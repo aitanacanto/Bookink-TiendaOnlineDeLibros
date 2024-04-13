@@ -65,3 +65,11 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 - Recomendaciones personalizadas: Utilizar algoritmos de recomendación basados en el historial de compras de los usuarios para ofrecer recomendaciones personalizadas de libros que podrían interesarles.
 
 - Integración con redes sociales: Permitir a los usuarios compartir sus compras, reseñas y listas de deseos en redes sociales como Facebook, Twitter o Instagram, lo que puede ayudar a aumentar la visibilidad de la tienda y atraer a nuevos clientes.
+
+# Entrega 01 Propuesta - Comentarios
+
+La web que proponeis es correcta y cumple con todos los requisitos. La descripción tiene todo lo que se pide. El git también está perfecto. 
+
+Os pediria que para entender mejor que va a hacer cada uno, añadais a la tabla inicial que EN y/o funcionalidades va a hacer cada uno.
+
+Gracias y buen trabajo, seguro que sale algo genial.
