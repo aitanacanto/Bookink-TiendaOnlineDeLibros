@@ -69,6 +69,10 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 
 - Integración con redes sociales: Permitir a los usuarios compartir sus compras, reseñas y listas de deseos en redes sociales como Facebook, Twitter o Instagram, lo que puede ayudar a aumentar la visibilidad de la tienda y atraer a nuevos clientes.
 
+### Base de Datos
+![Base de Datos](BaseDeDatos.png)
+*También, está disponible en pdf en el archivo **bbdd.pdf** .*
+
 # Entrega 01 Propuesta - Comentarios
 
 La web que proponeis es correcta y cumple con todos los requisitos. La descripción tiene todo lo que se pide. El git también está perfecto. 
