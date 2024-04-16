@@ -4,15 +4,15 @@
 ## Datos Grupo
 ### Integrantes del grupo
 
-| Nombre        | Apellidos         | DNI       | Entidades asociadas         |
-|---------------|-------------------|-----------|-----------------------------|
-| Aitana        | Cantó Rico        | DNI000001 | ENSuscripción, ENPaquete    |
-| Rafael        | Carballo Lorenzo  | DNI000002 | ENPedido, ENLinPedido       |
-| Bruno         | Vilella Martínez  | DNI000003 | ENCarrito, ENLinCarrito     |
-| Darío         | Pastor Fuentes    | DNI000004 | EnTracking, EnTransportista |
-| Alberto       | Boronat López     | DNI000005 | ENOfertas, ENReseña         |
-| Manuel José   | Tornero Fuster    | DNI000006 | ENUsuario, ENPuntos         |
-| Jorge         | Paredes Soler     | DNI000007 | ENCategoria, ENProducto     |
+| Nombre        | Apellidos         | DNI       | Entidades asociadas          |
+|---------------|-------------------|-----------|------------------------------|
+| Aitana        | Cantó Rico        | DNI000001 | ENTienePaquete, ENPaquete    |
+| Rafael        | Carballo Lorenzo  | DNI000002 | ENPedido, ENLinPedido_pa     |
+| Bruno         | Vilella Martínez  | DNI000003 | ENCarrito, ENLinCarrito      |
+| Darío         | Pastor Fuentes    | DNI000004 | EnProducto, EnLinPedido      |
+| Alberto       | Boronat López     | DNI000005 | ENCategoria, EnTieneCategoria|
+| Manuel José   | Tornero Fuster    | DNI000006 | ENUsuario, ENReseña          |
+| Jorge         | Paredes Soler     | DNI000007 | ENDireccion, ENTieneDireccion|
 
 
 ### Descripción
@@ -32,10 +32,12 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 ### Listado EN Pública
 - **ENProducto**: Representa los libros disponibles para la venta en la tienda.
 - **ENCategoría**: Categorías a las que pertenecen los libros para facilitar la búsqueda.
+- **ENTieneCategoria**: Relación que indica qué productos están asociados a una categoría.
 - **ENUsuario**: Usuarios no registrados que visitan la tienda y pueden añadir productos al carrito.
 - **ENCarrito**: Carrito de compras que contiene los productos seleccionados por el usuario.
 - **ENLinCarrito**: Relación entre el carrito de compras y los productos seleccionados.
-- **ENOfertas**: Ofertas especiales disponibles para los usuarios públicos.
+- **ENPaquete**: Paquetes de libros disponibles.
+- **ENTienePaquete**: Relación que indica qué productos están incluidos en un paquete.
 
 
 ### Parte Privada
@@ -50,12 +52,11 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 ### Listado EN Privada
 - **ENPedido**: Pedidos realizados por los usuarios registrados.
 - **ENLinPedido**: Relación entre el pedido y los productos seleccionados.
-- **ENSuscripción**: Suscripciones a paquetes de libros mensuales o anuales.
-- **ENPaquete**: Paquetes de libros disponibles para suscripción.
-- **ENPuntos**: Puntos acumulados por los usuarios por compras realizadas.
-- **ENTransportista**: Información sobre la empresa de transporte encargada de la entrega.
-- **ENTracking**: Seguimiento de los pedidos en tiempo real.
+- **ENLinPedido_pa**: Relación entre el pedido y los paquetes de productos.
 - **ENReseña**: Reseñas y valoraciones de los productos realizadas por los usuarios.
+- **ENDireccion**: Información de dirección asociada a un usuario.
+- **ENTieneDireccion**: Relación que indica qué usuarios están asociados a una dirección.
+
 
 ### Posibles mejoras
 - Añadir una sección biblioteca en la que también se puedan alquilar libros por determinado tiempo, el precio de alquiler dependerá de este tiempo.
