@@ -5,3 +5,5 @@
 /.vs/libroExpress/v16
 /ClassLibrary/obj/Debug
 /ClassLibrary/Properties
+/.vs
+/ClassLibrary/obj/Release
