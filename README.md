@@ -71,7 +71,7 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 
 ### Base de Datos
 ![Base de Datos](BaseDeDatos.png)
-*También, está disponible en pdf en el archivo **bbdd.pdf** .*
+*También, está disponible en pdf en el archivo ![bbdd.pdf](bbdd.pdf).*
 
 # Entrega 01 Propuesta - Comentarios
 
