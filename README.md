@@ -4,14 +4,16 @@
 ## Datos Grupo
 ### Integrantes del grupo
 
-| Nombre        | Apellidos         | DNI           |
-|---------------|-------------------|---------------|
-| Aitana        | Cantó Rico        | DNI000001     |
-| Rafael        | Carballo Lorenzo  | DNI000002     |
-| Bruno         | Vilella Martínez  | DNI000003     |
-| Darío         | Pastor Fuentes    | DNI000004     |
-| Alberto       | Boronat López     | DNI000005     |
-| Manuel José   | Tornero Fuster    | DNI000006     |
+| Nombre        | Apellidos         | DNI       | Entidades asociadas         |
+|---------------|-------------------|-----------|-----------------------------|
+| Aitana        | Cantó Rico        | DNI000001 | ENSuscripción, ENPaquete    |
+| Rafael        | Carballo Lorenzo  | DNI000002 | ENPedido, ENLinPedido       |
+| Bruno         | Vilella Martínez  | DNI000003 | ENCarrito, ENLinCarrito     |
+| Darío         | Pastor Fuentes    | DNI000004 | EnTracking, EnTransportista |
+| Alberto       | Boronat López     | DNI000005 | ENOfertas, ENReseña         |
+| Manuel José   | Tornero Fuster    | DNI000006 | ENUsuario, ENPuntos         |
+| Jorge         | Paredes Soler     | DNI000007 | ENCategoria, ENProducto     |
+
 
 ### Descripción
 La aplicación web que implementaremos es una **tienda online de libros**. En nuestra tienda online habrá **tres tipos de usuarios**, de esta categoría dependrán los permisos que este usuario tenga en la web.
