@@ -9,5 +9,31 @@ namespace ClassLibrary
 {
     class CADLinPedido
     {
+        private string constring;
+
+        public CADLinPedido()
+        {
+
+        }
+
+        public bool create(ENLinPedido en)
+        {
+            return false;
+        }
+
+        public bool update(ENLinPedido en)
+        {
+            return false;
+        }
+
+        public bool read(ENLinPedido en)
+        {
+            return false;
+        }
+
+        public bool delete(ENLinPedido en)
+        {
+            return false;
+        }
     }
 }
