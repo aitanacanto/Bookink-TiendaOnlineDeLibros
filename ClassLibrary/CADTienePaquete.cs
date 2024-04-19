@@ -9,6 +9,8 @@ namespace ClassLibrary
 {
     public class CADTienePaquete
     {
+        private string constring;
+
         // Método para agregar una relación entre un paquete y un producto en la base de datos
         public bool AgregarRelacionPaqueteProducto(int idPaquete, int idProducto)
         {

@@ -9,6 +9,8 @@ namespace ClassLibrary
 {
     public class CADPaquete
     {
+        private string constring;
+
         // Método para obtener un paquete por su ID desde la base de datos
         public ENPaquete ObtenerPaquetePorId(int idPaquete)
         {
