@@ -13,25 +13,25 @@ namespace ClassLibrary
         {
         }
 
-        public void AddRelation(int id, string idProducto)
+        public void AddRelation(ENTieneCategoria tiene)
         {
         }
 
-        public void EliminateRelation(int id)
+        public void EliminateRelation(ENTieneCategoria tiene)
         {
         }
 
-        public ENTieneCategoria RelationById(int id)
+        public ENTieneCategoria RelationById(ENTieneCategoria tiene)
         {
             return null;
         }
 
-        public List<ENTieneCategoria> RelationByProduct(string idProducto)
+        public List<ENTieneCategoria> RelationByProduct(ENTieneCategoria tiene)
         {
             return new List<ENTieneCategoria>();
         }
 
-        public void UpdateRelation(int id, string nuevoIdProducto)
+        public void UpdateRelation(ENTieneCategoria tiene)
         {
         }
     }

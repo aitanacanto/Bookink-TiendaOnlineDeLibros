@@ -17,7 +17,7 @@ namespace ClassLibrary
 
         }
 
-        public bool AgregarRelacion(int idUsuario, int idDireccion)
+        public bool AgregarRelacion(ENTieneDireccion tiene)
         {
             bool añadido = false;
 

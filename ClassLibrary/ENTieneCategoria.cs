@@ -12,26 +12,16 @@ namespace ClassLibrary
         private int id;
         private string id_producto;
 
+
+        public int Id { get; set; }
+
+        public string IdProducto { get; set; }
+
         public ENTieneCategoria(int id, string id_producto)
         {
         }
 
-        public int Id
-        {
-            get { return 0; }
-            set { }
-        }
 
-        public string IdProducto
-        {
-            get { return null; }
-            set { }
-        }
-
-        public string ToString()
-        {
-            return null;
-        }
     }
 
 }

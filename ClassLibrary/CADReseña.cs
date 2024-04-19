@@ -13,17 +13,17 @@ namespace ClassLibrary
         {
             //constring = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ToString();
         }
-        public bool Create()
+        public bool Create(ENReseña reseña)
         {
             return true;
         }
 
-        public bool Update()
+        public bool Update(ENReseña reseña)
         {
             return true;
         }
 
-        public bool Delete()
+        public bool Delete(ENReseña reseña)
         {
             return true;
         }

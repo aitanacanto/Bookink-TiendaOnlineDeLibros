@@ -16,7 +16,7 @@ namespace ClassLibrary
             constring = " ";
         }
 
-        public bool crearPedido()
+        public bool crearPedido(ENPedido pedido)
         {
             return false;
         }

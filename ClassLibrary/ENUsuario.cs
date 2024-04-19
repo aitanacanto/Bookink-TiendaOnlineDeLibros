@@ -24,11 +24,8 @@ namespace ClassLibrary
         public int PhoneNumber { get { return _phoneNumber; } set { _phoneNumber = value; } }
         public string NIF { get { return _NIF; } set { _NIF = value; } }
 
-
-        private readonly CADUsuario c;
         public ENUsuario() 
         {
-            c = new CADUsuario();
         }
 
         public bool Register()

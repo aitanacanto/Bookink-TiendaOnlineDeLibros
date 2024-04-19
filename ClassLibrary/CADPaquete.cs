@@ -10,10 +10,9 @@ namespace ClassLibrary
     public class CADPaquete
     {
         // Método para obtener un paquete por su ID desde la base de datos
-        public ENPaquete ObtenerPaquetePorId(int idPaquete)
+        public ENPaquete ObtenerPaquetePorId(ENPaquete paquete)
         {
-            ENPaquete p = new ENPaquete();
-            return p;
+            return paquete;
         }
 
         // Método para guardar un nuevo paquete en la base de datos
@@ -29,13 +28,13 @@ namespace ClassLibrary
         }
 
         // Método para eliminar un paquete de la base de datos por su ID
-        public bool EliminarPaquete(int idPaquete)
+        public bool EliminarPaquete(ENPaquete paquete)
         {
             return false;
         }
 
         // Método para agregar un producto al paquete en la base de datos
-        public bool AgregarProductoAlPaquete(int idPaquete, int idProducto)
+        public bool AgregarProductoAlPaquete(ENPaquete paquete)
         {
             return false;
         }

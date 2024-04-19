@@ -15,21 +15,21 @@ namespace ClassLibrary
             //añadir constring para la BD
         }
 
-        public bool SearchCategory()
+        public bool SearchCategory(ENCategoria cat)
         {
             return true;
         }
 
-        public bool AddCategory()
+        public bool AddCategory(ENCategoria cat)
         {
             return true;
         }
 
-        public bool UpdateCategory()
+        public bool UpdateCategory(ENCategoria cat)
         {
             return true;
         }
-        public bool DeleteCategory()
+        public bool DeleteCategory(ENCategoria cat)
         {
             return true;
         }
