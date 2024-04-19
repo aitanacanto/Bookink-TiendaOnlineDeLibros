@@ -1,4 +1,4 @@
-﻿// @author:     ; DNI:
+﻿// @author: Darío Pastor Fuentes    ; DNI: DNI000004
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿// @author:     ; DNI:
+﻿// @author: Jorge Paredes Soler; DNI: DNI000007
 using System;
 using System.Collections.Generic;
 using System.Linq;
