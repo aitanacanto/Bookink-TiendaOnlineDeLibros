@@ -1,4 +1,4 @@
-﻿// @author:     ; DNI:
+﻿// @author: Manuel José Tornero Fuster    ; DNI: DNI000006
 using System;
 using System.Collections.Generic;
 using System.Linq;
