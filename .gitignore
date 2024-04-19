@@ -2,6 +2,9 @@
 # Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
+/.vs/libroExpress/v16
 /ClassLibrary/obj/Debug
+/ClassLibrary/Properties
+/ClassLibrary/bin/Debug
+/.vs
 /ClassLibrary/obj/Release
