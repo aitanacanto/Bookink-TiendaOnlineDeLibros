@@ -17,7 +17,7 @@ namespace ClassLibrary
 
         public int ID { get { return id; } set { id = value; } }
         public int CodPostal { get { return cod_postal; } set { cod_postal = value; } }
-        public string Direccion { get { return direccion; } set { direccion = value} }
+        public string Direccion { get { return direccion; } set { direccion = value; } }
         public string Ciudad { get { return ciudad; } set { ciudad = value; } }
         public string Pais { get { return pais; } set { pais = value; } }
 
