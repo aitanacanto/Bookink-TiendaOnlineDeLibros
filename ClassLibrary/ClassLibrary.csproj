@@ -69,9 +69,7 @@
     <Compile Include="ENUsuario.cs" />
     <Compile Include="ENCategoria.cs" />
     <Compile Include="ENProducto.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
