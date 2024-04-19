@@ -1,4 +1,4 @@
-﻿// @author:     ; DNI:
+﻿// @author:  Alberto Boronat Lopez   ; DNI: DNI000005
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +9,32 @@ namespace ClassLibrary
 {
     class CADCategoria
     {
+
+        public CADCategoria()
+        {
+            //añadir constring para la BD
+        }
+
+        public bool SearchCategory()
+        {
+            return true;
+        }
+
+        public bool AddCategory()
+        {
+            return true;
+        }
+
+        public bool UpdateCategory()
+        {
+            return true;
+        }
+        public bool DeleteCategory()
+        {
+            return true;
+        }
+
+
     }
+
 }
