@@ -9,5 +9,19 @@ namespace ClassLibrary
 {
     class CADTieneDireccion
     {
+        private string constring;
+
+        public CADTieneDireccion()
+        {
+
+
+        }
+
+        public bool AgregarRelacion(int idUsuario, int idDireccion)
+        {
+            bool añadido = false;
+
+            return añadido;
+        }
     }
 }
