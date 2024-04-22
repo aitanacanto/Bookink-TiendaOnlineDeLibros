@@ -83,7 +83,7 @@ namespace ClassLibrary
         public bool crearPedido()
         {
             CADPedido cad = new CADPedido();
-            return cad.crearPedido();
+            return cad.crearPedido(this);
         }
     }
 }

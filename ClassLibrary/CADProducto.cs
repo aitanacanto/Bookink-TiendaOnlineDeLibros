@@ -16,10 +16,6 @@ namespace ClassLibrary
     {
         private string constring;
 
-        private bool Exists(SqlConnection c, ENProducto en)
-        {
-            return false;
-        }
 
         public CADProducto()
         {

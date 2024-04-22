@@ -13,6 +13,10 @@ namespace ClassLibrary
         public int IdProducto { get; set; }
 
         // Constructor
+        public ENTienePaquete()
+        {
+        }
+
         public ENTienePaquete(int idPaquete, int idProducto)
         {
             IdPaquete = idPaquete;

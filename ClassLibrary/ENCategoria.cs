@@ -1,4 +1,4 @@
-﻿// @author:     ; DNI:
+﻿// @author:   ALBERTO BORONAT lOPEZ  ; DNI: DNI000005
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,20 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Class2
+    class ENCategoria
     {
+        private int id;
+        private String nombre;
+
+        public int Id { get; set; }
+
+        public string Nombre { get; set; }
+
+        public ENCategoria()
+        {
+
+        }
+
     }
+
 }

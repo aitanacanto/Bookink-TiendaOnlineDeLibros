@@ -11,32 +11,32 @@ namespace ClassLibrary
     {
         private string constring;
 
-        public CADUsuario()
+        public CADUsuario(ENUsuario usuario)
         {
             //constring = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ToString();
         }
 
-        public bool Register() 
+        public bool Register(ENUsuario usuario) 
         { 
             return false; 
         }
 
-        public bool LogIn()
+        public bool LogIn(ENUsuario usuario)
         {
             return false;
         }
 
-        public bool LogOut()
+        public bool LogOut(ENUsuario usuario)
         {
             return false;
         }
 
-        public bool UpdateUserData()
+        public bool UpdateUserData(ENUsuario usuario)
         {
             return true;
         }
 
-        public bool DeleteUser() 
+        public bool DeleteUser(ENUsuario usuario) 
         {
             return true;
         }

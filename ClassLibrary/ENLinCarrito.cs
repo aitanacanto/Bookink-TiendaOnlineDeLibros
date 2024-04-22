@@ -1,4 +1,4 @@
-﻿// @author:     ; DNI:
+﻿// @author:  Bruno Vilella Martínez; DNI: DNI000003
 using System;
 using System.Collections.Generic;
 using System.Linq;

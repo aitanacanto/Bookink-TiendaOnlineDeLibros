@@ -12,13 +12,13 @@ namespace ClassLibrary
         private string constring;
 
         // Método para agregar una relación entre un paquete y un producto en la base de datos
-        public bool AgregarRelacionPaqueteProducto(int idPaquete, int idProducto)
+        public bool AgregarRelacionPaqueteProducto(ENTienePaquete tiene)
         {
             return false;
         }
 
         // Método para eliminar una relación entre un paquete y un producto de la base de datos
-        public bool EliminarRelacionPaqueteProducto(int idPaquete, int idProducto)
+        public bool EliminarRelacionPaqueteProducto(ENTienePaquete tiene)
         {
             return false;
         }
