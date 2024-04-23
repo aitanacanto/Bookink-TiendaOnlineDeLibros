@@ -10,7 +10,7 @@
 
 namespace proWeb
 {
-    public partial class resumenPedido
+    public partial class carrito
     {
     }
 }

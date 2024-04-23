@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace proWeb
 {
-    public partial class resumenPedido : System.Web.UI.Page
+    public partial class producto : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
