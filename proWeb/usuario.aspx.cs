@@ -13,5 +13,10 @@ namespace proWeb
         {
 
         }
+
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

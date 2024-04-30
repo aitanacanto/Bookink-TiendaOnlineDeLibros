@@ -18,5 +18,25 @@ namespace proWeb
         {
 
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnMostrarTrabajadorClick(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnBorrarTrabajador_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
