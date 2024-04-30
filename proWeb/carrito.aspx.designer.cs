@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace HADA_P4_BookCorner
+namespace proWeb
 {
 
 
-    public partial class Cesta
+    public partial class carrito
     {
 
         /// <summary>
