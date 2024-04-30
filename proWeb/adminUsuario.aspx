@@ -35,7 +35,7 @@
         <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
         
         <!-- Este botón se podrá utilizar en caso de que no exista aún el trabajador -->
-        <asp:Button ID="btnMostrarFormulario" runat="server" Text="Agregar Trabajador" OnClick="btnMostrarFormulario_Click" />
+        <asp:Button ID="btnMostrarTrabajador" runat="server" Text="Mostrar Trabajador" OnClick="btnMostrarFormulario_Click" />
 
         <!-- Este botón se puede utilizar una vez se ha buscado un trabajador y se ha seleccionado para borrar -->
         <asp:Button ID="btnBorrarTrabajador" runat="server" Text="Borrar Trabajador" OnClick="btnBorrarTrabajador_Click" />
