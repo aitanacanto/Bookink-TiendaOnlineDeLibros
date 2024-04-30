@@ -12,3 +12,4 @@
 /proWeb/bin
 /proWeb/obj/Debug
 /packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1
+/proWeb/obj/Release
