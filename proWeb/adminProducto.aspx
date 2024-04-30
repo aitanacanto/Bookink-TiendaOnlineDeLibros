@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="adminProducto.aspx.cs" Inherits="proWeb.adminProducto" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
     <style>
         body{
             font-family: Arial, sans-serif;
@@ -63,9 +65,44 @@
             color: #666;    
         }
 
-    </style>
-        
+        .edit{
+            background-color: #FFBF00;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;    
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 10px;
+            width: 150px;
+        }
 
+        .delete{
+            background-color: #FF0000;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;    
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 10px;
+             width: 150px;
+        }
+
+        .mod-buttons{
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            margin-right: 20px;
+            margin-left: auto;
+        }
+
+    </style>
+       
     <div class="admin-products">
         <div class="header">
             <h1 class="title">Productos
@@ -78,14 +115,86 @@
         </div>
         <div class="Productos">
             <div class="Producto">
-                <div style="width: 150px; height: 150px; background-color: #eee; border-radius: 8px;"></div>
+                <div style="width: 150px; height: 150px; background-color: #FFFFE0; border-radius: 8px;"></div>
                 <div>
                      <h2 class="title">Producto 1</h2>
                     <p class="price">Precio: 19,99 €</p>
                     <p class="id">ID: #1234</p>
+                    
+                </div>
+                <div class="mod-buttons">
+                    <button class="edit">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Editar
+                    </button>
+
+                    <button class="delete">
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar
+                    </button>
                 </div>
             </div>
-               
+
+            <div class="Producto">
+                <div style="width: 150px; height: 150px; background-color: #FFB6C1; border-radius: 8px;"></div>
+                <div>
+                     <h2 class="title">Producto 2</h2>
+                    <p class="price">Precio: 9,99 €</p>
+                    <p class="id">ID: #1244</p>
+                    
+                </div>
+                <div class="mod-buttons">
+                    <button class="edit">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Editar
+                    </button>
+
+                    <button class="delete">
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+            <div class="Producto">
+                <div style="width: 150px; height: 150px; background-color: #90EE90; border-radius: 8px;"></div>
+                <div>
+                     <h2 class="title">Producto 3</h2>
+                    <p class="price">Precio: 17,35 €</p>
+                    <p class="id">ID: #4924</p>
+                    
+                </div>
+                <div class="mod-buttons">
+                    <button class="edit">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Editar
+                    </button>
+
+                    <button class="delete">
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+               <div class="Producto">
+                <div style="width: 150px; height: 150px; background-color: #ADD8E6; border-radius: 8px;"></div>
+                <div>
+                     <h2 class="title">Producto 4</h2>
+                    <p class="price">Precio: 11,99 €</p>
+                    <p class="id">ID: #2365</p>
+                    
+                </div>
+                <div class="mod-buttons">
+                    <button class="edit">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Editar
+                    </button>
+
+                    <button class="delete">
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
 
             </div>
 
