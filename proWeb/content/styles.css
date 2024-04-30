@@ -1,0 +1,13 @@
+﻿.logo {
+    display: flex;
+    align-items: center;
+}
+
+    .logo h1 {
+        margin-right: 10px; /* Espacio entre el título y el logo */
+    }
+
+.logo-img {
+    width: 50px;
+    height: auto;
+}

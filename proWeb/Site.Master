@@ -4,17 +4,51 @@
 
 <html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>libroExpress - Tu tienda de libros en línea</title>
+    <link rel="stylesheet" href="content/styles.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <h1>libroExpress</h1>
+                    <img src="content/logo.png" alt="Logo de libroExpress" class="logo-img" />
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="carrito.aspx">Carrito</a></li>
+                        <li><a href="LogIn.aspx">Iniciar Sesión</a></li>
+                        <li><a href="register.aspx">Registrarte</a></li>
+                        <!--
+                        <li><a href="Contacto.aspx">Contacto</a></li>
+                        -->
+                    </ul>
+                </nav>
+            </header>
+            
+            <div class="main-content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            
+            <footer>
+                <p>&copy; 2024 libroExpress. Todos los derechos reservados.</p>
+                <ul>
+                    <!--
+                    <li><a href="PoliticaPrivacidad.aspx">Política de Privacidad</a></li>
+                    <li><a href="TerminosCondiciones.aspx">Términos y Condiciones</a></li>
+                    <li><a href="Contacto.aspx">Contáctanos</a></li>
+                    -->
+                </ul>
+            </footer>
         </div>
     </form>
 </body>
 </html>
+
+
+
