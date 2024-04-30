@@ -67,6 +67,7 @@
     <Content Include="adminProducto.aspx" />
     <Content Include="adminUsuario.aspx" />
     <Content Include="carrito.aspx" />
+    <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
     <Content Include="paquete.aspx" />
     <Content Include="pedido.aspx" />
