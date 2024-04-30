@@ -1,7 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="producto.aspx.cs" Inherits="proWeb.producto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
+   
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+     <style>
         /* Estilos CSS */
         body {
             font-family: Arial, sans-serif;
@@ -29,7 +34,7 @@
         .product-image img {
             display: block;
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
             background-color: #eee;
         }
 
@@ -180,9 +185,7 @@
 
         }
     </style>
-</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="product-container">
         <div class="informacion">
         <!-- Sección de Detalles del Producto -->
