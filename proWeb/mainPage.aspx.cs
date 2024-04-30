@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,30 @@ namespace proWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                // Aquí llamamos a un método para obtener la lista de productos
+                List<ENProducto> listaProductos = ObtenerProductos();
 
+                // Asignamos la lista de productos al repeater
+                reapeterProduct.DataSource = listaProductos;
+                reapeterProduct.DataBind();
+            }
+        }
+
+        // Método para obtener la lista de productos (puedes obtenerla de tu base de datos o de donde sea)
+        private List<ENProducto> ObtenerProductos()
+        {
+            // Aquí deberías escribir el código para obtener tus datos
+            // Simplemente devuelve una lista de productos como ejemplo
+
+            List<ENProducto> listaProductos = new List<ENProducto>();
+            // Añade algunos productos de ejemplo (debes obtenerlos de tu fuente de datos real)
+            listaProductos.Add(new ENProducto(1, "Producto 1", 10, 50.0f, 45.0f, 1, DateTime.Now, "content/producto.jpg"));
+            listaProductos.Add(new ENProducto(2, "Producto 2", 15, 60.0f, 55.0f, 2, DateTime.Now, "content/producto.jpg"));
+            listaProductos.Add(new ENProducto(3, "Producto 3", 20, 70.0f, 65.0f, 1, DateTime.Now, "content/producto.jpg"));
+
+            return listaProductos;
         }
     }
 }
