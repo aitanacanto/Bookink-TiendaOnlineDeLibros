@@ -13,5 +13,10 @@ namespace proWeb
         {
 
         }
+
+        protected void btnAgregarTrabajador_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
