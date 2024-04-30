@@ -19,13 +19,13 @@
                     <h1>libroExpress</h1>
                 </div>
                 <nav>
-                    <ul>
-                        <li><a href="mainPage.aspx">Inicio</a></li>
-                        <!--
-                        <li><a href="Catalogo.aspx">Catálogo</a></li>
-                        <li><a href="Contacto.aspx">Contacto</a></li>
-                        -->
-                    </ul>
+                    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" CssClass="menu">
+                        <Items>
+                            <asp:MenuItem Text="Catálogo" NavigateUrl="~/producto.aspx" />
+                            <asp:MenuItem Text="Inicio Sesión" NavigateUrl="~/LogIn.aspx" />
+                            <asp:MenuItem Text="Registrarte" NavigateUrl="~/register.aspx" />
+                        </Items>
+                    </asp:Menu>
                 </nav>
             </header>
             
