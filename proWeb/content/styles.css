@@ -1,19 +1,20 @@
-﻿.logo {
+﻿/*  LOGO    */
+.logo {
     display: flex;
     align-items: center;
 }
 
-    .logo h1 {
-        margin-right: 10px; /* Espacio entre el título y el logo */
-    }
+.logo h1 {
+    margin-right: 10px; /* Espacio entre el título y el logo */
+}
 
 .logo-img {
     width: 50px;
     height: auto;
 }
-
+/*  CARD    */
 .card {
-    background-color: #8A2BE2; /* Color de fondo de la tarjeta */
+    background-color: #B3C699; /* Color de fondo de la tarjeta */
     border: 1px solid #ccc; /* Borde de la tarjeta */
     border-radius: 5px; /* Borde redondeado */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
