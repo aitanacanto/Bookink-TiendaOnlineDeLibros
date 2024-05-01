@@ -20,10 +20,24 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Mostrar contraseña</label>
           </div>
-          <div class="botones">
-              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-              <button class="btn btn-primary">Registrarse</button>
-          </div>
-      </form>
+          </form>
+<div class="button-container" style="text-align: center; margin-top: 20px;"> 
+          <!-- Botón para Iniciar Sesión -->
+          <asp:Button 
+              ID="btnLogin" 
+              runat="server" 
+              Text="Iniciar Sesión" 
+              CssClass="button" 
+              OnClick="Login_Click" 
+          />
+          <!-- Botón para Registrarse -->
+          <asp:Button 
+              ID="btnRegister" 
+              runat="server" 
+              Text="Registrarse" 
+              CssClass="button" 
+              OnClick="Register_Click" 
+          />
+      </div>
   </div>
 </asp:Content>

@@ -1,7 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin.aspx.cs" Inherits="proWeb.admin" MasterPageFile="~/Site.master" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="admin-container">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container">
         <h1 class="admin-title">Panel de Administración</h1>
 
         <!-- Menú de administración centrado -->
