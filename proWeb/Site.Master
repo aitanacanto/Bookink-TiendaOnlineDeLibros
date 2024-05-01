@@ -32,6 +32,7 @@
                                 <Items>
                                     <asp:MenuItem Text="Página Principal" NavigateUrl="mainPage.aspx" />
                                     <asp:MenuItem Text="Carrito" NavigateUrl="carrito.aspx" />
+                                    <asp:MenuItem Text="Mis Pedidos" NavigateUrl="mispedidos.aspx" />
                                     <asp:MenuItem Text="No sé aún" NavigateUrl="adminProducto.aspx" />
                                     <asp:MenuItem Text="Mi Cuenta">
                                         <asp:MenuItem Text="Iniciar Sesión" NavigateUrl="LogIn.aspx" />
