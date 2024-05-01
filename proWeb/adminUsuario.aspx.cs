@@ -14,17 +14,12 @@ namespace proWeb
 
         }
 
-        protected void btnAgregarTrabajador_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
 
         }
 
-        protected void btnMostrarTrabajadorClick(object sender, EventArgs e)
+        protected void btnMostrarTrabajador_Click(object sender, EventArgs e)
         {
 
         }
@@ -38,5 +33,6 @@ namespace proWeb
         {
 
         }
+
     }
 }
