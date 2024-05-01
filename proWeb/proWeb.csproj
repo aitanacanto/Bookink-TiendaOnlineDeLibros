@@ -70,6 +70,7 @@
     <Content Include="carrito.aspx" />
     <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
+    <Content Include="mispedidos.aspx" />
     <Content Include="paquete.aspx" />
     <Content Include="pedido.aspx" />
     <Content Include="producto.aspx" />
@@ -127,6 +128,13 @@
     </Compile>
     <Compile Include="mainPage.aspx.designer.cs">
       <DependentUpon>mainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mispedidos.aspx.cs">
+      <DependentUpon>mispedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mispedidos.aspx.designer.cs">
+      <DependentUpon>mispedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="paquete.aspx.cs">
       <DependentUpon>paquete.aspx</DependentUpon>
