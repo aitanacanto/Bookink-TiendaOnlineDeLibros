@@ -1,4 +1,4 @@
-﻿// @author:     ; DNI:
+﻿// @author: Jorge Paredes Soler; DNI: DNI000007
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace ClassLibrary
 
         }
 
-        public bool AgregarRelacion(int idUsuario, int idDireccion)
+        public bool AgregarRelacion(ENTieneDireccion tiene)
         {
             bool añadido = false;
 

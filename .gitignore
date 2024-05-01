@@ -4,7 +4,13 @@
 
 /.vs/libroExpress/v16
 /ClassLibrary/obj/Debug
-/ClassLibrary/Properties
 /ClassLibrary/bin/Debug
 /.vs
 /ClassLibrary/obj/Release
+/.vs
+/ClassLibrary/obj/Release
+/proWeb/bin
+/proWeb/obj/Release
+/proWeb/obj/Debug
+/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1
+/proWeb/obj/Release

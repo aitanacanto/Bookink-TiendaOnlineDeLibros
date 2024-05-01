@@ -1,0 +1,55 @@
+﻿.logo {
+    display: flex;
+    align-items: center;
+}
+
+    .logo h1 {
+        margin-right: 10px; /* Espacio entre el título y el logo */
+    }
+
+.logo-img {
+    width: 50px;
+    height: auto;
+}
+
+.card {
+    background-color: #8A2BE2; /* Color de fondo de la tarjeta */
+    border: 1px solid #ccc; /* Borde de la tarjeta */
+    border-radius: 5px; /* Borde redondeado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: box-shadow 0.3s ease; /* Transición suave de la sombra */
+    width: 300px; /* Ajustar el ancho de la tarjeta */
+    height: 400px;
+    display: flex; /* Utilizar flexbox para el diseño */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center; /* Centrar los elementos horizontalmente */
+}
+
+.card-img-top {
+    width: 70%; /* La imagen ocupa todo el ancho de la tarjeta */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-top-left-radius: 5px; /* Borde redondeado en la esquina superior izquierda */
+    border-top-right-radius: 5px; /* Borde redondeado en la esquina superior derecha */
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada al pasar el mouse sobre la tarjeta */
+}
+
+.card-text {
+    font-size: 20px; /* Tamaño de fuente */
+    color: #FFFFFF; /* Color del texto */
+    padding: 10px; /* Relleno interior */
+}
+
+.card-title {
+    font-size: 18px; /* Tamaño de fuente */
+    color: #000; /* Color del texto */
+    margin-top: 10px; /* Espacio superior */
+    margin-bottom: 0; /* Sin margen inferior */
+    font-weight: bold; /* Negrita */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+}
