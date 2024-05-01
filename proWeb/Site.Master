@@ -57,14 +57,15 @@
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
-            <footer>
+            <footer class="d-flex justify-content-between align-items-center">
                 <div class="logo">
                     <img src="content/logo.png" alt="Logo de libroExpress" class="logo-img" />
+                    <h3>libroExpress</h3>
                 </div>
-                <ul style="list-style:none; align-content:center">
-                    <li><h5>Our Social Media</h5></li>
-                    <li><a href="www.instagram.com"><img height="15" src="content/instagram.png" /></a></li>
-                </ul>
+                <div class="social-media">
+                    <h5>Our Social Media</h5>
+                    <a href="www.instagram.com"><img height="15" src="content/instagram.png" /></a>
+                </div>
                 <p>&copy; 2024 libroExpress. Todos los derechos reservados.</p>
             </footer>
         </div>

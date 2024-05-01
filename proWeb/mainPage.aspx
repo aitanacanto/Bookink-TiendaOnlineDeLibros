@@ -14,12 +14,14 @@
                     <asp:Repeater ID="reapeterProduct" runat="server">
                         <ItemTemplate>
                             <div class="col-12 col-sm-6 col-md-4 py-3">
+                                <a href="producto.aspx">
                                 <div class="card" onclick="window.location.href='mainPage.aspx';" >
                                     <asp:Image ID="imgProduct" runat="server" class="card-img-top" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
                                     <p>
                                         <h5 class="card-text"><%# Eval("Name") %></h5>
                                     </p>
                                 </div>
+                                </a>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
