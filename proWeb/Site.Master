@@ -14,7 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container">
+        <div class="container-fluid">
             <header>
                 <div class="logo">
                     <h1>libroExpress</h1>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="social-media">
                     <h5>Our Social Media</h5>
-                    <a href="www.instagram.com"><img height="15" src="content/instagram.png" /></a>
+                    <a href="https://www.instagram.com/"><img height="15" src="content/instagram.png" /></a>
                 </div>
                 <p>&copy; 2024 libroExpress. Todos los derechos reservados.</p>
             </footer>
