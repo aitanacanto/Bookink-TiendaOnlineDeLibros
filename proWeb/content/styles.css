@@ -54,3 +54,48 @@
 .card:hover {
     transform: translateY(-5px); /* Efecto de elevación */
 }
+/* Carrito */
+
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+    .item:last-child {
+        border-bottom: none;
+    }
+
+    .item p {
+        margin: 5px 0;
+    }
+
+.total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.btn-buy {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .btn-buy:hover {
+        transition: all 0.3s ease; /* Transición suave */
+        background-color: #0056b3;
+    }
