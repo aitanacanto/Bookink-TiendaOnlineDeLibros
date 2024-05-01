@@ -24,16 +24,24 @@ namespace ClassLibrary
         public float SalePrice { get { return _salePrice; } set { _salePrice = value; } }
         public int Category { get { return _category; } set { _category = value; } }
         public DateTime CreationDate { get { return _creationDate; } set { _creationDate = value; } }
-        
+        public string ImagePath { get; set; }
+
 
         public ENProducto()
         {
 
         }
 
-        public ENProducto(int id, string name, int stock, float price, float salePrice, int category, DateTime creationDate)
+        public ENProducto(int id, string name, int stock, float price, float salePrice, int category, DateTime creationDate, string imagePath)
         {
-
+            Id = id;
+            Name = name;
+            Stock = stock;
+            Price = price;
+            SalePrice = salePrice;
+            Category = category;
+            CreationDate = creationDate;
+            ImagePath = imagePath; 
         }
 
         public bool Create()

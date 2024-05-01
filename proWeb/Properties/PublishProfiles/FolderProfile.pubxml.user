@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Dario\Desktop</_PublishTargetUrl>
+    <History>True|2024-04-29T17:46:32.4562929Z;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="admin.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="adminCategoria.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="adminPaquete.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="adminProducto.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="adminUsuario.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="bin/proWeb.dll">
+      <publishTime>04/29/2024 19:46:30</publishTime>
+    </File>
+    <File Include="bin/proWeb.pdb">
+      <publishTime>04/29/2024 19:46:30</publishTime>
+    </File>
+    <File Include="carrito.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="LogIn.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="mainPage.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="paquete.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="pedido.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="producto.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="register.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="Site.Master">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="usuario.aspx">
+      <publishTime>04/29/2024 19:38:44</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/29/2024 19:46:31</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

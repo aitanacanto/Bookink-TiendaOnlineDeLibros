@@ -13,5 +13,25 @@ namespace proWeb
         {
 
         }
+
+        protected void gvPaquetes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvProductosPaquete_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
