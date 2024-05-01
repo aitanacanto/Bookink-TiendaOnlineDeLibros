@@ -68,13 +68,13 @@ h1 {
     padding: 10px 0;
 }
 
-    .item:last-child {
-        border-bottom: none;
-    }
+.item:last-child {
+    border-bottom: none;
+}
 
-    .item p {
-        margin: 5px 0;
-    }
+.item p {
+    margin: 5px 0;
+}
 
 .total {
     text-align: right;
@@ -95,7 +95,51 @@ h1 {
     transition: all 0.3s ease;
 }
 
-    .btn-buy:hover {
-        transition: all 0.3s ease; /* Transición suave */
-        background-color: #0056b3;
-    }
+.btn-buy:hover {
+    transition: all 0.3s ease; /* Transición suave */
+    background-color: #0056b3;
+}
+/* Admin */
+
+.admin-title {
+    font-size: 24px; /* Tamaño del título */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+.menu-center {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    margin-bottom: 40px; /* Espacio debajo del menú */
+}
+
+.admin-menu {
+    display: inline-block; /* Mantener el menú en línea */
+}
+.menu-item {
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+    transition: all 0.3s ease; /* Transición suave */
+    margin-right: 20px; /* Mayor separación entre botones */
+}
+
+.hovered-menu-item {
+    background-color: #0056b3; /* Color al pasar el ratón */
+}
+
+.selected-menu-item {
+    background-color: #0056b3; /* Color cuando está seleccionado */
+}
+
+.content-box {
+    text-align: center; /* Centrar el contenido */
+    border: 1px solid #ddd; /* Borde */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interno */
+    background: #f9f9f9; /* Fondo de la caja */
+    max-width: 600px; /* Ancho máximo para centrar */
+    margin: 0 auto; /* Centrarse automáticamente */
+    margin-top: 40px; /* Espacio superior para mover el contenido hacia abajo */
+}
