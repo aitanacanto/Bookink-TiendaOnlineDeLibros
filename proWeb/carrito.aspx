@@ -3,6 +3,8 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+<body>
     <div class="container">
         <h1>Carrito</h1>
         <div class="item">
@@ -22,4 +24,7 @@
         </div>
         <button class="btn-buy">Comprar</button>
     </div>
+
+</body>
+
 </asp:Content>
