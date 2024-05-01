@@ -13,7 +13,7 @@
                 <div class="row">
                     <asp:Repeater ID="reapeterProduct" runat="server">
                         <ItemTemplate>
-                            <div class="col-12 col-sm-6 col-md-4 py-3">
+                            <div class="col-12 col-sm-6 col-md-4 px-2 py-2" style="width: 400px;">
                                 <a href="producto.aspx">
                                 <div class="card" onclick="window.location.href='mainPage.aspx';" >
                                     <asp:Image ID="imgProduct" runat="server" class="card-img-top" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
