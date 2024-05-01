@@ -2,28 +2,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@ViewData["Title"]</title>
 
   <style>
     body {
-      font-family: sans-serif;
       background-color: #f2f2f2;
     }
 
     .container {
-      display: flex;
+      width: 60%;
+      min-width:400px;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
     }
 
     .login-form {
-        width : 30%;
       display: flex;
       flex-direction: column;
       background-color: #fff;
@@ -40,16 +32,6 @@
     .login-form label {
       display: block;
       margin-bottom: 5px;
-    }
-
-    .login-form input[type="text"],
-    .login-form input[type="password"],
-    .login-form input[type="email"] {
-      width: 90%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 15px;
     }
 
     .login-form form {
@@ -74,50 +56,44 @@
       margin-bottom: 15px;
     }
   </style>
-</head>
-<body>
-    <div class="container">
-      <div class="login-form">
-        <h1>Registrarse</h1>
 
-        <form method="post">
-          <div class="form-group">
-            <label for="Nombre">*Nombre:</label>
-            <asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
-          </div>
-          <div class="form-group">
-            <label for="Apellidos">*Apellidos:</label>
-            <asp:TextBox ID="Apellidos" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
-          </div>
-          <div class="form-group">
-            <label for="Email">*Email:</label>
-            <asp:TextBox ID="Email" runat="server" TextMode="Email" CssClass="form-control" Required="true"></asp:TextBox>
-          </div>
-          <div class="form-group">
-            <label for="Contraseña">*Contraseña:</label>
-            <asp:TextBox ID="Contraseña" runat="server" TextMode="Password" CssClass="form-control" Required="true"></asp:TextBox>
-          </div>
-          <div class="form-group">
-            <label for="Telefono">Teléfono:</label>
-            <asp:TextBox ID="Telefono" runat="server" TextMode="SingleLine" CssClass="form-control"></asp:TextBox>
-          </div>
-          <div class="form-group">
-            <label for="NIF">*NIF/DNI:</label>
-            <asp:TextBox ID="NIF" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
-          </div>
-          <div class="form-group">
-            <label for="Direccion">*Dirección:</label>
-            <asp:TextBox ID="Dirección" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+    <div class="container">
+        <form method="post" class="login-form">
+            <h1>Registrarse</h1>
+            <div class="mb-3">
+                <label for="Nombre">*Nombre:</label>
+                <asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="Apellidos">*Apellidos:</label>
+                <asp:TextBox ID="Apellidos" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="Email">*Email:</label>
+                <asp:TextBox ID="Email" runat="server" TextMode="Email" CssClass="form-control" Required="true"></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="Contraseña">*Contraseña:</label>
+                <asp:TextBox ID="Contraseña" runat="server" TextMode="Password" CssClass="form-control" Required="true"></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="mb-3">Teléfono:</label>
+                <asp:TextBox ID="Telefono" runat="server" TextMode="SingleLine" CssClass="form-control"></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="NIF">*NIF/DNI:</label>
+                <asp:TextBox ID="NIF" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+            </div>
+            <div class="mb-3">
+                <label for="Direccion">*Dirección:</label>
+                <asp:TextBox ID="Dirección" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
             </div>
             <div>
                 *Opciones obligatorias
             </div>
-          <div>
-          <button type="submit" class="btn btn-primary">Registrarse</button>
-          </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+            </div>
         </form>
       </div>
-    </div>
-  </body>
-  </html>
 </asp:Content>

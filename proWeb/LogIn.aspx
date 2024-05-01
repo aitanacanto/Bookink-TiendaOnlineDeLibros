@@ -2,95 +2,63 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@ViewData["Title"]</title>
+
 
   <style>
     body {
-      font-family: sans-serif;
       background-color: #f2f2f2;
     }
 
     .container {
-      display: flex;
+      width: 60%;
+      min-width:400px;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
     }
 
     .login-form {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
       background-color: #fff;
       padding: 50px 90px;
       border-radius: 30px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
-
-    .login-form h1 {
-      text-align: center;
-      margin-bottom: 20px;
+    .login-form botones{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
     }
-
-    .login-form label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .login-form input[type="text"],
-    .login-form input[type="password"] {
-      width: 90%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 15px;
-    }
-
     .login-form form {
       display: flex;
       justify-content: space-between; /* Align buttons horizontally */
     }
-    
-    .login-form button {
-      background-color: #0f7bff;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .login-form .error {
-      color: red;
-      margin-bottom: 15px;
+    .login-form h1 {
+      text-align: center;
+      margin-bottom: 20px;
     }
   </style>
-</head>
-<body>
-  <div class="container">
-    <div class="login-form">
-      <h1>Iniciar sesión</h1>
 
-      <form method="post">
-        <div class="form-group">
-          <label for="NombreUsuario">Nombre de usuario:</label>
-          <input type="text" asp-for="NombreUsuario" class="form-control" />
-        </div>
-        <div class="form-group">
-          <label for="Contraseña">Contraseña:</label>
-          <input type="password" asp-for="Contraseña" class="form-control" />
-        </div>
-        <div class ="btn_container">
-          <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-          <button type="submit" class="btn btn-primary">Registrarse</button>
-        </div>
+  <div class="container">
+      <form class="login-form">
+          <h1>INICIO DE SESIÓN</h1>
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+              <asp:TextBox runat="server" type="email" class="form-control" ID="exampleInputEmail1" aria-describedby="emailHelp"></asp:TextBox>
+              <div id="emailHelp" class="form-text">No compartiremos tu email con nadie ;).</div>
+          </div>
+          <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+              <asp:TextBox runat="server" type="password" class="form-control" id="exampleInputPassword1"></asp:TextBox>
+          </div>
+          <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Mostrar contraseña</label>
+          </div>
+          <div class="botones">
+              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+              <button type="submit" class="btn btn-primary">Registrase</button>
+          </div>
       </form>
-    </div>
   </div>
-</body>
-</html>
 </asp:Content>
