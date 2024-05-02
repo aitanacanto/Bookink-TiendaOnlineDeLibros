@@ -21,6 +21,7 @@
                     <asp:MenuItem Text="Paquetes" NavigateUrl="adminPaquete.aspx" />
                     <asp:MenuItem Text="Usuarios" NavigateUrl="adminUsuario.aspx" />
                     <asp:MenuItem Text="Productos" NavigateUrl="adminProducto.aspx" />
+                    <asp:MenuItem Text="Categorías" NavigateUrl="adminCategoria.aspx" />
                 </Items>
             </asp:Menu>
         </div>
