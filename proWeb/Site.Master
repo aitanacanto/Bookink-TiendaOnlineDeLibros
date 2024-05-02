@@ -41,6 +41,7 @@
                                     <asp:MenuItem Text="Mi Cuenta">
                                         <asp:MenuItem Text="Iniciar Sesión" NavigateUrl="LogIn.aspx" />
                                         <asp:MenuItem Text="Registrarse" NavigateUrl="register.aspx" />
+                                        <asp:MenuItem Text="Mis Datos" NavigateUrl="usuario.aspx" />
                                         <asp:MenuItem Text="Soy Admin" NavigateUrl="admin.aspx" />
                                     </asp:MenuItem>
                                 </Items>
