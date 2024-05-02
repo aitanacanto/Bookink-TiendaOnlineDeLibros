@@ -13,5 +13,14 @@ namespace proWeb
         {
 
         }
+        protected void Register_Click(object sender, EventArgs e)
+        {
+            // Redirigir a la página de registro
+            Response.Redirect("register.aspx");
+        }
+        protected void Login_Click(object sender, EventArgs e)
+        {
+            // Código para manejar el inicio de sesión
+        }
     }
 }

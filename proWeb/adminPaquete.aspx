@@ -24,7 +24,7 @@
         <br />
 
         <!-- Formulario para agregar un nuevo paquete -->
-        <asp:Panel ID="pnlAgregarPaquete" runat="server" Visible="false">
+        <asp:Panel ID="pnlAgregarPaquete" runat="server">
             <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
             <asp:TextBox ID="txtNombrePaquete" runat="server"></asp:TextBox>
             <br />
