@@ -16,7 +16,7 @@
             <!-- Encabezado fijo -->
             <header class="fixed-top d-flex justify-content-between align-items-center bg-light p-3">
                 <div class="logo">
-                    <h1>libroExpress</h1>
+                    <h1>LibroExpress</h1>
                     <img src="content/logo.png" alt="Logo de libroExpress" class="logo-img" />
                 </div>
                 
@@ -81,7 +81,7 @@
             <footer class="d-flex justify-content-between align-items-center bg-light p-3"> <!-- Eliminar 'fixed-bottom' -->
                 <div class="logo">
                     <img src="content/logo.png" alt="Logo de libroExpress" class="logo-img" />
-                    <h3>libroExpress</h3>
+                    <h3>LibroExpress</h3>
                 </div>
                 <div class="social-media">
                     <h5>Our Social Media</h5>
