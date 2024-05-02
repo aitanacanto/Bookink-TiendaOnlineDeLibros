@@ -23,14 +23,12 @@ namespace proWeb
         }
         protected void ButtonAddCategoria_Click(object sender, EventArgs e)
         {
-            string categoriaNombre = TextBoxNuevaCategoria.Text;
 
             BindGrid();  // Actualizar la lista después de añadir
         }
 
         protected void ButtonDeleteCategoria_Click(object sender, EventArgs e)
         {
-            string categoriaId = DropDownListCategorias.SelectedValue;
 
             BindGrid();  // Actualizar la lista después de eliminar
         }
