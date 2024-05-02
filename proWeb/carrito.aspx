@@ -28,9 +28,8 @@
         <div class="total">
             Total de artículos: 3
         </div>
-        <button class="btn-buy">Comprar</button>
+        <asp:Button ID="btnComprar" runat="server" Text="Comprar" OnClick="buy_Click" CssClass="btn-buy" />
     </div>
-
 </body>
 
 </asp:Content>

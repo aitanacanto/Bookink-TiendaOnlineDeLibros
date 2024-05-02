@@ -24,6 +24,11 @@ namespace proWeb
 
         }
 
+        protected void buy_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("pedido.aspx");
+        }
+
         private string GenerarHtmlLibros(List<string> tituloproduct)
         {
             // Generar el HTML para los títulos de los productos
@@ -34,11 +39,6 @@ namespace proWeb
             }
 
             return htmlLibros;
-        }
-
-        protected void buy_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void EliminarLibro(/*ENProducto product*/)
