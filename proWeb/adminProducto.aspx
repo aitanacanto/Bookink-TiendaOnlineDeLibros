@@ -63,8 +63,7 @@
                         </div>
                           
                        <div class="mb-3">
-                          <label class="form-label">Nombre</label>
-                          <input type="text" name="name" class="form-control"/>
+                          <label class="form-label">Imagen</label>
                         </div>    
                       </div>
                       <div class="modal-footer">
