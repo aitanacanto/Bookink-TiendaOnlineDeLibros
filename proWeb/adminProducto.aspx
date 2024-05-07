@@ -113,90 +113,28 @@
                 </button>
                 </div>
         </div>
-        <div class="Productos">
-            <div class="Producto">
-                <div style="width: 150px; height: 150px; background-color: #FFFFE0; border-radius: 8px;"></div>
-                <div>
-                     <h2 class="title">Producto 1</h2>
-                    <p class="price">Precio: 19,99 €</p>
-                    <p class="id">ID: #1234</p>
-                    
-                </div>
-                <div class="mod-buttons">
-                    <button class="edit">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Editar
-                    </button>
-
-                    <button class="delete">
-                        <i class="fa-solid fa-trash"></i>
-                        Eliminar
-                    </button>
-                </div>
-            </div>
-
-            <div class="Producto">
-                <div style="width: 150px; height: 150px; background-color: #FFB6C1; border-radius: 8px;"></div>
-                <div>
-                     <h2 class="title">Producto 2</h2>
-                    <p class="price">Precio: 9,99 €</p>
-                    <p class="id">ID: #1244</p>
-                    
-                </div>
-                <div class="mod-buttons">
-                    <button class="edit">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Editar
-                    </button>
-
-                    <button class="delete">
-                        <i class="fa-solid fa-trash"></i>
-                        Eliminar
-                    </button>
-                </div>
-            </div>
-            <div class="Producto">
-                <div style="width: 150px; height: 150px; background-color: #90EE90; border-radius: 8px;"></div>
-                <div>
-                     <h2 class="title">Producto 3</h2>
-                    <p class="price">Precio: 17,35 €</p>
-                    <p class="id">ID: #4924</p>
-                    
-                </div>
-                <div class="mod-buttons">
-                    <button class="edit">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Editar
-                    </button>
-
-                    <button class="delete">
-                        <i class="fa-solid fa-trash"></i>
-                        Eliminar
-                    </button>
-                </div>
-            </div>
-               <div class="Producto">
-                <div style="width: 150px; height: 150px; background-color: #ADD8E6; border-radius: 8px;"></div>
-                <div>
-                     <h2 class="title">Producto 4</h2>
-                    <p class="price">Precio: 11,99 €</p>
-                    <p class="id">ID: #2365</p>
-                    
-                </div>
-                <div class="mod-buttons">
-                    <button class="edit">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Editar
-                    </button>
-
-                    <button class="delete">
-                        <i class="fa-solid fa-trash"></i>
-                        Eliminar
-                    </button>
-                </div>
-            </div>
-
-            </div>
+     <asp:Repeater ID="reapeterProduct" runat="server">
+                    <ItemTemplate>
+                        <div class="Producto">
+                            <div style="width: 150px; height: 150px; background-color: #FFFFE0; border-radius: 8px;"></div>
+                            <div>
+                                <h2 class="title"><%# Eval("Name") %></h2>
+                                <p class="price">Precio: <%# Eval("Price") %> €</p>
+                                <p class="id">ID: <%# Eval("Id") %></p>
+                            </div>
+                            <div class="mod-buttons">
+                                <button class="edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Editar
+                                </button>
+                                <button class="delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
 
         </div>
 
