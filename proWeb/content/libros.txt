@@ -1,0 +1,150 @@
+Título: Diario de un Guerrero 8-Bit
+Sinopsis: Runt, un niño de 12 años, sueña con ser guerrero. Cuando su héroe, Steve, pierde todo y se muda con Runt, surge la oportunidad de ser entrenado.
+Descripción: Un libro para los amantes de los videojuegos y las aventuras emocionantes.
+Autor: Cube Kid
+
+Título: Tu Amigo Fred
+Sinopsis: Fred, un robot amable, intenta llevar la paz a un mundo distópico y ayuda a que dos líderes en guerra encuentren la paz.
+Descripción: Un libro cálido y divertido con un mensaje positivo.
+Autor: Michael Rex
+
+Título: Una Arruga en el Tiempo
+Sinopsis: Meg, su hermano Charles Wallace y su amigo Calvin viajan por el espacio y el tiempo para encontrar al padre de Meg, que ha desaparecido.
+Descripción: Una aventura emocionante sobre la lucha entre el bien y el mal.
+Autor: Madeleine L'Engle
+
+Título: Caso Espacial
+Sinopsis: Dashiel sospecha de un asesinato en una base lunar y se embarca en un peligroso misterio.
+Descripción: Un emocionante thriller de ciencia ficción ambientado en la Luna.
+Autor: Stuart Gibbs
+
+Título: Los Últimos Niños en la Tierra
+Sinopsis: Jack Sullivan y sus amigos luchan contra zombis en un mundo apocalíptico.
+Descripción: Una divertida serie de aventuras con monstruos y acción.
+Autor: Max Brallier
+
+Título: Akiko en el Planeta Smoo
+Sinopsis: Akiko, una niña de cuarto grado, viaja a un planeta lejano y se convierte en líder para rescatar a un príncipe.
+Descripción: Un cómic que mezcla elementos de Star Wars y El Mago de Oz.
+Autor: Mark Crilley
+
+Título: Franny K. Stein: Almuerzo Camina Entre Nosotros
+Sinopsis: Franny K. Stein, una científica loca, intenta encajar en su clase, pero debe salvar a sus compañeros de un monstruo.
+Descripción: Un divertido libro sobre aceptar la singularidad de uno mismo.
+Autor: Jim Benton
+
+Título: Niño y Bot
+Sinopsis: Un niño y un robot se hacen amigos, pero enfrentan problemas cuando uno se apaga y el otro trata de curarlo.
+Descripción: Un libro adorable sobre la amistad y la aceptación.
+Autor: Ame Dyckman
+
+Título: Charlie y el Gran Ascensor de Cristal
+Sinopsis: Charlie y el Sr. Wonka viajan al espacio y luchan contra alienígenas en el Hotel Espacial.
+Descripción: Una secuela divertida y llena de aventuras de Charlie y la fábrica de chocolate.
+Autor: Roald Dahl
+
+Título: Traje Espacial y Viaje
+Sinopsis: Kip, un joven, gana un traje espacial en un concurso y se embarca en una aventura intergaláctica.
+Descripción: Un clásico de la ciencia ficción con un joven protagonista valiente.
+Autor: Robert A. Heinlein
+
+Título: Guerras de Robots
+Sinopsis: Un niño llamado Trout busca a su padre en un mundo donde los robots luchan por la igualdad.
+Descripción: Un libro de ciencia ficción emocionante y reflexivo.
+Autor: J.V. Kade
+
+Título: Escape de la Biblioteca del Sr. Lemoncello
+Sinopsis: Kyle y sus amigos quedan atrapados en una biblioteca mágica y deben resolver acertijos para escapar.
+Descripción: Un libro lleno de aventuras y misterios.
+Autor: Chris Grabenstein
+
+Título: Gregor el Superviviente
+Sinopsis: Gregor y su hermana caen en un mundo subterráneo lleno de criaturas gigantes y deben encontrar a su padre desaparecido.
+Descripción: Un libro de aventuras y fantasía con temas de valentía y amistad.
+Autor: Suzanne Collins
+
+Título: La Sociedad Benedict Misteriosa
+Sinopsis: Cuatro niños con habilidades especiales son reclutados por un excéntrico benefactor para detener a un villano.
+Descripción: Un libro lleno de misterio, aventura y rompecabezas.
+Autor: Trenton Lee Stewart
+
+Título: La Ciudad de Ember
+Sinopsis: En una ciudad subterránea, Lina y Doon intentan salvar a su comunidad antes de que se quede sin luz.
+Descripción: Un libro post-apocalíptico lleno de intriga y esperanza.
+Autor: Jeanne DuPrau
+
+Título: El Juego de Ender
+Sinopsis: Ender Wiggin, un niño prodigio, es entrenado para luchar contra una raza alienígena.
+Descripción: Un clásico de la ciencia ficción con temas de guerra y estrategia.
+Autor: Orson Scott Card
+
+Título: Percy Jackson y los Dioses del Olimpo
+Sinopsis: Percy, un semidiós, descubre su identidad y enfrenta monstruos y dioses en busca de su madre.
+Descripción: Una serie llena de mitología y aventuras.
+Autor: Rick Riordan
+
+Título: El Dador de Recuerdos
+Sinopsis: Jonas vive en una sociedad controlada y descubre oscuros secretos sobre su comunidad.
+Descripción: Un libro distópico con temas de libertad y control.
+Autor: Lois Lowry
+
+Título: Dune
+Sinopsis: Paul Atreides, un joven noble, se convierte en el líder de un planeta desértico y enfrenta conspiraciones y traiciones.
+Descripción: Un épico libro de ciencia ficción con política y religión.
+Autor: Frank Herbert
+
+Título: Los Juegos del Hambre
+Sinopsis: Katniss Everdeen, una joven cazadora, es forzada a participar en un sangriento espectáculo de supervivencia.
+Descripción: Una emocionante trilogía distópica con temas de lucha y resistencia.
+Autor: Suzanne Collins
+
+Título: Ráfagas Grandes: Vientos del Mundo y la Ciencia Detrás de Ellos
+Sinopsis: Una colección de poemas e información sobre diferentes tipos de vientos alrededor del mundo.
+Descripción: Un libro informativo y poético con ilustraciones dinámicas.
+Autor: Melanie Crowder y Megan Benedict
+
+Título: Ojalá Tuviera un Wookie y Otros Poemas para Nuestra Galaxia
+Sinopsis: Un divertido libro de poesía para fans de Star Wars con temas de aventuras galácticas.
+Descripción: Un libro encantador para niños y adultos que aman Star Wars.
+Autor: Ian Doescher
+
+Título: Spi-Ku: Un Desorden de Verso Corto en Ocho Patas
+Sinopsis: Una colección de poemas sobre arañas con texto informativo y lenguaje divertido.
+Descripción: Un libro creativo y educativo para fomentar el amor por la poesía.
+Autor: Leslie Bullion
+
+Título: Para Cada Cosita: Poemas y Oraciones para Celebrar el Día
+Sinopsis: Una colección de poemas y oraciones de agradecimiento para cada día, desde la mañana hasta la noche.
+Descripción: Un libro lleno de gratitud y conexión con Dios.
+Autor: June Cotner y Nancy Tupper Ling
+
+Título: Tigre, Tigre Ardiente: Un Poema de Animales para Cada Día del Año
+Sinopsis: Un libro de poemas para cada día del año, con temas de animales y hermosas ilustraciones.
+Descripción: Un libro impresionante y grande, lleno de poesía y naturaleza.
+Autor: Fiona Waters
+
+Título: Una Ballena de Tiempo: Un Poema Divertido para Cada Día del Año
+Sinopsis: Una colección de 365 poemas divertidos, con temas variados y diseños ilustrativos encantadores.
+Descripción: Un libro de poesía lleno de humor y creatividad.
+Autor: Lou Peacock
+
+Título: Cómo Escribir un Poema
+Sinopsis: Un poema sobre escribir un poema, que invita a los niños a buscar inspiración en la naturaleza, la imaginación y el lenguaje.
+Descripción: Un libro perfecto para iniciar una unidad de poesía o despertar el interés por escribir.
+Autor: Kwame Alexander y Deanna Nikaido
+
+Título: Recuerda
+Sinopsis: Un poema que nos invita a reflexionar sobre nuestra profunda conexión con el mundo natural.
+Descripción: Un libro atemporal con ilustraciones mágicas que celebran nuestra conexión con la Tierra.
+Autor: Joy Harjo
+
+Título: Valor en Voz Alta: 25 Poemas de Poder
+Sinopsis: Una colección que examina ejemplos y consejos para tener coraje en contextos aptos para niños.
+Descripción: Un libro que inspira a los niños a ser valientes y afrontar retos.
+Autor: Joseph Coelho
+
+Título: Robot, Unicornio, Reina: Poemas para Ti y para Mí
+Sinopsis: Una colección de poemas que examinan experiencias infantiles comunes con un estilo peculiar.
+Descripción: Un libro de poesía con un toque fresco y atractivo para discutir en grupo.
+Autor: Shannon Bramer
+
