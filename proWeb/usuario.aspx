@@ -4,42 +4,53 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
-        <h2>Mi cuenta</h2>
+    <style>
+        .container.content-box .item {
+            text-align: left;
+        }
+    </style>
+    
+    <div class="container content-box">
+        <h1 class="admin-title">Mi cuenta</h1>
         
         <!-- Nombre -->
-        <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
-        <asp:Label ID="lblNombreActual" runat="server" Text=""></asp:Label>
-        <br />
+        <div class="item">
+            <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
+            <asp:Label ID="lblNombreActual" runat="server" Text=""></asp:Label>
+        </div>
         
         <!-- Correo electrónico -->
-        <asp:Label ID="lblCorreo" runat="server" Text="Correo electrónico:"></asp:Label>
-        <asp:Label ID="lblCorreoActual" runat="server" Text=""></asp:Label>
-        <asp:TextBox ID="txtCorreoNuevo" runat="server" TextMode="Email" placeholder="Ingrese su nuevo correo electrónico"></asp:TextBox>
-        <br />
+        <div class="item">
+            <asp:Label ID="lblCorreo" runat="server" Text="Correo electrónico:"></asp:Label>
+            <asp:Label ID="lblCorreoActual" runat="server" Text=""></asp:Label>
+            <asp:TextBox ID="txtCorreoNuevo" runat="server" TextMode="Email" placeholder="Ingrese su nuevo correo electrónico"></asp:TextBox>
+        </div>
         
         <!-- Contraseña -->
-        <asp:Label ID="lblContraseña" runat="server" Text="Contraseña:"></asp:Label>
-        <asp:Label ID="lblContraseñaActual" runat="server" Text="********" CssClass="password"></asp:Label>
-        <asp:TextBox ID="txtContraseñaNueva" runat="server" TextMode="Password" placeholder="Ingrese su nueva contraseña"></asp:TextBox>
-        <br />
+        <div class="item">
+            <asp:Label ID="lblContraseña" runat="server" Text="Contraseña:"></asp:Label>
+            <asp:Label ID="lblContraseñaActual" runat="server" Text="********" CssClass="password"></asp:Label>
+            <asp:TextBox ID="txtContraseñaNueva" runat="server" TextMode="Password" placeholder="Ingrese su nueva contraseña"></asp:TextBox>
+        </div>
         
         <!-- Teléfono -->
-        <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:"></asp:Label>
-        <asp:Label ID="lblTelefonoActual" runat="server" Text=""></asp:Label>
-        <asp:TextBox ID="txtTelefonoNuevo" runat="server"></asp:TextBox>
-        <br />
+        <div class="item">
+            <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:"></asp:Label>
+            <asp:Label ID="lblTelefonoActual" runat="server" Text=""></asp:Label>
+            <asp:TextBox ID="txtTelefonoNuevo" runat="server"></asp:TextBox>
+        </div>
         
         <!-- Dirección -->
-        <asp:Label ID="lblDireccion" runat="server" Text="Dirección:"></asp:Label>
-        <asp:Label ID="lblDireccionActual" runat="server" Text=""></asp:Label>
-        <asp:TextBox ID="txtDireccionNueva" runat="server"></asp:TextBox>
-        <br />
+         <div class="item">
+            <asp:Label ID="lblDireccion" runat="server" Text="Dirección:"></asp:Label>
+            <asp:Label ID="lblDireccionActual" runat="server" Text=""></asp:Label>
+            <asp:TextBox ID="txtDireccionNueva" runat="server"></asp:TextBox>
+        </div>
         
         <!-- Botón para actualizar información -->
-        <asp:Button ID="btnActualizar" runat="server" Text="Actualizar información" OnClick="btnActualizar_Click" />
-        
+        <div class="button-container">
+            <asp:Button ID="btnActualizar" runat="server" Text="Actualizar información" OnClick="btnActualizar_Click" CssClass="button" />
+        </div>        
         <!-- Historial de pedidos -->
-        <!-- Aquí podrías agregar un enlace o una sección para ver el historial de pedidos del usuario -->
     </div>
 </asp:Content>
