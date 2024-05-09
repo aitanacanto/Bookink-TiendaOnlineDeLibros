@@ -32,12 +32,9 @@ namespace proWeb
 
             List<ENUsuario> listaUsuarios = new List<ENUsuario>();
             // Añade algunos productos de ejemplo (debes obtenerlos de tu fuente de datos real)
-            listaUsuarios.Add(new ENUsuario(1, "Javier", "Sanchuis Rodriguez", "494949", "javi@sanchis.com"));
             listaUsuarios.Add(new ENUsuario(2, "Manuel", "Lopez Cobos", "494949", "manu@cobos.com"));
             listaUsuarios.Add(new ENUsuario(3, "Laura", "Rodriguez Sala", "494949", "laura@sala.com"));
-            listaUsuarios.Add(new ENUsuario(4, "Francisco", "Francia LoL", "494949", "fran@franclol.com"));
             listaUsuarios.Add(new ENUsuario(5, "María", "Del Oro Marín", "494949", "maria@deloro.com"));
-            listaUsuarios.Add(new ENUsuario(6, "Lionel", "Messias Capuccino", "494949", "lionel@messi.com"));
 
             return listaUsuarios;
         }
