@@ -19,6 +19,7 @@ namespace ClassLibrary
         private string _NIF;
         private string _address; //deberia ser una referencia
         private int _id;
+
         public string Name { get { return _name; } set { _name = value; } }
         public string Surnames { get { return _surnames; } set { _surnames = value; } }
         public string Email { get { return _email; } set { _email = value; } }
@@ -28,6 +29,15 @@ namespace ClassLibrary
         public int Id { get { return _id; } set { _id = value; } }
         public ENUsuario() 
         {
+        }
+
+        public ENUsuario(int id, string name, string surnames, string nif, string email)
+        {
+            Id = id;
+            Name = name;
+            Surnames = surnames;
+            NIF = nif;
+            Email = email;
         }
 
         public bool Register()
