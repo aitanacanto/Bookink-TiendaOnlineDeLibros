@@ -1,85 +1,94 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="adminPaquete.aspx.cs" Inherits="proWeb.adminPaquete" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>Administrar Paquetes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
 </asp:Content>
-        
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
+
     <div class="container">
-        <!-- Listado de paquetes -->
-        <h2>Paquetes disponibles</h2>
-        <asp:GridView ID="gvPaquetes" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gvPaquetes_SelectedIndexChanged">
-            <Columns>
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
-                <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                <asp:TemplateField HeaderText="Acciones">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="lnkMostrarPaquete" runat="server" Text="Mostrar" CommandName="Mostrar" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
-                        <asp:LinkButton ID="lnkBorrarPaquete" runat="server" Text="Borrar" CommandName="Borrar" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
-        <br />
-
-        <!-- Formulario para agregar un nuevo paquete -->
-        <asp:Panel ID="pnlAgregarPaquete" runat="server">
-            <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
-            <asp:TextBox ID="txtNombrePaquete" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblDescripcion" runat="server" Text="Descripción:"></asp:Label>
-            <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
-            <br />
-            <asp:Label ID="lblPrecio" runat="server" Text="Precio:"></asp:Label>
-            <asp:TextBox ID="txtPrecio" runat="server"></asp:TextBox>
-            <br />
-            <asp:Button ID="btnAgregar" runat="server" Text="Agregar Paquete" OnClick="btnAgregar_Click" />
-        </asp:Panel>
-
-        <!-- Listado de productos del paquete seleccionado -->
-        <asp:Panel ID="pnlProductosPaquete" runat="server" Visible="false">
-            <h2>Productos del Paquete</h2>
-            <asp:Label ID="lblNombrePaquete" runat="server" Text="Nombre del paquete: "></asp:Label>
-            <br />
-            <asp:GridView ID="gvProductosPaquete" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gvProductosPaquete_SelectedIndexChanged">
-    <Columns>
-        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-        <asp:BoundField DataField="Stock" HeaderText="Stock" />
-        <asp:BoundField DataField="Precio" HeaderText="Precio" />
-        <asp:BoundField DataField="PrecioVenta" HeaderText="Precio de Venta" />
-        <asp:BoundField DataField="Categoria" HeaderText="Categoría" />
-        <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha de Creación" />
-        <asp:TemplateField HeaderText="Acciones">
-            <ItemTemplate>
-                <asp:LinkButton ID="lnkEliminarProducto" runat="server" Text="Eliminar" CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
-            </ItemTemplate>
-        </asp:TemplateField>
-    </Columns>
-</asp:GridView>
-
-            <br />
-            <!-- Formulario para agregar un nuevo producto al paquete -->
-            <asp:Panel ID="pnlAgregarProducto" runat="server" Visible="false">
-                <h3>Agregar Nuevo Producto al Paquete</h3>
-                <asp:Label ID="lblNombreProducto" runat="server" Text="Nombre:"></asp:Label>
-                <asp:TextBox ID="txtNombreProducto" runat="server"></asp:TextBox>
-                <br />
-                <asp:Label ID="lblStockProducto" runat="server" Text="Stock:"></asp:Label>
-                <asp:TextBox ID="txtStockProducto" runat="server"></asp:TextBox>
-                <br />
-                <asp:Label ID="lblPrecioProducto" runat="server" Text="Precio:"></asp:Label>
-                <asp:TextBox ID="txtPrecioProducto" runat="server"></asp:TextBox>
-                <br />
-                <asp:Label ID="lblPrecioVentaProducto" runat="server" Text="Precio de Venta:"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                <br />
-                <asp:Label ID="lblFechaCreacion" runat="server" Text="Fecha de Creación:"></asp:Label>
-                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                <br />
-                <asp:Button ID="btnAgregarProducto" runat="server" Text="Agregar Producto" OnClick="btnAgregarProducto_Click" />
-            </asp:Panel>
-        </asp:Panel>
-
+        <div class="admin-packages">
+            <div class="header">
+                <h1 class="title">Paquetes</h1>
+                <div style="margin-left: auto;">
+                    <asp:Button class="create" data-bs-toggle="modal" data-bs-target="#exampleModal" runat="server" Text="Crear Paquete" OnClientClick="return false;" />
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Paquete</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Aquí puedes agregar campos para la creación de paquetes -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <asp:Repeater ID="repeaterPackage" runat="server">
+                <ItemTemplate>
+                    <div class="Package">
+                        <!-- Aquí puedes mostrar la información de cada paquete -->
+                            <div class="Producto">
+                                <div style="width: 150px; height: 150px; background-color: #FFFFE0; border-radius: 8px;"></div>
+                                <div>
+                                    <h2 class="title"><%# Eval("Nombre") %></h2>
+                                    <p class="price">Precio: <%# Eval("Precio") %> €</p>
+                                    <p class="id">ID: <%# Eval("IdPaquete") %></p>
+                            </div>
+                        <div class="mod-buttons">
+                            <asp:LinkButton runat="server" class="edit" OnClientClick="return false;" data-bs-toggle="modal" data-bs-target="#editModal">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                Editar
+                            </asp:LinkButton>
+                            <asp:LinkButton runat="server" class="delete" OnClientClick="return false;" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <i class="fa-solid fa-trash"></i>
+                                Eliminar
+                            </asp:LinkButton>
+                        </div>
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Paquete</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>¿Quieres eliminar este paquete?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-danger">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="editModalLabel">Editar Paquete</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Aquí puedes agregar campos para editar la información del paquete -->
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
     </div>
 </asp:Content>

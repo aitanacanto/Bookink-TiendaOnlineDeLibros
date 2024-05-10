@@ -20,21 +20,21 @@ body {
     }
 
 /*  CARD    */
-    .card {
-        background-color: #B3C699; /* Color de fondo de la tarjeta */
-        border: 1px solid #ccc; /* Borde de la tarjeta */
-        border-radius: 5px; /* Borde redondeado */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-        transition: box-shadow 0.3s ease; /* Transición suave de la sombra */
-        width: 300px; /* Ajustar el ancho de la tarjeta */
-        height: 400px;
-        display: flex; /* Utilizar flexbox para el diseño */
-        flex-direction: column; /* Apilar elementos verticalmente */
-        align-items: center; /* Centrar los elementos horizontalmente */
-    }
+.card {
+    background-color: #848780; /* Color de fondo de la tarjeta */
+    border: 1px solid #ccc; /* Borde de la tarjeta */
+    border-radius: 5px; /* Borde redondeado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: box-shadow 0.3s ease; /* Transición suave de la sombra */
+    width: 300px; /* Ajustar el ancho de la tarjeta */
+    height: 400px;
+    display: flex; /* Utilizar flexbox para el diseño */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center; /* Centrar los elementos horizontalmente */
+}
 
     .card-img-top {
-        width: 70%; /* La imagen ocupa todo el ancho de la tarjeta */
+        width: 75%; /* La imagen ocupa todo el ancho de la tarjeta */
         height: auto; /* Altura automática para mantener la proporción */
         border-top-left-radius: 5px; /* Borde redondeado en la esquina superior izquierda */
         border-top-right-radius: 5px; /* Borde redondeado en la esquina superior derecha */
