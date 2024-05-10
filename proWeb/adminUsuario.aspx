@@ -21,8 +21,7 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
+            overflow: visible        }
 
         .title{
             margin-left:20px;
@@ -107,6 +106,10 @@
         background-color: #393185; /* Cambia el color de fondo del botón dropdown */
         }
 
+        .dropdown-form {
+            position: relative; /* Hace que el menú desplegable se expanda dentro del contenedor en lugar de flotar sobre él */
+        }
+
     </style>
 
     <div class="container">
@@ -176,10 +179,10 @@
         
             <div class="dropdown">
               <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                Añadir nuevo tabajador
+                Añadir trabajador
               </button>
 
-              <form class="dropdown-menu p-4">
+              <form class="dropdown-menu p-4 dropdown-form" position="relative">
                 <div class="mb-3">
                   <label for="Nombre" class="form-label">Nombre</label>
                   <input type="email" class="form-control" id="nombreTrabajador">
