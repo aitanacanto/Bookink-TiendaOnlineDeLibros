@@ -176,7 +176,7 @@
         
             <div class="dropdown">
               <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                Dropdown form
+                Añadir nuevo tabajador
               </button>
 
               <form class="dropdown-menu p-4">
