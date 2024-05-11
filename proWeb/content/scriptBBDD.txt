@@ -142,7 +142,7 @@ GO
 ---------------------------------------------------------------------------------------------------
 -- PRODUCTOS
 
-INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img_producto) VALUES
+INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img_producto, autor, sinopsis, descripcion) VALUES
 ('OF001', 'Diario de un Guerrero 8-Bit', 10.99, 100, 8.99, 'content/products/book_1.jpg'),
 ('OF001', 'Tu Amigo Fred', 12.99, 100, 10.99, 'content/products/book_2.jpg'),
 ('OF001', 'Una Arruga en el Tiempo', 8.99, 100, 7.99, 'content/products/book_3.jpg'),
