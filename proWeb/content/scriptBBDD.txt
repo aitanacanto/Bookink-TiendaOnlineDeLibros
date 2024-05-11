@@ -1,0 +1,190 @@
+-- CREACIÓN DE TABLAS
+
+create table [dbo].[USUARIO]
+(	
+    [id] INT PRIMARY KEY,
+    [nombre_apellido] VARCHAR(255) NOT NULL,
+    [nif] NVARCHAR(20) NOT NULL,
+    [puntos] INT NOT NULL,
+    [admin] NVARCHAR(5) NOT NULL,
+    [mail] NVARCHAR(100) NOT NULL,
+    [teléfono] NVARCHAR(20) NOT NULL
+)
+GO
+create table [dbo].[PEDIDO]
+(	
+    [numped] INT PRIMARY KEY,
+    [id_usuario] INT NOT NULL,
+    [cod_carrito] INT NOT NULL,
+    [dirección_envío] NVARCHAR(255) NOT NULL,
+    [cantidad] INT NOT NULL,
+    [precio] DECIMAL(10, 2) NOT NULL,
+    [estado] NVARCHAR(50) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
+    FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id)
+)
+GO
+create table [dbo].[LINPEDIDO_PA]
+(	
+    [id_paquete] INT,
+    [id_pedido] INT,
+    PRIMARY KEY (id_paquete, id_pedido),
+    FOREIGN KEY (id_paquete) REFERENCES PAQUETE(id),
+    FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped)   
+)
+GO
+create table [dbo].[LINPEDIDO]
+(	
+    [id_pedido] INT,
+    [id_producto] INT,
+    PRIMARY KEY (id_pedido, id_producto),
+    FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped),
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+)
+GO
+create table [dbo].[CARRITO]
+(	
+    [id] INT PRIMARY KEY,
+    [cantidad] INT NOT NULL,
+    [id_usuario] INT NOT NULL,
+    [lincarrito] NVARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id)
+)
+GO
+create table [dbo].[LINCARRITO]
+(	
+    [id_carrito] INT,
+    [id_producto] INT,
+    PRIMARY KEY (id_carrito, id_producto),
+    FOREIGN KEY (id_carrito) REFERENCES CARRITO(id),
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+)
+GO
+create table [dbo].[DIRECCION]
+(	
+    [id] INT PRIMARY KEY,
+    [cod_postal] NVARCHAR(10) NOT NULL,
+    [dirección] NVARCHAR(255) NOT NULL,
+    [ciudad] NVARCHAR(30) NOT NULL,
+    [pais] NVARCHAR(30) NOT NULL
+)
+GO
+create table [dbo].[TIENE_DIRECCION]
+(	
+    [id_usuario] INT,
+    [id_direccion] INT,
+    PRIMARY KEY (id_usuario, id_direccion),
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
+    FOREIGN KEY (id_direccion) REFERENCES DIRECCION(id)
+)
+GO
+create table [dbo].[RESENA]
+(	
+    [cod] INT IDENTITY (1, 1) NOT NULL,
+    [id_usuario] INT NOT NULL,
+    [id_producto] INT NOT NULL,
+    [comentario] TEXT NOT NULL,
+    [fecha] DATE NOT NULL,
+    [valoracion] DECIMAL(3, 2) NOT NULL,
+    PRIMARY KEY CLUSTERED ([cod] ASC),
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+)
+GO
+create table [dbo].[PRODUCTO]
+(	
+    [id] INT IDENTITY (1, 1) NOT NULL,
+    [cod_oferta] NVARCHAR(50) NOT NULL,
+    [img_producto] NVARCHAR(255) NOT NULL,
+    [nombre] NVARCHAR(100) NOT NULL,
+    [sinopsis] NVARCHAR(2000) NOT NULL,
+    [autor] NVARCHAR(50) NOT NULL,
+    [descripcion] NVARCHAR(500) NOT NULL,
+    [precio] DECIMAL(10, 2) NOT NULL,
+    [cant_stock] INT NOT NULL,
+    [precio_oferta] DECIMAL(10, 2),
+    PRIMARY KEY CLUSTERED ([id] ASC)
+)
+GO
+create table [dbo].[TIENE_PAQUETE]
+(	
+    [id_paquete] INT,
+    [id_producto] INT,
+    PRIMARY KEY (id_paquete, id_producto),
+    FOREIGN KEY (id_paquete) REFERENCES PAQUETE(id),
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+)
+GO
+create table [dbo].[PAQUETE]
+(	
+    [id] INT IDENTITY (1, 1) NOT NULL,
+    [nombre] NVARCHAR(100) NOT NULL,
+    [precio] DECIMAL(10, 2) NOT NULL
+    PRIMARY KEY CLUSTERED ([id] ASC)
+)
+GO
+create table [dbo].[TIENE_CATEGORIA]
+(	
+    [id_categoria] INT,
+    [id_producto] INT,
+    PRIMARY KEY (id_categoria, id_producto),
+    FOREIGN KEY (id_categoria) REFERENCES CATEGORIA(id),
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+)
+GO
+create table [dbo].[CATEGORIA]
+(	
+    [id] INT IDENTITY (1, 1) NOT NULL,
+    [nombre] NVARCHAR(100) NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+)
+GO
+
+---------------------------------------------------------------------------------------------------
+-- PRODUCTOS
+
+INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img_producto, autor, sinopsis, descripcion) VALUES
+('OF001', 'Diario de un Guerrero 8-Bit', 10.99, 100, 8.99, 'content/products/book_1.jpg'),
+('OF001', 'Tu Amigo Fred', 12.99, 100, 10.99, 'content/products/book_2.jpg'),
+('OF001', 'Una Arruga en el Tiempo', 8.99, 100, 7.99, 'content/products/book_3.jpg'),
+('OF001', 'Caso Espacial', 15.49, 100, 12.49, 'content/products/book_4.jpg'),
+('OF001', 'Los Últimos Niños en la Tierra', 7.99, 100, 6.99, 'content/products/book_5.jpg'),
+('OF001', 'Akiko en el Planeta Smoo', 9.99, 100, 7.99, 'content/products/book_6.jpg'),
+('OF001', 'Franny K. Stein: Almuerzo Camina Entre Nosotros', 9.49, 100, 7.49, 'content/products/book_7.jpg'),
+('OF001', 'Niño y Bot', 8.99, 100, 6.99, 'content/products/book_8.jpg'),
+('OF001', 'Charlie y el Gran Ascensor de Cristal', 10.99, 100, 8.99, 'content/products/book_9.jpg'),
+('OF001', 'Traje Espacial y Viaje', 11.99, 100, 9.99, 'content/products/book_10.jpg'),
+('OF001', 'Guerras de Robots', 13.99, 100, 11.99, 'content/products/book_11.jpg'),
+('OF001', 'Escape de la Biblioteca del Sr. Lemoncello', 9.99, 100, 7.99, 'content/products/book_12.jpg'),
+('OF001', 'Gregor el Superviviente', 10.49, 100, 8.49, 'content/products/book_13.jpg'),
+('OF001', 'La Sociedad Benedict Misteriosa', 12.49, 100, 10.49, 'content/products/book_14.jpg'),
+('OF001', 'La Ciudad de Ember', 11.99, 100, 9.99, 'content/products/book_15.jpg'),
+('OF001', 'El Juego de Ender', 14.99, 100, 12.99, 'content/products/book_16.jpg'),
+('OF001', 'Percy Jackson y los Dioses del Olimpo', 13.99, 100, 11.99, 'content/products/book_17.jpg'),
+('OF001', 'El Dador de Recuerdos', 8.99, 100, 6.99, 'content/products/book_18.jpg'),
+('OF001', 'Dune', 16.99, 100, 14.99, 'content/products/book_19.jpg'),
+('OF001', 'Los Juegos del Hambre', 12.99, 100, 10.99, 'content/products/book_20.jpg'),
+('OF001', 'Ráfagas Grandes: Vientos del Mundo y la Ciencia Detrás de Ellos', 9.99, 100, 7.99, 'content/products/book_21.jpg'),
+('OF001', 'Ojalá Tuviera un Wookie y Otros Poemas para Nuestra Galaxia', 10.49, 100, 8.49, 'content/products/book_22.jpg'),
+('OF001', 'Spi-Ku: Un Desorden de Verso Corto en Ocho Patas', 9.99, 100, 7.99, 'content/products/book_23.jpg'),
+('OF001', 'Para Cada Cosita: Poemas y Oraciones para Celebrar el Día', 10.99, 100, 8.99, 'content/products/book_24.jpg'),
+('OF001', 'Tigre, Tigre Ardiente: Un Poema de Animales para Cada Día del Año', 11.99, 100, 9.99, 'content/products/book_25.jpg'),
+('OF001', 'Una Ballena de Tiempo: Un Poema Divertido para Cada Día del Año', 12.49, 100, 10.49, 'content/products/book_26.jpg'),
+('OF001', 'Cómo Escribir un Poema', 9.99, 100, 7.99, 'content/products/book_27.jpg'),
+('OF001', 'Recuerda', 8.99, 100, 6.99, 'content/products/book_28.jpg'),
+('OF001', 'Valor en Voz Alta: 25 Poemas de Poder', 10.49, 100, 8.49, 'content/products/book_29.jpg'),
+('OF001', 'Robot, Unicornio, Reina: Poemas para Ti y para Mí', 11.49, 100, 9.49, 'content/products/book_30.jpg');
+
+-- CATEGORIA
+INSERT INTO CATEGORIA (nombre) VALUES
+('Infantil'),
+('Ciencia Ficción'),
+('Poesía');
+
+-- TIENE CATEGORIA
+
+-- PAQUETE
+
+
+-- TIENE PAQUETE
+
