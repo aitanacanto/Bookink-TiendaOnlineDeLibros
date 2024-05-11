@@ -16,8 +16,8 @@
 
             <header class="fixed-top d-flex justify-content-between align-items-center bg-light p-3">
                 <div class="logo">
-                    <h1>LibroExpress</h1>
-                    <img src="content/logo.png" alt="Logo de libroExpress" class="logo-img" />
+                    <h1>BookInk</h1>
+                    <img src="content/blogo.png" alt="Logo de bookink" class="logo-img" />
                 </div>
                 
                 <div class="row justify-content-between">
@@ -77,14 +77,14 @@
             
             <footer class="d-flex justify-content-between align-items-center bg-light p-3"> 
                 <div class="logo">
-                    <img src="content/logo.png" alt="Logo de libroExpress" class="logo-img" />
-                    <h3>LibroExpress</h3>
+                    <img src="content/blogo.png" alt="Logo de libroExpress" class="logo-img" />
+                    <h3>BookInk</h3>
                 </div>
                 <div class="social-media">
                     <h5>Our Social Media</h5>
                     <a href="https://www.instagram.com/"><img height="15" src="content/instagram.png" /></a>
                 </div>
-                <p>&copy; 2024 libroExpress. Todos los derechos reservados.</p>
+                <p>&copy; 2024 BookInk. Todos los derechos reservados.</p>
             </footer>
         </div>
     </form>
