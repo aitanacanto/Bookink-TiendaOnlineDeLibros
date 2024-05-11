@@ -27,6 +27,7 @@ namespace ClassLibrary
         public string ImagePath { get; set; }
         public string sinopsis { get; set; }
         public string descripcion { get; set; }
+        public string autor { get; set; }
 
         public ENProducto()
         {

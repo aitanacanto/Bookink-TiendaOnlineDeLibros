@@ -98,6 +98,7 @@ create table [dbo].[PRODUCTO]
     [img_producto] NVARCHAR(255) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
     [sinopsis] NVARCHAR(2000) NOT NULL,
+    [autor] NVARCHAR(50) NOT NULL,
     [descripcion] NVARCHAR(500) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [cant_stock] INT NOT NULL,
