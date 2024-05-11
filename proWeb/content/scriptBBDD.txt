@@ -97,6 +97,9 @@ create table [dbo].[PRODUCTO]
     [cod_oferta] NVARCHAR(50) NOT NULL,
     [img_producto] NVARCHAR(255) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
+    [sinopsis] NVARCHAR(2000) NOT NULL,
+    [autor] NVARCHAR(50) NOT NULL,
+    [descripcion] NVARCHAR(500) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [cant_stock] INT NOT NULL,
     [precio_oferta] DECIMAL(10, 2),
@@ -114,9 +117,10 @@ create table [dbo].[TIENE_PAQUETE]
 GO
 create table [dbo].[PAQUETE]
 (	
-    [id] INT PRIMARY KEY,
+    [id] INT IDENTITY (1, 1) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL
+    PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
 create table [dbo].[TIENE_CATEGORIA]
@@ -139,7 +143,7 @@ GO
 ---------------------------------------------------------------------------------------------------
 -- PRODUCTOS
 
-INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img_producto) VALUES
+INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img_producto, autor, sinopsis, descripcion) VALUES
 ('OF001', 'Diario de un Guerrero 8-Bit', 10.99, 100, 8.99, 'content/products/book_1.jpg'),
 ('OF001', 'Tu Amigo Fred', 12.99, 100, 10.99, 'content/products/book_2.jpg'),
 ('OF001', 'Una Arruga en el Tiempo', 8.99, 100, 7.99, 'content/products/book_3.jpg'),
