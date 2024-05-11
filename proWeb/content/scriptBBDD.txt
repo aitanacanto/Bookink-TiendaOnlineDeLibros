@@ -97,6 +97,8 @@ create table [dbo].[PRODUCTO]
     [cod_oferta] NVARCHAR(50) NOT NULL,
     [img_producto] NVARCHAR(255) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
+    [sinopsis] NVARCHAR(2000) NOT NULL,
+    [descripcion] NVARCHAR(500) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [cant_stock] INT NOT NULL,
     [precio_oferta] DECIMAL(10, 2),
