@@ -117,9 +117,10 @@ create table [dbo].[TIENE_PAQUETE]
 GO
 create table [dbo].[PAQUETE]
 (	
-    [id] INT PRIMARY KEY,
+    [id] INT IDENTITY (1, 1) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL
+    PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
 create table [dbo].[TIENE_CATEGORIA]
