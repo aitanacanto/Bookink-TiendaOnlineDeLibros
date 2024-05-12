@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace ClassLibrary
 {
     class CADCategoria
     {
-
+        private string connectionString; //String para conectarse a la bbdd
         public CADCategoria()
         {
-            //añadir constring para la BD
+            connectionString=
         }
 
         public bool SearchCategory(ENCategoria cat)
