@@ -72,6 +72,7 @@
       <DependentUpon>bbdd.mdf</DependentUpon>
     </Content>
     <Content Include="carrito.aspx" />
+    <Content Include="content\scriptBBDD.txt" />
     <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
     <Content Include="mispedidos.aspx" />

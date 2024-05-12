@@ -148,3 +148,81 @@ Sinopsis: Una colección de poemas que examinan experiencias infantiles comunes 
 Descripción: Un libro de poesía con un toque fresco y atractivo para discutir en grupo.
 Autor: Shannon Bramer
 
+---------------------------------------------------------------------------
+LIBROS PAQUETES:
+
+Harry Potter Pack:
+
+Título: Harry Potter y la piedra filosofal (Harry Potter 1)
+Autor: J.K. Rowling
+Sinopsis: Harry Potter nunca ha oído hablar de Hogwarts hasta que empiezan a caer cartas en el felpudo del número 4 de Privet Drive. Llevan la dirección escrita con tinta verde en un sobre de pergamino amarillento con un sello de lacre púrpura, y sus horripilantes tíos se apresuran a confiscarlas. Más tarde, el día que Harry cumple once años, Rubeus Hagrid, un hombre gigantesco cuyos ojos brillan como escarabajos negros, irrumpe con una noticia extraordinaria: Harry Potter es un mago, y le han concedido una plaza en el Colegio Hogwarts de Magia y Hechicería.
+Descripción: Harry Potter y la piedra filosofal es el primer volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.
+
+Título: Harry Potter y la cámara secreta (Harry Potter 2)
+Autor: J.K. Rowling
+Sinopsis: El verano de Harry Potter ha incluido el peor cumpleaños de su vida, las funestas advertencias de un elfo doméstico llamado Dobby y el rescate de casa de los Dursley protagonizado por su amigo Ron Weasley al volante de un coche mágico volador. De vuelta en el Colegio Hogwarts de Magia y Hechicería, donde va a empezar su segundo curso, Harry oye unos extraños susurros que resuenan por los pasillos vacíos. Y entonces empiezan los ataques y varios alumnos aparecen petrificados... Por lo visto, las siniestras predicciones de Dobby se están cumpliendo....
+Descripción: Harry Potter y la cámara secreta, el segundo volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.
+
+Título: Harry Potter y el prisionero de Azkaban (Harry Potter 3)
+Autor: J.K. Rowling
+Sinopsis: Cuando el autobús noctámbulo irrumpe en una calle oscura y frena con fuertes chirridos delante de Harry, comienza para él un nuevo curso en Hogwarts, lleno de acontecimientos extraordinarios. Sirius Black, asesino y seguidor de lord Voldemort, se ha fugado, y dicen que va en busca de Harry. En su primera clase de Adivinación, la profesora Trelawney ve un augurio de muerte en las hojas de té de la taza de Harry... Pero quizá lo más aterrador sean los dementores que patrullan por los jardines del colegio, capaces de sorberte el alma con su beso...
+Descripción: Harry Potter y el prisionero de Azkaban es la tercera novela de la ya clásica serie fantástica de la autora británica J.K. Rowling.
+
+Título: Harry Potter y el cáliz de fuego (Harry Potter 4)
+Autor: J.K. Rowling
+Sinopsis: Se va a celebrar en Hogwarts el Torneo de los Tres Magos. Sólo los alumnos mayores de diecisiete años pueden participar en esta competición, pero, aun así, Harry sueña con ganarla. En Halloween, cuando el cáliz de fuego elige a los campeones, Harry se lleva una sorpresa al ver que su nombre es uno de los escogidos por el cáliz mágico. Durante el torneo deberá enfrentarse a desafíos mortales, dragones y magos tenebrosos, pero con la ayuda de Ron y Hermione, sus mejores amigos, ¡quizá logre salir con vida!
+Descripción: Harry Potter y el cáliz de fuego es la cuarta entrega de la serie fantástica de la autora británica J.K. Rowling.
+
+Título: Harry Potter y la Orden del Fénix (Harry Potter 5)
+Autor: J.K. Rowling
+Sinopsis: Son malos tiempos para Hogwarts. Tras el ataque de los dementores a su primo Dudley, Harry Potter comprende que Voldemort no se detendrá ante nada para encontrarlo. Muchos niegan que el Señor Tenebroso haya regresado, pero Harry no está solo: una orden secreta se reúne en Grimmauld Place para luchar contra las fuerzas oscuras. Harry debe permitir que el profesor Snape le enseñe a protegerse de las brutales incursiones de Voldemort en su mente. Pero éstas son cada vez más potentes, y a Harry se le está agotando el tiempo...
+Descripción: Harry Potter y la Orden del Fénix es la quinta entrega de la ya clásica serie de fantasía de la autora británica J.K. Rowling.
+
+Título: Harry Potter y el misterio del príncipe (Harry Potter 6)
+Autor: J.K. Rowling
+Sinopsis: Con dieciséis años cumplidos, Harry inicia el sexto curso en Hogwarts en medio de terribles acontecimientos que asolan Inglaterra. Elegido capitán del equipo de quidditch, los ensayos, los exámenes y las chicas ocupan todo su tiempo, pero la tranquilidad dura poco. A pesar de los férreos controles de seguridad que protegen la escuela, dos alumnos son brutalmente atacados. Dumbledore sabe que se acerca el momento, anunciado por la Profecía, en que Harry y Voldemort se enfrentarán a muerte.El anciano director solicitará la ayuda de Harry y juntos emprenderán peligrosos viajes para intentar debilitar al enemigo, para lo cual el joven mago contará con un viejo libro de pociones perteneciente a un misterioso personaje, alguien que se hace llamar Príncipe Mestizo.
+Descripción: Harry Potter y el misterio del príncipe es la sexta novela de la ya clásica serie fantástica de la autora británica J.K. Rowling.
+
+Título: Harry Potter y las reliquias de la muerte (Harry Potter 7)
+Autor: J.K. Rowling
+Sinopsis: Cuando se monta en el sidecar de la moto de Hagrid y se eleva en el cielo, dejando Privet Drive por última vez, Harry Potter sabe que lord Voldemort y sus mortífagos se hallan cerca. El encantamiento protector que había mantenido a salvo a Harry se ha roto, pero él no puede seguir escondiéndose. El Señor Tenebroso se dedica a aterrorizar a todos los seres queridos de Harry, y, para detenerlo, éste habrá de encontrar y destruir los horrocruxes que quedan. La batalla definitiva debe comenzar: Harry tendrá que alzarse y enfrentarse a su enemigo...
+Descripción: Harry Potter y las reliquias de la muerte es el séptimo y último volumen de la ya clásica serie fantástica de la autora británica J.K. Rowling.
+
+Culpables trilogía Pack:
+
+Título: Culpa mía (Culpables 1)
+Autor: Mercedes Ron
+Sinopsis: Nicholas Leister ha sido creado para amargarme la vida. Alto, ojos azules, pelo negro como la noche... Suena genial ¿verdad? Pues no tanto cuando te enteras de que va a ser tu hermanastro y además representa todo de lo que has estado huyendo desde que tienes uso de razón. Peligro fue lo primero que me vino a la cabeza cuando lo conocí y descubrí que mantiene una doble vida oculta de su padre multimillonario. ¿Cómo terminé cayendo en sus redes? Fácil: con esos ojos es capaz de poner tu mundo patas arriba.
+Descripción: Una historia de amor que te atrapará. La primera parte de la trilogía «Culpables».
+
+Título: Culpa tuya (Culpables 2)
+Autor: Mercedes Ron
+Sinopsis: Cuando Noah se enamoró de Nick sabía que su relación no iba a ser fácil: son polos opuestos, fuego y electricidad, y cuando están juntos saltan chispas... en todos los sentidos. Hasta ahora, la pasión ha sido más fuerte que el orgullo, pero la diferencia de edad, la universidad, las fiestas, sus padres y los fantasmas que acechan a los dos les ponen a prueba una y otra vez, como una bomba de relojería que amenaza con hacerles estallar.
+Descripción: Más romance, traición y misterio en Culpa tuya, segunda parte de «Culpa Mía», la saga romántica de Mercedes Ron protagonizada por un chico malo con un gran corazón y una chica buena con muchas agallas.
+
+Título: Culpa nuestra (Culpables 3)
+Autor: Mercedes Ron
+Sinopsis: La relación de Nick y Noah está pasando por su peor momento, y parece que nada podrá volver a ser como antes... Van a tener que pasarpor muchas cosas para finalmente comprender si de verdad están hechos el uno para el otro o si por lo contrario, estar separados es lo que de verdad les conviene.
+Descripción: Una historia de amor que te atrapará. La entrega final de la trilogía «Culpables».
+
+Divergente Pack:
+Título: Divergente 1 - Divergente
+Autor: Veronica Roth
+Sinopsis: En el Chicago distópico de Beatrice, la sociedad está dividida en cinco facciones. En una ceremonia anual, todos los chicos de dieciséis años deben decidir a qué facción dedicarán el resto de sus vidas. Beatrice tiene que elegir entre quedarse con su familia... y ser quien realmente es.
+Descripción: Novela de ciencia ficción con toque romántico.
+
+Título: Divergente 2 - Insurgente
+Autor: Veronica Roth
+Sinopsis: Con la oleada de disturbios en las distintas facciones, el día de la iniciación de Tris debería haber sido una celebración de la facción elegida. En cambio, terminó con un gran problema. El conflicto entre las facciones se intensifica y las ideologías se enfrentan. En tiempos de guerra, se eligen líderes, los secretos afloran y cada decisión tiene mayores consecuencias.
+Descripción: Novela de ciencia ficción con toque romántico.
+
+Título: Divergente 3 - Leal
+Autor: Veronica Roth
+Sinopsis: La sociedad dividida en facciones en la que antes creía Tris Prior ha quedado hecha pedazos, fracturada por la violencia y las luchas de poder, y marcada por la traición. Así que cuando tiene la oportunidad de explorar el mundo más allá de los límites que siempre ha conocido, Tris está más que dispuesta. Sin embargo, la nueva realidad de Tris es aún más inquietante que la que ha dejado atrás. Y, de nuevo, Tris lucha por comprender las complejidades de la naturaleza humana (y de su propia naturaleza) a la vez que se enfrenta a elecciones imposibles que tienen que ver con el valor, la lealtad, el sacrificio y el amor.
+Descripción: Novela de ciencia ficción con toque romántico.
+
+
+
+
+
+
