@@ -25,7 +25,9 @@ namespace ClassLibrary
         public int Category { get { return _category; } set { _category = value; } }
         public DateTime CreationDate { get { return _creationDate; } set { _creationDate = value; } }
         public string ImagePath { get; set; }
-
+        public string sinopsis { get; set; }
+        public string descripcion { get; set; }
+        public string autor { get; set; }
 
         public ENProducto()
         {

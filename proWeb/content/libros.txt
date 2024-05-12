@@ -1,0 +1,228 @@
+Título: Diario de un Guerrero 8-Bit
+Sinopsis: Runt, un niño de 12 años, sueña con ser guerrero. Cuando su héroe, Steve, pierde todo y se muda con Runt, surge la oportunidad de ser entrenado.
+Descripción: Un libro para los amantes de los videojuegos y las aventuras emocionantes.
+Autor: Cube Kid
+
+Título: Tu Amigo Fred
+Sinopsis: Fred, un robot amable, intenta llevar la paz a un mundo distópico y ayuda a que dos líderes en guerra encuentren la paz.
+Descripción: Un libro cálido y divertido con un mensaje positivo.
+Autor: Michael Rex
+
+Título: Una Arruga en el Tiempo
+Sinopsis: Meg, su hermano Charles Wallace y su amigo Calvin viajan por el espacio y el tiempo para encontrar al padre de Meg, que ha desaparecido.
+Descripción: Una aventura emocionante sobre la lucha entre el bien y el mal.
+Autor: Madeleine L'Engle
+
+Título: Caso Espacial
+Sinopsis: Dashiel sospecha de un asesinato en una base lunar y se embarca en un peligroso misterio.
+Descripción: Un emocionante thriller de ciencia ficción ambientado en la Luna.
+Autor: Stuart Gibbs
+
+Título: Los Últimos Niños en la Tierra
+Sinopsis: Jack Sullivan y sus amigos luchan contra zombis en un mundo apocalíptico.
+Descripción: Una divertida serie de aventuras con monstruos y acción.
+Autor: Max Brallier
+
+Título: Akiko en el Planeta Smoo
+Sinopsis: Akiko, una niña de cuarto grado, viaja a un planeta lejano y se convierte en líder para rescatar a un príncipe.
+Descripción: Un cómic que mezcla elementos de Star Wars y El Mago de Oz.
+Autor: Mark Crilley
+
+Título: Franny K. Stein: Almuerzo Camina Entre Nosotros
+Sinopsis: Franny K. Stein, una científica loca, intenta encajar en su clase, pero debe salvar a sus compañeros de un monstruo.
+Descripción: Un divertido libro sobre aceptar la singularidad de uno mismo.
+Autor: Jim Benton
+
+Título: Niño y Bot
+Sinopsis: Un niño y un robot se hacen amigos, pero enfrentan problemas cuando uno se apaga y el otro trata de curarlo.
+Descripción: Un libro adorable sobre la amistad y la aceptación.
+Autor: Ame Dyckman
+
+Título: Charlie y el Gran Ascensor de Cristal
+Sinopsis: Charlie y el Sr. Wonka viajan al espacio y luchan contra alienígenas en el Hotel Espacial.
+Descripción: Una secuela divertida y llena de aventuras de Charlie y la fábrica de chocolate.
+Autor: Roald Dahl
+
+Título: Traje Espacial y Viaje
+Sinopsis: Kip, un joven, gana un traje espacial en un concurso y se embarca en una aventura intergaláctica.
+Descripción: Un clásico de la ciencia ficción con un joven protagonista valiente.
+Autor: Robert A. Heinlein
+
+Título: Guerras de Robots
+Sinopsis: Un niño llamado Trout busca a su padre en un mundo donde los robots luchan por la igualdad.
+Descripción: Un libro de ciencia ficción emocionante y reflexivo.
+Autor: J.V. Kade
+
+Título: Escape de la Biblioteca del Sr. Lemoncello
+Sinopsis: Kyle y sus amigos quedan atrapados en una biblioteca mágica y deben resolver acertijos para escapar.
+Descripción: Un libro lleno de aventuras y misterios.
+Autor: Chris Grabenstein
+
+Título: Gregor el Superviviente
+Sinopsis: Gregor y su hermana caen en un mundo subterráneo lleno de criaturas gigantes y deben encontrar a su padre desaparecido.
+Descripción: Un libro de aventuras y fantasía con temas de valentía y amistad.
+Autor: Suzanne Collins
+
+Título: La Sociedad Benedict Misteriosa
+Sinopsis: Cuatro niños con habilidades especiales son reclutados por un excéntrico benefactor para detener a un villano.
+Descripción: Un libro lleno de misterio, aventura y rompecabezas.
+Autor: Trenton Lee Stewart
+
+Título: La Ciudad de Ember
+Sinopsis: En una ciudad subterránea, Lina y Doon intentan salvar a su comunidad antes de que se quede sin luz.
+Descripción: Un libro post-apocalíptico lleno de intriga y esperanza.
+Autor: Jeanne DuPrau
+
+Título: El Juego de Ender
+Sinopsis: Ender Wiggin, un niño prodigio, es entrenado para luchar contra una raza alienígena.
+Descripción: Un clásico de la ciencia ficción con temas de guerra y estrategia.
+Autor: Orson Scott Card
+
+Título: Percy Jackson y los Dioses del Olimpo
+Sinopsis: Percy, un semidiós, descubre su identidad y enfrenta monstruos y dioses en busca de su madre.
+Descripción: Una serie llena de mitología y aventuras.
+Autor: Rick Riordan
+
+Título: El Dador de Recuerdos
+Sinopsis: Jonas vive en una sociedad controlada y descubre oscuros secretos sobre su comunidad.
+Descripción: Un libro distópico con temas de libertad y control.
+Autor: Lois Lowry
+
+Título: Dune
+Sinopsis: Paul Atreides, un joven noble, se convierte en el líder de un planeta desértico y enfrenta conspiraciones y traiciones.
+Descripción: Un épico libro de ciencia ficción con política y religión.
+Autor: Frank Herbert
+
+Título: Los Juegos del Hambre
+Sinopsis: Katniss Everdeen, una joven cazadora, es forzada a participar en un sangriento espectáculo de supervivencia.
+Descripción: Una emocionante trilogía distópica con temas de lucha y resistencia.
+Autor: Suzanne Collins
+
+Título: Ráfagas Grandes: Vientos del Mundo y la Ciencia Detrás de Ellos
+Sinopsis: Una colección de poemas e información sobre diferentes tipos de vientos alrededor del mundo.
+Descripción: Un libro informativo y poético con ilustraciones dinámicas.
+Autor: Melanie Crowder y Megan Benedict
+
+Título: Ojalá Tuviera un Wookie y Otros Poemas para Nuestra Galaxia
+Sinopsis: Un divertido libro de poesía para fans de Star Wars con temas de aventuras galácticas.
+Descripción: Un libro encantador para niños y adultos que aman Star Wars.
+Autor: Ian Doescher
+
+Título: Spi-Ku: Un Desorden de Verso Corto en Ocho Patas
+Sinopsis: Una colección de poemas sobre arañas con texto informativo y lenguaje divertido.
+Descripción: Un libro creativo y educativo para fomentar el amor por la poesía.
+Autor: Leslie Bullion
+
+Título: Para Cada Cosita: Poemas y Oraciones para Celebrar el Día
+Sinopsis: Una colección de poemas y oraciones de agradecimiento para cada día, desde la mañana hasta la noche.
+Descripción: Un libro lleno de gratitud y conexión con Dios.
+Autor: June Cotner y Nancy Tupper Ling
+
+Título: Tigre, Tigre Ardiente: Un Poema de Animales para Cada Día del Año
+Sinopsis: Un libro de poemas para cada día del año, con temas de animales y hermosas ilustraciones.
+Descripción: Un libro impresionante y grande, lleno de poesía y naturaleza.
+Autor: Fiona Waters
+
+Título: Una Ballena de Tiempo: Un Poema Divertido para Cada Día del Año
+Sinopsis: Una colección de 365 poemas divertidos, con temas variados y diseños ilustrativos encantadores.
+Descripción: Un libro de poesía lleno de humor y creatividad.
+Autor: Lou Peacock
+
+Título: Cómo Escribir un Poema
+Sinopsis: Un poema sobre escribir un poema, que invita a los niños a buscar inspiración en la naturaleza, la imaginación y el lenguaje.
+Descripción: Un libro perfecto para iniciar una unidad de poesía o despertar el interés por escribir.
+Autor: Kwame Alexander y Deanna Nikaido
+
+Título: Recuerda
+Sinopsis: Un poema que nos invita a reflexionar sobre nuestra profunda conexión con el mundo natural.
+Descripción: Un libro atemporal con ilustraciones mágicas que celebran nuestra conexión con la Tierra.
+Autor: Joy Harjo
+
+Título: Valor en Voz Alta: 25 Poemas de Poder
+Sinopsis: Una colección que examina ejemplos y consejos para tener coraje en contextos aptos para niños.
+Descripción: Un libro que inspira a los niños a ser valientes y afrontar retos.
+Autor: Joseph Coelho
+
+Título: Robot, Unicornio, Reina: Poemas para Ti y para Mí
+Sinopsis: Una colección de poemas que examinan experiencias infantiles comunes con un estilo peculiar.
+Descripción: Un libro de poesía con un toque fresco y atractivo para discutir en grupo.
+Autor: Shannon Bramer
+
+---------------------------------------------------------------------------
+LIBROS PAQUETES:
+
+Harry Potter Pack:
+
+Título: Harry Potter y la piedra filosofal (Harry Potter 1)
+Autor: J.K. Rowling
+Sinopsis: Harry Potter nunca ha oído hablar de Hogwarts hasta que empiezan a caer cartas en el felpudo del número 4 de Privet Drive. Llevan la dirección escrita con tinta verde en un sobre de pergamino amarillento con un sello de lacre púrpura, y sus horripilantes tíos se apresuran a confiscarlas. Más tarde, el día que Harry cumple once años, Rubeus Hagrid, un hombre gigantesco cuyos ojos brillan como escarabajos negros, irrumpe con una noticia extraordinaria: Harry Potter es un mago, y le han concedido una plaza en el Colegio Hogwarts de Magia y Hechicería.
+Descripción: Harry Potter y la piedra filosofal es el primer volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.
+
+Título: Harry Potter y la cámara secreta (Harry Potter 2)
+Autor: J.K. Rowling
+Sinopsis: El verano de Harry Potter ha incluido el peor cumpleaños de su vida, las funestas advertencias de un elfo doméstico llamado Dobby y el rescate de casa de los Dursley protagonizado por su amigo Ron Weasley al volante de un coche mágico volador. De vuelta en el Colegio Hogwarts de Magia y Hechicería, donde va a empezar su segundo curso, Harry oye unos extraños susurros que resuenan por los pasillos vacíos. Y entonces empiezan los ataques y varios alumnos aparecen petrificados... Por lo visto, las siniestras predicciones de Dobby se están cumpliendo....
+Descripción: Harry Potter y la cámara secreta, el segundo volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.
+
+Título: Harry Potter y el prisionero de Azkaban (Harry Potter 3)
+Autor: J.K. Rowling
+Sinopsis: Cuando el autobús noctámbulo irrumpe en una calle oscura y frena con fuertes chirridos delante de Harry, comienza para él un nuevo curso en Hogwarts, lleno de acontecimientos extraordinarios. Sirius Black, asesino y seguidor de lord Voldemort, se ha fugado, y dicen que va en busca de Harry. En su primera clase de Adivinación, la profesora Trelawney ve un augurio de muerte en las hojas de té de la taza de Harry... Pero quizá lo más aterrador sean los dementores que patrullan por los jardines del colegio, capaces de sorberte el alma con su beso...
+Descripción: Harry Potter y el prisionero de Azkaban es la tercera novela de la ya clásica serie fantástica de la autora británica J.K. Rowling.
+
+Título: Harry Potter y el cáliz de fuego (Harry Potter 4)
+Autor: J.K. Rowling
+Sinopsis: Se va a celebrar en Hogwarts el Torneo de los Tres Magos. Sólo los alumnos mayores de diecisiete años pueden participar en esta competición, pero, aun así, Harry sueña con ganarla. En Halloween, cuando el cáliz de fuego elige a los campeones, Harry se lleva una sorpresa al ver que su nombre es uno de los escogidos por el cáliz mágico. Durante el torneo deberá enfrentarse a desafíos mortales, dragones y magos tenebrosos, pero con la ayuda de Ron y Hermione, sus mejores amigos, ¡quizá logre salir con vida!
+Descripción: Harry Potter y el cáliz de fuego es la cuarta entrega de la serie fantástica de la autora británica J.K. Rowling.
+
+Título: Harry Potter y la Orden del Fénix (Harry Potter 5)
+Autor: J.K. Rowling
+Sinopsis: Son malos tiempos para Hogwarts. Tras el ataque de los dementores a su primo Dudley, Harry Potter comprende que Voldemort no se detendrá ante nada para encontrarlo. Muchos niegan que el Señor Tenebroso haya regresado, pero Harry no está solo: una orden secreta se reúne en Grimmauld Place para luchar contra las fuerzas oscuras. Harry debe permitir que el profesor Snape le enseñe a protegerse de las brutales incursiones de Voldemort en su mente. Pero éstas son cada vez más potentes, y a Harry se le está agotando el tiempo...
+Descripción: Harry Potter y la Orden del Fénix es la quinta entrega de la ya clásica serie de fantasía de la autora británica J.K. Rowling.
+
+Título: Harry Potter y el misterio del príncipe (Harry Potter 6)
+Autor: J.K. Rowling
+Sinopsis: Con dieciséis años cumplidos, Harry inicia el sexto curso en Hogwarts en medio de terribles acontecimientos que asolan Inglaterra. Elegido capitán del equipo de quidditch, los ensayos, los exámenes y las chicas ocupan todo su tiempo, pero la tranquilidad dura poco. A pesar de los férreos controles de seguridad que protegen la escuela, dos alumnos son brutalmente atacados. Dumbledore sabe que se acerca el momento, anunciado por la Profecía, en que Harry y Voldemort se enfrentarán a muerte.El anciano director solicitará la ayuda de Harry y juntos emprenderán peligrosos viajes para intentar debilitar al enemigo, para lo cual el joven mago contará con un viejo libro de pociones perteneciente a un misterioso personaje, alguien que se hace llamar Príncipe Mestizo.
+Descripción: Harry Potter y el misterio del príncipe es la sexta novela de la ya clásica serie fantástica de la autora británica J.K. Rowling.
+
+Título: Harry Potter y las reliquias de la muerte (Harry Potter 7)
+Autor: J.K. Rowling
+Sinopsis: Cuando se monta en el sidecar de la moto de Hagrid y se eleva en el cielo, dejando Privet Drive por última vez, Harry Potter sabe que lord Voldemort y sus mortífagos se hallan cerca. El encantamiento protector que había mantenido a salvo a Harry se ha roto, pero él no puede seguir escondiéndose. El Señor Tenebroso se dedica a aterrorizar a todos los seres queridos de Harry, y, para detenerlo, éste habrá de encontrar y destruir los horrocruxes que quedan. La batalla definitiva debe comenzar: Harry tendrá que alzarse y enfrentarse a su enemigo...
+Descripción: Harry Potter y las reliquias de la muerte es el séptimo y último volumen de la ya clásica serie fantástica de la autora británica J.K. Rowling.
+
+Culpables trilogía Pack:
+
+Título: Culpa mía (Culpables 1)
+Autor: Mercedes Ron
+Sinopsis: Nicholas Leister ha sido creado para amargarme la vida. Alto, ojos azules, pelo negro como la noche... Suena genial ¿verdad? Pues no tanto cuando te enteras de que va a ser tu hermanastro y además representa todo de lo que has estado huyendo desde que tienes uso de razón. Peligro fue lo primero que me vino a la cabeza cuando lo conocí y descubrí que mantiene una doble vida oculta de su padre multimillonario. ¿Cómo terminé cayendo en sus redes? Fácil: con esos ojos es capaz de poner tu mundo patas arriba.
+Descripción: Una historia de amor que te atrapará. La primera parte de la trilogía «Culpables».
+
+Título: Culpa tuya (Culpables 2)
+Autor: Mercedes Ron
+Sinopsis: Cuando Noah se enamoró de Nick sabía que su relación no iba a ser fácil: son polos opuestos, fuego y electricidad, y cuando están juntos saltan chispas... en todos los sentidos. Hasta ahora, la pasión ha sido más fuerte que el orgullo, pero la diferencia de edad, la universidad, las fiestas, sus padres y los fantasmas que acechan a los dos les ponen a prueba una y otra vez, como una bomba de relojería que amenaza con hacerles estallar.
+Descripción: Más romance, traición y misterio en Culpa tuya, segunda parte de «Culpa Mía», la saga romántica de Mercedes Ron protagonizada por un chico malo con un gran corazón y una chica buena con muchas agallas.
+
+Título: Culpa nuestra (Culpables 3)
+Autor: Mercedes Ron
+Sinopsis: La relación de Nick y Noah está pasando por su peor momento, y parece que nada podrá volver a ser como antes... Van a tener que pasarpor muchas cosas para finalmente comprender si de verdad están hechos el uno para el otro o si por lo contrario, estar separados es lo que de verdad les conviene.
+Descripción: Una historia de amor que te atrapará. La entrega final de la trilogía «Culpables».
+
+Divergente Pack:
+Título: Divergente 1 - Divergente
+Autor: Veronica Roth
+Sinopsis: En el Chicago distópico de Beatrice, la sociedad está dividida en cinco facciones. En una ceremonia anual, todos los chicos de dieciséis años deben decidir a qué facción dedicarán el resto de sus vidas. Beatrice tiene que elegir entre quedarse con su familia... y ser quien realmente es.
+Descripción: Novela de ciencia ficción con toque romántico.
+
+Título: Divergente 2 - Insurgente
+Autor: Veronica Roth
+Sinopsis: Con la oleada de disturbios en las distintas facciones, el día de la iniciación de Tris debería haber sido una celebración de la facción elegida. En cambio, terminó con un gran problema. El conflicto entre las facciones se intensifica y las ideologías se enfrentan. En tiempos de guerra, se eligen líderes, los secretos afloran y cada decisión tiene mayores consecuencias.
+Descripción: Novela de ciencia ficción con toque romántico.
+
+Título: Divergente 3 - Leal
+Autor: Veronica Roth
+Sinopsis: La sociedad dividida en facciones en la que antes creía Tris Prior ha quedado hecha pedazos, fracturada por la violencia y las luchas de poder, y marcada por la traición. Así que cuando tiene la oportunidad de explorar el mundo más allá de los límites que siempre ha conocido, Tris está más que dispuesta. Sin embargo, la nueva realidad de Tris es aún más inquietante que la que ha dejado atrás. Y, de nuevo, Tris lucha por comprender las complejidades de la naturaleza humana (y de su propia naturaleza) a la vez que se enfrenta a elecciones imposibles que tienen que ver con el valor, la lealtad, el sacrificio y el amor.
+Descripción: Novela de ciencia ficción con toque romántico.
+
+
+
+
+
+

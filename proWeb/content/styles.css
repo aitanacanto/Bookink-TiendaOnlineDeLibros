@@ -16,7 +16,7 @@ body {
     }
 
     .logo-img {
-        width: 50px;
+        width: 80px;
         height: auto;
     }
 
@@ -42,11 +42,24 @@ body {
     color: gold;
 }
 /* Carrito */
-h1 { /*cuidado que esto cambia todos los h1 de la página*/
+
+
+    h1 { /*cuidado que esto cambia todos los h1 de la página*/
     font-size: 32px;
     text-align: center;
-    margin-bottom: 30px;
-}
+    /*margin-bottom: 30px;*/
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+
+
+    }
+    h3 {
+        font-family: "Luckiest Guy", cursive;
+        font-weight: 400;
+        font-style: normal;
+    }
+
 
     .item {
         border-bottom: 1px solid #ddd;
