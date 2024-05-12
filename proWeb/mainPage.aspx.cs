@@ -16,10 +16,17 @@ namespace proWeb
             {
                 // Aquí llamamos a un método para obtener la lista de productos
                 List<ENProducto> listaProductos = ObtenerProductos();
-
+                List<ENProducto> Novedades = new List<ENProducto>();
+                for (int i = 0; i < 4; i++)
+                {
+                    Novedades.Add(listaProductos[i]);
+                }
                 // Asignamos la lista de productos al repeater
                 reapeterProduct.DataSource = listaProductos;
                 reapeterProduct.DataBind();
+
+                reapeterNov.DataSource = Novedades;
+                reapeterNov.DataBind();
             }
         }
 
@@ -30,6 +37,7 @@ namespace proWeb
             // Simplemente devuelve una lista de productos como ejemplo
 
             List<ENProducto> listaProductos = new List<ENProducto>();
+            
             // Añade algunos productos de ejemplo (debes obtenerlos de tu fuente de datos real)
             listaProductos.Add(new ENProducto(1, "Producto 1", 10, 50.0f, 45.0f, 1, DateTime.Now, "content/producto.jpg"));
             listaProductos.Add(new ENProducto(2, "Producto 2", 15, 60.0f, 55.0f, 2, DateTime.Now, "content/producto.jpg"));
