@@ -16,10 +16,10 @@
            <div id="carouselExampleIndicators" class="mb-5 carousel slide mx-auto" data-ride="carousel" style="max-width: 1000px;">
                <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="https://i.imgur.com/eQfdS9M.png" class="d-block w-100" alt="...">
+              <img src="content/slider/1.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-              <img src="https://i.imgur.com/qoFBCcJ.png" class="d-block w-100" alt="...">
+              <img src="content/slider/2.png" class="d-block w-100" alt="...">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
