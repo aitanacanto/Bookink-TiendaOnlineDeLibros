@@ -2,31 +2,65 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Enlace al archivo CSS -->
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="content/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="py-2">
-        <h1>Catálogo Libros</h1>
-        <ul id="secciones" class="list-unstyled">
-            <li>
-                <div class="row">
-                    <asp:Repeater ID="reapeterProduct" runat="server">
-                        <ItemTemplate>
-                            <div class="col-12 col-sm-6 col-md-4 px-2 py-2" style="width: 400px;">
-                                <a href="producto.aspx">
-                                <div class="card" onclick="window.location.href='mainPage.aspx';" >
-                                    <asp:Image ID="imgProduct" runat="server" class="card-img-top" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
-                                    <p>
-                                        <h5 class="card-text"><%# Eval("Name") %></h5>
-                                    </p>
-                                </div>
+           <div id="carouselExampleIndicators" class="mb-5 carousel slide mx-auto" data-ride="carousel" style="max-width: 1000px;">
+               <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://i.imgur.com/eQfdS9M.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="https://i.imgur.com/qoFBCcJ.png" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+            </div>
+         <h1 class="text-center">Catálogo Libros</h1>
+        <div class="container">
+            <div class="row">
+                <asp:Repeater ID="reapeterProduct" runat="server">
+                    <ItemTemplate>
+                        <div class="col-md-3 mb-4">
+                            <div class="product-card card">
+                                <a href="producto.aspx" class="text-decoration-none">
+                                    <div class="text-center">
+                                        <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title font-weight-bold text-dark mb-1" style="font-weight: bold;"><%# Eval("name") %></h5>
+                                        <p class="autor mb-2">Autor</p>
+                                        <div class="d-flex">
+                                            <p class="card-text text-danger" style="text-decoration:line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
+                                            <p class="card-text text-dark" style="margin-left:10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
+                                        </div>
+                                            
+                                        <div class="text-center mt-3">
+                                        <a href="#" class="btn btn-primary">
+                                            <i class="fa-solid fa-cart-plus"></i>
+                                            Añadir al Carrito</a>
+                                            </div>
+                                    </div>
                                 </a>
                             </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </li>
-        </ul>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+        </div>
     </div>
 </asp:Content>

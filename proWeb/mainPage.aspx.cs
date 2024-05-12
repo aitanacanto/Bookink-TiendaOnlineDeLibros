@@ -37,6 +37,8 @@ namespace proWeb
             listaProductos.Add(new ENProducto(4, "Producto 4", 25, 80.0f, 75.0f, 2, DateTime.Now, "content/producto.jpg"));
             listaProductos.Add(new ENProducto(5, "Producto 5", 30, 90.0f, 85.0f, 1, DateTime.Now, "content/producto.jpg"));
             listaProductos.Add(new ENProducto(6, "Producto 6", 35, 100.0f, 95.0f, 2, DateTime.Now, "content/producto.jpg"));
+            listaProductos.Add(new ENProducto(5, "Producto 7", 12, 21.0f, 11.0f, 1, DateTime.Now, "content/producto.jpg"));
+            listaProductos.Add(new ENProducto(6, "Producto 8", 35, 14.23f, 10.0f, 2, DateTime.Now, "content/producto.jpg"));
 
             return listaProductos;
         }
