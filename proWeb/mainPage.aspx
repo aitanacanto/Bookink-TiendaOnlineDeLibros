@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold;"><%# Eval("name") %></h5>
-                                        <p class="autor mb-1">Autor</p>
+                                        <p class="autor mb-1"><%# Eval("Autor") %></p>
                                         <div class="mb-2">
                                             <i class="fa-solid fa-star color-estre"></i>
                                             <i class="fa-solid fa-star color-estre"></i>
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold;"><%# Eval("name") %></h5>
-                                        <p class="autor mb-1">Autor</p>
+                                        <p class="autor mb-1"><%# Eval("Autor") %></p>
                                         <div class="mb-2">
                                             <i class="fa-solid fa-star color-estre"></i>
                                             <i class="fa-solid fa-star color-estre"></i>
