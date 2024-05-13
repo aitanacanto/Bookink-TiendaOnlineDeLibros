@@ -45,4 +45,5 @@ namespace ClassLibrary
             return cad.DeleteCategory(this);
         }
 
+    }
 }
