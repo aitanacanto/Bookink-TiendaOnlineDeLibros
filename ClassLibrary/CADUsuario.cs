@@ -13,6 +13,24 @@ namespace ClassLibrary
     {
         private string constring;
 
+
+        //Devuelve true si existe el producto en la base de datos
+        private bool Exists(SqlConnection c, ENUsuario en)
+        {
+            //declaración querry auxiliar
+            string querryAux = "Select * from Products where code = @code";
+            SqlCommand comAux = new SqlCommand(querryAux, c);
+
+            //asignación parámetros
+            comAux.Parameters.AddWithValue("@code", en.Code);
+
+            SqlDataReader dr = comAux.ExecuteReader();
+
+            bool existe = dr.Read();
+            dr.Close();
+            return existe;
+        }
+
         public CADUsuario() 
         {
             constring = ConfigurationManager.ConnectionStrings["database"].ToString();
@@ -26,22 +44,22 @@ namespace ClassLibrary
                 c.Open();
 
                 // Crear una sentencia parametricada
-                string query = "INSERT INTO USUARIO (id_usuario, id_producto, comentario, fecha, valoracion) VALUES (@user, @product, @comment, @date, @rating)";
+                string query = "INSERT INTO USUARIO (nombre, apellidos, nif, mail, teléfono) VALUES (@name, @surname, @nif, @mail, @telefono)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
-                com.Parameters.AddWithValue("@user", en.UserID);
-                com.Parameters.AddWithValue("@product", en.ProductID);
-                com.Parameters.AddWithValue("@comment", en.Comment);
-                com.Parameters.AddWithValue("@date", en.Date);
-                com.Parameters.AddWithValue("@rating", en.Rating);
+                com.Parameters.AddWithValue("@name", en.Name);
+                com.Parameters.AddWithValue("@surname", en.Surname);
+                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@mail", en.Email);
+                com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
 
                 com.ExecuteNonQuery();
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No se ha podido añadir la reseña, ERROR: {0}", ex.Message);
+                Console.WriteLine("No se ha podido añadir el usuario, ERROR: {0}", ex.Message);
                 return false;
             }
             finally

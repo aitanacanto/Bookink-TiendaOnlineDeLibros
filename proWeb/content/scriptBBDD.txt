@@ -3,7 +3,8 @@
 create table [dbo].[USUARIO]
 (	
     [id] INT IDENTITY (1, 1) NOT NULL,
-    [nombre_apellido] VARCHAR(255) NOT NULL,
+    [nombre] VARCHAR(255) NOT NULL,
+    [apellidos] VARCHAR(255) NOT NULL,
     [nif] NVARCHAR(20) NOT NULL,
     [puntos] INT NOT NULL,
     [admin] NVARCHAR(5) NOT NULL,
@@ -35,6 +36,7 @@ create table [dbo].[CARRITO]
     [cantidad] INT NOT NULL,
     [id_usuario] INT NOT NULL,
     [lincarrito] NVARCHAR(255) NOT NULL,
+    [cantidad] INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
@@ -55,7 +57,6 @@ create table [dbo].[PEDIDO]
     [id_usuario] INT NOT NULL,
     [cod_carrito] INT NOT NULL,
     [dirección_envío] NVARCHAR(255) NOT NULL,
-    [cantidad] INT NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
@@ -67,6 +68,7 @@ create table [dbo].[LINPEDIDO]
 (	
     [id_pedido] INT IDENTITY (1, 1) NOT NULL,
     [id_producto] INT,
+    [cantidad] INT NOT NULL,
     PRIMARY KEY (id_pedido, id_producto),
     FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped),
     FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
