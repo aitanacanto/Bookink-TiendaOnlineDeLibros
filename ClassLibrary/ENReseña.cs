@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ClassLibrary
 {
@@ -26,9 +27,20 @@ namespace ClassLibrary
         {
 
         }
+
+        public ENReseña(int userID, int productID, int rating, string comment, DateTime date)
+        {
+            _userID = userID;
+            _productID = productID;
+            _rating = rating;
+            _comment = comment;
+            _date = date;
+        }
         public bool Create()
         {
-            return true;
+            CADReseña cad = new CADReseña();
+
+            return cad.Create(this);
         }
 
         public bool Update() 
