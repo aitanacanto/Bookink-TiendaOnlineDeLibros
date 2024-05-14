@@ -25,16 +25,16 @@ namespace ClassLibrary
         public int Category { get { return _category; } set { _category = value; } }
         public DateTime CreationDate { get { return _creationDate; } set { _creationDate = value; } }
         public string ImagePath { get; set; }
-        public string sinopsis { get; set; }
-        public string descripcion { get; set; }
-        public string autor { get; set; }
+        public string Sinopsis { get; set; }
+        public string Descripcion { get; set; }
+        public string Autor { get; set; }
 
         public ENProducto()
         {
 
         }
 
-        public ENProducto(int id, string name, int stock, float price, float salePrice, int category, DateTime creationDate, string imagePath)
+        public ENProducto(int id, string name, int stock, float price, float salePrice, int category, DateTime creationDate, string imagePath, string sinopsis, string descripcion, string autor)
         {
             Id = id;
             Name = name;
@@ -43,27 +43,35 @@ namespace ClassLibrary
             SalePrice = salePrice;
             Category = category;
             CreationDate = creationDate;
-            ImagePath = imagePath; 
+            ImagePath = imagePath;
+            Sinopsis = sinopsis;
+            Descripcion = descripcion;
+            Autor = autor;
         }
 
         public bool Create()
         {
-            return false;
+            CADProducto c = new CADProducto();
+
+            return c.Create(this);
         }
 
         public bool Update()
         {
-            return false;
+            CADProducto c = new CADProducto();
+            return c.Update(this);
         }
 
         public bool Delete()
         {
-            return false;
+            CADProducto c = new CADProducto();
+            return c.Delete(this);
         }
 
         public bool Read()
         {
-            return false;
+            CADProducto c = new CADProducto();
+            return c.Read(this);
         }
 
     }
