@@ -18,9 +18,9 @@ namespace ClassLibrary
         private string constring;
         private bool Exists(SqlConnection c, ENProducto en)
         {
-            string querryAux = "Select * from Products where code = @code";
+            string querryAux = "Select * from Products where id = @id";
             SqlCommand comAux = new SqlCommand(querryAux, c);
-            comAux.Parameters.AddWithValue("@code", en.Id);
+            comAux.Parameters.AddWithValue("@id", en.Id);
             SqlDataReader dr = comAux.ExecuteReader();
             bool existe = dr.Read();
             dr.Close();
@@ -38,22 +38,23 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "INSERT INTO Products (Id, Name, Stock, Price, SalePrice, Category, CreationDate, ImagePath, Sinopsis, Descripcion, Autor) VALUES (@Id, @Name, @Stock, @Price, @SalePrice, @Category, @CreationDate, @ImagePath, @Sinopsis, @Descripcion, @Autor)";
+                string query = "INSERT INTO Products (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, Autor, Cod_Ofer, Editorial, Anyo_Publicacion, Num_Pags) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
-                com.Parameters.AddWithValue("@Id", en.Id);
                 com.Parameters.AddWithValue("@Stock", en.Stock);
                 com.Parameters.AddWithValue("@Price", en.Price);
                 com.Parameters.AddWithValue("@SalePrice", en.SalePrice);
-                com.Parameters.AddWithValue("@Category", en.Category);
-                com.Parameters.AddWithValue("@CreationDate", en.CreationDate);
+                com.Parameters.AddWithValue("@ImagePath", en.ImagePath);
                 com.Parameters.AddWithValue("@Sinopsis", en.Sinopsis);
-                com.Parameters.AddWithValue("@Descripcion", en.Descripcion);
                 com.Parameters.AddWithValue("@Autor", en.Autor);
+                com.Parameters.AddWithValue("@CodOfer", en.CodOfer);
+                com.Parameters.AddWithValue("@Editorial", en.Editorial);
+                com.Parameters.AddWithValue("@AnyoPubli", en.AnyoPubli);
+                com.Parameters.AddWithValue("@NumPags", en.NumPags);
 
                 com.ExecuteNonQuery();
-                return false;
+                return true;
             }
             catch (Exception ex)
             {
@@ -72,18 +73,16 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "UPDATE Products set Name = @name, Id = @Id, Stock = @Stock, Price = @Price, SalePrice = @SalePrice, Category = @Category, CreationDate = @CreationDate, Sinopsis = @Sinopsis, Description = @Description, Autor = @Autor";
+                string query = "UPDATE Products set Name = @name, Stock = @Stock, Price = @Price, SalePrice = @SalePrice, Category = @Category, CreationDate = @CreationDate, Sinopsis = @Sinopsis, Autor = @Autor";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
-                com.Parameters.AddWithValue("@Id", en.Id);
                 com.Parameters.AddWithValue("@Stock", en.Stock);
                 com.Parameters.AddWithValue("@Price", en.Price);
                 com.Parameters.AddWithValue("@SalePrice", en.SalePrice);
                 com.Parameters.AddWithValue("@Category", en.Category);
                 com.Parameters.AddWithValue("@CreationDate", en.CreationDate);
                 com.Parameters.AddWithValue("@Sinopsis", en.Sinopsis);
-                com.Parameters.AddWithValue("@Descripcion", en.Descripcion);
                 com.Parameters.AddWithValue("@Autor", en.Autor);
 
                 com.ExecuteNonQuery();
@@ -145,7 +144,6 @@ namespace ClassLibrary
                 en.Category = Convert.ToInt32(dr["Category"]);
                 en.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                 en.Sinopsis = dr["Sinopsis"].ToString();
-                en.Descripcion = dr["Descripcion"].ToString();
                 en.Autor = dr["Autor"].ToString();
 
                 dr.Close();

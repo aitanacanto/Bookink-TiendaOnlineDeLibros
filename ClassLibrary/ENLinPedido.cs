@@ -30,7 +30,7 @@ namespace ClassLibrary
 
         public ENLinPedido(int id_pedido, int producto_id)
         {
-
+          
         }
 
         public ENLinPedido(ENLinPedido en)

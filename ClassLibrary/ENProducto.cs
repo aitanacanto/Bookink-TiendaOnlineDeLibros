@@ -22,31 +22,33 @@ namespace ClassLibrary
         public int Stock { get { return _stock; } set { _stock = value; } }
         public float Price { get { return _price; } set { _price = value; } }
         public float SalePrice { get { return _salePrice; } set { _salePrice = value; } }
-        public int Category { get { return _category; } set { _category = value; } }
-        public DateTime CreationDate { get { return _creationDate; } set { _creationDate = value; } }
         public string ImagePath { get; set; }
         public string Sinopsis { get; set; }
-        public string Descripcion { get; set; }
         public string Autor { get; set; }
+        public string CodOfer { get; set; }
+        public string Editorial { get; set; }
+        public int AnyoPubli { get; set; }
+        public int NumPags { get; set; }
 
         public ENProducto()
         {
 
         }
 
-        public ENProducto(int id, string name, int stock, float price, float salePrice, int category, DateTime creationDate, string imagePath, string sinopsis, string descripcion, string autor)
+        public ENProducto(string name, int stock, float price, float salePrice, string imagePath, string sinopsis, string descripcion, string autor, string codOfer, string editorial,int anyoPubli, int numPags )
         {
-            Id = id;
             Name = name;
             Stock = stock;
             Price = price;
             SalePrice = salePrice;
-            Category = category;
-            CreationDate = creationDate;
             ImagePath = imagePath;
             Sinopsis = sinopsis;
-            Descripcion = descripcion;
             Autor = autor;
+            CodOfer = codOfer;
+            Editorial = editorial;
+            AnyoPubli = anyoPubli;
+            NumPags = numPags;
+
         }
 
         public bool Create()
