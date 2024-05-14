@@ -481,3 +481,59 @@ body {
 .max-width {
     max-width: 50%; /* Puedes ajustar el porcentaje según tus necesidades */
 }
+
+
+/*Estilo para adminUsuario*/
+.admin-users {
+    max-width: 100%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: visible
+}
+
+.user {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+.email {
+    margin-left: 25px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.mostrar {
+    background-color: #137e93;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+    width: 150px;
+}
+
+.deleteUser {
+    background-color: #b12d44;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+    width: 150px;
+}
+
+.dropdown-toggle.btn-primary {
+    background-color: #393185; /* Cambia el color de fondo del botón dropdown */
+}
+
+.dropdown-form {
+    position: relative; /* Hace que el menú desplegable se expanda dentro del contenedor en lugar de flotar sobre él */
+}
