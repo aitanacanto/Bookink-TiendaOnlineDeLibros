@@ -33,7 +33,6 @@ GO
 create table [dbo].[CARRITO]
 (	
     [id] INT IDENTITY (1, 1) NOT NULL,
-    [cantidad] INT NOT NULL,
     [id_usuario] INT NOT NULL,
     [lincarrito] NVARCHAR(255) NOT NULL,
     [cantidad] INT NOT NULL,
@@ -45,10 +44,10 @@ create table [dbo].[LINCARRITO]
 (	
     [id_carrito] INT IDENTITY (1, 1) NOT NULL,
     [id_producto] INT,
+    [cantidad] INT NOT NULL,
     PRIMARY KEY (id_carrito, id_producto),
     FOREIGN KEY (id_carrito) REFERENCES CARRITO(id),
     FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id),
-    PRIMARY KEY CLUSTERED ([id_carrito] ASC)
 )
 GO
 create table [dbo].[PEDIDO]
