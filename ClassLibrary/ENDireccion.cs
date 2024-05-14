@@ -35,5 +35,21 @@ namespace ClassLibrary
             this.pais = pais;
         }
 
+        public bool Create()
+        {
+            CADDireccion cadDireccion = new CADDireccion();
+            return cadDireccion.AñadirDireccion(this);
+        }
+
+        public bool Read()
+        {
+            CADDireccion cadDireccion = new CADDireccion();
+            return cadDireccion.LeerDireccion(this);
+        }
+
+        public bool Update()
+        {
+            CADDireccion cadDireccion = new CADDireccion();
+            return cadDireccion.ModificarDireccion(this);
+        }
     }
-}
