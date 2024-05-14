@@ -52,7 +52,7 @@ create table [dbo].[LINCARRITO]
 GO
 create table [dbo].[PEDIDO]
 (	
-    [numped] INT PRIMARY KEY IDENTITY (1, 1),
+    [numped] INT IDENTITY (1, 1),
     [id_usuario] INT NOT NULL,
     [cod_carrito] INT NOT NULL,
     [dirección_envío] NVARCHAR(255) NOT NULL,
@@ -75,7 +75,7 @@ create table [dbo].[LINPEDIDO]
 GO
 create table [dbo].[DIRECCION]
 (	
-    [id] INT PRIMARY KEY IDENTITY (1, 1),
+    [id] INT IDENTITY (1, 1),
     [cod_postal] NVARCHAR(10) NOT NULL,
     [dirección] NVARCHAR(255) NOT NULL,
     [ciudad] NVARCHAR(30) NOT NULL,
