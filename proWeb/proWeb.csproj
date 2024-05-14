@@ -72,6 +72,7 @@
       <DependentUpon>bbdd.mdf</DependentUpon>
     </Content>
     <Content Include="carrito.aspx" />
+    <Content Include="catalogo.aspx" />
     <Content Include="content\scriptBBDD.txt" />
     <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
@@ -126,6 +127,13 @@
     </Compile>
     <Compile Include="carrito.aspx.designer.cs">
       <DependentUpon>carrito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="catalogo.aspx.cs">
+      <DependentUpon>catalogo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="catalogo.aspx.designer.cs">
+      <DependentUpon>catalogo.aspx</DependentUpon>
     </Compile>
     <Compile Include="mainPage.aspx.cs">
       <DependentUpon>mainPage.aspx</DependentUpon>

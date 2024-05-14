@@ -4,6 +4,7 @@ body {
     background-color: #f2f2f2;
 }
 
+
 /*  LOGO    */
     .logo {
         display: flex;
@@ -19,67 +20,46 @@ body {
         height: auto;
     }
 
-/*  CARD    */
-.card {
-    background-color: #848780; /* Color de fondo de la tarjeta */
-    border: 1px solid #ccc; /* Borde de la tarjeta */
-    border-radius: 5px; /* Borde redondeado */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: box-shadow 0.3s ease; /* Transición suave de la sombra */
-    width: 300px; /* Ajustar el ancho de la tarjeta */
-    height: 400px;
-    display: flex; /* Utilizar flexbox para el diseño */
-    flex-direction: column; /* Apilar elementos verticalmente */
-    align-items: center; /* Centrar los elementos horizontalmente */
+    .precios {
+        text-decoration: line-through;
+        margin-right: 10px;
+    }
+
+    .product-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .autor {
+        font-style: italic;
+        color: #666;
+    }
+    .color-estre {
+        color: gold;
+    }
+
+.no-estre {
+    color: gold;
 }
-
-    .card-img-top {
-        width: 75%; /* La imagen ocupa todo el ancho de la tarjeta */
-        height: auto; /* Altura automática para mantener la proporción */
-        border-top-left-radius: 5px; /* Borde redondeado en la esquina superior izquierda */
-        border-top-right-radius: 5px; /* Borde redondeado en la esquina superior derecha */
-    }
-
-    .card:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada al pasar el mouse sobre la tarjeta */
-    }
-
-    .card-text {
-        font-size: 20px; /* Tamaño de fuente */
-        color: #FFFFFF; /* Color del texto */
-        padding: 10px; /* Relleno interior */
-    }
-
-    .card-title {
-        font-size: 18px; /* Tamaño de fuente */
-        color: #000; /* Color del texto */
-        margin-top: 10px; /* Espacio superior */
-        margin-bottom: 0; /* Sin margen inferior */
-        font-weight: bold; /* Negrita */
-    }
-
-    .card:hover {
-        transform: translateY(-5px); /* Efecto de elevación */
-    }
 /* Carrito */
 
 
-    h1 { /*cuidado que esto cambia todos los h1 de la página*/
+h1 { /*cuidado que esto cambia todos los h1 de la página*/
     font-size: 32px;
     text-align: center;
-    /*margin-bottom: 30px;*/
+    /*margin-bottom: 30px;
     font-family: "Luckiest Guy", cursive;
     font-weight: 400;
     font-style: normal;
-
-
-    }
-    h3 {
+     */
+}
+/*
+h3 {
         font-family: "Luckiest Guy", cursive;
         font-weight: 400;
         font-style: normal;
-    }
-
+}        */
+    
 
     .item {
         border-bottom: 1px solid #ddd;
@@ -115,8 +95,8 @@ body {
 
     .btn-buy:hover {
         transition: all 0.3s ease; /* Transición suave */
-        background-color: #0056b3;
-    }
+    background-color: #0056b3;
+}
     .small-image {
         width: 10px; /* Tamaño de la imagen ajustado */
         height: 10px; /* Mantener la proporción de aspecto */
@@ -169,7 +149,7 @@ body {
 
 /*  Login y register    */
 
-    .container {
+    .login-container {
         width: 60%;
         min-width: 400px;
         align-items: center;
@@ -496,4 +476,8 @@ body {
 .informacion {
     display: flex;
     flex-direction: row;
+}
+
+.max-width {
+    max-width: 50%; /* Puedes ajustar el porcentaje según tus necesidades */
 }
