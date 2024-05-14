@@ -7,126 +7,94 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class ENCarrito
+    public class ENCarrito
     {
-        /// <summary>
-        /// Almacena el nombre del que compra
-        /// </summary>
-        private string userName;
+        private int id;
+        private int id_usuario;
+        private int id_lincarrito;
+        private double precio;
 
-        public string UserName
+        public int idcarrito
         {
-            get { return userName; }
-            set { userName = value; }
+            get { return id; }
+            set { id = value; }
+        }
+        public int user
+        {
+            get { return id_usuario; }
+            set { id_usuario = value; }
         }
 
-        /// <summary>
-        /// Almacena el identificador del Libro
-        /// </summary>
-        private int id_Book;
-
-        public int Id_Book
+        public int lincarrito
         {
-            get { return id_Book; }
-            set { id_Book = value; }
+            get { return id_lincarrito; }
+            set { id_lincarrito = value; }
         }
-
-        /// <summary>
-        /// Almacena las unidades que quiere comprar el usuario
-        /// </summary>
-        private int cantidad;
-
-        public int Cantidad
+        public double preciocarrito
         {
-            get { return cantidad; }
-            set { cantidad = value; }
+            get { return precio; }
+            set { precio = value; }
         }
-
-        /// <summary>
-        /// Almacena la fecha de creacion
-        /// </summary>
-        private DateTime fecha;
-
-        public DateTime fechaCreacion
-        {
-            get { return fecha; }
-            set { fecha = value; }
-        }
-
-        /// <summary>
-        /// Almacena el importe total
-        /// </summary>
-        private float importe;
-
-        public float importeTotal
-        {
-            get { return importe; }
-            set { importe = value; }
-        }
-
-
-        /// <summary>
-        /// Constructor por defecto
-        /// </summary>
         public ENCarrito()
         {
-            UserName = "";
-            Id_Book = -1;
-            Cantidad = 0;
-            fechaCreacion = DateTime.Now;
-            importeTotal = 0;
+            CADCarrito carrito = new CADCarrito();
+            idcarrito = carrito.ObtenerId();
+            lincarrito = 0;
+            id_usuario = 0;
+            precio = 0.0;
         }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public ENCarrito(string nameUser, int book_id, int unidades, int a, int m, int d, DateTime fecha, float precio)
+        public ENCarrito(int id, int usuario, int lincarrito, double precio)
         {
-            UserName = nameUser;
-            Id_Book = book_id ;
-            Cantidad = unidades;
-            fechaCreacion = fecha;
-            importeTotal = precio;
+            this.id = id;
+            this.id_usuario = usuario;
+            this.id_lincarrito = lincarrito;
+            this.precio = precio;
         }
-        /// <summary>
-        /// Constructor de copia.
-        /// </summary>
-        public ENCarrito(ENCarrito carrito)
+        public bool CrearCarrito()
         {
-            UserName = carrito.UserName;
-            Id_Book = carrito.Id_Book;
-            Cantidad = carrito.Cantidad;
-            fechaCreacion = carrito.fechaCreacion;
-            importeTotal = carrito.importeTotal;
-        }
-        /// <summary>
-        /// Crea un carrito, introduciendolo a la BBDD
-        /// </summary>
-        /// <returns>Devuelve true si se ha podido introducir</returns>
-        public bool createCarrito()
-        {
-            bool creado = false;
-
+            bool creado;
+            CADCarrito carrito = new CADCarrito();
+            if (carrito.readCarrito(this) == false)
+            {
+                creado = carrito.createCarrito(this);
+            }
+            else
+            {
+                creado = false;
+            }
             return creado;
         }
-        public bool readCarrito()
+        public bool BorrarCarrito()
         {
-            bool creado = false;
-
-            return creado;
+            bool borrar = false;
+            CADCarrito carrito = new CADCarrito();
+            if (carrito.readCarrito(this) == true)
+            {
+                borrar = carrito.deleteCarrito(this);
+            }
+            return borrar;
         }
-        public bool updateCarrito()
+        public bool LeerCarrito()
         {
-            bool creado = false;
-
-            return creado;
+            CADCarrito carrito = new CADCarrito();
+            bool read = carrito.readCarrito(this);
+            return read;
         }
-        public bool deleteCarrito()
+        public bool actualizarCompra()
         {
-            bool creado = false;
-
-            return creado;
+            bool update = false;
+            CADCarrito compra = new CADCarrito();
+            ENCarrito aux = new ENCarrito();
+            aux.id_usuario = this.id_usuario;
+            aux.id_lincarrito = this.id_lincarrito;
+            aux.precio = this.precio;
+            if (compra.readCarrito(this) == true)
+            {
+                this.id_lincarrito = aux.id_lincarrito;
+                this.id_usuario = aux.id_usuario;
+                this.precio = aux.precio;
+            }
+            return update;
         }
     }
-    
 }
