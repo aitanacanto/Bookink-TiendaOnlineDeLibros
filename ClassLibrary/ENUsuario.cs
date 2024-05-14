@@ -29,6 +29,7 @@ namespace ClassLibrary
         public int Id { get { return _id; } set { _id = value; } }
         public ENUsuario() 
         {
+
         }
 
         public ENUsuario(int id, string name, string surnames, string nif, string email)
@@ -42,7 +43,8 @@ namespace ClassLibrary
 
         public bool Register()
         {
-            return false;
+            CADUsuario cad = new CADUsuario();
+            return cad.Register(this);
         }
 
         public bool LogIn()
