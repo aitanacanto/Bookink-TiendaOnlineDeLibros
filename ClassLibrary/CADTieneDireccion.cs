@@ -21,25 +21,25 @@ namespace ClassLibrary
 
         public bool AgregarRelacion(ENTieneDireccion tiene)
         {
-            using (SqlConnection c = new SqlConnection(constring))
+            try
             {
-                c.Open();
-                using (SqlCommand com = new SqlCommand("INSERT INTO TIENE_DIRECCION (id_usuario, id_direccion) VALUES (@id_usuario, @id_direccion)", c))
+                using (SqlConnection c = new SqlConnection(constring))
                 {
-                    com.Parameters.AddWithValue("@id_usuario", tiene.IdUsuario);
-                    com.Parameters.AddWithValue("@id_direccion", tiene.IdDireccion);
-
-                    try
+                    c.Open();
+                    using (SqlCommand com = new SqlCommand("INSERT INTO TIENE_DIRECCION (id_usuario, id_direccion) VALUES (@id_usuario, @id_direccion)", c))
                     {
+                        com.Parameters.AddWithValue("@id_usuario", tiene.IdUsuario);
+                        com.Parameters.AddWithValue("@id_direccion", tiene.IdDireccion);
+
                         com.ExecuteNonQuery();
                         return true;
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("No se ha podido añadir la relación, ERROR: {0}", ex.Message);
-                        return false;
-                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido añadir la relación, ERROR: {0}", ex.Message);
+                return false;
             }
         }
     }
