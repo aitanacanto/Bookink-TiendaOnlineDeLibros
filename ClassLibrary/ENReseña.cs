@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ClassLibrary
 {
-    class ENReseña
+    public class ENReseña
     {
         private int _userID; //Identificar el usuario(NIF, email, id,...)
         private int _productID;
