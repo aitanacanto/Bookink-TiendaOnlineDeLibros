@@ -1,3 +1,20 @@
+-- BORRADO DE TABLAS
+
+DROP TABLE TIENE_CATEGORIA
+DROP TABLE TIENE_DIRECCION
+DROP TABLE TIENE_PAQUETE
+DROP TABLE CATEGORIA
+DROP TABLE DIRECCION
+DROP TABLE LINCARRITO
+DROP TABLE LINPEDIDO
+DROP TABLE LINPEDIDO_PA
+DROP TABLE PAQUETE
+DROP TABLE PEDIDO
+DROP TABLE RESENA
+DROP TABLE PRODUCTO
+DROP TABLE CARRITO
+DROP TABLE USUARIO
+
 -- CREACIÓN DE TABLAS
 
 create table [dbo].[USUARIO]
@@ -5,11 +22,12 @@ create table [dbo].[USUARIO]
     [id] INT IDENTITY (1, 1) NOT NULL,
     [nombre] VARCHAR(255) NOT NULL,
     [apellidos] VARCHAR(255) NOT NULL,
+    [contrasenya] VARCHAR(255) NOT NULL,
     [nif] NVARCHAR(20) NOT NULL,
+    [email] NVARCHAR(100) NOT NULL UNIQUE,
+    [telefono] NVARCHAR(20) NOT NULL,
     [puntos] INT NOT NULL,
     [admin] NVARCHAR(5) NOT NULL,
-    [mail] NVARCHAR(100) NOT NULL,
-    [teléfono] NVARCHAR(20) NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
@@ -36,7 +54,6 @@ create table [dbo].[CARRITO]
     [cantidad] INT NOT NULL,
     [id_usuario] INT NOT NULL,
     [lincarrito] NVARCHAR(255) NOT NULL,
-    [cantidad] INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
@@ -47,8 +64,7 @@ create table [dbo].[LINCARRITO]
     [id_producto] INT,
     PRIMARY KEY (id_carrito, id_producto),
     FOREIGN KEY (id_carrito) REFERENCES CARRITO(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id),
-    PRIMARY KEY CLUSTERED ([id_carrito] ASC)
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
 )
 GO
 create table [dbo].[PEDIDO]
@@ -60,8 +76,7 @@ create table [dbo].[PEDIDO]
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
-    FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id),
-    PRIMARY KEY CLUSTERED ([numped] ASC)
+    FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id)
 )
 GO
 create table [dbo].[LINPEDIDO]
@@ -80,8 +95,7 @@ create table [dbo].[DIRECCION]
     [cod_postal] NVARCHAR(10) NOT NULL,
     [dirección] NVARCHAR(255) NOT NULL,
     [ciudad] NVARCHAR(30) NOT NULL,
-    [pais] NVARCHAR(30) NOT NULL,
-    PRIMARY KEY CLUSTERED ([id] ASC)
+    [pais] NVARCHAR(30) NOT NULL
 )
 GO
 create table [dbo].[TIENE_DIRECCION]
