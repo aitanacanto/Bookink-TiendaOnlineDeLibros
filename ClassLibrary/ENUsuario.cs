@@ -12,7 +12,7 @@ namespace ClassLibrary
     {
 
         private string _name;
-        private string _surnames;
+        private string _surname;
         private string _email;
         private string _password;
         private int _phoneNumber;
@@ -21,28 +21,38 @@ namespace ClassLibrary
         private int _id;
 
         public string Name { get { return _name; } set { _name = value; } }
-        public string Surnames { get { return _surnames; } set { _surnames = value; } }
+        public string Surname { get { return _surname; } set { _surname = value; } }
         public string Email { get { return _email; } set { _email = value; } }
         public string Password { get { return _password; } set { _password = value; } }
         public int PhoneNumber { get { return _phoneNumber; } set { _phoneNumber = value; } }
         public string NIF { get { return _NIF; } set { _NIF = value; } }
         public int Id { get { return _id; } set { _id = value; } }
+        
         public ENUsuario() 
         {
+
         }
 
-        public ENUsuario(int id, string name, string surnames, string nif, string email)
+        public ENUsuario(string name, string surname, string nif, string email, int phone)
         {
-            Id = id;
-            Name = name;
-            Surnames = surnames;
-            NIF = nif;
-            Email = email;
+            _name = name;
+            _surname = surname;
+            _NIF = nif;
+            _email = email;
+            _phoneNumber = phone;
+        }
+
+        public ENUsuario(string email, string password)
+        {
+            _email = email;
+            // cifrar 
+            _password = password;
         }
 
         public bool Register()
         {
-            return false;
+            CADUsuario cad = new CADUsuario();
+            return cad.Register(this);
         }
 
         public bool LogIn()

@@ -1,14 +1,34 @@
+-- BORRADO DE TABLAS
+
+DROP TABLE TIENE_CATEGORIA
+DROP TABLE TIENE_DIRECCION
+DROP TABLE TIENE_PAQUETE
+DROP TABLE CATEGORIA
+DROP TABLE DIRECCION
+DROP TABLE LINCARRITO
+DROP TABLE LINPEDIDO
+DROP TABLE LINPEDIDO_PA
+DROP TABLE PAQUETE
+DROP TABLE PEDIDO
+DROP TABLE RESENA
+DROP TABLE PRODUCTO
+DROP TABLE CARRITO
+DROP TABLE USUARIO
+
 -- CREACIÓN DE TABLAS
 
 create table [dbo].[USUARIO]
 (	
-    [id] INT PRIMARY KEY,
-    [nombre_apellido] VARCHAR(255) NOT NULL,
+    [id] INT IDENTITY (1, 1) NOT NULL,
+    [nombre] VARCHAR(255) NOT NULL,
+    [apellidos] VARCHAR(255) NOT NULL,
+    [contrasenya] VARCHAR(255) NOT NULL,
     [nif] NVARCHAR(20) NOT NULL,
+    [email] NVARCHAR(100) NOT NULL UNIQUE,
+    [telefono] NVARCHAR(20) NOT NULL,
     [puntos] INT NOT NULL,
     [admin] NVARCHAR(5) NOT NULL,
-    [mail] NVARCHAR(100) NOT NULL,
-    [teléfono] NVARCHAR(20) NOT NULL
+    PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
 create table [dbo].[PRODUCTO]
@@ -30,16 +50,17 @@ create table [dbo].[PRODUCTO]
 GO
 create table [dbo].[CARRITO]
 (	
-    [id] INT PRIMARY KEY,
+    [id] INT IDENTITY (1, 1) NOT NULL,
     [cantidad] INT NOT NULL,
     [id_usuario] INT NOT NULL,
     [lincarrito] NVARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id)
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
+    PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
 create table [dbo].[LINCARRITO]
 (	
-    [id_carrito] INT,
+    [id_carrito] INT IDENTITY (1, 1) NOT NULL,
     [id_producto] INT,
     PRIMARY KEY (id_carrito, id_producto),
     FOREIGN KEY (id_carrito) REFERENCES CARRITO(id),
@@ -48,11 +69,10 @@ create table [dbo].[LINCARRITO]
 GO
 create table [dbo].[PEDIDO]
 (	
-    [numped] INT PRIMARY KEY,
+    [numped] INT PRIMARY KEY IDENTITY (1, 1),
     [id_usuario] INT NOT NULL,
     [cod_carrito] INT NOT NULL,
     [dirección_envío] NVARCHAR(255) NOT NULL,
-    [cantidad] INT NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
@@ -61,8 +81,9 @@ create table [dbo].[PEDIDO]
 GO
 create table [dbo].[LINPEDIDO]
 (	
-    [id_pedido] INT,
+    [id_pedido] INT IDENTITY (1, 1) NOT NULL,
     [id_producto] INT,
+    [cantidad] INT NOT NULL,
     PRIMARY KEY (id_pedido, id_producto),
     FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped),
     FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
@@ -70,7 +91,7 @@ create table [dbo].[LINPEDIDO]
 GO
 create table [dbo].[DIRECCION]
 (	
-    [id] INT PRIMARY KEY,
+    [id] INT PRIMARY KEY IDENTITY (1, 1),
     [cod_postal] NVARCHAR(10) NOT NULL,
     [dirección] NVARCHAR(255) NOT NULL,
     [ciudad] NVARCHAR(30) NOT NULL,

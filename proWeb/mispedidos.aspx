@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <h1> MisPedidos </h1>
+        <h1> Mis Pedidos </h1>
     
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">

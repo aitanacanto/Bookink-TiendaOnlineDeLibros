@@ -44,22 +44,22 @@ body {
 /* Carrito */
 
 
-    h1 { /*cuidado que esto cambia todos los h1 de la página*/
+h1 { /*cuidado que esto cambia todos los h1 de la página*/
     font-size: 32px;
     text-align: center;
-    /*margin-bottom: 30px;*/
+    /*margin-bottom: 30px;
     font-family: "Luckiest Guy", cursive;
     font-weight: 400;
     font-style: normal;
-
-
-    }
-    h3 {
+     */
+}
+/*
+h3 {
         font-family: "Luckiest Guy", cursive;
         font-weight: 400;
         font-style: normal;
-    }
-
+}        */
+    
 
     .item {
         border-bottom: 1px solid #ddd;
@@ -95,8 +95,8 @@ body {
 
     .btn-buy:hover {
         transition: all 0.3s ease; /* Transición suave */
-        background-color: #0056b3;
-    }
+    background-color: #0056b3;
+}
     .small-image {
         width: 10px; /* Tamaño de la imagen ajustado */
         height: 10px; /* Mantener la proporción de aspecto */
@@ -480,4 +480,60 @@ body {
 
 .max-width {
     max-width: 50%; /* Puedes ajustar el porcentaje según tus necesidades */
+}
+
+
+/*Estilo para adminUsuario*/
+.admin-users {
+    max-width: 100%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: visible
+}
+
+.user {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+.email {
+    margin-left: 25px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.mostrar {
+    background-color: #137e93;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+    width: 150px;
+}
+
+.deleteUser {
+    background-color: #b12d44;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+    width: 150px;
+}
+
+.dropdown-toggle.btn-primary {
+    background-color: #393185; /* Cambia el color de fondo del botón dropdown */
+}
+
+.dropdown-form {
+    position: relative; /* Hace que el menú desplegable se expanda dentro del contenedor en lugar de flotar sobre él */
 }
