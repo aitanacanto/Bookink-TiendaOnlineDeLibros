@@ -38,7 +38,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "INSERT INTO Products (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, Autor, Cod_Ofer, Editorial, Anyo_Publicacion, Num_Pags) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
+                string query = "INSERT INTO Products (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -73,17 +73,20 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "UPDATE Products set Name = @name, Stock = @Stock, Price = @Price, SalePrice = @SalePrice, Category = @Category, CreationDate = @CreationDate, Sinopsis = @Sinopsis, Autor = @Autor";
+                string query = "UPDATE Products set nombre = @Name, cant_stock = @Stock, precio = @Price, precio_oferta = @SalePrice, img_producto = @ImagePath, sinopsis = @Sinopsis, autor = @Autor, cod_oferta = @CodOfer, editorial = @Editorial, anyo_publicacion = @AnyoPubli, num_pag = @NumPags";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
                 com.Parameters.AddWithValue("@Stock", en.Stock);
                 com.Parameters.AddWithValue("@Price", en.Price);
                 com.Parameters.AddWithValue("@SalePrice", en.SalePrice);
-                com.Parameters.AddWithValue("@Category", en.Category);
-                com.Parameters.AddWithValue("@CreationDate", en.CreationDate);
+                com.Parameters.AddWithValue("@ImagePath", en.ImagePath);
                 com.Parameters.AddWithValue("@Sinopsis", en.Sinopsis);
                 com.Parameters.AddWithValue("@Autor", en.Autor);
+                com.Parameters.AddWithValue("@CodOfer", en.CodOfer);
+                com.Parameters.AddWithValue("@Editorial", en.Editorial);
+                com.Parameters.AddWithValue("@AnyoPubli", en.AnyoPubli);
+                com.Parameters.AddWithValue("@NumPags", en.NumPags);
 
                 com.ExecuteNonQuery();
                 return false;
@@ -137,14 +140,17 @@ namespace ClassLibrary
 
                 SqlDataReader dr = com.ExecuteReader();
                 dr.Read();
-                en.Name = dr["Name"].ToString();
-                en.Price = float.Parse(dr["Price"].ToString());
-                en.Stock = int.Parse(dr["Stock"].ToString());
-                en.SalePrice = float.Parse(dr["SalePrice"].ToString());
-                en.Category = Convert.ToInt32(dr["Category"]);
-                en.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
-                en.Sinopsis = dr["Sinopsis"].ToString();
-                en.Autor = dr["Autor"].ToString();
+                en.Name = dr["nombre"].ToString();
+                en.Price = float.Parse(dr["precio"].ToString());
+                en.Stock = int.Parse(dr["cant_stock"].ToString());
+                en.SalePrice = float.Parse(dr["precio_oferta"].ToString());
+                en.Sinopsis = dr["sinopsis"].ToString();
+                en.Autor = dr["autor"].ToString();
+                en.ImagePath = dr["img_producto"].ToString();
+                en.Editorial = dr["editorial"].ToString();
+                en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                en.NumPags = int.Parse(dr["num_pag"].ToString());
+
 
                 dr.Close();
                 return true;
