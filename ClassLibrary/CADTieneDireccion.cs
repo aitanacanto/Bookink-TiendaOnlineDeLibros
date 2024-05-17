@@ -21,10 +21,11 @@ namespace ClassLibrary
 
         public bool AgregarRelacion(ENTieneDireccion tiene)
         {
-            try
+            using (SqlConnection c = new SqlConnection(constring))
             {
-                using (SqlConnection c = new SqlConnection(constring))
+                try
                 {
+
                     c.Open();
                     using (SqlCommand com = new SqlCommand("INSERT INTO TIENE_DIRECCION (id_usuario, id_direccion) VALUES (@id_usuario, @id_direccion)", c))
                     {
@@ -35,11 +36,15 @@ namespace ClassLibrary
                         return true;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("No se ha podido añadir la relación, ERROR: {0}", ex.Message);
-                return false;
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido añadir la relación, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
+                }
             }
         }
     }

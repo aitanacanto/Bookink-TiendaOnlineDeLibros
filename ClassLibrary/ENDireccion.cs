@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class ENDireccion
+    public class ENDireccion
     {
         private int id;
         private string cod_postal;
