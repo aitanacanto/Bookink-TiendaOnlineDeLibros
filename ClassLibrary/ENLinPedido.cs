@@ -23,14 +23,22 @@ namespace ClassLibrary
             set { id_producto = value; }
         }
 
+        public int cantidad
+        {
+            get { return cantidad; }
+            set { cantidad = value; }
+        }
+
         public ENLinPedido()
         {
 
         }
 
-        public ENLinPedido(int id_pedido, int producto_id)
+        public ENLinPedido(int id_pedido, int producto_id,int cant)
         {
-          
+            Id_Pedido = id_pedido;
+            Id_Producto = producto_id;
+            cantidad = cant;
         }
 
         public ENLinPedido(ENLinPedido en)

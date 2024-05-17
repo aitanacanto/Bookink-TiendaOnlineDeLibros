@@ -14,8 +14,6 @@ namespace ClassLibrary
         private int _stock;
         private float _price;
         private float _salePrice;
-        private int _category;
-        private DateTime _creationDate;
 
         public string Name { get { return _name; } set { _name = value; } }
         public int Id { get { return _id; } set { _id = value; } }
@@ -35,7 +33,7 @@ namespace ClassLibrary
 
         }
 
-        public ENProducto(string name, int stock, float price, float salePrice, string imagePath, string sinopsis, string descripcion, string autor, string codOfer, string editorial,int anyoPubli, int numPags )
+        public ENProducto(string name, int stock, float price, float salePrice, string imagePath, string sinopsis, string autor, string codOfer, string editorial,int anyoPubli, int numPags )
         {
             Name = name;
             Stock = stock;

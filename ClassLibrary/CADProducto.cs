@@ -16,6 +16,10 @@ namespace ClassLibrary
     class CADProducto
     {
         private string constring;
+        public CADProducto()
+        {
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
+        }
         private bool Exists(SqlConnection c, ENProducto en)
         {
             string querryAux = "Select * from Products where id = @id";
@@ -27,10 +31,7 @@ namespace ClassLibrary
             return existe;
         }
 
-        public CADProducto()
-        {
-            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
-        }
+        
 
         public bool Create(ENProducto en)
         {
