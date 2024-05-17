@@ -1,6 +1,8 @@
 ﻿// @author: Aitana Cantó Rico;  DNI: DNI000001
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,37 +13,80 @@ namespace ClassLibrary
     {
         private string constring;
 
-        // Método para obtener un paquete por su ID desde la base de datos
-        public ENPaquete ObtenerPaquetePorId(ENPaquete paquete)
-        {
-            return paquete;
+        public CADPaquete(){
+            constring = ConfigurationManager.ConnectionStrings["miconstring"].ToString();
         }
 
-        // Método para guardar un nuevo paquete en la base de datos
-        public bool GuardarPaquete(ENPaquete paquete)
+        public bool CrearPaquete(ENPaquete en)
         {
-            return false;
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+
+                string comandoSQL = $"INSERT INTO Paquete (nombre, precio) VALUES (@nombre, @precio)";
+
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
+                cmd.Parameters.AddWithValue("@name", en.Nombre);
+                cmd.Parameters.AddWithValue("@code", en.Precio);
+                cmd.ExecuteNonQuery();
+
+                for (int i = 1; i < en.Productos.Count; i++){
+
+                }
+
+                    return true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Product operation has failed.Error: {0}", e.Message);
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Product operation has failed.Error: {0}", e.Message);
+                return false;
+            }
+            finally
+            {
+                conex.Close();
+            }
         }
 
-        // Método para actualizar un paquete existente en la base de datos
-        public bool ActualizarPaquete(ENPaquete paquete)
-        {
-            return false;
-        }
-
-        // Método para eliminar un paquete de la base de datos por su ID
-        public bool EliminarPaquete(ENPaquete paquete)
-        {
-            return false;
-        }
-
-        // Método para agregar un producto al paquete en la base de datos
         public bool AgregarProductoAlPaquete(ENPaquete paquete)
         {
             return false;
         }
 
-        // Método para eliminar un producto del paquete en la base de datos
+        public ENPaquete ObtenerPaquetePorId(ENPaquete paquete)
+        { 
+            return paquete;
+        }
+
+        public bool anyadirPaquete(ENPaquete paquete)
+        {
+            return true;
+        }
+
+        public bool GuardarPaquete(ENPaquete paquete)
+        {
+            return false;
+        }
+
+        
+        public bool ActualizarPaquete(ENPaquete paquete)
+        {
+            return false;
+        }
+
+      
+        public bool EliminarPaquete(ENPaquete paquete)
+        {
+            return false;
+        }
+
+        
         public bool EliminarProductoDelPaquete(int idPaquete, int idProducto)
         {
             return false;
