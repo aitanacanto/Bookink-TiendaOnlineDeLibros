@@ -20,9 +20,9 @@ namespace ClassLibrary
 
         public bool AñadirDireccion(ENDireccion direccion)
         {
-            try
+            using (SqlConnection c = new SqlConnection(constring))
             {
-                using (SqlConnection c = new SqlConnection(constring))
+                try
                 {
                     c.Open();
                     using (SqlCommand com = new SqlCommand("INSERT INTO DIRECCION (id, cod_postal, direccion, ciudad, pais) VALUES (@id, @cod_postal, @direccion, @ciudad, @pais)", c))
@@ -37,20 +37,25 @@ namespace ClassLibrary
                         return true;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("No se ha podido añadir la dirección, ERROR: {0}", ex.Message);
-                return false;
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido añadir la dirección, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
+                }
+            }   
+                
         }
 
 
         public bool LeerDireccion(ENDireccion direccion)
         {
-            try
+            using (SqlConnection c = new SqlConnection(constring))
             {
-                using (SqlConnection c = new SqlConnection(constring))
+                try
                 {
                     c.Open();
                     using (SqlCommand com = new SqlCommand("SELECT * FROM DIRECCION WHERE id = @id", c))
@@ -74,20 +79,25 @@ namespace ClassLibrary
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("No se ha podido leer la dirección, ERROR: {0}", ex.Message);
-                return false;
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido leer la dirección, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
+                }
             }
         }
 
         public bool ModificarDireccion(ENDireccion direccion)
         {
-            try
+            using (SqlConnection c = new SqlConnection(constring))
             {
-                using (SqlConnection c = new SqlConnection(constring))
+                try
                 {
+
                     c.Open();
                     using (SqlCommand com = new SqlCommand("UPDATE DIRECCION SET cod_postal = @cod_postal, direccion = @direccion, ciudad = @ciudad, pais = @pais WHERE id = @id", c))
                     {
@@ -102,10 +112,16 @@ namespace ClassLibrary
                         return true;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("No se ha podido modificar la dirección, ERROR: {0}", ex.Message);
-                return false;
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido modificar la dirección, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
+                }
             }
         }
+    }
+}
