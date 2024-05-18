@@ -13,16 +13,15 @@ namespace ClassLibrary
     {
         private string constring;
 
-
         //Devuelve true si existe el producto en la base de datos
         private bool Exists(SqlConnection c, ENUsuario en)
         {
             //declaración querry auxiliar
-            string querryAux = "Select * from USUARIO where email = @email";
+            string querryAux = "Select email from USUARIO where email = @email";
             SqlCommand comAux = new SqlCommand(querryAux, c);
 
             //asignación parámetros
-            comAux.Parameters.AddWithValue("@code", en.Email);
+            comAux.Parameters.AddWithValue("@email", en.Email);
 
             SqlDataReader dr = comAux.ExecuteReader();
 
@@ -77,7 +76,7 @@ namespace ClassLibrary
             {
                 c.Open();
 
-                if (!Exists(c, en)) { throw new ArgumentException("No existe el usuario con email: " + en.Email.ToString()); }
+                if (!Exists(c, en)) { throw new ArgumentException("No existe el usuario con email: " + en.Email.ToString());}
 
                 string inputPass;
                 // Crear una sentencia parametricada
@@ -98,7 +97,7 @@ namespace ClassLibrary
                     }
                     else
                     {
-                        throw new ArgumentException("Contraseña no válida.");
+                        throw new ArgumentException("Contraseña: " + en.Password + "no válida.");
                     }
                 }
                 else
@@ -108,7 +107,7 @@ namespace ClassLibrary
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No se ha podido añadir el usuario, ERROR: {0}", ex.Message);
+                Console.WriteLine("No se ha podido iniciar sesión, ERROR: {0}", ex.Message);
                 return false;
             }
             finally
