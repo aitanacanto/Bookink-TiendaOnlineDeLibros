@@ -24,7 +24,7 @@ namespace ClassLibrary
                 conex.Open();
                 transaction = conex.BeginTransaction();
 
-                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio) OUTPUT INSERTED.id VALUES (@nombre, @precio)";
+                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio) VALUES (@nombre, @precio)";
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex, transaction);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
@@ -34,11 +34,7 @@ namespace ClassLibrary
 
                 foreach (ENProducto producto in en.Productos)
                 {
-                    string insertProductoSQL = "INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES (@id_paquete, @id_producto)";
-                    SqlCommand cmdProducto = new SqlCommand(insertProductoSQL, conex, transaction);
-                    cmdProducto.Parameters.AddWithValue("@id_paquete", paqueteId);
-                    cmdProducto.Parameters.AddWithValue("@id_producto", producto.Id);
-                    cmdProducto.ExecuteNonQuery();
+                    producto.Create();
                 }
 
                 transaction.Commit();
@@ -79,41 +75,30 @@ namespace ClassLibrary
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@id", en.IdPaquete);
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        en.Nombre = (string)reader["nombre"];
-                        en.Precio = (float)reader["precio"];
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    en.Nombre = (string)reader["nombre"];
+                    en.Precio = (float)reader["precio"];
+                }
+                else
+                {
+                    reader.Close();
+                    return null;
                 }
 
                 en.Productos = new List<ENProducto>();
                 string comandoProductosSQL = "SELECT p.* FROM PRODUCTO p INNER JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
                 SqlCommand cmdProductos = new SqlCommand(comandoProductosSQL, conex);
                 cmdProductos.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+                bool leido = true;
 
                 using (SqlDataReader readerProductos = cmdProductos.ExecuteReader())
                 {
-                    while (readerProductos.Read())
+                    while (readerProductos.Read() && leido)
                     {
-                        ENProducto producto = new ENProducto
-                        {
-                            Id = (int)readerProductos["id"],
-                            Name = (string)readerProductos["nombre"],
-                            Stock = (int)readerProductos["cant_stock"],
-                            Price = (float)(decimal)readerProductos["precio"],
-                            SalePrice = readerProductos["precio_oferta"] != DBNull.Value ? (float)(decimal)readerProductos["precio_oferta"] : 0,
-                            //Category = 0, 
-                            //CreationDate = DateTime.Now, 
-                            ImagePath = (string)readerProductos["img_producto"],
-                            Sinopsis = (string)readerProductos["sinopsis"],
-                            Autor = (string)readerProductos["autor"]
-                        };
+                        ENProducto producto = new ENProducto();
+                        leido = producto.Read();
                         en.Productos.Add(producto);
                     }
                 }
@@ -152,20 +137,6 @@ namespace ClassLibrary
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
                 cmd.ExecuteNonQuery();
-
-                string deleteProductosSQL = "DELETE FROM TIENE_PAQUETE WHERE id_paquete = @id_paquete";
-                SqlCommand cmdDelete = new SqlCommand(deleteProductosSQL, conex, transaction);
-                cmdDelete.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
-                cmdDelete.ExecuteNonQuery();
-
-                foreach (ENProducto producto in en.Productos)
-                {
-                    string insertProductoSQL = "INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES (@id_paquete, @id_producto)";
-                    SqlCommand cmdProducto = new SqlCommand(insertProductoSQL, conex, transaction);
-                    cmdProducto.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
-                    cmdProducto.Parameters.AddWithValue("@id_producto", producto.Id);
-                    cmdProducto.ExecuteNonQuery();
-                }
 
                 transaction.Commit();
                 return true;
@@ -310,48 +281,20 @@ namespace ClassLibrary
             try
             {
                 conex.Open();
-                string comandoPaquetesSQL = "SELECT * FROM PAQUETE";
+                string comandoPaquetesSQL = "SELECT id FROM PAQUETE";
                 SqlCommand cmdPaquetes = new SqlCommand(comandoPaquetesSQL, conex);
 
                 using (SqlDataReader readerPaquetes = cmdPaquetes.ExecuteReader())
                 {
                     while (readerPaquetes.Read())
                     {
-                        ENPaquete paquete = new ENPaquete
-                        {
-                            IdPaquete = (int)readerPaquetes["id"],
-                            Nombre = (string)readerPaquetes["nombre"],
-                            Precio = (float)readerPaquetes["precio"],
-                            Productos = new List<ENProducto>()
-                        };
-                        paquetes.Add(paquete);
-                    }
-                }
+                        ENPaquete paquete = new ENPaquete();
+                        paquete.IdPaquete = (int)readerPaquetes["id"];
+                        paquete = leerPaquete(paquete);
 
-                foreach (ENPaquete paquete in paquetes)
-                {
-                    string comandoProductosSQL = "SELECT p.* FROM PRODUCTO p INNER JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
-                    SqlCommand cmdProductos = new SqlCommand(comandoProductosSQL, conex);
-                    cmdProductos.Parameters.AddWithValue("@id_paquete", paquete.IdPaquete);
-
-                    using (SqlDataReader readerProductos = cmdProductos.ExecuteReader())
-                    {
-                        while (readerProductos.Read())
+                        if (paquete != null)
                         {
-                            ENProducto producto = new ENProducto
-                            {
-                                Id = (int)readerProductos["id"],
-                                Name = (string)readerProductos["nombre"],
-                                Stock = (int)readerProductos["cant_stock"],
-                                Price = (float)(decimal)readerProductos["precio"],
-                                SalePrice = readerProductos["precio_oferta"] != DBNull.Value ? (float)(decimal)readerProductos["precio_oferta"] : 0,
-                                //Category = 0, 
-                                //CreationDate = DateTime.Now, 
-                                ImagePath = (string)readerProductos["img_producto"],
-                                Sinopsis = (string)readerProductos["sinopsis"],
-                                Autor = (string)readerProductos["autor"]
-                            };
-                            paquete.Productos.Add(producto);
+                            paquetes.Add(paquete);
                         }
                     }
                 }
@@ -373,6 +316,7 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
+
 
     }
 }
