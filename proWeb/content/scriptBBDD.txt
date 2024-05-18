@@ -1,19 +1,19 @@
 -- BORRADO DE TABLAS
 
-DROP TABLE TIENE_CATEGORIA
-DROP TABLE TIENE_DIRECCION
-DROP TABLE TIENE_PAQUETE
-DROP TABLE CATEGORIA
-DROP TABLE DIRECCION
-DROP TABLE LINCARRITO
-DROP TABLE LINPEDIDO
-DROP TABLE LINPEDIDO_PA
-DROP TABLE PAQUETE
-DROP TABLE PEDIDO
-DROP TABLE RESENA
-DROP TABLE PRODUCTO
-DROP TABLE CARRITO
-DROP TABLE USUARIO
+--DROP TABLE TIENE_CATEGORIA
+--DROP TABLE TIENE_DIRECCION
+--DROP TABLE TIENE_PAQUETE
+--DROP TABLE CATEGORIA
+--DROP TABLE DIRECCION
+--DROP TABLE LINCARRITO
+--DROP TABLE LINPEDIDO
+--DROP TABLE LINPEDIDO_PA
+----DROP TABLE PAQUETE
+--DROP TABLE PEDIDO
+--DROP TABLE RESENA
+--DROP TABLE PRODUCTO
+--DROP TABLE CARRITO
+--DROP TABLE USUARIO
 
 -- CREACIÓN DE TABLAS
 create table [dbo].[USUARIO]
@@ -126,7 +126,8 @@ create table [dbo].[PAQUETE]
 (	
     [id] INT IDENTITY (1, 1) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
-    [precio] DECIMAL(10, 2) NOT NULL
+    [precio] DECIMAL(10, 2) NOT NULL,
+    [img_paquete] NVARCHAR(255) NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
@@ -293,16 +294,16 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
 
 
 -- PAQUETE
-    INSERT INTO PAQUETE (nombre, precio) VALUES 
-    ('HARRY POTTER Pack',80.00),
-    ('CULPABLES Pack',32.99),
-    ('DIVERGENTE Pack',42.99),
-    ('POPPY WAR Pack',35.00),
-    ('LOS HABITANTES DEL AIRE Pack',54.99),
-    ('MISTBORN Pack',45.50),
-    ('BLACKWATER Pack',69.99),
-    ('CRÓNICAS DE LA TORRE Pack',29.99),
-    ('PERCY JACKSON Pack', 46.55);
+    INSERT INTO PAQUETE (nombre, precio, img_paquete) VALUES 
+    ('HARRY POTTER Pack',80.00, 'content/products/pack_1.jpg'),
+    ('CULPABLES Pack',32.99, 'content/products/pack_2.jpg'),
+    ('DIVERGENTE Pack',42.99, 'content/products/pack_3.jpg'),
+    ('POPPY WAR Pack',35.00, 'content/products/pack_3.jpg'),
+    ('LOS HABITANTES DEL AIRE Pack',54.99, 'content/products/pack_4.jpg'),
+    ('MISTBORN Pack',45.50, 'content/products/pack_5.jpg'),
+    ('BLACKWATER Pack',69.99, 'content/products/pack_6.jpg'),
+    ('CRÓNICAS DE LA TORRE Pack',29.99, 'content/products/pack_7.jpg'),
+    ('PERCY JACKSON Pack', 46.55, 'content/products/pack_8.jpg');
 
 -- TIENE PAQUETE
     INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES 
@@ -334,6 +335,8 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
      -- PERCY JACKSON Pack 9
         (9, 28),(9, 29),(9, 30);
      
+
+
 
 
 
