@@ -24,13 +24,6 @@ namespace proWeb
 
         private void CargarLibros()
         {
-            ENCarrito carrito = Session["Carrito"] as ENCarrito;
-
-            Button button = (Button)sender;
-            int id_producto = int.Parse(button.CommandArgument);
-            carrito.anyadirProductoCarrito(id_producto);
-            Response.Redirect("carrito.aspx");
-
             ENProducto en = new ENProducto();
             List<ENProducto> listaProductos = new List<ENProducto>();
             listaProductos = en.ObtenerTodosLosProductos();
@@ -52,12 +45,14 @@ namespace proWeb
             repeaterPaquetes.DataBind();
         }
 
-            ENProducto en = new ENProducto();
-            listaProductos = en.ObtenerTodosLosProductos();
-            return listaProductos;
+            protected void Anyadir_Click(object sender, EventArgs e)
+            {
+            ENCarrito carrito = Session["Carrito"] as ENCarrito;
 
-            
-
-        }
+            Button button = (Button)sender;
+            int id_producto = int.Parse(button.CommandArgument);
+            carrito.anyadirProductoCarrito(id_producto);
+            Response.Redirect("carrito.aspx");
+            }
     }
 }
