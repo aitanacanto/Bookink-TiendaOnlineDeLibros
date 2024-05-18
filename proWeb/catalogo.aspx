@@ -30,10 +30,8 @@
                                         </div>
                                             
                                         <div class="text-center mt-3">
-                                        <a href="#" class="btn btn-primary">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                            Añadir al Carrito</a>
-                                            </div>
+                                          <asp:Button ID="Anyadir" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Anyadir_Click"  />
+                                          </div>
                                     </div>
                                 </a>
                             </div>
