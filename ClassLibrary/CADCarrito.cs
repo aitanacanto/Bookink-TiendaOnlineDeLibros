@@ -74,7 +74,7 @@ namespace ClassLibrary
                 {
                     DataRow fila = tabla.Rows[j];
 
-                    if (user.id == fila[1].ToString())
+                    if (user.Id == int.Parse(fila[1].ToString()))
                     {
                         validar = true;
                         carr.id = int.Parse(fila[0].ToString());
