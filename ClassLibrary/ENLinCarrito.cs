@@ -57,7 +57,10 @@ namespace ClassLibrary
             this.cantidad = cantidad;
             this.pvp = pvp;
         }
-
+        public void incrementarCantidad()
+        {
+            this.cantidad++;
+        }
         public bool creacionLineaCarrito()
         {
             CADLinCarrito linca = new CADLinCarrito();

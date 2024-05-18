@@ -37,6 +37,7 @@ namespace ClassLibrary
                 tabla.Rows.Add(fila);
                 SqlCommandBuilder builder = new SqlCommandBuilder(adap);
                 adap.Update(dat, "CARRITO");
+                carr.id = int.Parse(fila[0].ToString());
                 validar = true;
             }
             catch (SqlException er)
@@ -98,7 +99,23 @@ namespace ClassLibrary
             return validar;
 
         }
+        /*
+        public bool anyadirProductoCarrito(ENCarrito carr, ENProducto pro)
+        {
+            bool validar = false;
+            SqlConnection cone = new SqlConnection(constring);
+            try
+            {
+                cone.Open();
+                String linea = "Insert into LINCARRITO (id_carrito, id_producto, cantidad, pvp) VALUES (" + carr.id + "," + pro.Id + "," + +")";
+                SqlCommand coma = new SqlCommand(linea, cone);
+                coma.ExecuteNonQuery();
+                validar = true;
+                return validar;
+            }
 
+        }
+        */
         public bool actualizacionCarrito(ENCarrito carr)
         {
             bool validar = false;
@@ -128,7 +145,7 @@ namespace ClassLibrary
                 if (cone != null) cone.Close();
             }
         }
-
+        
         public bool readCarrito(ENCarrito carr)
         {
             bool validar = false;

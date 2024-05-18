@@ -16,7 +16,7 @@ namespace ClassLibrary
         private int _id;
         private int _id_usuario;
         private float _importe_total;
-
+        private List<ENLinCarrito> _listLinCar;
         public int id
         {
             get { return _id; }
@@ -38,14 +38,18 @@ namespace ClassLibrary
 
         public ENCarrito()
         {
+            this.id = 0;
             this.id_usuario = 0;
             this.importe_total = 0;
+            this._listLinCar = new List<ENLinCarrito>();
         }
 
         public ENCarrito(int id, int id_usuario, float importe_total)
         {
+            this.id = id;
             this.id_usuario = id_usuario;
             this.importe_total = importe_total;
+            this._listLinCar = new List<ENLinCarrito>();
         }
 
         public bool creacionCarrito()
@@ -55,7 +59,7 @@ namespace ClassLibrary
 
             if (carr.readCarrito(this) != true)
             {
-                return carr.readCarrito(this);
+                return carr.creacionCarrito(this);
             }
 
             return false;
@@ -80,7 +84,34 @@ namespace ClassLibrary
 
             return false;
         }
+        private ENLinCarrito existeProducto(ENProducto pro)
+        {
+            foreach ( ENLinCarrito lincar in _listLinCar )
+            {
+                if (lincar.id_producto == pro.Id)
+                {
+                    return lincar;
+                }
+            }
 
+            return null;
+
+        }
+
+        public void anyadirProductoCarrito(int id_pro)
+        {
+            ENProducto pro;
+            ENLinCarrito linca = existeProducto(pro);
+            if (linca == null)
+            {
+                linca = new ENLinCarrito(this.id, pro.Id, 1, pro.Price);
+                _listLinCar.Add(linca);
+            }
+            else
+            {
+                linca.incrementarCantidad();
+            }
+        }
         public bool readCarrito()
         {
             CADCarrito carr = new CADCarrito();
