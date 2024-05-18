@@ -1,81 +1,130 @@
-﻿// @author:  Bruno Vilella Martínez; DNI: DNI000003
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
+using System.Data;
 using System.Threading.Tasks;
+using System.Configuration;
+
 
 namespace ClassLibrary
 {
-    class ENLinCarrito
+    public class ENLinCarrito
     {
-        private int id_carrito;
 
-        public int Id_Carrito
+        private int _id_carrito;
+        private int _id_producto;
+        private int _cantidad;
+        private float _pvp;
+
+        public int id_carrito
         {
-            get { return id_carrito; }
-            set { id_carrito = value; }
+            get { return _id_carrito; }
+            set { _id_carrito = value; }
         }
 
-        /// <summary>
-        /// Almacena las unidades que quiere comprar el usuario
-        /// </summary>
-        private int id_producto;
-
-        public int Id_Producto
+        public int id_producto
         {
-            get { return id_producto; }
-            set { id_producto = value; }
+            get { return _id_producto; }
+            set { _id_producto = value; }
         }
-        /// <summary>
-        /// Constructor por defecto
-        /// </summary>
+
+        public int cantidad
+        {
+            get { return _cantidad; }
+            set { _cantidad = value; }
+        }
+
+        public float pvp
+        {
+            get { return _pvp; }
+            set { _pvp = value; }
+        }
+
         public ENLinCarrito()
         {
-            Id_Carrito = -1;
-            Id_Producto = -1;
+            this.id_carrito = 0;
+            this.id_producto = 0;
+            this.cantidad = 0;
+            this.pvp = 0;
         }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public ENLinCarrito(int carrito_id, int producto_id)
+        public ENLinCarrito(int id_carrito, int id_producto, int cantidad, float pvp)
         {
-            Id_Carrito = carrito_id;
-            Id_Producto = producto_id;
-        }
-        /// <summary>
-        /// Constructor de copia.
-        /// </summary>
-        public ENLinCarrito(ENLinCarrito lincarrito)
-        {
-            Id_Carrito = lincarrito.id_carrito;
-            Id_Producto = lincarrito.id_producto;
+            this.id_carrito = id_carrito;
+            this.id_producto = id_producto;
+            this.cantidad = cantidad;
+            this.pvp = pvp;
         }
 
-        public bool createLinCarrito()
+        public bool crearLineaCarrito()
         {
-            bool creado = false;
+            CADLinCarrito linca = new CADLinCarrito();
+            ENCarrito c = new ENCarrito();
+            c.id = this.id_carrito;
 
-            return creado;
+            if (linca.readLinCarrito(this) != true && c.readCarrito())
+            {
+                return linca.creacionLinCarrito(this);
+            }
+
+            return false;
         }
+
         public bool readLinCarrito()
         {
-            bool creado = false;
-
-            return creado;
+            CADLinCarrito linca = new CADLinCarrito();
+            return linca.readLinCarrito(this);
         }
-        public bool updateLinCarrito()
-        {
-            bool creado = false;
 
-            return creado;
+        public DataSet actualizacionLinCarrito(int lin)
+        {
+            CADLinCarrito c = new CADLinCarrito();
+            DataSet dat = new DataSet();
+            ENLinCarrito linca = new ENLinCarrito();
+
+            linca.id_producto = this.id_producto;
+            linca.cantidad = this.cantidad;
+            linca.pvp = this.pvp;
+
+            if (c.readLinCarrito(this) == true)
+            {
+                this.id_producto = linca.id_producto;
+                this.cantidad = linca.cantidad;
+                this.pvp = linca.pvp;
+                dat = c.actualizacionLinCarrito(this, lin);
+            }
+
+            return dat;
         }
-        public bool deleteLinCarrito()
-        {
-            bool creado = false;
 
-            return creado;
+
+        public bool eliminacionLinCarrito()
+        {
+            CADLinCarrito linca = new CADLinCarrito();
+
+            if (linca.readLinCarrito(this))
+            {
+                return linca.eliminacionLinCarrito(this);
+            }
+
+            return false;
+        }
+
+        
+
+        public DataSet ensenyarLinCarritoByCarrito(ENCarrito c)
+        {
+            CADLinCarrito linca = new CADLinCarrito();
+            DataSet dat = new DataSet();
+
+            if (c.readCarrito() == true)
+            {
+                dat = linca.ensenyarLinCarritoByCarrito(c);
+            }
+
+            return dat;
         }
     }
 }
