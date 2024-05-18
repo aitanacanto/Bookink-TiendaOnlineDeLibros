@@ -27,6 +27,7 @@ namespace ClassLibrary
         public int PhoneNumber { get { return _phoneNumber; } set { _phoneNumber = value; } }
         public string NIF { get { return _NIF; } set { _NIF = value; } }
         public int Id { get { return _id; } set { _id = value; } }
+        
         public ENUsuario() 
         {
 
@@ -39,6 +40,13 @@ namespace ClassLibrary
             _NIF = nif;
             _email = email;
             _phoneNumber = phone;
+        }
+
+        public ENUsuario(string email, string password)
+        {
+            _email = email;
+            // cifrar 
+            _password = password;
         }
 
         public bool Register()

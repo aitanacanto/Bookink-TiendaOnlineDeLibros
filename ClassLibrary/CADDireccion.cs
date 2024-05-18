@@ -22,40 +22,46 @@ namespace ClassLibrary
         {
             using (SqlConnection c = new SqlConnection(constring))
             {
-                c.Open();
-                using (SqlCommand com = new SqlCommand("INSERT INTO DIRECCION (id, cod_postal, direccion, ciudad, pais) VALUES (@id, @cod_postal, @direccion, @ciudad, @pais)", c))
+                try
                 {
-                    com.Parameters.AddWithValue("@id", direccion.ID);
-                    com.Parameters.AddWithValue("@cod_postal", direccion.CodPostal);
-                    com.Parameters.AddWithValue("@direccion", direccion.Direccion);
-                    com.Parameters.AddWithValue("@ciudad", direccion.Ciudad);
-                    com.Parameters.AddWithValue("@pais", direccion.Pais);
-
-                    try
+                    c.Open();
+                    using (SqlCommand com = new SqlCommand("INSERT INTO DIRECCION (id, cod_postal, direccion, ciudad, pais) VALUES (@id, @cod_postal, @direccion, @ciudad, @pais)", c))
                     {
+                        com.Parameters.AddWithValue("@id", direccion.ID);
+                        com.Parameters.AddWithValue("@cod_postal", direccion.CodPostal);
+                        com.Parameters.AddWithValue("@direccion", direccion.Direccion);
+                        com.Parameters.AddWithValue("@ciudad", direccion.Ciudad);
+                        com.Parameters.AddWithValue("@pais", direccion.Pais);
+
                         com.ExecuteNonQuery();
                         return true;
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("No se ha podido añadir la dirección, ERROR: {0}", ex.Message);
-                        return false;
-                    }
                 }
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido añadir la dirección, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
+                }
+            }   
+                
         }
+
 
         public bool LeerDireccion(ENDireccion direccion)
         {
             using (SqlConnection c = new SqlConnection(constring))
             {
-                c.Open();
-                using (SqlCommand com = new SqlCommand("SELECT * FROM DIRECCION WHERE id = @id", c))
+                try
                 {
-                    com.Parameters.AddWithValue("@id", direccion.ID);
-
-                    try
+                    c.Open();
+                    using (SqlCommand com = new SqlCommand("SELECT * FROM DIRECCION WHERE id = @id", c))
                     {
+                        com.Parameters.AddWithValue("@id", direccion.ID);
+
                         using (SqlDataReader dr = com.ExecuteReader())
                         {
                             if (dr.Read())
@@ -72,11 +78,15 @@ namespace ClassLibrary
                             }
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("No se ha podido leer la dirección, ERROR: {0}", ex.Message);
-                        return false;
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido leer la dirección, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
                 }
             }
         }
@@ -85,25 +95,31 @@ namespace ClassLibrary
         {
             using (SqlConnection c = new SqlConnection(constring))
             {
-                c.Open();
-                using (SqlCommand com = new SqlCommand("UPDATE DIRECCION SET cod_postal = @cod_postal, direccion = @direccion, ciudad = @ciudad, pais = @pais WHERE id = @id", c))
+                try
                 {
-                    com.Parameters.AddWithValue("@id", direccion.ID);
-                    com.Parameters.AddWithValue("@cod_postal", direccion.CodPostal);
-                    com.Parameters.AddWithValue("@direccion", direccion.Direccion);
-                    com.Parameters.AddWithValue("@ciudad", direccion.Ciudad);
-                    com.Parameters.AddWithValue("@pais", direccion.Pais);
 
-                    try
+                    c.Open();
+                    using (SqlCommand com = new SqlCommand("UPDATE DIRECCION SET cod_postal = @cod_postal, direccion = @direccion, ciudad = @ciudad, pais = @pais WHERE id = @id", c))
                     {
+                        com.Parameters.AddWithValue("@id", direccion.ID);
+                        com.Parameters.AddWithValue("@cod_postal", direccion.CodPostal);
+                        com.Parameters.AddWithValue("@direccion", direccion.Direccion);
+                        com.Parameters.AddWithValue("@ciudad", direccion.Ciudad);
+                        com.Parameters.AddWithValue("@pais", direccion.Pais);
+
+
                         com.ExecuteNonQuery();
                         return true;
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("No se ha podido modificar la dirección, ERROR: {0}", ex.Message);
-                        return false;
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido modificar la dirección, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
                 }
             }
         }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class CADReseña
+    public class CADReseña
     {
         private string constring;
         public CADReseña()
