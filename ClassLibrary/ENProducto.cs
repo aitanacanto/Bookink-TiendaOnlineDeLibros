@@ -74,5 +74,11 @@ namespace ClassLibrary
             return c.Read(this);
         }
 
+        public List<ENProducto> ObtenerTodosLosProductos()
+        {
+            CADProducto cad = new CADProducto();
+            return cad.ObtenerTodosLosProductos();
+        }
+
     }
 }

@@ -43,8 +43,8 @@ namespace ClassLibrary
                 c.Open();
 
                 // Crear una sentencia parametricada
-                string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, nif, email, telefono) " +
-                               "VALUES (@name, @surname, @contrasenya, @nif, @email, @telefono)";
+                string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, nif, email, telefono, puntos, admin) " +
+                               "VALUES (@name, @surname, @contrasenya, @nif, @email, @telefono, 0, 'no')";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
