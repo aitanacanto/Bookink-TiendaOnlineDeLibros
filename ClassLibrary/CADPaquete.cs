@@ -108,8 +108,8 @@ namespace ClassLibrary
                             Stock = (int)readerProductos["cant_stock"],
                             Price = (float)(decimal)readerProductos["precio"],
                             SalePrice = readerProductos["precio_oferta"] != DBNull.Value ? (float)(decimal)readerProductos["precio_oferta"] : 0,
-                            Category = 0, 
-                            CreationDate = DateTime.Now, 
+                            //Category = 0, 
+                            //CreationDate = DateTime.Now, 
                             ImagePath = (string)readerProductos["img_producto"],
                             Sinopsis = (string)readerProductos["sinopsis"],
                             Autor = (string)readerProductos["autor"]
@@ -345,8 +345,8 @@ namespace ClassLibrary
                                 Stock = (int)readerProductos["cant_stock"],
                                 Price = (float)(decimal)readerProductos["precio"],
                                 SalePrice = readerProductos["precio_oferta"] != DBNull.Value ? (float)(decimal)readerProductos["precio_oferta"] : 0,
-                                Category = 0, 
-                                CreationDate = DateTime.Now, 
+                                //Category = 0, 
+                                //CreationDate = DateTime.Now, 
                                 ImagePath = (string)readerProductos["img_producto"],
                                 Sinopsis = (string)readerProductos["sinopsis"],
                                 Autor = (string)readerProductos["autor"]
