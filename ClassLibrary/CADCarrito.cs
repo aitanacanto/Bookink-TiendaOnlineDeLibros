@@ -1,173 +1,329 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
+using System.Data;
 using System.Text;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
+
+
 
 namespace ClassLibrary
 {
-    class CADCarrito
+    public class CADCarrito
     {
         private string constring;
 
         public CADCarrito()
         {
-            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
+            this.constring = ConfigurationManager.ConnectionStrings["database"].ToString();
         }
-        public bool createCarrito(ENCarrito carrito)
+
+        public bool creacionCarrito(ENCarrito carr)
         {
-            bool creado = false;
+            bool validar = false;
+            DataSet dat = new DataSet();
+            SqlConnection cone = new SqlConnection(constring);
             try
             {
-                SqlConnection conec = new SqlConnection(constring);
-                conec.Open();
-                SqlCommand comando = new SqlCommand("insert into [dbo].[CARRITO] (id, id_usuario, lincarrito, cantidad) VALUES(@id, @id_usuario, @lincarrito, @cantidad)", conec);
-                comando.Parameters.Add("@id", SqlDbType.Int).Value = carrito.idcarrito;
-                comando.Parameters.Add("@id_usuario", SqlDbType.Int).Value = carrito.user;
-                comando.Parameters.Add("@lincarrito", SqlDbType.Int).Value = carrito.lincarrito;
-                comando.Parameters.Add("@cantidad", SqlDbType.Float).Value = carrito.preciocarrito;
-                comando.ExecuteNonQuery();
-                creado = true;
-                conec.Close();
+                SqlDataAdapter adap = new SqlDataAdapter("select * from CARRITO", cone);
+                adap.Fill(dat, "CARRITO");
+                DataTable tabla = new DataTable();
+                tabla = dat.Tables["CARRITO"];
+                DataRow fila = tabla.NewRow();
+                fila[1] = carr.id_usuario;
+                fila[2] = carr.importe_total;
+                tabla.Rows.Add(fila);
+                SqlCommandBuilder builder = new SqlCommandBuilder(adap);
+                adap.Update(dat, "CARRITO");
+                validar = true;
             }
-            catch (SqlException excS)
+            catch (SqlException er)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", excS.Message);
+                validar = false;
+                Console.WriteLine("User operation has failed. Error: {0}", er.Message);
             }
-            catch (Exception exc)
+            catch (Exception er)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", exc.Message);
+                validar = false;
+                Console.WriteLine("User operation has failed. Error: {0}", er.Message);
+            }
+            finally
+            {
+                if (cone != null) cone.Close();
             }
 
-            return creado;
+            return validar;
         }
-        public int ObtenerId()
+        public bool readCarritoUsuario(ENCarrito carr, ENUsuario user)
         {
-            int i = 1;
+            bool leer = false;
+            DataSet dat = new DataSet();
+            SqlConnection cone = new SqlConnection(constring);
+
+
             try
             {
-                SqlConnection conec = new SqlConnection(constring);
-                conec.Open();
-                SqlCommand comando = new SqlCommand("Select MAX(id) maximo FROM [dbo].[CARRITO]", conec);
-                SqlDataReader encontrar = comando.ExecuteReader();
-                encontrar.Read();
-                if (encontrar.HasRows)
+                SqlDataAdapter adap = new SqlDataAdapter("select * from CARRITO", cone);
+                adap.Fill(dat, "CARRITO");
+                DataTable tabla = new DataTable();
+                tabla = dat.Tables["CARRITO"];
+
+                for (int j = 0; j < tabla.Rows.Count; j++)
                 {
-                    i = int.Parse(encontrar["maximo"].ToString()) + 1;
+                    DataRow fila = tabla.Rows[j];
+
+                    if (user.id == fila[1].ToString())
+                    {
+                        leer = true;
+                        carr.id = int.Parse(fila[0].ToString());
+                        carr.importe_total = float.Parse(fila[2].ToString());
+                    }
                 }
-                encontrar.Close();
-                conec.Close();
             }
-            catch (SqlException excS)
+            catch (SqlException e)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", excS.Message);
+                leer = false;
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
             }
-            catch (Exception exc)
+            catch (Exception e)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", exc.Message);
+                leer = false;
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            finally
+            {
+                if (cone != null) cone.Close();
             }
 
-            return i;
+            return leer;
+
         }
-        public bool readCarrito(ENCarrito carrito)
+
+        public bool actualizacionCarrito(ENCarrito carr)
         {
-            bool leido = false;
+            bool actualizar = false;
+            SqlConnection cone = new SqlConnection(constring);
 
             try
             {
-                SqlConnection conec = new SqlConnection(constring);
-                conec.Open();
-                SqlCommand comando = new SqlCommand("Select * FROM [dbo].[CARRITO] WHERE id_usuario =" + carrito.user + "AND lincarrito =" + carrito.lincarrito, conec);
-                SqlDataReader encontrar = comando.ExecuteReader();
-                encontrar.Read();
+                cone.Open();
+                String linea = "Update CARRITO set importe_total=" + carr.importe_total + " where id_usuario='" + carr.id_usuario + "'";
+                SqlCommand coma = new SqlCommand(linea, cone);
+                coma.ExecuteNonQuery();
+                actualizar = true;
+                return actualizar;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return actualizar;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return actualizar;
+            }
+            finally
+            {
+                if (cone != null) cone.Close();
+            }
+        }
 
-                if (encontrar["lincarrito"].ToString() == carrito.lincarrito.ToString() && encontrar["id_usuario"].ToString() == carrito.user.ToString())
+        public bool readCarrito(ENCarrito carr)
+        {
+            bool leer = false;
+            DataSet dat = new DataSet();
+            SqlConnection cone = new SqlConnection(constring);
+
+
+            try
+            {
+                SqlDataAdapter adap = new SqlDataAdapter("select * from CARRITO where id='" + carr.id + "'", cone);
+                adap.Fill(dat, "CARRITO");
+                DataTable tabla = new DataTable();
+                tabla = dat.Tables["CARRITO"];
+                if (tabla.Rows.Count > 0) {
+                    DataRow fila = tabla.Rows[0];
+                    leer = true;
+                    carr.id_usuario = int.Parse(fila[1].ToString());
+                    carr.importe_total = float.Parse(fila[2].ToString());
+                }
+
+            }
+            catch (SqlException e)
+            {
+                leer = false;
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            catch (Exception e)
+            {
+                leer = false;
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            finally
+            {
+                if (cone != null) cone.Close();
+            }
+
+            return leer;
+
+        }
+        public bool vaciarCarrito(ENCarrito car)
+        {
+            bool validar = false;
+            SqlConnection cone = null;
+            string linea;
+
+            linea = "Delete From LINCARRITO where id_carrito=" + car.id;
+
+            try
+            {
+                cone = new SqlConnection(constring);
+                cone.Open();
+
+                SqlCommand coma = new SqlCommand(linea, cone);
+
+                coma.ExecuteNonQuery();
+                validar = true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                validar = false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                validar = false;
+            }
+            finally
+            {
+                if (cone != null) cone.Close();
+            }
+
+            return validar;
+        }
+
+        public DataSet ensenyarCarritoUsuario(ENUsuario user)
+        {
+            DataSet dat = new DataSet();
+            SqlConnection cone = new SqlConnection(constring);
+
+            try
+            {
+                String linea = "Select * From CARRITO where id_usuario=" + user.id;
+                SqlDataAdapter adap = new SqlDataAdapter(linea, cone);
+                adap.Fill(dat, "CARRITO");
+                return dat;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return dat;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return dat;
+            }
+            finally
+            {
+                if (cone != null) cone.Close();
+            }
+        }
+        public DataSet eliminacionCarrito(ENCarrito carr, int id)
+        {
+            DataSet dat = new DataSet();
+            SqlConnection cone = new SqlConnection(constring);
+
+            try
+            {
+                String linea = "Select * From CARRITO";
+                SqlDataAdapter adap = new SqlDataAdapter(linea, cone);
+                adap.Fill(dat, "CARRITO");
+                DataTable tabla = new DataTable();
+                tabla = dat.Tables["CARRITO"];
+                tabla.Rows[id].Delete();
+                SqlCommandBuilder builder = new SqlCommandBuilder(adap);
+                adap.Update(dat, "CARRITO");
+                return dat;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return dat;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return dat;
+            }
+            finally
+            {
+                if (cone != null) cone.Close();
+            }
+        }
+        public DataSet listandoCarritos()
+        {
+            DataSet dat = new DataSet();
+            SqlConnection cone = new SqlConnection(constring);
+
+            try
+            {
+                String linea = "Select * From CARRITO";
+                SqlDataAdapter adap = new SqlDataAdapter(linea, cone);
+                adap.Fill(dat, "CARRITO");
+
+                return dat;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return dat;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return dat;
+
+            }
+            finally
+            {
+                if (cone != null)
                 {
-                    carrito.user = int.Parse(encontrar["id_usuario"].ToString());
-                    carrito.lincarrito = int.Parse(encontrar["lincarrito"].ToString());
-                    carrito.preciocarrito = double.Parse(encontrar["cantidad"].ToString());
-
-                    leido = true;
+                    cone.Close();
                 }
-                encontrar.Close();
-                conec.Close();
-
-                return leido;
             }
-            catch (SqlException excS)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", excS.Message);
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", exc.Message);
-            }
-            return leido;
         }
-
-        public bool updateCarrito(ENCarrito carrito)
+        public DataSet ensenyarCarrito(ENCarrito carr)
         {
-            bool leido = false;
+            DataSet dat = new DataSet();
+            SqlConnection cone = new SqlConnection(constring);
 
             try
             {
-                SqlConnection conec = new SqlConnection(constring);
-                conec.Open();
-                SqlCommand comando = new SqlCommand("Select * FROM [dbo].[CARRITO] WHERE id_usuario =" + carrito.user + "AND lincarrito =" + carrito.lincarrito, conec);
-                SqlDataReader encontrar = comando.ExecuteReader();
-                encontrar.Read();
+                String linea = "Select * FROM CARRITO WHERE id =" + carr.id;
+                SqlDataAdapter adap = new SqlDataAdapter(linea, cone);
+                adap.Fill(dat, "CARRITO");
 
-                if (encontrar["lincarrito"].ToString() == carrito.lincarrito.ToString() && encontrar["id_usuario"].ToString() == carrito.user.ToString())
-                {
-                    carrito.user = int.Parse(encontrar["id_usuario"].ToString());
-                    carrito.lincarrito = int.Parse(encontrar["lincarrito"].ToString());
-                    carrito.preciocarrito = double.Parse(encontrar["cantidad"].ToString());
-                    leido = true;
-                }
-                encontrar.Close();
-                conec.Close();
-                return leido;
+                return dat;
             }
-            catch (SqlException excS)
+            catch (SqlException e)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", excS.Message);
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return dat;
             }
-            catch (Exception exc)
+            catch (Exception e)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", exc.Message);
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return dat;
             }
-
-            return leido;
+            finally
+            {
+                if (cone != null) cone.Close();
+            }
         }
-
-        public bool deleteCarrito(ENCarrito carrito)
-        {
-            bool borrado = false;
-
-            try
-            {
-                SqlConnection conec = new SqlConnection(constring);
-                conec.Open();
-                SqlCommand comando = new SqlCommand("Delete FROM [dbo].[CARRITO] WHERE id_usuario = '" + carrito.user + "and lincarrito ='" + carrito.lincarrito + "'", conec);
-                comando.ExecuteNonQuery();
-                borrado = true;
-                conec.Close();
-            }
-            catch (SqlException excS)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", excS.Message);
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", exc.Message);
-            }
-
-            return borrado;
-        }
-
-
     }
 }

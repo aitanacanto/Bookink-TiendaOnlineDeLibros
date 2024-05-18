@@ -1,100 +1,141 @@
-﻿// @author:  Bruno Vilella Martínez; DNI: DNI000003
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Configuration;
+
+
 
 namespace ClassLibrary
 {
     public class ENCarrito
     {
-        private int id;
-        private int id_usuario;
-        private int id_lincarrito;
-        private double precio;
+        private int _id;
+        private int _id_usuario;
+        private float _importe_total;
 
-        public int idcarrito
+        public int id
         {
-            get { return id; }
-            set { id = value; }
-        }
-        public int user
-        {
-            get { return id_usuario; }
-            set { id_usuario = value; }
+            get { return _id; }
+            set { _id = value; }
         }
 
-        public int lincarrito
+        public int id_usuario
         {
-            get { return id_lincarrito; }
-            set { id_lincarrito = value; }
+            get { return _id_usuario; }
+            set { _id_usuario = value; }
         }
-        public double preciocarrito
+
+        public float importe_total
         {
-            get { return precio; }
-            set { precio = value; }
+            get { return _importe_total; }
+            set { _importe_total = value; }
         }
+
+
         public ENCarrito()
         {
-            CADCarrito carrito = new CADCarrito();
-            idcarrito = carrito.ObtenerId();
-            lincarrito = 0;
-            id_usuario = 0;
-            precio = 0.0;
+            this.id_usuario = 0;
+            this.importe_total = 0;
         }
-        public ENCarrito(int id, int usuario, int lincarrito, double precio)
+
+        public ENCarrito(int id, int id_usuario, float importe_total)
         {
-            this.id = id;
-            this.id_usuario = usuario;
-            this.id_lincarrito = lincarrito;
-            this.precio = precio;
+            this.id_usuario = id_usuario;
+            this.importe_total = importe_total;
         }
-        public bool CrearCarrito()
+
+        public bool crearCarrito()
         {
-            bool creado;
-            CADCarrito carrito = new CADCarrito();
-            if (carrito.readCarrito(this) == false)
+            CADCarrito carr = new CADCarrito();
+            ENUsuario user = new ENUsuario();
+
+            if (carr.readCarrito(this) != true)
             {
-                creado = carrito.createCarrito(this);
+                return carr.readCarrito(this);
             }
-            else
-            {
-                creado = false;
-            }
-            return creado;
+
+            return false;
         }
-        public bool BorrarCarrito()
+
+        public DataSet ensenyarCarrito()
         {
-            bool borrar = false;
-            CADCarrito carrito = new CADCarrito();
-            if (carrito.readCarrito(this) == true)
-            {
-                borrar = carrito.deleteCarrito(this);
-            }
-            return borrar;
+            CADCarrito carr = new CADCarrito();
+            DataSet dat = carr.ensenyarCarrito(this);
+            return dat;
         }
-        public bool LeerCarrito()
+
+
+        public bool actualizacionCarrito()
         {
-            CADCarrito carrito = new CADCarrito();
-            bool read = carrito.readCarrito(this);
-            return read;
-        }
-        public bool actualizarCompra()
-        {
-            bool update = false;
-            CADCarrito compra = new CADCarrito();
-            ENCarrito aux = new ENCarrito();
-            aux.id_usuario = this.id_usuario;
-            aux.id_lincarrito = this.id_lincarrito;
-            aux.precio = this.precio;
-            if (compra.readCarrito(this) == true)
+            CADCarrito carr = new CADCarrito();
+
+            if (carr.readCarrito(this))
             {
-                this.id_lincarrito = aux.id_lincarrito;
-                this.id_usuario = aux.id_usuario;
-                this.precio = aux.precio;
+                return carr.actualizacionCarrito(this);
             }
-            return update;
+
+            return false;
+        }
+
+        public bool readCarrito()
+        {
+            CADCarrito carr = new CADCarrito();
+            return carr.readCarrito(this);
+        }
+
+        public bool readCarritoUsuario(ENUsuario user)
+        {
+            CADCarrito carr = new CADCarrito();
+            return carr.readCarritoUsuario(this, user);
+        }
+
+
+        public DataSet eliminacionCarrito(int id)
+
+        {
+            CADCarrito carr = new CADCarrito();
+            DataSet dat = carr.eliminacionCarrito(this, id);
+
+            if (carr.readCarrito(this))
+            {
+                dat = carr.eliminacionCarrito(this, id);
+            }
+
+            return dat;
+        }
+        public bool vaciarCarrito()
+        {
+            CADCarrito carr = new CADCarrito();
+
+            if (carr.readCarrito(this))
+            {
+                return carr.vaciarCarrito(this);
+            }
+
+            return false;
+        }
+        public DataSet ensenyarCarritoUsuario(ENUsuario user)
+        {
+            DataSet dat = new DataSet();
+
+            if (user.readUsuario() == true)
+            {
+                CADCarrito carr = new CADCarrito();
+                dat = carr.ensenyarCarritoUsuario(user);
+            }
+
+            return dat;
+        }
+
+        public DataSet listarCarritos()
+        {
+            CADCarrito carr = new CADCarrito();
+            DataSet dat = carr.listandoCarritos();
+            return dat;
         }
     }
 }

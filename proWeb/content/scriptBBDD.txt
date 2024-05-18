@@ -16,7 +16,6 @@ DROP TABLE CARRITO
 DROP TABLE USUARIO
 
 -- CREACIÓN DE TABLAS
-
 create table [dbo].[USUARIO]
 (	
     [id] INT IDENTITY (1, 1) NOT NULL,
@@ -52,19 +51,20 @@ create table [dbo].[CARRITO]
 (	
     [id] INT IDENTITY (1, 1) NOT NULL,
     [id_usuario] INT NOT NULL,
-    [lincarrito] NVARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
-    PRIMARY KEY CLUSTERED ([id] ASC)
+    [pvp_total] DECIMAL (7, 2) DEFAULT ((0)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [fk_CARRITO_USUARIO] FOREIGN KEY ([id_usuario]) REFERENCES [dbo].[Usuario] ([id]) ON DELETE CASCADE
 )
 GO
 create table [dbo].[LINCARRITO]
 (	
-    [id_carrito] INT IDENTITY (1, 1) NOT NULL,
-    [id_producto] INT,
-    [cantidad] INT NOT NULL,
+    [id_carrito] INT NOT NULL,
+    [id_producto] INT NOT NULL,
+    [cantidad] INT DEFAULT ((1)) NOT NULL,
+    [pvp] DECIMAL (7, 2) NOT NULL,
     PRIMARY KEY (id_carrito, id_producto),
-    FOREIGN KEY (id_carrito) REFERENCES CARRITO(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    CONSTRAINT [fk_LINCARRITO_PRODUCTO] FOREIGN KEY ([id_producto]) REFERENCES [dbo].[PRODUCTO] ([id]),
+    CONSTRAINT [fk_LINCARRITO_CARRITO] FOREIGN KEY ([id_carrito]) REFERENCES [dbo].[CARRITO] ([id]) ON DELETE CASCADE
 )
 GO
 create table [dbo].[PEDIDO]
@@ -75,6 +75,7 @@ create table [dbo].[PEDIDO]
     [dirección_envío] NVARCHAR(255) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
+    PRIMARY KEY (numped),
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
     FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id)
 )
@@ -96,6 +97,7 @@ create table [dbo].[DIRECCION]
     [dirección] NVARCHAR(255) NOT NULL,
     [ciudad] NVARCHAR(30) NOT NULL,
     [pais] NVARCHAR(30) NOT NULL
+    PRIMARY KEY (id),
 )
 GO
 create table [dbo].[TIENE_DIRECCION]
