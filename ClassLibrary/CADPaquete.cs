@@ -22,10 +22,11 @@ namespace ClassLibrary
             {
                 conex.Open();
 
-                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio) VALUES (@nombre, @precio); SELECT SCOPE_IDENTITY();";
+                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio, img_paquete) VALUES (@nombre, @precio, @img_paquete);";
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
+                cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
 
                 en.IdPaquete = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -78,7 +79,8 @@ namespace ClassLibrary
                     {
                         IdPaquete = (int)reader["id"],
                         Nombre = (string)reader["nombre"],
-                        Precio = (float)reader["precio"]
+                        Precio = (float)reader["precio"],
+                        Img_paquete = (string)reader["img_paquete"]
                     };
                 }
                 else
@@ -138,6 +140,7 @@ namespace ClassLibrary
                 cmd.Parameters.AddWithValue("@id", en.IdPaquete);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
+                cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
                 cmd.ExecuteNonQuery();
 
                 return true;
@@ -262,7 +265,7 @@ namespace ClassLibrary
             {
                 conex.Open();
 
-                string comandoPaquetesSQL = "SELECT id, nombre, precio FROM PAQUETE";
+                string comandoPaquetesSQL = "SELECT id, nombre, precio, img_paquete FROM PAQUETE";
                 SqlCommand cmdPaquetes = new SqlCommand(comandoPaquetesSQL, conex);
 
                 using (SqlDataReader readerPaquetes = cmdPaquetes.ExecuteReader())
@@ -275,7 +278,8 @@ namespace ClassLibrary
                             {
                                 IdPaquete = (int)readerPaquetes["id"],
                                 Nombre = (string)readerPaquetes["nombre"],
-                                Precio = Convert.ToSingle(readerPaquetes["precio"])
+                                Precio = Convert.ToSingle(readerPaquetes["precio"]),
+                                Img_paquete = (string)readerPaquetes["img_paquete"]
                             };
 
                             paquetes.Add(paquete);

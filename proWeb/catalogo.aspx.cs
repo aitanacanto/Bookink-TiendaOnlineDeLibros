@@ -14,36 +14,39 @@ namespace proWeb
         {
             if (!IsPostBack)
             {
-                // Aquí llamamos a un método para obtener la lista de productos
-                List<ENProducto> listaProductos = ObtenerProductos();
-                List<ENProducto> Novedades = new List<ENProducto>();
-                for (int i = 0; i < 4; i++)
-                {
-                    Novedades.Add(listaProductos[i]);
-                }
-                // Asignamos la lista de productos al repeater
-                reapeterProduct.DataSource = listaProductos;
-                reapeterProduct.DataBind();
+                // Método para cargar los libros
+                CargarLibros();
+
+                // Método para cargar los paquetes
+                CargarPaquetes();
             }
         }
-        protected void Anyadir_Click(object sender, EventArgs e)
+
+        private void CargarLibros()
         {
 
-            Response.Redirect("carrito.aspx");
-
-        }
-
-        // Método para obtener la lista de productos (puedes obtenerla de tu base de datos o de donde sea)
-        private List<ENProducto> ObtenerProductos()
-        {
-            // Aquí deberías escribir el código para obtener tus datos
-            // Simplemente devuelve una lista de productos como ejemplo
-
-            List<ENProducto> listaProductos = new List<ENProducto>();
 
             ENProducto en = new ENProducto();
+            List<ENProducto> listaProductos = new List<ENProducto>();
             listaProductos = en.ObtenerTodosLosProductos();
-            return listaProductos;
+            reapeterProduct.DataSource = listaProductos;
+            reapeterProduct.DataBind();
+        }
+
+        private void CargarPaquetes()
+        {
+            // Método para cargar los paquetes
+            ENPaquete paquete = new ENPaquete();
+            List<ENPaquete> listaPaquetes = paquete.ObtenerTodosLosPaquetes();
+
+            repeaterPaquetes.DataSource = listaPaquetes;
+            repeaterPaquetes.DataBind();
+        }
+
+        protected void Anyadir_Click(object sender, EventArgs e)
+        {
+            // Lógica para añadir al carrito (si es necesario)
+            Response.Redirect("carrito.aspx");
         }
     }
 }
