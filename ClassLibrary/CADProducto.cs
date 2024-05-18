@@ -22,7 +22,7 @@ namespace ClassLibrary
         }
         private bool Exists(SqlConnection c, ENProducto en)
         {
-            string querryAux = "Select * from Products where id = @id";
+            string querryAux = "Select * from Producto where id = @id";
             SqlCommand comAux = new SqlCommand(querryAux, c);
             comAux.Parameters.AddWithValue("@id", en.Id);
             SqlDataReader dr = comAux.ExecuteReader();
@@ -39,7 +39,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "INSERT INTO Products (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
+                string query = "INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -74,7 +74,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "UPDATE Products set nombre = @Name, cant_stock = @Stock, precio = @Price, precio_oferta = @SalePrice, img_producto = @ImagePath, sinopsis = @Sinopsis, autor = @Autor, cod_oferta = @CodOfer, editorial = @Editorial, anyo_publicacion = @AnyoPubli, num_pag = @NumPags";
+                string query = @"INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -135,7 +135,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "Select * from Products where Id = @Id";
+                string query = "Select * from PRODUCTO where Id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
                 com.Parameters.AddWithValue("@Id", en.Id);
 
@@ -159,7 +159,7 @@ namespace ClassLibrary
             catch (Exception ex)
             {
                 Console.WriteLine("No se ha podido leer el producto, ERROR: {0}", ex.Message);
-                throw;
+                return false;
             }
             finally
             {
