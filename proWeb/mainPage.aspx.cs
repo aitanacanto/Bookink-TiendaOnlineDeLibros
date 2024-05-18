@@ -29,6 +29,12 @@ namespace proWeb
                 reapeterNov.DataBind();
             }
         }
+        protected void Anyadir_Click(object sender, EventArgs e)
+        {
+
+            Response.Redirect("carrito.aspx");
+
+        }
 
         // Método para obtener la lista de productos (puedes obtenerla de tu base de datos o de donde sea)
         private List<ENProducto> ObtenerProductos()

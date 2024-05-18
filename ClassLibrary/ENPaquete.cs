@@ -12,6 +12,7 @@ namespace ClassLibrary
         public int IdPaquete { get; set; }
         public string Nombre { get; set; }
         public float Precio { get; set; }
+        public string Img_paquete { get; set; }
         public List<ENProducto> Productos { get; set; } // Lista de productos en el paquete
 
 
