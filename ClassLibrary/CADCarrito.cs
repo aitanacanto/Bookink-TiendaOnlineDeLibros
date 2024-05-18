@@ -213,7 +213,7 @@ namespace ClassLibrary
 
             try
             {
-                String linea = "Select * From CARRITO where id_usuario=" + user.id;
+                String linea = "Select * From CARRITO where id_usuario=" + user.Id;
                 SqlDataAdapter adap = new SqlDataAdapter(linea, cone);
                 adap.Fill(dat, "CARRITO");
                 return dat;
