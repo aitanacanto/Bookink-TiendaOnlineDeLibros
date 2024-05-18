@@ -75,7 +75,7 @@ create table [dbo].[PEDIDO]
     [dirección_envío] NVARCHAR(255) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
-    PRIMARY KEY (numped),
+    PRIMARY KEY CLUSTERED (numped),
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
     FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id)
 )

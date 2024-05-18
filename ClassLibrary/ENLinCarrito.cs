@@ -58,7 +58,7 @@ namespace ClassLibrary
             this.pvp = pvp;
         }
 
-        public bool crearLineaCarrito()
+        public bool creacionLineaCarrito()
         {
             CADLinCarrito linca = new CADLinCarrito();
             ENCarrito c = new ENCarrito();
