@@ -57,7 +57,8 @@ namespace ClassLibrary
 
         public bool LogIn()
         {
-            return true;
+            CADUsuario cad = new CADUsuario();
+            return cad.LogIn(this);
         }
 
         public bool LogOut()
