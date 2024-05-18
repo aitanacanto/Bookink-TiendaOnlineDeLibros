@@ -100,7 +100,9 @@ namespace ClassLibrary
 
         public void anyadirProductoCarrito(int id_pro)
         {
-            ENProducto pro;
+
+            ENProducto pro = new ENProducto(id_pro);
+            pro.Read();
             ENLinCarrito linca = existeProducto(pro);
             if (linca == null)
             {

@@ -27,6 +27,7 @@ namespace proWeb
 
                 reapeterNov.DataSource = Novedades;
                 reapeterNov.DataBind();
+                Session["Carrito"] = new ENCarrito();
             }
         }
 

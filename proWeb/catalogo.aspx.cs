@@ -28,7 +28,11 @@ namespace proWeb
         }
         protected void Anyadir_Click(object sender, EventArgs e)
         {
+            ENCarrito carrito = Session["Carrito"] as ENCarrito;
 
+            Button button = (Button)sender;
+            int id_producto = int.Parse(button.CommandArgument);
+            carrito.anyadirProductoCarrito(id_producto);
             Response.Redirect("carrito.aspx");
 
         }
@@ -38,12 +42,15 @@ namespace proWeb
         {
             // Aquí deberías escribir el código para obtener tus datos
             // Simplemente devuelve una lista de productos como ejemplo
-
+            
             List<ENProducto> listaProductos = new List<ENProducto>();
 
             ENProducto en = new ENProducto();
             listaProductos = en.ObtenerTodosLosProductos();
             return listaProductos;
+
+            
+
         }
     }
 }

@@ -48,6 +48,11 @@ namespace ClassLibrary
             NumPags = numPags;
 
         }
+        public ENProducto(int id)
+        {
+            this.Id = id;
+        }
+
 
         public bool Create()
         {
@@ -79,6 +84,7 @@ namespace ClassLibrary
             CADProducto cad = new CADProducto();
             return cad.ObtenerTodosLosProductos();
         }
+        
 
     }
 }

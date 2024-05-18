@@ -28,10 +28,9 @@
                                             <p class="card-text text-danger" style="text-decoration:line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
                                             <p class="card-text text-dark" style="margin-left:10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
                                         </div>
-                                            
                                         <div class="text-center mt-3">
-                                          <asp:Button ID="Anyadir" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Anyadir_Click"  />
-                                          </div>
+                                          <asp:Button ID="Id_Producto" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("id") %>' OnClick="Anyadir_Click"  />
+                                        </div>
                                     </div>
                                 </a>
                             </div>
