@@ -48,7 +48,7 @@ namespace ClassLibrary
             this.importe_total = importe_total;
         }
 
-        public bool crearCarrito()
+        public bool creacionCarrito()
         {
             CADCarrito carr = new CADCarrito();
             ENUsuario user = new ENUsuario();
@@ -129,7 +129,6 @@ namespace ClassLibrary
                 CADCarrito carr = new CADCarrito();
                 dat = carr.ensenyarCarritoUsuario(user);
             }
-
             return dat;
             
         }

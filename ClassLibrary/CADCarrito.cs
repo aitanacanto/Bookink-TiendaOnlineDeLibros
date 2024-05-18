@@ -53,7 +53,6 @@ namespace ClassLibrary
             {
                 if (cone != null) cone.Close();
             }
-
             return validar;
         }
         public bool readCarritoUsuario(ENCarrito carr, ENUsuario user)
@@ -61,7 +60,6 @@ namespace ClassLibrary
             bool validar = false;
             DataSet dat = new DataSet();
             SqlConnection cone = new SqlConnection(constring);
-
 
             try
             {
@@ -136,7 +134,6 @@ namespace ClassLibrary
             bool validar = false;
             DataSet dat = new DataSet();
             SqlConnection cone = new SqlConnection(constring);
-
 
             try
             {

@@ -97,7 +97,7 @@ namespace ClassLibrary
 
             return validar;
         }
-        public DataSet actualizacionLinCarrito(ENLinCarrito enli, int i)
+        public DataSet actualizacionLinCarrito(ENLinCarrito enli, int mi)
         {
             DataSet dat = new DataSet();
             SqlConnection cone = new SqlConnection(constring);
@@ -109,9 +109,9 @@ namespace ClassLibrary
                 adap.Fill(dat, "LINCARRITO");
                 DataTable tabla = new DataTable();
                 tabla = dat.Tables["LINCARRITO"];
-                tabla.Rows[i]["id_producto"] = enli.id_producto;
-                tabla.Rows[i]["cantidad"] = enli.cantidad;
-                tabla.Rows[i]["pvp"] = enli.pvp;
+                tabla.Rows[mi]["id_producto"] = enli.id_producto;
+                tabla.Rows[mi]["cantidad"] = enli.cantidad;
+                tabla.Rows[mi]["pvp"] = enli.pvp;
                 SqlCommandBuilder builder = new SqlCommandBuilder(adap);
                 adap.Update(dat, "LINCARRITO");
                 return dat;
@@ -141,9 +141,7 @@ namespace ClassLibrary
             {
                 cone = new SqlConnection(constring);
                 cone.Open();
-
                 SqlCommand coma = new SqlCommand(linea, cone);
-
                 coma.ExecuteNonQuery();
                 validar = true;
             }
@@ -164,8 +162,6 @@ namespace ClassLibrary
 
             return validar;
         }
-
-        
 
         public DataSet ensenyarLinCarritoByCarrito(ENCarrito car)
         {
