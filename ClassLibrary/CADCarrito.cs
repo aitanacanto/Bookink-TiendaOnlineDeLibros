@@ -58,7 +58,7 @@ namespace ClassLibrary
         }
         public bool readCarritoUsuario(ENCarrito carr, ENUsuario user)
         {
-            bool leer = false;
+            bool validar = false;
             DataSet dat = new DataSet();
             SqlConnection cone = new SqlConnection(constring);
 
@@ -76,7 +76,7 @@ namespace ClassLibrary
 
                     if (user.id == fila[1].ToString())
                     {
-                        leer = true;
+                        validar = true;
                         carr.id = int.Parse(fila[0].ToString());
                         carr.importe_total = float.Parse(fila[2].ToString());
                     }
@@ -84,12 +84,12 @@ namespace ClassLibrary
             }
             catch (SqlException e)
             {
-                leer = false;
+                validar = false;
                 Console.WriteLine("User operation has failed. Error: {0}", e.Message);
             }
             catch (Exception e)
             {
-                leer = false;
+                validar = false;
                 Console.WriteLine("User operation has failed. Error: {0}", e.Message);
             }
             finally
@@ -97,13 +97,13 @@ namespace ClassLibrary
                 if (cone != null) cone.Close();
             }
 
-            return leer;
+            return validar;
 
         }
 
         public bool actualizacionCarrito(ENCarrito carr)
         {
-            bool actualizar = false;
+            bool validar = false;
             SqlConnection cone = new SqlConnection(constring);
 
             try
@@ -112,18 +112,18 @@ namespace ClassLibrary
                 String linea = "Update CARRITO set importe_total=" + carr.importe_total + " where id_usuario='" + carr.id_usuario + "'";
                 SqlCommand coma = new SqlCommand(linea, cone);
                 coma.ExecuteNonQuery();
-                actualizar = true;
-                return actualizar;
+                validar = true;
+                return validar;
             }
             catch (SqlException e)
             {
                 Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                return actualizar;
+                return validar;
             }
             catch (Exception e)
             {
                 Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                return actualizar;
+                return validar;
             }
             finally
             {
@@ -133,7 +133,7 @@ namespace ClassLibrary
 
         public bool readCarrito(ENCarrito carr)
         {
-            bool leer = false;
+            bool validar = false;
             DataSet dat = new DataSet();
             SqlConnection cone = new SqlConnection(constring);
 
@@ -146,7 +146,7 @@ namespace ClassLibrary
                 tabla = dat.Tables["CARRITO"];
                 if (tabla.Rows.Count > 0) {
                     DataRow fila = tabla.Rows[0];
-                    leer = true;
+                    validar = true;
                     carr.id_usuario = int.Parse(fila[1].ToString());
                     carr.importe_total = float.Parse(fila[2].ToString());
                 }
@@ -154,12 +154,12 @@ namespace ClassLibrary
             }
             catch (SqlException e)
             {
-                leer = false;
+                validar = false;
                 Console.WriteLine("User operation has failed. Error: {0}", e.Message);
             }
             catch (Exception e)
             {
-                leer = false;
+                validar = false;
                 Console.WriteLine("User operation has failed. Error: {0}", e.Message);
             }
             finally
@@ -167,7 +167,7 @@ namespace ClassLibrary
                 if (cone != null) cone.Close();
             }
 
-            return leer;
+            return validar;
 
         }
         public bool vaciarCarrito(ENCarrito car)
