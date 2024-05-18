@@ -64,7 +64,7 @@ namespace ClassLibrary
             ENCarrito c = new ENCarrito();
             c.id = this.id_carrito;
 
-            if (linca.readLinCarrito(this) != true && c.leerCarrito() == true)
+            if (linca.readLinCarrito(this) != true && c.readCarrito())
             {
                 return linca.creacionLinCarrito(this);
             }
