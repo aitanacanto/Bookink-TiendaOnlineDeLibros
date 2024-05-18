@@ -14,7 +14,7 @@ namespace ClassLibrary
         public float Precio { get; set; }
         public List<ENProducto> Productos { get; set; } // Lista de productos en el paquete
 
-        // Constructor
+
         public ENPaquete()
         {
             this.Productos = new List<ENProducto>();
@@ -31,50 +31,48 @@ namespace ClassLibrary
             Productos = new List<ENProducto>(productos);
         }
 
-        public bool anyadirPaquete()
+        public bool CrearPaquete()
         {
             CADPaquete cad = new CADPaquete();
-            return cad.anyadirPaquete(this);
+            return cad.CrearPaquete(this);
         }
 
-        public void eliminarPaquete()
+        public ENPaquete leerPaquete()
         {
-
+            CADPaquete cad = new CADPaquete();
+            return cad.leerPaquete(this);
         }
 
-        public ENPaquete ObtenerPaquetePorId(ENPaquete paquete)
+        public bool ActualizarPaquete()
         {
-            return paquete;
-        }
-
-
-        public bool GuardarPaquete(int idPaquete, string nombre, float precio)
-        {
-            return false;
+            CADPaquete cad = new CADPaquete();
+            return cad.ActualizarPaquete(this);
         }
 
 
-        public bool ActualizarPaquete(ENPaquete paquete)
+        public bool EliminarPaquete()
         {
-            return false;
+            CADPaquete cad = new CADPaquete();
+            return cad.EliminarPaquete(this);
+        }
+
+        public bool EliminarProductoDelPaquete(int idProducto)
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.EliminarProductoDelPaquete(this, idProducto);
         }
 
 
-        public bool EliminarPaquete(ENPaquete paquete)
+        public bool AgregarProductoAlPaquete(int idProducto)
         {
-            return false;
+            CADPaquete cad = new CADPaquete();
+            return cad.AgregarProductoAlPaquete(this, idProducto);
         }
 
-
-        public bool AgregarProductoAlPaquete(ENPaquete paquete)
+        public List<ENPaquete> ObtenerTodosLosPaquetes()
         {
-            return false;
-        }
-
-
-        public bool EliminarProductoDelPaquete(int idPaquete, int idProducto)
-        {
-            return false;
+            CADPaquete cad = new CADPaquete();
+            return cad.ObtenerTodosLosPaquetes();
         }
     }
 }

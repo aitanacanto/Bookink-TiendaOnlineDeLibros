@@ -1,11 +1,7 @@
-﻿// @author: Aitana Cantó Rico;  DNI: DNI000001
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
@@ -13,39 +9,57 @@ namespace ClassLibrary
     {
         private string constring;
 
-        public CADPaquete(){
-            constring = ConfigurationManager.ConnectionStrings["miconstring"].ToString();
+        public CADPaquete()
+        {
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
         }
 
         public bool CrearPaquete(ENPaquete en)
         {
             SqlConnection conex = new SqlConnection(constring);
+            SqlTransaction transaction = null;
 
             try
             {
                 conex.Open();
+                transaction = conex.BeginTransaction();
 
-                string comandoSQL = $"INSERT INTO Paquete (nombre, precio) VALUES (@nombre, @precio)";
+                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio) OUTPUT INSERTED.id VALUES (@nombre, @precio)";
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex, transaction);
+                cmd.Parameters.AddWithValue("@nombre", en.Nombre);
+                cmd.Parameters.AddWithValue("@precio", en.Precio);
 
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
-                cmd.Parameters.AddWithValue("@name", en.Nombre);
-                cmd.Parameters.AddWithValue("@code", en.Precio);
-                cmd.ExecuteNonQuery();
+                int paqueteId = (int)cmd.ExecuteScalar();
+                en.IdPaquete = paqueteId;
 
-                for (int i = 1; i < en.Productos.Count; i++){
-
+                foreach (ENProducto producto in en.Productos)
+                {
+                    string insertProductoSQL = "INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES (@id_paquete, @id_producto)";
+                    SqlCommand cmdProducto = new SqlCommand(insertProductoSQL, conex, transaction);
+                    cmdProducto.Parameters.AddWithValue("@id_paquete", paqueteId);
+                    cmdProducto.Parameters.AddWithValue("@id_producto", producto.Id);
+                    cmdProducto.ExecuteNonQuery();
                 }
 
-                    return true;
+                transaction.Commit();
+                return true;
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Product operation has failed.Error: {0}", e.Message);
+                Console.WriteLine("Product operation has failed. Error: {0}", e.Message);
+                if (transaction != null)
+                {
+                    transaction.Rollback();
+                }
                 return false;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Product operation has failed.Error: {0}", e.Message);
+                Console.WriteLine("Product operation has failed. Error: {0}", e.Message);
+                if (transaction != null)
+                {
+                    transaction.Rollback();
+                }
                 return false;
             }
             finally
@@ -54,42 +68,311 @@ namespace ClassLibrary
             }
         }
 
-        public bool AgregarProductoAlPaquete(ENPaquete paquete)
+        public ENPaquete leerPaquete(ENPaquete en)
         {
-            return false;
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string comandoSQL = "SELECT * FROM PAQUETE WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
+                cmd.Parameters.AddWithValue("@id", en.IdPaquete);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        en.Nombre = (string)reader["nombre"];
+                        en.Precio = (float)reader["precio"];
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                en.Productos = new List<ENProducto>();
+                string comandoProductosSQL = "SELECT p.* FROM PRODUCTO p INNER JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
+                SqlCommand cmdProductos = new SqlCommand(comandoProductosSQL, conex);
+                cmdProductos.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+
+                using (SqlDataReader readerProductos = cmdProductos.ExecuteReader())
+                {
+                    while (readerProductos.Read())
+                    {
+                        ENProducto producto = new ENProducto
+                        {
+                            Id = (int)readerProductos["id"],
+                            Name = (string)readerProductos["nombre"],
+                            Stock = (int)readerProductos["cant_stock"],
+                            Price = (float)(decimal)readerProductos["precio"],
+                            SalePrice = readerProductos["precio_oferta"] != DBNull.Value ? (float)(decimal)readerProductos["precio_oferta"] : 0,
+                            Category = 0, 
+                            CreationDate = DateTime.Now, 
+                            ImagePath = (string)readerProductos["img_producto"],
+                            Sinopsis = (string)readerProductos["sinopsis"],
+                            Autor = (string)readerProductos["autor"]
+                        };
+                        en.Productos.Add(producto);
+                    }
+                }
+
+                return en;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operation has failed. Error: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operation has failed. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                conex.Close();
+            }
         }
 
-        public ENPaquete ObtenerPaquetePorId(ENPaquete paquete)
-        { 
-            return paquete;
+        public bool ActualizarPaquete(ENPaquete en)
+        {
+            SqlConnection conex = new SqlConnection(constring);
+            SqlTransaction transaction = null;
+
+            try
+            {
+                conex.Open();
+                transaction = conex.BeginTransaction();
+
+                string comandoSQL = "UPDATE PAQUETE SET nombre = @nombre, precio = @precio WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex, transaction);
+                cmd.Parameters.AddWithValue("@id", en.IdPaquete);
+                cmd.Parameters.AddWithValue("@nombre", en.Nombre);
+                cmd.Parameters.AddWithValue("@precio", en.Precio);
+                cmd.ExecuteNonQuery();
+
+                string deleteProductosSQL = "DELETE FROM TIENE_PAQUETE WHERE id_paquete = @id_paquete";
+                SqlCommand cmdDelete = new SqlCommand(deleteProductosSQL, conex, transaction);
+                cmdDelete.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+                cmdDelete.ExecuteNonQuery();
+
+                foreach (ENProducto producto in en.Productos)
+                {
+                    string insertProductoSQL = "INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES (@id_paquete, @id_producto)";
+                    SqlCommand cmdProducto = new SqlCommand(insertProductoSQL, conex, transaction);
+                    cmdProducto.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+                    cmdProducto.Parameters.AddWithValue("@id_producto", producto.Id);
+                    cmdProducto.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Update operation has failed. Error: {0}", e.Message);
+                if (transaction != null)
+                {
+                    transaction.Rollback();
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Update operation has failed. Error: {0}", e.Message);
+                if (transaction != null)
+                {
+                    transaction.Rollback();
+                }
+                return false;
+            }
+            finally
+            {
+                conex.Close();
+            }
         }
 
-        public bool anyadirPaquete(ENPaquete paquete)
+        public bool EliminarPaquete(ENPaquete en)
         {
-            return true;
+            SqlConnection conex = new SqlConnection(constring);
+            SqlTransaction transaction = null;
+
+            try
+            {
+                conex.Open();
+                transaction = conex.BeginTransaction();
+
+                string deleteProductosSQL = "DELETE FROM TIENE_PAQUETE WHERE id_paquete = @id_paquete";
+                SqlCommand cmdDeleteProductos = new SqlCommand(deleteProductosSQL, conex, transaction);
+                cmdDeleteProductos.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+                cmdDeleteProductos.ExecuteNonQuery();
+
+                string comandoSQL = "DELETE FROM PAQUETE WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex, transaction);
+                cmd.Parameters.AddWithValue("@id", en.IdPaquete);
+                cmd.ExecuteNonQuery();
+
+                transaction.Commit();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Delete operation has failed. Error: {0}", e.Message);
+                if (transaction != null)
+                {
+                    transaction.Rollback();
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Delete operation has failed. Error: {0}", e.Message);
+                if (transaction != null)
+                {
+                    transaction.Rollback();
+                }
+                return false;
+            }
+            finally
+            {
+                conex.Close();
+            }
         }
 
-        public bool GuardarPaquete(ENPaquete paquete)
+        public bool EliminarProductoDelPaquete(ENPaquete en, int idProducto)
         {
-            return false;
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string comandoSQL = "DELETE FROM TIENE_PAQUETE WHERE id_paquete = @id_paquete AND id_producto = @id_producto";
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
+                cmd.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+                cmd.Parameters.AddWithValue("@id_producto", idProducto);
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Delete product operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Delete product operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            finally
+            {
+                conex.Close();
+            }
+        }
+        public bool AgregarProductoAlPaquete(ENPaquete en, int idProducto)
+        {
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string comandoSQL = "INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES (@id_paquete, @id_producto)";
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
+                cmd.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+                cmd.Parameters.AddWithValue("@id_producto", idProducto);
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Insert product operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Insert product operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            finally
+            {
+                conex.Close();
+            }
         }
 
-        
-        public bool ActualizarPaquete(ENPaquete paquete)
+        public List<ENPaquete> ObtenerTodosLosPaquetes()
         {
-            return false;
+            List<ENPaquete> paquetes = new List<ENPaquete>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string comandoPaquetesSQL = "SELECT * FROM PAQUETE";
+                SqlCommand cmdPaquetes = new SqlCommand(comandoPaquetesSQL, conex);
+
+                using (SqlDataReader readerPaquetes = cmdPaquetes.ExecuteReader())
+                {
+                    while (readerPaquetes.Read())
+                    {
+                        ENPaquete paquete = new ENPaquete
+                        {
+                            IdPaquete = (int)readerPaquetes["id"],
+                            Nombre = (string)readerPaquetes["nombre"],
+                            Precio = (float)readerPaquetes["precio"],
+                            Productos = new List<ENProducto>()
+                        };
+                        paquetes.Add(paquete);
+                    }
+                }
+
+                foreach (ENPaquete paquete in paquetes)
+                {
+                    string comandoProductosSQL = "SELECT p.* FROM PRODUCTO p INNER JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
+                    SqlCommand cmdProductos = new SqlCommand(comandoProductosSQL, conex);
+                    cmdProductos.Parameters.AddWithValue("@id_paquete", paquete.IdPaquete);
+
+                    using (SqlDataReader readerProductos = cmdProductos.ExecuteReader())
+                    {
+                        while (readerProductos.Read())
+                        {
+                            ENProducto producto = new ENProducto
+                            {
+                                Id = (int)readerProductos["id"],
+                                Name = (string)readerProductos["nombre"],
+                                Stock = (int)readerProductos["cant_stock"],
+                                Price = (float)(decimal)readerProductos["precio"],
+                                SalePrice = readerProductos["precio_oferta"] != DBNull.Value ? (float)(decimal)readerProductos["precio_oferta"] : 0,
+                                Category = 0, 
+                                CreationDate = DateTime.Now, 
+                                ImagePath = (string)readerProductos["img_producto"],
+                                Sinopsis = (string)readerProductos["sinopsis"],
+                                Autor = (string)readerProductos["autor"]
+                            };
+                            paquete.Productos.Add(producto);
+                        }
+                    }
+                }
+
+                return paquetes;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operation has failed. Error: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operation has failed. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                conex.Close();
+            }
         }
 
-      
-        public bool EliminarPaquete(ENPaquete paquete)
-        {
-            return false;
-        }
-
-        
-        public bool EliminarProductoDelPaquete(int idPaquete, int idProducto)
-        {
-            return false;
-        }
     }
 }
