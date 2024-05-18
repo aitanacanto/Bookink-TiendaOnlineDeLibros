@@ -280,12 +280,12 @@ namespace ClassLibrary
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
                 return dat;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
                 return dat;
 
             }

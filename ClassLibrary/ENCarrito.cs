@@ -118,8 +118,10 @@ namespace ClassLibrary
 
             return false;
         }
+        /*
         public DataSet ensenyarCarritoUsuario(ENUsuario user)
         {
+            
             DataSet dat = new DataSet();
 
             if (user.readUsuario() == true)
@@ -129,7 +131,9 @@ namespace ClassLibrary
             }
 
             return dat;
+            
         }
+        */
 
         public DataSet listarCarritos()
         {
