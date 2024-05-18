@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace ClassLibrary
 {
@@ -37,13 +38,6 @@ namespace ClassLibrary
             set { direccion_envio = value; }
         }
 
-        private int cantidad;
-        public int Cantidad
-        {
-            get { return cantidad; }
-            set { cantidad = value; }
-        }
-
         private float precio;
         public float Precio
         {
@@ -64,18 +58,16 @@ namespace ClassLibrary
             this.Id_usuario = 0;
             this.Cod_carrito = 0;
             this.Direccion_envio = " ";
-            this.Cantidad = 0;
             this.Precio = 0;
             this.Estado = " ";
         }
 
-        public ENPedido(int numped, int id_usuario, int cod_carrito, string direccion_envio, int cantidad, float precio, string estado)
+        public ENPedido(int numped, int id_usuario, int cod_carrito, string direccion_envio, float precio, string estado)
         {
             this.Numped = numped;
             this.Id_usuario = id_usuario;
             this.Cod_carrito = cod_carrito;
             this.Direccion_envio = direccion_envio;
-            this.Cantidad = cantidad;
             this.Precio = precio;
             this.Estado = estado;
         }
@@ -84,6 +76,18 @@ namespace ClassLibrary
         {
             CADPedido cad = new CADPedido();
             return cad.crearPedido(this);
+        }
+
+        public bool cambiarEstado()
+        {
+            CADPedido cad = new CADPedido();
+            return cad.cambiarEstado(this);
+        }
+
+        public DataSet verPedidos()
+        {
+            CADPedido cad = new CADPedido();
+            return cad.verPedidos(this);
         }
     }
 }
