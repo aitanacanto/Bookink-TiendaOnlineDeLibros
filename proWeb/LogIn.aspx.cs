@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,18 @@ namespace proWeb
         protected void Login_Click(object sender, EventArgs e)
         {
             // Código para manejar el inicio de sesión
+            CADUsuario cad = new CADUsuario();
+            ENUsuario en = new ENUsuario(exampleInputEmail1.Text, exampleInputPassword1.Text);
+            bool logged = cad.LogIn(en);
+            if (logged)
+            {
+                // Usuario logeado
+                Response.Redirect("mainpage.aspx");
+            }
+            else
+            {
+                // ERROR al hacer login
+            }
         }
     }
 }
