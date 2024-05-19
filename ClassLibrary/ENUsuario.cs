@@ -30,6 +30,13 @@ namespace ClassLibrary
         
         public ENUsuario() 
         {
+            Id = 0;
+            this.Name = "";
+            _surname = "";
+            _NIF = "";
+            _password = "";
+            _email = "";
+            _phoneNumber = "";
 
         }
 

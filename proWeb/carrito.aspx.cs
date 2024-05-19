@@ -11,6 +11,7 @@ namespace proWeb
     public partial class carrito : Page
     {
         ENCarrito cesta;
+        ENUsuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -60,16 +61,25 @@ namespace proWeb
         // Método para comprar productos y redirigir a otra página
         protected void Buy_Click(object sender, EventArgs e)
         {
-            Response.Redirect("pedido.aspx"); // Redirigir a la página de pedido
+            usuario = Session["user"] as ENUsuario;
+            if (usuario != null)
+            {
+                Response.Redirect("pedido.aspx");
+            }
+            else { 
+                Response.Redirect("LogIn.aspx"); // Redirigir a la página de pedido
+            }
         }
         private void CargarCarrito()
         {
+            
             cesta = Session["Carrito"] as ENCarrito;
             if (cesta == null)
             {
                 cesta = new ENCarrito();
                 Session["Carrito"] = cesta;
             }
+            
             ENProducto en = new ENProducto();
             List<ENLinCarrito> listaProductos = new List<ENLinCarrito>();
             listaProductos = cesta.ObtenerProductosEnCarrito();

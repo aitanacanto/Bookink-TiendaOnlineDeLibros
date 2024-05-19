@@ -8,11 +8,13 @@ using System.Web.UI.WebControls;
 
 namespace proWeb
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class LogIn : System.Web.UI.Page
     {
+        ENUsuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session.Remove("User");
+            usuario = new ENUsuario();
         }
         protected void Register_Click(object sender, EventArgs e)
         {
@@ -22,13 +24,13 @@ namespace proWeb
         protected void Login_Click(object sender, EventArgs e)
         {
             // Código para manejar el inicio de sesión
-            ENUsuario en = new ENUsuario(loginForm.UserName, loginForm.Password);
-            bool logged = en.LogIn();
+            usuario = new ENUsuario(loginForm.UserName, loginForm.Password);
+            bool logged = usuario.LogIn();
             if (logged)
             {
                 // Usuario logeado
                 //Response.Redirect("mainpage.aspx");
-                Session["UserId"] = en.Name;
+                Session["User"] = usuario;
                 LabelOculta.Text = "ta logeao";
                 LabelOculta.Visible = true;
             }
