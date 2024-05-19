@@ -25,15 +25,19 @@ namespace ClassLibrary
                 try
                 {
                     c.Open();
-                    using (SqlCommand com = new SqlCommand("INSERT INTO DIRECCION (id, cod_postal, direccion, ciudad, pais) VALUES (@id, @cod_postal, @direccion, @ciudad, @pais)", c))
+                    //te he quitado el id porque se pone solo en la base de datos al introducir una fila
+                    using (SqlCommand com = new SqlCommand(
+                            "INSERT INTO DIRECCION (cod_postal, dirección, ciudad, pais) " +
+                            "OUTPUT INSERTED.ID " +
+                            "VALUES (@cod_postal, @direccion, @ciudad, @pais);", c))
                     {
-                        com.Parameters.AddWithValue("@id", direccion.ID);
                         com.Parameters.AddWithValue("@cod_postal", direccion.CodPostal);
                         com.Parameters.AddWithValue("@direccion", direccion.Direccion);
                         com.Parameters.AddWithValue("@ciudad", direccion.Ciudad);
                         com.Parameters.AddWithValue("@pais", direccion.Pais);
 
-                        com.ExecuteNonQuery();
+                        // saca de la base de datos el id generado
+                        direccion.ID = Convert.ToInt32(com.ExecuteScalar());
                         return true;
                     }
                 }

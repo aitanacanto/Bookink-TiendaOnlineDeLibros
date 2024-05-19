@@ -35,6 +35,15 @@ namespace ClassLibrary
             this.pais = pais;
         }
 
+        public ENDireccion(string cod_postal, string direccion, string ciudad, string pais)
+        {
+            this.id = 0;
+            this.cod_postal = cod_postal;
+            this.direccion = direccion;
+            this.ciudad = ciudad;
+            this.pais = pais;
+        }
+
         public bool Create()
         {
             CADDireccion cadDireccion = new CADDireccion();

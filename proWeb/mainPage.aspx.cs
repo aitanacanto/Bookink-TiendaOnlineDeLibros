@@ -27,7 +27,15 @@ namespace proWeb
 
                 reapeterNov.DataSource = Novedades;
                 reapeterNov.DataBind();
+                Session["Carrito"] = new ENCarrito();
+                if (Session["Usuario"] ==  null) Session["Usuario"] = new ENUsuario();
             }
+            /*ENUsuario user = (ENUsuario)Session["Usuario"];
+            if (user.Id != 0)
+            {
+                LabelOculta.Text = "Bienvenido " + user.Name + " con id " + user.Id;
+                LabelOculta.Visible = true;
+            }*/
         }
 
         // Método para obtener la lista de productos (puedes obtenerla de tu base de datos o de donde sea)
