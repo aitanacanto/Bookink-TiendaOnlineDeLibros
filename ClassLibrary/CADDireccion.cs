@@ -38,7 +38,6 @@ namespace ClassLibrary
 
                         // saca de la base de datos el id generado
                         direccion.ID = Convert.ToInt32(com.ExecuteScalar());
-                        com.ExecuteNonQuery();
                         return true;
                     }
                 }
