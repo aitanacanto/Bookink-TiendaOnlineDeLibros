@@ -80,7 +80,7 @@
 
                        <div class="mb-3">
                           <label class="form-label">Imagen</label>
-                           <input class="form-control" type="file" id="formFile">
+                           <asp:FileUpload runat="server" class="form-control" type="file" id="ImagenSubida"/>
                         </div>    
                       </div>
                       <div class="modal-footer">

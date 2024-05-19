@@ -6,7 +6,7 @@ using System.Web.UI;
 using ClassLibrary;
 using System.Web.UI.WebControls;
 using System.Globalization;
-
+using System.IO;
 namespace proWeb
 {
     public partial class adminProducto : System.Web.UI.Page
@@ -37,8 +37,11 @@ namespace proWeb
                 string editorial = txt_editorial.Text;
                 int anyo = int.Parse(txt_anyo.Text);
                 int numpag = int.Parse(TxtNumPag.Text);
+                string fileName = Path.GetFileName(ImagenSubida.PostedFile.FileName);
+                string filePath = "/content/products/" + fileName;
+                ImagenSubida.SaveAs(Server.MapPath(filePath));
 
-                ENProducto newProduct = new ENProducto(name, stock, price, saleprice, "", sinopsis, autor, codOfer, editorial, anyo, numpag);
+                ENProducto newProduct = new ENProducto(name, stock, price, saleprice, filePath, sinopsis, autor, codOfer, editorial, anyo, numpag);
                 newProduct.Create();
                 listaProductos.Add(newProduct);
                 BindRepeater();
