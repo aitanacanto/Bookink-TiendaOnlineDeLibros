@@ -63,9 +63,15 @@ namespace proWeb
 
         private void PoblarCategorias()
         {
-            ddlCategoria.Items.Add(new ListItem("Ficción", "Ficcion"));
-            ddlCategoria.Items.Add(new ListItem("No Ficción", "NoFiccion"));
+            ENCategoria enCat = new ENCategoria();
+            List<ENCategoria> categories = enCat.GetAllCategories();
+
+            foreach (ENCategoria categoria in categories)
+            {
+                ddlCategoria.Items.Add(new ListItem(categoria.Nombre, categoria.Id.ToString()));
+            }
         }
+
 
         private void PoblarEditoriales()
         {

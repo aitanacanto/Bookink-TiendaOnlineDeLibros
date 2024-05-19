@@ -24,7 +24,7 @@ public class ENCategoria
         return cad.DeleteCategory(this.Id);
     }
 
-    public static List<ENCategoria> GetAllCategories()
+    public List<ENCategoria> GetAllCategories()
     {
         CADCategoria cad = new CADCategoria();
         return cad.GetAllCategories();
