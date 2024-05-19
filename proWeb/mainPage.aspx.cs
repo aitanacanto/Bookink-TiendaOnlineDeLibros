@@ -41,8 +41,14 @@ namespace proWeb
         // Método para obtener la lista de productos (puedes obtenerla de tu base de datos o de donde sea)
         private List<ENProducto> ObtenerProductos()
         {
-            // Aquí deberías escribir el código para obtener tus datos
-            // Simplemente devuelve una lista de productos como ejemplo
+            List<ENProducto> productos = new List<ENProducto>();
+            for (int i = 1; i < 9; i++)
+            {
+                ENProducto prod = new ENProducto();
+                prod.Id = i;
+                prod.Read();
+                productos.Add(prod);
+            }
 
             List<ENProducto> listaProductos = new List<ENProducto>();
 

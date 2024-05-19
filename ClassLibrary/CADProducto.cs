@@ -39,7 +39,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "INSERT INTO Producto (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
+                string query = "INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -74,7 +74,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "UPDATE Producto set nombre = @Name, cant_stock = @Stock, precio = @Price, precio_oferta = @SalePrice, img_producto = @ImagePath, sinopsis = @Sinopsis, autor = @Autor, cod_oferta = @CodOfer, editorial = @Editorial, anyo_publicacion = @AnyoPubli, num_pag = @NumPags";
+                string query = @"INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -135,7 +135,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "Select * from Producto where Id = @Id";
+                string query = "Select * from PRODUCTO where Id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
                 com.Parameters.AddWithValue("@Id", en.Id);
 
@@ -160,7 +160,7 @@ namespace ClassLibrary
             catch (Exception ex)
             {
                 Console.WriteLine("No se ha podido leer el producto, ERROR: {0}", ex.Message);
-                throw;
+                return false;
             }
             finally
             {
