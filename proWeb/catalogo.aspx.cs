@@ -14,11 +14,9 @@ namespace proWeb
         {
             if (!IsPostBack)
             {
-                // Método para cargar los libros
+                PoblarFiltros();
                 CargarLibros();
-
-                // Método para cargar los paquetes
-                //CargarPaquetes();
+                CargarPaquetes();
             }
         }
 
@@ -33,11 +31,8 @@ namespace proWeb
 
         private void CargarPaquetes()
         {
-            // Aquí deberías escribir el código para obtener tus datos
-            // Simplemente devuelve una lista de productos como ejemplo
 
             List<ENProducto> listaProductos = new List<ENProducto>();
-            // Método para cargar los paquetes
             ENPaquete paquete = new ENPaquete();
             List<ENPaquete> listaPaquetes = paquete.ObtenerTodosLosPaquetes();
 
@@ -58,5 +53,37 @@ namespace proWeb
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
         }
+
+        private void PoblarFiltros()
+        {
+            PoblarCategorias();
+            PoblarEditoriales();
+            PoblarAutores();
+        }
+
+        private void PoblarCategorias()
+        {
+            ddlCategoria.Items.Add(new ListItem("Ficción", "Ficcion"));
+            ddlCategoria.Items.Add(new ListItem("No Ficción", "NoFiccion"));
+        }
+
+        private void PoblarEditoriales()
+        {
+            ddlEditorial.Items.Add(new ListItem("Editorial A", "EditorialA"));
+            ddlEditorial.Items.Add(new ListItem("Editorial B", "EditorialB"));
+        }
+
+        private void PoblarAutores()
+        {
+            ddlAutor.Items.Add(new ListItem("Autor A", "AutorA"));
+            ddlAutor.Items.Add(new ListItem("Autor B", "AutorB"));
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            CargarLibros();
+            CargarPaquetes();
+        }
+
     }
 }
