@@ -23,17 +23,17 @@ namespace ClassLibrary
             CADCategoria cad = new CADCategoria();
             return cad.DeleteCategory(this.Id);
         }
-
         public bool Update()
         {
             CADCategoria cad = new CADCategoria();
             return cad.UpdateCategory(this.Id, this.Nombre);
         }
 
-        public static List<ENCategoria> GetAllCategories()
+        public List<ENCategoria> GetAllCategories()
         {
             CADCategoria cad = new CADCategoria();
             return cad.GetAllCategories();
         }
+
     }
 }
