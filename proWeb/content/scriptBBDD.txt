@@ -111,15 +111,14 @@ create table [dbo].[TIENE_DIRECCION]
 GO
 create table [dbo].[RESENA]
 (	
-    [cod] INT IDENTITY (1, 1) NOT NULL,
     [id_usuario] INT NOT NULL,
     [id_producto] INT NOT NULL,
-    [comentario] TEXT NOT NULL,
+    [comentario] NVARCHAR(max) NOT NULL,
     [fecha] DATE NOT NULL,
     [valoracion] DECIMAL(3, 2) NOT NULL,
-    PRIMARY KEY CLUSTERED ([cod] ASC),
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id),
+    PRIMARY KEY (id_usuario,id_producto)
 )
 GO
 create table [dbo].[PAQUETE]

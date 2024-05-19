@@ -64,17 +64,20 @@ namespace ClassLibrary
 
         public bool LogOut()
         {
-            return false;
+            CADUsuario cad = new CADUsuario();
+            return cad.LogOut(this);
         }
 
         public bool UpdateUserData()
         {
-            return false;
+            CADUsuario cad = new CADUsuario();
+            return cad.UpdateUserData(this);
         }  
 
         public bool DeleteUser()
         {
-            return false;
+            CADUsuario cad = new CADUsuario();
+            return cad.DeleteUser(this);
         }
     }
 }

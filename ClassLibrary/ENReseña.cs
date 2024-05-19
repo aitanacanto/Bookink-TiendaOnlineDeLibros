@@ -44,13 +44,17 @@ namespace ClassLibrary
         }
 
         public bool Update() 
-        { 
-            return true;
+        {
+            CADReseña cad = new CADReseña();
+
+            return cad.Update(this);
         }
 
         public bool Delete()
         {
-            return true;
+            CADReseña cad = new CADReseña();
+
+            return cad.Delete(this);
         }
     }
 }

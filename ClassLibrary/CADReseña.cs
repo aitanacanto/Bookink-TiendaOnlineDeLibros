@@ -49,14 +49,66 @@ namespace ClassLibrary
             }
         }
 
-        public bool Update(ENReseña reseña)
+        public bool Update(ENReseña en)
         {
-            return true;
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "UPDATE RESENA SET comentario = @comment, fecha = @date, valoracion = @rating " +
+                                "WHERE id_usuario = @user AND id_producto = @product";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@user", en.UserID);
+                com.Parameters.AddWithValue("@product", en.ProductID);
+                com.Parameters.AddWithValue("@comment", en.Comment);
+                com.Parameters.AddWithValue("@date", en.Date);
+                com.Parameters.AddWithValue("@rating", en.Rating);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido modificar la reseña, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
         }
 
-        public bool Delete(ENReseña reseña)
+        public bool Delete(ENReseña en)
         {
-            return true;
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "DELETE FROM RESENA WHERE id_usuario = @user AND id_producto = @product";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@user", en.UserID);
+                com.Parameters.AddWithValue("@product", en.ProductID);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido modificar la reseña, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
         }
     }
 }
