@@ -44,6 +44,7 @@ namespace ClassLibrary
 
                 // Crear una sentencia parametricada
                 string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, nif, email, telefono, puntos, admin) " +
+                               "OUTPUT INSERTED.ID " +
                                "VALUES (@name, @surname, @contrasenya, @nif, @email, @telefono, 0, 'no')";
                 SqlCommand com = new SqlCommand(query, c);
 
@@ -55,7 +56,9 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@email", en.Email);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
 
-                com.ExecuteNonQuery();
+                en.Id = Convert.ToInt32(com.ExecuteScalar());
+
+                //com.ExecuteNonQuery();
                 return true;
             }
             catch (Exception ex)
@@ -80,7 +83,7 @@ namespace ClassLibrary
 
                 string inputPass;
                 // Crear una sentencia parametricada
-                string query = "SELECT email, contrasenya FROM USUARIO WHERE email = @email";
+                string query = "SELECT id, nombre, apellidos, contrasenya, nif, email, telefono FROM USUARIO WHERE email = @email";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
@@ -93,6 +96,11 @@ namespace ClassLibrary
                     inputPass = (string)reader["contrasenya"];
                     if (inputPass == en.Password)
                     {
+                        en.Id = (int)reader["id"];
+                        en.Name = (string)reader["nombre"];
+                        en.Surname = (string)reader["apellidos"];
+                        en.NIF = (string)reader["nif"];
+                        en.PhoneNumber = (string)reader["telefono"];
                         return true;
                     }
                     else
@@ -114,11 +122,6 @@ namespace ClassLibrary
             {
                 c.Close();
             }
-        }
-
-        public bool LogOut(ENUsuario usuario)
-        {
-            return false;
         }
 
         public bool UpdateUserData(ENUsuario en)
@@ -162,12 +165,13 @@ namespace ClassLibrary
             SqlConnection c = new SqlConnection(constring);
             try
             {
+                //necesito una funcion de tiene_direccion para borrar las relaciones y luego poder todas las direcciones
                 c.Open();
 
                 // Crear una sentencia parametricada
                 string query = "DELETE FROM USUARIO WHERE email = @email";
 
-                /*POSIBLE MEJORA: Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login*/
+                //TODO: posible mejora - Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
@@ -186,6 +190,12 @@ namespace ClassLibrary
                 c.Close();
             }
 
+        }
+
+        public bool AddAddress(ENUsuario user, ENDireccion dir)
+        {
+            user.Direcciones.Add(dir);
+            return true;
         }
     }
 }

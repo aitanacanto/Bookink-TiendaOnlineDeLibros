@@ -14,9 +14,10 @@ namespace ClassLibrary
     {
 
         private int _id_carrito;
-        private int _id_producto;
+        private ENProducto _producto;
         private int _cantidad;
         private float _pvp;
+        private float _price;
 
         public int id_carrito
         {
@@ -24,10 +25,10 @@ namespace ClassLibrary
             set { _id_carrito = value; }
         }
 
-        public int id_producto
+        public ENProducto producto
         {
-            get { return _id_producto; }
-            set { _id_producto = value; }
+            get { return _producto; }
+            set { _producto = value; }
         }
 
         public int cantidad
@@ -41,26 +42,59 @@ namespace ClassLibrary
             get { return _pvp; }
             set { _pvp = value; }
         }
+        public float price
+        {
+            get { return _price; }
+            set { _price = value; }
+        }
 
         public ENLinCarrito()
         {
             this.id_carrito = 0;
-            this.id_producto = 0;
+            this.producto = null;
             this.cantidad = 0;
             this.pvp = 0;
         }
 
-        public ENLinCarrito(int id_carrito, int id_producto, int cantidad, float pvp)
+        public ENLinCarrito(int id_carrito, ENProducto producto, int cantidad)
         {
             this.id_carrito = id_carrito;
-            this.id_producto = id_producto;
+            this.producto = producto;
             this.cantidad = cantidad;
-            this.pvp = pvp;
+            float price;
+            if (producto.SalePrice != 0)
+            {
+                price = producto.SalePrice;
+            }
+            else
+            {
+                price = producto.Price;
+            }
+            this.price = price;
+            this.pvp = price * cantidad;
         }
         public void incrementarCantidad()
         {
-            this.cantidad++;
+            if (cantidad < producto.Stock) { 
+                this.cantidad++;
+                this.pvp = price * cantidad;
+            }
         }
+        public bool decrementarCantidad()
+        {
+            if (cantidad != 1) { 
+                this.cantidad--;
+                this.pvp = price * cantidad;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
+        
+        
         public bool creacionLineaCarrito()
         {
             CADLinCarrito linca = new CADLinCarrito();
@@ -79,27 +113,6 @@ namespace ClassLibrary
         {
             CADLinCarrito linca = new CADLinCarrito();
             return linca.readLinCarrito(this);
-        }
-
-        public DataSet actualizacionLinCarrito(int lin)
-        {
-            CADLinCarrito c = new CADLinCarrito();
-            DataSet dat = new DataSet();
-            ENLinCarrito linca = new ENLinCarrito();
-
-            linca.id_producto = this.id_producto;
-            linca.cantidad = this.cantidad;
-            linca.pvp = this.pvp;
-
-            if (c.readLinCarrito(this) == true)
-            {
-                this.id_producto = linca.id_producto;
-                this.cantidad = linca.cantidad;
-                this.pvp = linca.pvp;
-                dat = c.actualizacionLinCarrito(this, lin);
-            }
-
-            return dat;
         }
 
 

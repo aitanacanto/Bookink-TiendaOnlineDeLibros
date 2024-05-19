@@ -10,28 +10,24 @@ namespace proWeb
 {
     public partial class usuario : System.Web.UI.Page
     {
+        ENUsuario user;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            user = Session["user"] as ENUsuario;
+            if (user == null) //si el usuario no está logeado se redirige a la página de logeo
             {
-                // Aquí es donde normalmente accederías a tu base de datos para obtener la información del cliente.
-                // Como este es solo un ejemplo, voy a usar algunos datos de cliente ficticios.
-
-                string nombreCliente = "Juan Pérez";
-                string correoCliente = "juan.perez@example.com";
-                string telefonoCliente = "123-456-7890";
-                string direccionCliente = "Calle Ficticia 123, Ciudad Ficticia";
-
-                // Ahora, vamos a cargar esta información en los controles de la página.
-
-                lblNombreActual.Text = nombreCliente;
-                lblCorreoActual.Text = correoCliente;
-                lblTelefonoActual.Text = telefonoCliente;
-                lblDireccionActual.Text = direccionCliente;
+                Response.Redirect("LogIn.aspx");
+            }
+            else
+            {
+                lblNombreActual.Text = user.Name;
+                lblCorreoActual.Text = user.Email;
+                lblTelefonoActual.Text = user.PhoneNumber;
+                lblDireccionActual.Text = "direccion provisional";
             }
         }
 
-        protected void btnActualizar_Click(object sender, EventArgs e)
+        protected void BtnActualizar_Click(object sender, EventArgs e)
         {
             // Crear una nueva instancia de ENDireccion
             ENDireccion direccion = new ENDireccion();
@@ -57,6 +53,24 @@ namespace proWeb
                 lblMensaje.Text = "Hubo un error al actualizar la dirección.";
             }
         }
-
+        protected void BtnLogOut(object sender, EventArgs e)
+        {
+            Session.Remove("User");
+            user = new ENUsuario();
+            Response.Redirect("mainPage.aspx");
+        }
+        protected void BtnDeleteUser(object sender, EventArgs e)
+        {
+            if (!user.DeleteUser())
+            {
+                lblMensaje.Text = "Hubo un error al borrar el usuario.";
+            }
+            else
+            {
+                Session.Remove("User");
+                user = new ENUsuario();
+                Response.Redirect("mainPage.aspx");
+            }
+        }
     }
 }

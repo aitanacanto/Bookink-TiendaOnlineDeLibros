@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,15 +18,38 @@ namespace proWeb
 
         protected void Register_Click(object sender, EventArgs e)
         {
-            ENUsuario en = new ENUsuario(Nombre.Text, Apellidos.Text, Contraseña.Text, NIF.Text, Email.Text, Telefono.Text);
-            bool registro = en.Register();
-            if (registro)
+            try
             {
-                Response.Redirect("login.aspx");
+                ENUsuario user = new ENUsuario(Nombre.Text, Apellidos.Text, Contraseña.Text, NIF.Text, Email.Text, Telefono.Text);
+                bool registro = user.Register();
+                if (registro)
+                {
+                    ENDireccion direccion = new ENDireccion(cod_postal.Text,calle.Text,ciudad.Text,pais.Text);
+                    if (!direccion.Create())
+                    {
+                        LabelOculta.Text = "Error al crear la direccion.";
+                        LabelOculta.Visible = true;
+                        return;
+                    }
+                    ENTieneDireccion tieneDir = new ENTieneDireccion(user.Id,direccion.ID);
+                    if (!tieneDir.Create())
+                    {
+                        LabelOculta.Text = "Error al vincular la direccion.";
+                        LabelOculta.Visible = true;
+                        return;
+                    }
+                    Response.Redirect("login.aspx");
+                }
+                else
+                {
+                    LabelOculta.Text = "Error al registrar al usuario.";
+                    LabelOculta.Visible = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                LabelOculta.Text = "fallo gordo";
+                LabelOculta.Text = "ERROR: " + ex.Message;
+                LabelOculta.Visible = true;
             }
         }
     }

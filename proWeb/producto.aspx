@@ -21,37 +21,41 @@
         <div class="informacion">
         <!-- Sección de Detalles del Producto -->
         <div class="product-image">
-            <div style="width: 300px; height: 300px; background-color: #eee; border-radius: 8px;"></div>
+            <div style="width: 400px; height: 400px; background-color: #eee; border-radius: 8px;">
+                <asp:Image ImageUrl="content/products/book_1.jpg" runat="server" ID="imageProduct" style="max-height: 400px;object-fit: contain; max-width: 100%;"/>
+            </div>
         </div>
         <div class="product-details">
-            <h1 style="text-align:left">Un animal salvaje</h1>
-            <p class="author">Autor: Juan Villoro</p>
-            <p class="price">Precio: 19.99 €</p>
-            <p>Descripción corta del libro: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h1 id="ProductName" runat="server" style="text-align:left">Titulo Libro</h1>
+            <p  ID="ProductAutor" runat="server" class="author">Autor</p>
+             <div class="d-flex">
+            <p ID="ProductPrice" runat="server" class="card-text text-danger" style="text-decoration:line-through">Precio Oferta</p>
+            <p ID="ProductOfer" runat="server" style="margin-left: 10px" class="price">Precio: 19.99 €</p>
+                 </div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
        </div>
         <div style="clear: both;"></div> <!-- Limpiar el float -->
         <!-- Descripción Extendida y Ficha Técnica -->
         <div class="additional-section">
-            <h2>Descripción Extendida</h2>
+            <h2>Sinopsis</h2>
             <div class="separator"></div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit odio id ligula fermentum, a congue quam varius. Integer eget urna vitae purus placerat consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque nec ipsum quis nulla ultrices varius et a lectus. Proin vehicula ultricies ante, id iaculis enim fermentum et. Duis vestibulum vulputate augue eget accumsan. In nec bibendum nunc. Duis nec tincidunt metus. In nec tincidunt metus. In hac habitasse platea dictumst. Vestibulum in justo id leo egestas posuere. Nullam laoreet, dolor in pharetra tempor, elit nunc consequat metus, in facilisis metus libero ut sapien.</p>
+            <p runat="server" id="ProductSinopsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit odio id ligula fermentum, a congue quam varius. Integer eget urna vitae purus placerat consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque nec ipsum quis nulla ultrices varius et a lectus. Proin vehicula ultricies ante, id iaculis enim fermentum et. Duis vestibulum vulputate augue eget accumsan. In nec bibendum nunc. Duis nec tincidunt metus. In nec tincidunt metus. In hac habitasse platea dictumst. Vestibulum in justo id leo egestas posuere. Nullam laoreet, dolor in pharetra tempor, elit nunc consequat metus, in facilisis metus libero ut sapien.</p>
             <!-- Ficha Técnica -->
             <div class="tech-specs">
                 <h2>Ficha Técnica</h2>
                 <table>
                     <tr>
                         <th>Año de Publicación</th>
-                        <td>2022</td>
+                        <td id="anyo" runat="server">2022</td>
                     </tr>
                     <tr>
                         <th>Número de Páginas</th>
-                        <td>250</td>
+                        <td id="numpag" runat="server">250</td>
                     </tr>
                     <tr>
                         <th>Editorial</th>
-                        <td>Editorial ABC</td>
+                        <td id="editorial" runat="server">Editorial ABC</td>
                     </tr>
                     <!-- Agrega más detalles según sea necesario -->
                 </table>

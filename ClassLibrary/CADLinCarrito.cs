@@ -33,7 +33,7 @@ namespace ClassLibrary
                 tabla = dat.Tables["LINCARRITO"];
                 DataRow fila = tabla.NewRow();
                 fila[0] = enli.id_carrito;
-                fila[2] = enli.id_producto;
+                fila[2] = enli.producto.Id;
                 fila[3] = enli.cantidad;
                 fila[4] = enli.pvp;
                 tabla.Rows.Add(fila);
@@ -74,7 +74,9 @@ namespace ClassLibrary
                     if (lee["id_carrito"].ToString() == enli.id_carrito.ToString())
                     {
                         validar = true;
-                        enli.id_producto = int.Parse(lee["id_producto"].ToString());
+                        ENProducto producto = new ENProducto(int.Parse(lee["id_producto"].ToString()));
+                        producto.Read();
+                        enli.producto = producto;
                         enli.cantidad = int.Parse(lee["cantidad"].ToString());
                         enli.pvp = float.Parse(lee["pvp"].ToString());
                     }
@@ -109,7 +111,7 @@ namespace ClassLibrary
                 adap.Fill(dat, "LINCARRITO");
                 DataTable tabla = new DataTable();
                 tabla = dat.Tables["LINCARRITO"];
-                tabla.Rows[mi]["id_producto"] = enli.id_producto;
+                tabla.Rows[mi]["id_producto"] = enli.producto.Id;
                 tabla.Rows[mi]["cantidad"] = enli.cantidad;
                 tabla.Rows[mi]["pvp"] = enli.pvp;
                 SqlCommandBuilder builder = new SqlCommandBuilder(adap);
@@ -135,7 +137,7 @@ namespace ClassLibrary
         {
             bool validar = false;
             SqlConnection cone = null;
-            String linea = "Delete From LINCARRITO where id_carrito=" + enli.id_carrito + " and id_producto" + enli.id_producto;
+            String linea = "Delete From LINCARRITO where id_carrito=" + enli.id_carrito + " and id_producto" + enli.producto.Id;
 
             try
             {
