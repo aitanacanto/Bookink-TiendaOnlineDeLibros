@@ -121,14 +121,71 @@ namespace ClassLibrary
             return false;
         }
 
-        public bool UpdateUserData(ENUsuario usuario)
+        public bool UpdateUserData(ENUsuario en)
         {
-            return true;
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "UPDATE USUARIO SET nombre = @name, apellidos = @surname, contrasenya = @contrasenya, " +
+                                "nif = @nif, telefono = @telefono " +
+                                "WHERE email = @email";
+
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@name", en.Name);
+                com.Parameters.AddWithValue("@surname", en.Surname);
+                com.Parameters.AddWithValue("@contrasenya", en.Password);
+                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@email", en.Email);
+                com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido modificar el usuario, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
         }
 
-        public bool DeleteUser(ENUsuario usuario) 
+        public bool DeleteUser(ENUsuario en) 
         {
-            return true;
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "DELETE FROM USUARIO WHERE email = @email";
+
+                /*POSIBLE MEJORA: Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login*/
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@email", en.Email);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido eliminar el usuario, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+
         }
     }
 }
