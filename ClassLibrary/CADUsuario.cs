@@ -124,11 +124,6 @@ namespace ClassLibrary
             }
         }
 
-        public bool LogOut(ENUsuario en)
-        {
-            return true;
-        }
-
         public bool UpdateUserData(ENUsuario en)
         {
             SqlConnection c = new SqlConnection(constring);
@@ -170,12 +165,13 @@ namespace ClassLibrary
             SqlConnection c = new SqlConnection(constring);
             try
             {
+                //necesito una funcion de tiene_direccion para borrar las relaciones y luego poder todas las direcciones
                 c.Open();
 
                 // Crear una sentencia parametricada
                 string query = "DELETE FROM USUARIO WHERE email = @email";
 
-                /*POSIBLE MEJORA: Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login*/
+                //TODO: posible mejora - Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia

@@ -70,7 +70,9 @@
         
         <!-- Botón para actualizar información -->
         <div class="button-container">
-            <asp:Button ID="btnActualizar" runat="server" Text="Actualizar información" OnClick="btnActualizar_Click" CssClass="button" />
+            <asp:Button ID="btnActualizar" runat="server" Text="Actualizar información" OnClick="BtnActualizar_Click" CssClass="button" />
+            <asp:Button ID="btnLogOut" runat="server" Text="Cerrar Sesión" OnClick="BtnLogOut" CssClass="button" />
+            <asp:Button ID="btnDeleteUser" runat="server" Text="Borrar Cuenta" OnClick="BtnDeleteUser" CssClass="button" />
         </div>
 
         <!-- Mensaje -->

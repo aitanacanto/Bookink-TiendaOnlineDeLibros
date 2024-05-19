@@ -32,14 +32,14 @@
                         </div>
                               <div class="mb-3 col">
                           <asp:label runat="server" class="form-label">Cantidad</asp:label>
-                          <asp:TextBox runat="server" type="number" name="stock" class="form-control"/>
+                          <asp:TextBox runat="server" type="number" name="stock" class="form-control" ID="txt_stock"/>
                         </div>
                           
                           </div>
                           
                            <div class="mb-3">
                           <asp:Label runat="server" class="form-label">Autor</asp:Label>
-                          <asp:TextBox runat="server" type="text" name="author" class="form-control"/>
+                          <asp:TextBox runat="server" type="text" name="author" class="form-control" ID="txt_Autor"/>
                         </div>
 
                           <div class="row align-items-start">
@@ -64,18 +64,18 @@
                         </div>
                              <div class="mb-3 col">
                                  <asp:label runat="server" class="form-label">Editorial</asp:label>
-                          <asp:TextBox runat="server" type="text"  name="Editoria" class="form-control"/> 
+                          <asp:TextBox runat="server" type="text"  name="Editoria" class="form-control" ID="txt_editorial"/> 
                         </div>
                                  </div>
 
                           <div class="mb-3">
                           <asp:Label runat="server" class="form-label">Sinopsis</asp:Label>
-                          <textarea  type="text" name="sinopsis" class="form-control"></textarea>
+                          <asp:TextBox TextMode="MultiLine"  runat="server" type="text" name="sinopsis" class="form-control" ID="Txt_sinopsis"></asp:TextBox>
                         </div>
 
                            <div class="mb-3">
                           <asp:label runat="server" class="form-label">Año de Publicación</asp:label>
-                          <asp:TextBox runat="server" type="text" name="anyo_publi" class="form-control"/>
+                          <asp:TextBox runat="server" type="text" name="anyo_publi" class="form-control" ID="txt_anyo"/>
                         </div>
 
                        <div class="mb-3">
@@ -134,45 +134,46 @@
 
                  <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="editmodallabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
+                      <div class="modal-content">
                       <div class="modal-header">
                         <h1 class="modal-title fs-5" id="editmodallabel">Editar Producto</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <asp:button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" runat="server"></asp:button>
                       </div>
                       <div class="modal-body">
                           <div class="mb-3 col">
-                          <label class="form-label">Nombre</label>
-                          <input type="text" name="name" class="form-control"/>
+                          <asp:label runat="server" class="form-label">Nombre</asp:label>
+                          <asp:TextBox runat="server" type="text" name="name" ID="TxtName" class="form-control"/>
                         </div>
                           <div class="row align-items-start">
                               <div class="mb-3 col">
-                          <label class="form-label">ID</label>
-                          <input type="number" name="id" value="123" class="form-control"/>
+                          <asp:label runat="server" class="form-label">Número de Páginas</asp:label>
+                          <asp:TextBox runat="server" type="number" name="pags" ID="TxtNumPag" class="form-control"/>
                         </div>
                               <div class="mb-3 col">
-                          <label class="form-label">Cantidad</label>
-                          <input type="number" name="stock" class="form-control"/>
+                          <asp:label runat="server" class="form-label">Cantidad</asp:label>
+                          <asp:TextBox runat="server" type="number" name="stock" class="form-control" ID="txt_stock"/>
                         </div>
                           
                           </div>
                           
                            <div class="mb-3">
-                          <label class="form-label">Autor</label>
-                          <input type="text" name="author" class="form-control"/>
+                          <asp:Label runat="server" class="form-label">Autor</asp:Label>
+                          <asp:TextBox runat="server" type="text" name="author" class="form-control" ID="txt_Autor"/>
                         </div>
 
                           <div class="row align-items-start">
                           <div class="mb-3 col">
-                         <label class="form-label">Precio</label>
-                          <input type="number"  step="0.01" name="price" class="form-control"/> 
+                         <asp:Label runat="server" class="form-label">Precio</asp:Label>
+                          <asp:TextBox runat="server" type="number"  ID="TxtPrice" step="0.01" name="price" class="form-control"/> 
                         </div>
                           <div class="mb-3 col">
-                         <label class="form-label">Precio Oferta</label>
-                          <input type="number"  step="0.01" name="price-offer" class="form-control"/> 
+                         <asp:label runat="server" class="form-label">Precio Oferta</asp:label>
+                          <asp:TextBox runat="server" type="number" ID="TxtSalePrice"  step="0.01" name="price-offer" class="form-control"/> 
                         </div>
                               </div>
-                        <div class="mb-3">
-                         <label class="form-label">Categoría</label>
+                         <div class="row align-items-start">
+                        <div class="mb-3 col">
+                         <asp:label runat="server" class="form-label">Categoría</asp:label>
                             <select class="form-select">
                                 <option value="cat1">Cat1</option>
                                 <option value="cat2">Cat2</option>
@@ -180,7 +181,22 @@
                                 <option value="cat4">Cat4</option>
                             </select>
                         </div>
-                          
+                             <div class="mb-3 col">
+                                 <asp:label runat="server" class="form-label">Editorial</asp:label>
+                          <asp:TextBox runat="server" type="text"  name="Editoria" class="form-control" ID="txt_editorial"/> 
+                        </div>
+                                 </div>
+
+                          <div class="mb-3">
+                          <asp:Label runat="server" class="form-label">Sinopsis</asp:Label>
+                          <asp:TextBox TextMode="MultiLine"  runat="server" type="text" name="sinopsis" class="form-control" ID="Txt_sinopsis"></asp:TextBox>
+                        </div>
+
+                           <div class="mb-3">
+                          <asp:label runat="server" class="form-label">Año de Publicación</asp:label>
+                          <asp:TextBox runat="server" type="text" name="anyo_publi" class="form-control" ID="txt_anyo"/>
+                        </div>
+
                        <div class="mb-3">
                           <label class="form-label">Imagen</label>
                            <input class="form-control" type="file" id="formFile">
@@ -188,7 +204,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                        <asp:button ID="btnAdd" runat="server" type="button" class="btn btn-primary" Text="Guardar Cambios"></asp:button>
                       </div>
                     </div>
                   </div>

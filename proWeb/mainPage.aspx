@@ -39,7 +39,7 @@
                     <ItemTemplate>
                         <div class="col-md-3 mb-4">
                             <div class="product-card card">
-                                <a href="producto.aspx" class="text-decoration-none">
+                                <a href='<%# "producto.aspx?id=" + Eval("Id") %>' class="text-decoration-none">
                                     <div class="text-center">
                                         <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
                                     </div>
@@ -119,7 +119,7 @@
                     <ItemTemplate>
                         <div class="col-md-3 mb-4">
                             <div class="product-card card">
-                                <a href="producto.aspx" class="text-decoration-none">
+                                 <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none">
                                     <div class="text-center">
                                         <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
                                     </div>
