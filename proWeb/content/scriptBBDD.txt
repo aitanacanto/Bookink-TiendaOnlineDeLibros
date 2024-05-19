@@ -148,20 +148,23 @@ create table [dbo].[LINPEDIDO_PA]
     FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped)   
 )
 GO
-create table [dbo].[CATEGORIA]
-(	
+
+CREATE TABLE [dbo].[CATEGORIA]
+(
     [id] INT IDENTITY (1, 1) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
-create table [dbo].[TIENE_CATEGORIA]
-(	
+
+-- Create/modify the TIENE_CATEGORIA table
+CREATE TABLE [dbo].[TIENE_CATEGORIA]
+(
     [id_categoria] INT,
     [id_producto] INT,
     PRIMARY KEY (id_categoria, id_producto),
-    FOREIGN KEY (id_categoria) REFERENCES CATEGORIA(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    CONSTRAINT [fk_TIENE_CATEGORIA_CATEGORIA] FOREIGN KEY ([id_categoria]) REFERENCES CATEGORIA([id]) ON DELETE CASCADE,
+    CONSTRAINT [fk_TIENE_CATEGORIA_PRODUCTO] FOREIGN KEY ([id_producto]) REFERENCES PRODUCTO([id]) ON DELETE CASCADE
 )
 GO
 
@@ -334,6 +337,7 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
      -- PERCY JACKSON Pack 9
         (9, 28),(9, 29),(9, 30);
      
+
 
 
 
