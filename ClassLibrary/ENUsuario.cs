@@ -17,8 +17,8 @@ namespace ClassLibrary
         private string _password;
         private string _phoneNumber;
         private string _NIF;
-        private string _address; //deberia ser una referencia
         private int _id;
+        private List<ENDireccion> _direcciones; //deberia ser una referencia
 
         public string Name { get { return _name; } set { _name = value; } }
         public string Surname { get { return _surname; } set { _surname = value; } }
@@ -27,10 +27,29 @@ namespace ClassLibrary
         public string PhoneNumber { get { return _phoneNumber; } set { _phoneNumber = value; } }
         public string NIF { get { return _NIF; } set { _NIF = value; } }
         public int Id { get { return _id; } set { _id = value; } }
-        
+        public List<ENDireccion> Direcciones
+        {
+            get
+            {
+                // Se crea una copia de la lista privada
+                List<ENDireccion> direccionesCopia = new List<ENDireccion>(_direcciones);
+                return direccionesCopia;
+            }
+            set
+            {
+                // Se actualiza la lista interna con la nueva lista
+                _direcciones = value;
+            }
+        }
+
         public ENUsuario() 
         {
-
+            _id = 0;
+            _name = string.Empty;
+            _email = string.Empty;
+            _password = string.Empty;
+            _phoneNumber = string.Empty;
+            _direcciones = new List<ENDireccion>();
         }
 
         public ENUsuario(string name, string surname, string password, string nif, string email, string phone)
@@ -78,6 +97,12 @@ namespace ClassLibrary
         {
             CADUsuario cad = new CADUsuario();
             return cad.DeleteUser(this);
+        }
+
+        public bool AddAddress(ENDireccion dir)
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.AddAddress(this,dir);
         }
     }
 }

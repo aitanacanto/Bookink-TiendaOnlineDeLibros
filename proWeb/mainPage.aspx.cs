@@ -28,7 +28,14 @@ namespace proWeb
                 reapeterNov.DataSource = Novedades;
                 reapeterNov.DataBind();
                 Session["Carrito"] = new ENCarrito();
+                if (Session["Usuario"] ==  null) Session["Usuario"] = new ENUsuario();
             }
+            /*ENUsuario user = (ENUsuario)Session["Usuario"];
+            if (user.Id != 0)
+            {
+                LabelOculta.Text = "Bienvenido " + user.Name + " con id " + user.Id;
+                LabelOculta.Visible = true;
+            }*/
         }
         protected void Anyadir_Click(object sender, EventArgs e)
         {

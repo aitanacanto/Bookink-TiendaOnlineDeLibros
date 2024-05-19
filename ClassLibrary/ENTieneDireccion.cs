@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class ENTieneDireccion
+    public class ENTieneDireccion
     {
         private int idUsuario;
         private int idDireccion;

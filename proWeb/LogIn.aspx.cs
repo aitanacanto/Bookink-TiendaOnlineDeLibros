@@ -28,14 +28,15 @@ namespace proWeb
             {
                 // Usuario logeado
                 //Response.Redirect("mainpage.aspx");
-                Session["UserId"] = en.Name;
-                LabelOculta.Text = "ta logeao";
+                Session["Usuario"] = en;
+                ENUsuario user = (ENUsuario)Session["Usuario"];
+                LabelOculta.Text = "Autenticación exitosa. " + user.Name;
                 LabelOculta.Visible = true;
             }
             else
             {
                 // ERROR al hacer login
-                LabelOculta.Text = loginForm.UserName + " con " + loginForm.Password;
+                LabelOculta.Text = "Credenciales inválidas.";
                 LabelOculta.Visible = true;
             }
         }
