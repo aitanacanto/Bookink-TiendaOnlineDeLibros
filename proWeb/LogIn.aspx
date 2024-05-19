@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="proWeb.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="proWeb.LogIn" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="styles.css" />
