@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ClassLibrary
 {
-    class ENReseña
+    public class ENReseña
     {
         private int _userID; //Identificar el usuario(NIF, email, id,...)
         private int _productID;
@@ -26,19 +27,34 @@ namespace ClassLibrary
         {
 
         }
+
+        public ENReseña(int userID, int productID, int rating, string comment, DateTime date)
+        {
+            _userID = userID;
+            _productID = productID;
+            _rating = rating;
+            _comment = comment;
+            _date = date;
+        }
         public bool Create()
         {
-            return true;
+            CADReseña cad = new CADReseña();
+
+            return cad.Create(this);
         }
 
         public bool Update() 
-        { 
-            return true;
+        {
+            CADReseña cad = new CADReseña();
+
+            return cad.Update(this);
         }
 
         public bool Delete()
         {
-            return true;
+            CADReseña cad = new CADReseña();
+
+            return cad.Delete(this);
         }
     }
 }

@@ -46,11 +46,37 @@
             <asp:Label ID="lblDireccionActual" runat="server" Text=""></asp:Label>
             <asp:TextBox ID="txtDireccionNueva" runat="server"></asp:TextBox>
         </div>
+        <!-- Código Postal -->
+        <div class="item">
+            <asp:Label ID="lblCodPostal" runat="server" Text="Código Postal:"></asp:Label>
+            <asp:Label ID="lblCodPostalActual" runat="server" Text=""></asp:Label>
+            <asp:TextBox ID="txtCodPostalNuevo" runat="server"></asp:TextBox>
+        </div>
+
+        <!-- Ciudad -->
+        <div class="item">
+            <asp:Label ID="lblCiudad" runat="server" Text="Ciudad:"></asp:Label>
+            <asp:Label ID="lblCiudadActual" runat="server" Text=""></asp:Label>
+            <asp:TextBox ID="txtCiudadNueva" runat="server"></asp:TextBox>
+        </div>
+
+        <!-- País -->
+        <div class="item">
+            <asp:Label ID="lblPais" runat="server" Text="País:"></asp:Label>
+            <asp:Label ID="lblPaisActual" runat="server" Text=""></asp:Label>
+            <asp:TextBox ID="txtPaisNuevo" runat="server"></asp:TextBox>
+        </div>
+
         
         <!-- Botón para actualizar información -->
         <div class="button-container">
             <asp:Button ID="btnActualizar" runat="server" Text="Actualizar información" OnClick="btnActualizar_Click" CssClass="button" />
-        </div>        
-        <!-- Historial de pedidos -->
+        </div>
+
+        <!-- Mensaje -->
+        <div class="item">
+            <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
+        </div>
+
     </div>
 </asp:Content>

@@ -16,21 +16,22 @@ namespace ClassLibrary
     class CADProducto
     {
         private string constring;
+        public CADProducto()
+        {
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
+        }
         private bool Exists(SqlConnection c, ENProducto en)
         {
-            string querryAux = "Select * from Products where code = @code";
+            string querryAux = "Select * from Producto where id = @id";
             SqlCommand comAux = new SqlCommand(querryAux, c);
-            comAux.Parameters.AddWithValue("@code", en.Id);
+            comAux.Parameters.AddWithValue("@id", en.Id);
             SqlDataReader dr = comAux.ExecuteReader();
             bool existe = dr.Read();
             dr.Close();
             return existe;
         }
 
-        public CADProducto()
-        {
-            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
-        }
+        
 
         public bool Create(ENProducto en)
         {
@@ -38,22 +39,23 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "INSERT INTO Products (Id, Name, Stock, Price, SalePrice, Category, CreationDate, ImagePath, Sinopsis, Descripcion, Autor) VALUES (@Id, @Name, @Stock, @Price, @SalePrice, @Category, @CreationDate, @ImagePath, @Sinopsis, @Descripcion, @Autor)";
+                string query = "INSERT INTO Producto (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
-                com.Parameters.AddWithValue("@Id", en.Id);
                 com.Parameters.AddWithValue("@Stock", en.Stock);
                 com.Parameters.AddWithValue("@Price", en.Price);
                 com.Parameters.AddWithValue("@SalePrice", en.SalePrice);
-                com.Parameters.AddWithValue("@Category", en.Category);
-                com.Parameters.AddWithValue("@CreationDate", en.CreationDate);
+                com.Parameters.AddWithValue("@ImagePath", en.ImagePath);
                 com.Parameters.AddWithValue("@Sinopsis", en.Sinopsis);
-                com.Parameters.AddWithValue("@Descripcion", en.Descripcion);
                 com.Parameters.AddWithValue("@Autor", en.Autor);
+                com.Parameters.AddWithValue("@CodOfer", en.CodOfer);
+                com.Parameters.AddWithValue("@Editorial", en.Editorial);
+                com.Parameters.AddWithValue("@AnyoPubli", en.AnyoPubli);
+                com.Parameters.AddWithValue("@NumPags", en.NumPags);
 
                 com.ExecuteNonQuery();
-                return false;
+                return true;
             }
             catch (Exception ex)
             {
@@ -72,19 +74,20 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "UPDATE Products set Name = @name, Id = @Id, Stock = @Stock, Price = @Price, SalePrice = @SalePrice, Category = @Category, CreationDate = @CreationDate, Sinopsis = @Sinopsis, Description = @Description, Autor = @Autor";
+                string query = "UPDATE Producto set nombre = @Name, cant_stock = @Stock, precio = @Price, precio_oferta = @SalePrice, img_producto = @ImagePath, sinopsis = @Sinopsis, autor = @Autor, cod_oferta = @CodOfer, editorial = @Editorial, anyo_publicacion = @AnyoPubli, num_pag = @NumPags";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
-                com.Parameters.AddWithValue("@Id", en.Id);
                 com.Parameters.AddWithValue("@Stock", en.Stock);
                 com.Parameters.AddWithValue("@Price", en.Price);
                 com.Parameters.AddWithValue("@SalePrice", en.SalePrice);
-                com.Parameters.AddWithValue("@Category", en.Category);
-                com.Parameters.AddWithValue("@CreationDate", en.CreationDate);
+                com.Parameters.AddWithValue("@ImagePath", en.ImagePath);
                 com.Parameters.AddWithValue("@Sinopsis", en.Sinopsis);
-                com.Parameters.AddWithValue("@Descripcion", en.Descripcion);
                 com.Parameters.AddWithValue("@Autor", en.Autor);
+                com.Parameters.AddWithValue("@CodOfer", en.CodOfer);
+                com.Parameters.AddWithValue("@Editorial", en.Editorial);
+                com.Parameters.AddWithValue("@AnyoPubli", en.AnyoPubli);
+                com.Parameters.AddWithValue("@NumPags", en.NumPags);
 
                 com.ExecuteNonQuery();
                 return false;
@@ -132,21 +135,24 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "Select * from Products where Id = @Id";
+                string query = "Select * from Producto where Id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
                 com.Parameters.AddWithValue("@Id", en.Id);
 
                 SqlDataReader dr = com.ExecuteReader();
                 dr.Read();
-                en.Name = dr["Name"].ToString();
-                en.Price = float.Parse(dr["Price"].ToString());
-                en.Stock = int.Parse(dr["Stock"].ToString());
-                en.SalePrice = float.Parse(dr["SalePrice"].ToString());
-                en.Category = Convert.ToInt32(dr["Category"]);
-                en.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
-                en.Sinopsis = dr["Sinopsis"].ToString();
-                en.Descripcion = dr["Descripcion"].ToString();
-                en.Autor = dr["Autor"].ToString();
+                en.Id = int.Parse(dr["id"].ToString());
+                en.Name = dr["nombre"].ToString();
+                en.Price = float.Parse(dr["precio"].ToString());
+                en.Stock = int.Parse(dr["cant_stock"].ToString());
+                en.SalePrice = float.Parse(dr["precio_oferta"].ToString());
+                en.Sinopsis = dr["sinopsis"].ToString();
+                en.Autor = dr["autor"].ToString();
+                en.ImagePath = dr["img_producto"].ToString();
+                en.Editorial = dr["editorial"].ToString();
+                en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                en.NumPags = int.Parse(dr["num_pag"].ToString());
+
 
                 dr.Close();
                 return true;
@@ -159,6 +165,65 @@ namespace ClassLibrary
             finally
             {
                 c.Close();
+            }
+        }
+
+        public List<ENProducto> ObtenerTodosLosProductos()
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+
+                string comandoPaquetesSQL = "SELECT * FROM PRODUCTO";
+                SqlCommand cmdPaquetes = new SqlCommand(comandoPaquetesSQL, conex);
+
+                using (SqlDataReader dr = cmdPaquetes.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        try
+                        {
+                            ENProducto en = new ENProducto();
+                            en.Id = int.Parse(dr["id"].ToString());
+                            en.Name = dr["nombre"].ToString();
+                            en.Price = float.Parse(dr["precio"].ToString());
+                            en.Stock = int.Parse(dr["cant_stock"].ToString());
+                            en.SalePrice = float.Parse(dr["precio_oferta"].ToString());
+                            en.Sinopsis = dr["sinopsis"].ToString();
+                            en.Autor = dr["autor"].ToString();
+                            en.ImagePath = dr["img_producto"].ToString();
+                            en.Editorial = dr["editorial"].ToString();
+                            en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                            en.NumPags = int.Parse(dr["num_pag"].ToString());
+
+                            productos.Add(en);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error al leer producto con ID {0}. Error: {1}", dr["id"], ex.Message);
+                        }
+                    }
+                }
+
+                return productos;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operation has failed. SQL Error: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operation has failed. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
             }
         }
 

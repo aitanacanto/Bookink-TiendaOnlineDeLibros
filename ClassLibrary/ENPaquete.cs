@@ -11,23 +11,69 @@ namespace ClassLibrary
     {
         public int IdPaquete { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public decimal Precio { get; set; }
+        public float Precio { get; set; }
+        public string Img_paquete { get; set; }
         public List<ENProducto> Productos { get; set; } // Lista de productos en el paquete
 
-        // Constructor
+
         public ENPaquete()
         {
-            Productos = new List<ENProducto>();
+            this.Productos = new List<ENProducto>();
+            this.Nombre = "";
+            this.Precio = 0;
+
         }
 
-        public ENPaquete(int idPaquete, string nombre, string descripcion, decimal precio)
+        public ENPaquete(int idPaquete, string nombre, float precio, List<ENProducto> productos)
         {
             IdPaquete = idPaquete;
             Nombre = nombre;
-            Descripcion = descripcion;
             Precio = precio;
-            Productos = new List<ENProducto>();
+            Productos = new List<ENProducto>(productos);
+        }
+
+        public bool CrearPaquete()
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.CrearPaquete(this);
+        }
+
+        public ENPaquete leerPaquete()
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.leerPaquete(this);
+        }
+
+        public bool ActualizarPaquete()
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.ActualizarPaquete(this);
+        }
+
+
+        public bool EliminarPaquete()
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.EliminarPaquete(this);
+        }
+
+        public bool EliminarProductoDelPaquete(int idProducto)
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.EliminarProductoDelPaquete(this, idProducto);
+        }
+
+
+        public bool AgregarProductoAlPaquete(int idProducto)
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.AgregarProductoAlPaquete(this, idProducto);
+        }
+
+        public List<ENPaquete> ObtenerTodosLosPaquetes()
+        {
+            CADPaquete cad = new CADPaquete();
+            return cad.ObtenerTodosLosPaquetes();
         }
     }
 }

@@ -59,9 +59,7 @@
                                         </div>
                                             
                                         <div class="text-center mt-3">
-                                        <a href="#" class="btn btn-primary">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                            Añadir al Carrito</a>
+                                        <asp:Button ID="Id_Producto" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("id") %>' OnClick="Add_Click"  />
                                             </div>
                                     </div>
                                 </a>
@@ -141,9 +139,7 @@
                                         </div>
                                             
                                         <div class="text-center mt-3">
-                                        <a href="#" class="btn btn-primary">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                            Añadir al Carrito</a>
+                                            <asp:Button ID="Anyadir" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Anyadir_Click"  />
                                             </div>
                                     </div>
                                 </a>

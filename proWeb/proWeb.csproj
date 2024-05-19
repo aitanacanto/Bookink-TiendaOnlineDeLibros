@@ -67,9 +67,9 @@
     <Content Include="adminPaquete.aspx" />
     <Content Include="adminProducto.aspx" />
     <Content Include="adminUsuario.aspx" />
-    <Content Include="App_Data\database.mdf" />
-    <Content Include="App_Data\database_log.ldf">
-      <DependentUpon>database.mdf</DependentUpon>
+    <Content Include="App_Data\bbdd.mdf" />
+    <Content Include="App_Data\bbdd_log.ldf">
+      <DependentUpon>bbdd.mdf</DependentUpon>
     </Content>
     <Content Include="carrito.aspx" />
     <Content Include="catalogo.aspx" />

@@ -1,14 +1,33 @@
--- CREACIÓN DE TABLAS
+-- BORRADO DE TABLAS
 
+--DROP TABLE TIENE_CATEGORIA
+--DROP TABLE TIENE_DIRECCION
+--DROP TABLE TIENE_PAQUETE
+--DROP TABLE CATEGORIA
+--DROP TABLE DIRECCION
+--DROP TABLE LINCARRITO
+--DROP TABLE LINPEDIDO
+--DROP TABLE LINPEDIDO_PA
+----DROP TABLE PAQUETE
+--DROP TABLE PEDIDO
+--DROP TABLE RESENA
+--DROP TABLE PRODUCTO
+--DROP TABLE CARRITO
+--DROP TABLE USUARIO
+
+-- CREACIÓN DE TABLAS
 create table [dbo].[USUARIO]
 (	
-    [id] INT PRIMARY KEY,
-    [nombre_apellido] VARCHAR(255) NOT NULL,
+    [id] INT IDENTITY (1, 1) NOT NULL,
+    [nombre] VARCHAR(255) NOT NULL,
+    [apellidos] VARCHAR(255) NOT NULL,
+    [contrasenya] VARCHAR(255) NOT NULL,
     [nif] NVARCHAR(20) NOT NULL,
+    [email] NVARCHAR(100) NOT NULL UNIQUE,
+    [telefono] NVARCHAR(20) NOT NULL,
     [puntos] INT NOT NULL,
     [admin] NVARCHAR(5) NOT NULL,
-    [mail] NVARCHAR(100) NOT NULL,
-    [teléfono] NVARCHAR(20) NOT NULL
+    PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
 create table [dbo].[PRODUCTO]
@@ -30,39 +49,42 @@ create table [dbo].[PRODUCTO]
 GO
 create table [dbo].[CARRITO]
 (	
-    [id] INT PRIMARY KEY,
-    [cantidad] INT NOT NULL,
+    [id] INT IDENTITY (1, 1) NOT NULL,
     [id_usuario] INT NOT NULL,
-    [lincarrito] NVARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id)
+    [pvp_total] DECIMAL (7, 2) DEFAULT ((0)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [fk_CARRITO_USUARIO] FOREIGN KEY ([id_usuario]) REFERENCES [dbo].[Usuario] ([id]) ON DELETE CASCADE
 )
 GO
 create table [dbo].[LINCARRITO]
 (	
-    [id_carrito] INT,
-    [id_producto] INT,
+    [id_carrito] INT NOT NULL,
+    [id_producto] INT NOT NULL,
+    [cantidad] INT DEFAULT ((1)) NOT NULL,
+    [pvp] DECIMAL (7, 2) NOT NULL,
     PRIMARY KEY (id_carrito, id_producto),
-    FOREIGN KEY (id_carrito) REFERENCES CARRITO(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    CONSTRAINT [fk_LINCARRITO_PRODUCTO] FOREIGN KEY ([id_producto]) REFERENCES [dbo].[PRODUCTO] ([id]),
+    CONSTRAINT [fk_LINCARRITO_CARRITO] FOREIGN KEY ([id_carrito]) REFERENCES [dbo].[CARRITO] ([id]) ON DELETE CASCADE
 )
 GO
 create table [dbo].[PEDIDO]
 (	
-    [numped] INT PRIMARY KEY,
+    [numped] INT IDENTITY (1, 1),
     [id_usuario] INT NOT NULL,
     [cod_carrito] INT NOT NULL,
     [dirección_envío] NVARCHAR(255) NOT NULL,
-    [cantidad] INT NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
+    PRIMARY KEY CLUSTERED (numped),
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
     FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id)
 )
 GO
 create table [dbo].[LINPEDIDO]
 (	
-    [id_pedido] INT,
+    [id_pedido] INT IDENTITY (1, 1) NOT NULL,
     [id_producto] INT,
+    [cantidad] INT NOT NULL,
     PRIMARY KEY (id_pedido, id_producto),
     FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped),
     FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
@@ -70,11 +92,12 @@ create table [dbo].[LINPEDIDO]
 GO
 create table [dbo].[DIRECCION]
 (	
-    [id] INT PRIMARY KEY,
+    [id] INT IDENTITY (1, 1),
     [cod_postal] NVARCHAR(10) NOT NULL,
     [dirección] NVARCHAR(255) NOT NULL,
     [ciudad] NVARCHAR(30) NOT NULL,
     [pais] NVARCHAR(30) NOT NULL
+    PRIMARY KEY (id),
 )
 GO
 create table [dbo].[TIENE_DIRECCION]
@@ -88,22 +111,22 @@ create table [dbo].[TIENE_DIRECCION]
 GO
 create table [dbo].[RESENA]
 (	
-    [cod] INT IDENTITY (1, 1) NOT NULL,
     [id_usuario] INT NOT NULL,
     [id_producto] INT NOT NULL,
-    [comentario] TEXT NOT NULL,
+    [comentario] NVARCHAR(max) NOT NULL,
     [fecha] DATE NOT NULL,
     [valoracion] DECIMAL(3, 2) NOT NULL,
-    PRIMARY KEY CLUSTERED ([cod] ASC),
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id),
+    PRIMARY KEY (id_usuario,id_producto)
 )
 GO
 create table [dbo].[PAQUETE]
 (	
     [id] INT IDENTITY (1, 1) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
-    [precio] DECIMAL(10, 2) NOT NULL
+    [precio] DECIMAL(10, 2) NOT NULL,
+    [img_paquete] NVARCHAR(255) NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
@@ -270,16 +293,16 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
 
 
 -- PAQUETE
-    INSERT INTO PAQUETE (nombre, precio) VALUES 
-    ('HARRY POTTER Pack',80.00),
-    ('CULPABLES Pack',32.99),
-    ('DIVERGENTE Pack',42.99),
-    ('POPPY WAR Pack',35.00),
-    ('LOS HABITANTES DEL AIRE Pack',54.99),
-    ('MISTBORN Pack',45.50),
-    ('BLACKWATER Pack',69.99),
-    ('CRÓNICAS DE LA TORRE Pack',29.99),
-    ('PERCY JACKSON Pack', 46.55);
+    INSERT INTO PAQUETE (nombre, precio, img_paquete) VALUES 
+    ('HARRY POTTER Pack',80.00, 'content/products/pack_1.jpg'),
+    ('CULPABLES Pack',32.99, 'content/products/pack_2.jpg'),
+    ('DIVERGENTE Pack',42.99, 'content/products/pack_3.jpg'),
+    ('POPPY WAR Pack',35.00, 'content/products/pack_3.jpg'),
+    ('LOS HABITANTES DEL AIRE Pack',54.99, 'content/products/pack_4.jpg'),
+    ('MISTBORN Pack',45.50, 'content/products/pack_5.jpg'),
+    ('BLACKWATER Pack',69.99, 'content/products/pack_6.jpg'),
+    ('CRÓNICAS DE LA TORRE Pack',29.99, 'content/products/pack_7.jpg'),
+    ('PERCY JACKSON Pack', 46.55, 'content/products/pack_8.jpg');
 
 -- TIENE PAQUETE
     INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES 
@@ -311,6 +334,8 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
      -- PERCY JACKSON Pack 9
         (9, 28),(9, 29),(9, 30);
      
+
+
 
 
 

@@ -25,5 +25,11 @@ namespace ClassLibrary
             this.idUsuario = idUsuario;
             this.idDireccion = idDireccion;
         }
+
+        public bool Create()
+        {
+            CADTieneDireccion cadTieneDireccion = new CADTieneDireccion();
+            return cadTieneDireccion.AgregarRelacion(this);
+        }
     }
 }

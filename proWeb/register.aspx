@@ -5,8 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="container">
-        <form method="post" class="login-form">
+    <div class="container login-form">
             <h1>Registrarse</h1>
             <div class="mb-3">
                 <label for="Nombre">*Nombre</label>
@@ -38,10 +37,18 @@
             </div>
             <div>
                 *Opciones obligatorias
+                <asp:Label ID="LabelOculta" runat="server" Visible="false">fdsafjdasklfjdas</asp:Label>          
             </div>
-            <div>
-                <button type="submit" class="btn btn-primary">Registrarse</button>
+            <div class="button-container" style="text-align: center; margin-top: 20px;"> 
+              <!-- Botón para Registrarse -->
+              <asp:Button 
+                  ID="btnRegister" 
+                  runat="server" 
+                  Text="Registrarse" 
+                  CssClass="button" 
+                  OnClick="Register_Click" 
+              />
             </div>
-        </form>
+
       </div>
 </asp:Content>

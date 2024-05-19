@@ -1,29 +1,119 @@
 ﻿// @author: Manuel José Tornero Fuster    ; DNI: DNI000006
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class CADUsuario
+    public class CADUsuario
     {
         private string constring;
 
-        public CADUsuario(ENUsuario usuario)
+        //Devuelve true si existe el producto en la base de datos
+        private bool Exists(SqlConnection c, ENUsuario en)
         {
-            //constring = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ToString();
+            //declaración querry auxiliar
+            string querryAux = "Select email from USUARIO where email = @email";
+            SqlCommand comAux = new SqlCommand(querryAux, c);
+
+            //asignación parámetros
+            comAux.Parameters.AddWithValue("@email", en.Email);
+
+            SqlDataReader dr = comAux.ExecuteReader();
+
+            bool existe = dr.Read();
+            dr.Close();
+            return existe;
         }
 
-        public bool Register(ENUsuario usuario) 
-        { 
-            return false; 
+        public CADUsuario() 
+        {
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
         }
 
-        public bool LogIn(ENUsuario usuario)
+        public bool Register(ENUsuario en) 
         {
-            return false;
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, nif, email, telefono, puntos, admin) " +
+                               "VALUES (@name, @surname, @contrasenya, @nif, @email, @telefono, 0, 'no')";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@name", en.Name);
+                com.Parameters.AddWithValue("@surname", en.Surname);
+                com.Parameters.AddWithValue("@contrasenya", en.Password);
+                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@email", en.Email);
+                com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido añadir el usuario, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public bool LogIn(ENUsuario en)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                if (!Exists(c, en)) { throw new ArgumentException("No existe el usuario con email: " + en.Email.ToString());}
+
+                string inputPass;
+                // Crear una sentencia parametricada
+                string query = "SELECT email, contrasenya FROM USUARIO WHERE email = @email";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@email", en.Email);
+
+                SqlDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    inputPass = (string)reader["contrasenya"];
+                    if (inputPass == en.Password)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Contraseña: " + en.Password + "no válida.");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("No se ha podido leer los datos al iniciar sesión.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido iniciar sesión, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
         }
 
         public bool LogOut(ENUsuario usuario)
@@ -31,14 +121,71 @@ namespace ClassLibrary
             return false;
         }
 
-        public bool UpdateUserData(ENUsuario usuario)
+        public bool UpdateUserData(ENUsuario en)
         {
-            return true;
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "UPDATE USUARIO SET nombre = @name, apellidos = @surname, contrasenya = @contrasenya, " +
+                                "nif = @nif, telefono = @telefono " +
+                                "WHERE email = @email";
+
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@name", en.Name);
+                com.Parameters.AddWithValue("@surname", en.Surname);
+                com.Parameters.AddWithValue("@contrasenya", en.Password);
+                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@email", en.Email);
+                com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido modificar el usuario, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
         }
 
-        public bool DeleteUser(ENUsuario usuario) 
+        public bool DeleteUser(ENUsuario en) 
         {
-            return true;
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "DELETE FROM USUARIO WHERE email = @email";
+
+                /*POSIBLE MEJORA: Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login*/
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@email", en.Email);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido eliminar el usuario, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+
         }
     }
 }
