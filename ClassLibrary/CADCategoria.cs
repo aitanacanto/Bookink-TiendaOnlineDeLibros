@@ -21,6 +21,7 @@ namespace ClassLibrary
                 throw new InvalidOperationException("La cadena de conexión 'database' no está definida en el archivo de configuración.");
             }
         }
+
         public List<ENCategoria> GetAllCategories()
         {
             List<ENCategoria> categories = new List<ENCategoria>();
@@ -44,10 +45,6 @@ namespace ClassLibrary
             catch (Exception ex)
             {
                 Console.WriteLine("Error al obtener todas las categorías: " + ex.Message);
-            }
-            finally
-            {
-                
             }
             return categories;
         }
@@ -91,9 +88,26 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public bool UpdateCategory(int categoryId, string newNombre)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+                    SqlCommand cmd = new SqlCommand("UPDATE CATEGORIA SET nombre = @nombre WHERE id = @id", connection);
+                    cmd.Parameters.AddWithValue("@nombre", newNombre);
+                    cmd.Parameters.AddWithValue("@id", categoryId);
+                    connection.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al actualizar categoría: " + ex.Message);
+                return false;
+            }
+        }
     }
 }
-
-
-
-
