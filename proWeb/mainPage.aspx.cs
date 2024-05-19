@@ -27,8 +27,9 @@ namespace proWeb
 
                 reapeterNov.DataSource = Novedades;
                 reapeterNov.DataBind();
-                Session["Carrito"] = new ENCarrito();
+                if (Session["Carrito"] == null) Session["Carrito"] = new ENCarrito();
                 if (Session["Usuario"] ==  null) Session["Usuario"] = new ENUsuario();
+                
             }
             /*ENUsuario user = (ENUsuario)Session["Usuario"];
             if (user.Id != 0)
