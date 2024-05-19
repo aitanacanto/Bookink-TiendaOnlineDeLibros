@@ -17,45 +17,33 @@ namespace ClassLibrary
         public bool CrearPaquete(ENPaquete en)
         {
             SqlConnection conex = new SqlConnection(constring);
-            SqlTransaction transaction = null;
 
             try
             {
                 conex.Open();
-                transaction = conex.BeginTransaction();
 
-                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio) VALUES (@nombre, @precio)";
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex, transaction);
+                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio, img_paquete) VALUES (@nombre, @precio, @img_paquete);";
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
+                cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
 
-                int paqueteId = (int)cmd.ExecuteScalar();
-                en.IdPaquete = paqueteId;
+                en.IdPaquete = Convert.ToInt32(cmd.ExecuteScalar());
 
                 foreach (ENProducto producto in en.Productos)
                 {
-                    producto.Create();
+                    AgregarProductoAlPaquete(en, producto.Id); 
                 }
-
-                transaction.Commit();
                 return true;
             }
             catch (SqlException e)
             {
                 Console.WriteLine("Product operation has failed. Error: {0}", e.Message);
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
                 return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Product operation has failed. Error: {0}", e.Message);
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
                 return false;
             }
             finally
@@ -64,8 +52,15 @@ namespace ClassLibrary
             }
         }
 
+
+
         public ENPaquete leerPaquete(ENPaquete en)
         {
+            if (en == null)
+            {
+                throw new ArgumentNullException(nameof(en), "El parámetro en no puede ser null");
+            }
+
             SqlConnection conex = new SqlConnection(constring);
 
             try
@@ -76,10 +71,17 @@ namespace ClassLibrary
                 cmd.Parameters.AddWithValue("@id", en.IdPaquete);
 
                 SqlDataReader reader = cmd.ExecuteReader();
+                ENPaquete paquete = null;
+
                 if (reader.Read())
                 {
-                    en.Nombre = (string)reader["nombre"];
-                    en.Precio = (float)reader["precio"];
+                    paquete = new ENPaquete
+                    {
+                        IdPaquete = (int)reader["id"],
+                        Nombre = (string)reader["nombre"],
+                        Precio = (float)reader["precio"],
+                        Img_paquete = (string)reader["img_paquete"]
+                    };
                 }
                 else
                 {
@@ -87,10 +89,12 @@ namespace ClassLibrary
                     return null;
                 }
 
-                en.Productos = new List<ENProducto>();
-                string comandoProductosSQL = "SELECT p.* FROM PRODUCTO p INNER JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
+                reader.Close();
+
+                paquete.Productos = new List<ENProducto>();
+                string comandoProductosSQL = "SELECT p.* FROM PRODUCTO p JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
                 SqlCommand cmdProductos = new SqlCommand(comandoProductosSQL, conex);
-                cmdProductos.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
+                cmdProductos.Parameters.AddWithValue("@id_paquete", paquete.IdPaquete);
                 bool leido = true;
 
                 using (SqlDataReader readerProductos = cmdProductos.ExecuteReader())
@@ -99,15 +103,15 @@ namespace ClassLibrary
                     {
                         ENProducto producto = new ENProducto();
                         leido = producto.Read();
-                        en.Productos.Add(producto);
+                        paquete.Productos.Add(producto);
                     }
                 }
 
-                return en;
+                return paquete;
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Operation has failed. Error: {0}", e.Message);
+                Console.WriteLine("Operation has failed. SQL Error: {0}", e.Message);
                 return null;
             }
             catch (Exception e)
@@ -121,42 +125,34 @@ namespace ClassLibrary
             }
         }
 
+
+
         public bool ActualizarPaquete(ENPaquete en)
         {
             SqlConnection conex = new SqlConnection(constring);
-            SqlTransaction transaction = null;
 
             try
             {
                 conex.Open();
-                transaction = conex.BeginTransaction();
 
                 string comandoSQL = "UPDATE PAQUETE SET nombre = @nombre, precio = @precio WHERE id = @id";
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex, transaction);
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@id", en.IdPaquete);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
+                cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
                 cmd.ExecuteNonQuery();
 
-                transaction.Commit();
                 return true;
             }
             catch (SqlException e)
             {
                 Console.WriteLine("Update operation has failed. Error: {0}", e.Message);
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
                 return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Update operation has failed. Error: {0}", e.Message);
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
                 return false;
             }
             finally
@@ -168,42 +164,30 @@ namespace ClassLibrary
         public bool EliminarPaquete(ENPaquete en)
         {
             SqlConnection conex = new SqlConnection(constring);
-            SqlTransaction transaction = null;
 
             try
             {
                 conex.Open();
-                transaction = conex.BeginTransaction();
 
                 string deleteProductosSQL = "DELETE FROM TIENE_PAQUETE WHERE id_paquete = @id_paquete";
-                SqlCommand cmdDeleteProductos = new SqlCommand(deleteProductosSQL, conex, transaction);
+                SqlCommand cmdDeleteProductos = new SqlCommand(deleteProductosSQL, conex);
                 cmdDeleteProductos.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
                 cmdDeleteProductos.ExecuteNonQuery();
 
                 string comandoSQL = "DELETE FROM PAQUETE WHERE id = @id";
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex, transaction);
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@id", en.IdPaquete);
                 cmd.ExecuteNonQuery();
-
-                transaction.Commit();
                 return true;
             }
             catch (SqlException e)
             {
                 Console.WriteLine("Delete operation has failed. Error: {0}", e.Message);
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
                 return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Delete operation has failed. Error: {0}", e.Message);
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
                 return false;
             }
             finally
@@ -211,7 +195,6 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
-
         public bool EliminarProductoDelPaquete(ENPaquete en, int idProducto)
         {
             SqlConnection conex = new SqlConnection(constring);
@@ -281,20 +264,29 @@ namespace ClassLibrary
             try
             {
                 conex.Open();
-                string comandoPaquetesSQL = "SELECT id FROM PAQUETE";
+
+                string comandoPaquetesSQL = "SELECT id, nombre, precio, img_paquete FROM PAQUETE";
                 SqlCommand cmdPaquetes = new SqlCommand(comandoPaquetesSQL, conex);
 
                 using (SqlDataReader readerPaquetes = cmdPaquetes.ExecuteReader())
                 {
                     while (readerPaquetes.Read())
                     {
-                        ENPaquete paquete = new ENPaquete();
-                        paquete.IdPaquete = (int)readerPaquetes["id"];
-                        paquete = leerPaquete(paquete);
-
-                        if (paquete != null)
+                        try
                         {
+                            ENPaquete paquete = new ENPaquete
+                            {
+                                IdPaquete = (int)readerPaquetes["id"],
+                                Nombre = (string)readerPaquetes["nombre"],
+                                Precio = Convert.ToSingle(readerPaquetes["precio"]),
+                                Img_paquete = (string)readerPaquetes["img_paquete"]
+                            };
+
                             paquetes.Add(paquete);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error al leer paquete con ID {0}. Error: {1}", readerPaquetes["id"], ex.Message);
                         }
                     }
                 }
@@ -303,7 +295,7 @@ namespace ClassLibrary
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Operation has failed. Error: {0}", e.Message);
+                Console.WriteLine("Operation has failed. SQL Error: {0}", e.Message);
                 return null;
             }
             catch (Exception e)
@@ -313,10 +305,9 @@ namespace ClassLibrary
             }
             finally
             {
+                Console.WriteLine("Cerrando la conexión.");
                 conex.Close();
             }
         }
-
-
     }
 }
