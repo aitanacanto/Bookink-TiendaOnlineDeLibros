@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ClassLibrary
@@ -25,7 +26,21 @@ namespace ClassLibrary
         public string Email { get { return _email; } set { _email = value; } }
         public string Password { get { return _password; } set { _password = value; } }
         public string PhoneNumber { get { return _phoneNumber; } set { _phoneNumber = value; } }
-        public string NIF { get { return _NIF; } set { _NIF = value; } }
+        public string NIF
+        {
+            get { return _NIF; }
+            set
+            {
+                if (IsValidDNI(value))
+                {
+                    _NIF = value;
+                }
+                else
+                {
+                    throw new ArgumentException("El NIF proporcionado no es válido.");
+                }
+            }
+        }
         public int Id { get { return _id; } set { _id = value; } }
         public List<ENDireccion> Direcciones
         {
@@ -42,6 +57,34 @@ namespace ClassLibrary
             }
         }
 
+        // Método para validar el DNI
+        private bool IsValidDNI(string dni)
+        {
+            if (string.IsNullOrWhiteSpace(dni))
+            {
+                return false;
+            }
+
+            // Expresión regular para validar el formato del DNI
+            Regex dniRegex = new Regex(@"^\d{8}[A-HJ-NP-TV-Z]$");
+            if (!dniRegex.IsMatch(dni))
+            {
+                return false;
+            }
+
+            // Extraer los números y la letra del DNI
+            string numberPart = dni.Substring(0, 8);
+            char letterPart = dni[8];
+
+            // Calcular la letra correcta
+            string validLetters = "TRWAGMYFPDXBNJZSQVHLCKE";
+            int number = int.Parse(numberPart);
+            char correctLetter = validLetters[number % 23];
+
+            // Comprobar si la letra del DNI es correcta
+            return correctLetter == letterPart;
+        }
+
         public ENUsuario() 
         {
             _id = 0;
@@ -56,8 +99,8 @@ namespace ClassLibrary
         {
             _name = name;
             _surname = surname;
-            _NIF = nif;
-            _password = password;
+            NIF = nif;
+            _password = ComputeSha256Hash(password);
             _email = email;
             _phoneNumber = phone;
         }
@@ -66,7 +109,7 @@ namespace ClassLibrary
         {
             _email = email;
             // cifrar 
-            _password = password;
+            _password = ComputeSha256Hash(password);
         }
 
         public bool Register()
@@ -79,12 +122,6 @@ namespace ClassLibrary
         {
             CADUsuario cad = new CADUsuario();
             return cad.LogIn(this);
-        }
-
-        public bool LogOut()
-        {
-            CADUsuario cad = new CADUsuario();
-            return cad.LogOut(this);
         }
 
         public bool UpdateUserData()
@@ -103,6 +140,23 @@ namespace ClassLibrary
         {
             CADUsuario cad = new CADUsuario();
             return cad.AddAddress(this,dir);
+        }
+        public static string ComputeSha256Hash(string rawData)
+        {
+            // Crear un objeto SHA256
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Computar el hash del string en bytes
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convertir los bytes a un string hexadecimal
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }

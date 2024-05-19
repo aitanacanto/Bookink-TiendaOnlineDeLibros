@@ -13,8 +13,7 @@ namespace proWeb
         ENUsuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session.Remove("User");
-            usuario = new ENUsuario();
+            
         }
         protected void Register_Click(object sender, EventArgs e)
         {
@@ -31,7 +30,7 @@ namespace proWeb
                 // Usuario logeado
                 //Response.Redirect("mainpage.aspx");
                 Session["User"] = usuario;
-                LabelOculta.Text = "ta logeao";
+                LabelOculta.Text = "Autenticación exitosa. " + usuario.Name;
                 LabelOculta.Visible = true;
             }
             else
