@@ -8,7 +8,7 @@
 --DROP TABLE LINCARRITO
 --DROP TABLE LINPEDIDO
 --DROP TABLE LINPEDIDO_PA
-----DROP TABLE PAQUETE
+--DROP TABLE PAQUETE
 --DROP TABLE PEDIDO
 --DROP TABLE RESENA
 --DROP TABLE PRODUCTO
@@ -105,7 +105,7 @@ create table [dbo].[TIENE_DIRECCION]
     [id_usuario] INT,
     [id_direccion] INT,
     PRIMARY KEY (id_usuario, id_direccion),
-    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id) ON DELETE CASCADE,
     FOREIGN KEY (id_direccion) REFERENCES DIRECCION(id)
 )
 GO
@@ -117,7 +117,7 @@ create table [dbo].[RESENA]
     [fecha] DATE NOT NULL,
     [valoracion] DECIMAL(3, 2) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id),
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id) ON DELETE CASCADE,
     PRIMARY KEY (id_usuario,id_producto)
 )
 GO
@@ -334,10 +334,129 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
      -- PERCY JACKSON Pack 9
         (9, 28),(9, 29),(9, 30);
      
+-- Usuarios
+
+-- Nota: La función HASHBYTES() de SQL Server se usa para cifrar la contraseña en SHA256.
+
+INSERT INTO [dbo].[USUARIO] (nombre, apellidos, contrasenya, nif, email, telefono, puntos, admin) VALUES 
+('Juan', 'Pérez', 'bf59998c661e13ef3620f09462e15e521e5d3d707dab54313034526bc8474b6f', 'DNI000008', 'juan.perez@example.com', '600123456', 100, 'no'), --contraseña1234
+('Ana', 'Gómez', 'a20aff106fe011d5dd696e3b7105200ff74331eeb8e865bb80ebd82b12665a07', 'DNI000009', 'ana.gomez@example.com', '600654321', 150, 'no'), --password321
+('Luis', 'Martínez', 'd84464181f7f019f3fb10e6bbd06f543d7ac84c4f8e360ebb9402a472ab30ebc', 'DNI000010', 'luis.martinez@example.com', '600789123', 200, 'no'); --1234password
 
 
+--Direcciones
+
+INSERT INTO [dbo].[DIRECCION] (cod_postal, dirección, ciudad, pais) VALUES 
+('28001', 'Calle Mayor 1', 'Madrid', 'España'),
+('41001', 'Avenida de la Constitución 2', 'Sevilla', 'España'),
+('08001', 'Paseo de Gracia 3', 'Barcelona', 'España');
+
+--Tiene_direccion
+
+-- Los IDs aquí son ficticios y deben ser reemplazados por los reales obtenidos de las inserciones anteriores.
+INSERT INTO [dbo].[TIENE_DIRECCION] (id_usuario, id_direccion) VALUES 
+(1, 1), -- Juan Pérez vive en Calle Mayor 1
+(2, 2), -- Ana Gómez vive en Avenida de la Constitución 2
+(3, 3); -- Luis Martínez vive en Paseo de Gracia 3
 
 
+--Reseña
 
+INSERT INTO RESENA (id_usuario, id_producto, comentario, fecha, valoracion) VALUES
+-- Producto 1: 2 reseñas
+(1, 1, 'Excelente libro, muy recomendable.', '2024-05-01', 4.8),
+(2, 1, 'Una historia fascinante de principio a fin.', '2024-05-02', 4.5),
 
+-- Producto 2: 2 reseñas
+(3, 2, 'Me encantó, no pude dejar de leerlo.', '2024-05-03', 4.9),
+(1, 2, 'Buena trama, personajes bien desarrollados.', '2024-05-04', 4.7),
 
+-- Producto 3: 2 reseñas
+(2, 3, 'Una narrativa única y envolvente.', '2024-05-05', 4.6),
+(3, 3, 'Interesante, aunque un poco lento al principio.', '2024-05-06', 4.0),
+
+-- Producto 4
+(1, 4, 'Increíble de principio a fin.', '2024-05-07', 4.8),
+
+-- Producto 5
+(2, 5, 'Una lectura imprescindible.', '2024-05-08', 4.9),
+
+-- Producto 6
+(3, 6, 'Me dejó sin palabras, muy bueno.', '2024-05-09', 5.0),
+
+-- Producto 7
+(1, 7, 'Un clásico moderno.', '2024-05-10', 4.5),
+
+-- Producto 8
+(2, 8, 'Recomendado para todos.', '2024-05-11', 4.4),
+
+-- Producto 9
+(3, 9, 'Entretenido y bien escrito.', '2024-05-12', 4.3),
+
+-- Producto 10
+(1, 10, 'Una obra maestra.', '2024-05-13', 4.9),
+
+-- Producto 11
+(2, 11, 'Me encantó, lo recomiendo mucho.', '2024-05-14', 4.7),
+
+-- Producto 12
+(3, 12, 'Muy buen libro, me gustó.', '2024-05-15', 4.6),
+
+-- Producto 13
+(1, 13, 'Fantástico, lo disfruté mucho.', '2024-05-16', 4.8),
+
+-- Producto 14
+(2, 14, 'Un libro que te atrapa desde el principio.', '2024-05-17', 4.9),
+
+-- Producto 15
+(3, 15, 'Impresionante, no pude soltarlo.', '2024-05-18', 4.7),
+
+-- Producto 16
+(1, 16, 'Muy bien escrito, lo disfruté.', '2024-05-19', 4.6),
+
+-- Producto 17
+(2, 17, 'Un libro para recordar.', '2024-05-20', 4.9),
+
+-- Producto 18
+(3, 18, 'Excelente narrativa.', '2024-05-21', 4.8),
+
+-- Producto 19
+(1, 19, 'Muy entretenido.', '2024-05-22', 4.5),
+
+-- Producto 20
+(2, 20, 'Lo mejor que he leído en años.', '2024-05-23', 5.0),
+
+-- Producto 21
+(3, 21, 'Un libro muy interesante.', '2024-05-24', 4.6),
+
+-- Producto 22
+(1, 22, 'Recomendado para todos.', '2024-05-25', 4.4),
+
+-- Producto 23
+(2, 23, 'Una lectura obligatoria.', '2024-05-26', 4.9),
+
+-- Producto 24
+(3, 24, 'Muy bueno, lo recomiendo.', '2024-05-27', 4.7),
+
+-- Producto 25
+(1, 25, 'Una historia fascinante.', '2024-05-28', 4.8),
+
+-- Producto 26: 2 reseñas
+(2, 26, 'Excelente libro.', '2024-05-29', 4.9),
+(3, 26, 'Una trama muy bien desarrollada.', '2024-05-30', 4.7),
+
+-- Producto 27: 2 reseñas
+(1, 27, 'Me encantó de principio a fin.', '2024-06-01', 4.8),
+(2, 27, 'Muy buen libro.', '2024-06-02', 4.6),
+
+-- Producto 28: 2 reseñas
+(3, 28, 'Una lectura imprescindible.', '2024-06-03', 4.9),
+(1, 28, 'Fantástico.', '2024-06-04', 4.7),
+
+-- Producto 29: 2 reseñas
+(2, 29, 'Muy bien escrito.', '2024-06-05', 4.8),
+(3, 29, 'Un libro para recomendar.', '2024-06-06', 4.9),
+
+-- Producto 30: 2 reseñas
+(1, 30, 'Lo disfruté mucho.', '2024-06-07', 4.6),
+(2, 30, 'Excelente.', '2024-06-08', 4.7);

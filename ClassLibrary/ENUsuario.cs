@@ -19,8 +19,8 @@ namespace ClassLibrary
         private string _phoneNumber;
         private string _NIF;
         private int _id;
-        private List<ENDireccion> _direcciones; //deberia ser una referencia
-
+        private List<ENDireccion> _direcciones;
+         
         public string Name { get { return _name; } set { _name = value; } }
         public string Surname { get { return _surname; } set { _surname = value; } }
         public string Email { get { return _email; } set { _email = value; } }
@@ -87,29 +87,30 @@ namespace ClassLibrary
 
         public ENUsuario() 
         {
-            _id = 0;
-            _name = string.Empty;
-            _email = string.Empty;
-            _password = string.Empty;
-            _phoneNumber = string.Empty;
-            _direcciones = new List<ENDireccion>();
+            Id = 0;
+            Name = string.Empty;
+            Surname = string.Empty;
+            Email = string.Empty;
+            _NIF = string.Empty;
+            Password = string.Empty;
+            PhoneNumber = string.Empty;
+            Direcciones = new List<ENDireccion>();
         }
 
         public ENUsuario(string name, string surname, string password, string nif, string email, string phone)
         {
-            _name = name;
-            _surname = surname;
+            Name = name;
+            Surname = surname;
             NIF = nif;
-            _password = ComputeSha256Hash(password);
-            _email = email;
-            _phoneNumber = phone;
+            Password = ComputeSha256Hash(password);
+            Email = email;
+            PhoneNumber = phone;
         }
 
         public ENUsuario(string email, string password)
         {
-            _email = email;
-            // cifrar 
-            _password = ComputeSha256Hash(password);
+            Email = email;
+            Password = ComputeSha256Hash(password);
         }
 
         public bool Register()
@@ -141,7 +142,7 @@ namespace ClassLibrary
             CADUsuario cad = new CADUsuario();
             return cad.AddAddress(this,dir);
         }
-        public static string ComputeSha256Hash(string rawData)
+        private static string ComputeSha256Hash(string rawData)
         {
             // Crear un objeto SHA256
             using (SHA256 sha256Hash = SHA256.Create())

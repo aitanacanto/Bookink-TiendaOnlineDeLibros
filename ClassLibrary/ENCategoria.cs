@@ -6,21 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClassLibrary
+{ 
+public class ENCategoria
 {
-    class ENCategoria
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+
+    public bool Add()
     {
-        private int id;
-        private String nombre;
-
-        public int Id { get; set; }
-
-        public string Nombre { get; set; }
-
-        public ENCategoria()
-        {
-
-        }
-
+        CADCategoria cad = new CADCategoria();
+        return cad.AddCategory(this.Nombre);
     }
 
+    public bool Delete()
+    {
+        CADCategoria cad = new CADCategoria();
+        return cad.DeleteCategory(this.Id);
+    }
+
+    public static List<ENCategoria> GetAllCategories()
+    {
+        CADCategoria cad = new CADCategoria();
+        return cad.GetAllCategories();
+    }
+}
 }
