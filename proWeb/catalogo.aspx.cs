@@ -48,7 +48,6 @@ namespace proWeb
             protected void Anyadir_Click(object sender, EventArgs e)
             {
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
-
             Button button = (Button)sender;
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
