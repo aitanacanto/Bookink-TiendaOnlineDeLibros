@@ -16,13 +16,13 @@ namespace ClassLibrary
         private int _id;
         private int _id_usuario;
         private float _importe_total;
-        private List<ENLinCarrito> _listLinCar;
+        private List<ENLinCarrito> _listLinCar = new List<ENLinCarrito>();
         public int id
         {
             get { return _id; }
-            set { _id = value; }
+            set { actualizarIdCarritoLineas(value); }
         }
-        
+
 
         public int id_usuario
         {
@@ -42,7 +42,6 @@ namespace ClassLibrary
             this.id = 0;
             this.id_usuario = 0;
             this.importe_total = 0;
-            this._listLinCar = new List<ENLinCarrito>();
         }
 
         public ENCarrito(int id_usuario)
@@ -50,49 +49,69 @@ namespace ClassLibrary
             this.id = 0;
             this.id_usuario = id_usuario;
             this.importe_total = 0;
-            this._listLinCar = new List<ENLinCarrito>();
-        }
 
-        public bool creacionCarrito()
-        {
             CADCarrito carr = new CADCarrito();
-            ENUsuario user = new ENUsuario();
-
-            if (carr.readCarrito(this) != true)
+            int id_carrito = carr.buscarIdCarrito(this.id_usuario);
+            if (id_carrito == 0)
             {
-                return carr.creacionCarrito(this);
+                carr.creacionCarrito(this);
             }
-
-            return false;
+            else
+            {
+                id = id_carrito;
+                carr.cargarCarrito(this);
+                ENLinCarrito linca = new ENLinCarrito();
+                this._listLinCar = linca.cargarLineasCarrito(id);
+            }
         }
 
-        public DataSet ensenyarCarrito()
+        private void actualizarIdCarritoLineas(int id_carrito)
         {
-            CADCarrito carr = new CADCarrito();
-            DataSet dat = carr.ensenyarCarrito(this);
-            return dat;
+            _id = id_carrito;
+            foreach (ENLinCarrito linea in _listLinCar)
+            {
+                linea.id_carrito = id_carrito;
+            }
         }
 
         public bool insertarCarrito()
         {
             CADCarrito carr = new CADCarrito();
-            return carr.creacionCarrito(this);
-        }
 
-        public bool actualizacionCarrito()
-        {
-            CADCarrito carr = new CADCarrito();
-
-            if (carr.readCarrito(this))
+            int id_carrito = carr.buscarIdCarrito(this.id_usuario);
+            if (id_carrito == 0)
             {
-                return carr.actualizacionCarrito(this);
+                if (carr.creacionCarrito(this))
+                {
+
+                    foreach (ENLinCarrito linea in _listLinCar)
+                    {
+                        linea.insertarLinea();
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                id = id_carrito;
+                foreach (ENLinCarrito linea in _listLinCar)
+                {
+                    linea.insertarLinea();
+                }
+                return true;
             }
 
-            return false;
+
         }
+
+        
         private ENLinCarrito existeProducto(ENProducto pro)
         {
-            foreach ( ENLinCarrito lincar in _listLinCar )
+            foreach (ENLinCarrito lincar in _listLinCar)
             {
                 if (lincar.producto.Id == pro.Id)
                 {
@@ -134,8 +153,16 @@ namespace ClassLibrary
 
         public bool readCarrito()
         {
+            
             CADCarrito carr = new CADCarrito();
-            return carr.readCarrito(this);
+            if (carr.readCarrito(this))
+            {
+                ENLinCarrito linca = new ENLinCarrito();
+                _listLinCar.Clear();
+                _listLinCar = linca.cargarLineasCarrito(id);
+                return true;
+            }
+            return false;
         }
 
         public bool readCarritoUsuario(ENUsuario user)
@@ -196,7 +223,7 @@ namespace ClassLibrary
         {
             foreach (ENLinCarrito linea in _listLinCar)
             {
-                if(linea.producto.Id == id_producto)
+                if (linea.producto.Id == id_producto)
                 {
                     return linea;
                 }

@@ -14,8 +14,7 @@ namespace proWeb
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session.Remove("User");
-            usuario = new ENUsuario();
+            
         }
         protected void Register_Click(object sender, EventArgs e)
         {
@@ -37,19 +36,25 @@ namespace proWeb
                 ENCarrito cesta = Session["Carrito"] as ENCarrito;
                 if (cesta != null)
                 {
+                    // carrito en memoria
                     cesta.id_usuario = usuario.Id;
+                    cesta.insertarCarrito();
+                    cesta.readCarrito();
+
                 }
                 else
                 {
+                    // no tengo carrito en memoria y tengo carrito en base de datos
                     cesta = new ENCarrito(usuario.Id);
-                    Session["Carrito"] = cesta;
+                   
                 }
-                cesta.insertarCarrito();
+                Session["Carrito"] = cesta;
+
             }
             else
             {
                 // ERROR al hacer login
-                LabelOculta.Text = loginForm.UserName + " con " + loginForm.Password;
+                LabelOculta.Text = "Credenciales inválidas.";
                 LabelOculta.Visible = true;
             }
         }

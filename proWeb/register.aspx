@@ -8,19 +8,19 @@
     <div class="container login-form">
             <h1>Registrarse</h1>
             <div class="mb-3">
-                <label for="Nombre">*Nombre</label>
+                <label for="Nombre">Nombre</label>
                 <asp:TextBox ID="Nombre" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label for="Apellidos">*Apellidos</label>
+                <label for="Apellidos">Apellidos</label>
                 <asp:TextBox ID="Apellidos" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label for="Email">*Email</label>
+                <label for="Email">Email</label>
                 <asp:TextBox ID="Email" runat="server" TextMode="Email" CssClass="form-control" Required="true"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label for="Contraseña">*Contraseña</label>
+                <label for="Contraseña">Contraseña</label>
                 <asp:TextBox ID="Contraseña" runat="server" TextMode="Password" CssClass="form-control" Required="true"></asp:TextBox>
             </div>
             <div class="mb-3">
@@ -28,15 +28,28 @@
                 <asp:TextBox ID="Telefono" runat="server" TextMode="SingleLine" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label for="NIF">*NIF/DNI</label>
+                <label for="NIF">NIF/DNI</label>
                 <asp:TextBox ID="NIF" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
             </div>
-            <div class="mb-3">
-                <label for="Direccion">*Dirección</label>
-                <asp:TextBox ID="Dirección" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+            <div class="mb-3 related-products">
+                <div class="mb-3 flex-item">
+                    <label for="cop_postal">Código postal</label>
+                    <asp:TextBox ID="cod_postal" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+                </div>
+                <div class="mb-3 flex-item">
+                    <label for="calle">Calle</label>
+                    <asp:TextBox ID="calle" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+                </div>
+                <div class="mb-3 flex-item">
+                    <label for="Ciudad">Ciudad</label>
+                    <asp:TextBox ID="ciudad" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+                </div>
+                <div class="mb-3 flex-item">
+                    <label for="Pais">País</label>
+                    <asp:TextBox ID="pais" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
+                </div>
             </div>
             <div>
-                *Opciones obligatorias
                 <asp:Label ID="LabelOculta" runat="server" Visible="false">fdsafjdasklfjdas</asp:Label>          
             </div>
             <div class="button-container" style="text-align: center; margin-top: 20px;"> 

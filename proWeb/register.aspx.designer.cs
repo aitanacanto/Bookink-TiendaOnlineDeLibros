@@ -69,13 +69,40 @@ namespace proWeb
         protected global::System.Web.UI.WebControls.TextBox NIF;
 
         /// <summary>
-        /// Control Dirección.
+        /// Control cod_postal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Dirección;
+        protected global::System.Web.UI.WebControls.TextBox cod_postal;
+
+        /// <summary>
+        /// Control calle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox calle;
+
+        /// <summary>
+        /// Control ciudad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ciudad;
+
+        /// <summary>
+        /// Control pais.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox pais;
 
         /// <summary>
         /// Control LabelOculta.
