@@ -14,7 +14,7 @@ namespace ClassLibrary
 
         public CADTieneCategoria()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["miConexion"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["database"].ConnectionString;
         }
 
         public void AddRelation(ENTieneCategoria tiene)

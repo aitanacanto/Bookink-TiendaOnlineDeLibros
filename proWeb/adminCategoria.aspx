@@ -1,3 +1,4 @@
+﻿
 ﻿<%@ Page Title="Administración de Categorías" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="adminCategoria.aspx.cs" Inherits="proWeb.adminCategoria" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="styles.css" />
@@ -9,19 +10,33 @@
     <div class="admin-products">
         <div class="header">
             <h1 class="title">Administración de Categorías</h1>
-            <asp:Button ID="btnAddCategory" runat="server" CssClass="create" Text="Añadir Categoría" OnClick="ButtonAddCategoria_Click" />
-            <asp:TextBox ID="TextBoxNewCategory" runat="server" CssClass="category-input" />
+            <div style="margin-left: auto;">
+                <button class="create">Añadir Categoría</button>
+            </div>
         </div>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="Productos" OnRowDeleting="GridView1_RowDeleting">
-            <Columns>
-                <asp:BoundField DataField="Nombre" HeaderText="Categoría" />
-                <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar" ButtonType="Button">
-                    <ItemStyle CssClass="delete" />
-                </asp:CommandField>
-                <asp:CommandField ShowEditButton="True" EditText="Editar" ButtonType="Button">
-                    <ItemStyle CssClass="edit" />
-                </asp:CommandField>
-            </Columns>
-        </asp:GridView>
+        <div class="Productos">
+            <div class="Producto">
+                <div style="width: 150px; height: 150px; background-color: #FFFFE0; border-radius: 8px;"></div>
+                <div>
+                    <h2 class="title">Categoría 1</h2>
+                </div>
+                <div class="mod-buttons">
+                    <button class="edit">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Editar
+                    </button>
+                    <button class="delete">
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Aquí se repetirían las categorías restantes -->
+
+        </div>
     </div>
+
+    
+    
 </asp:Content>

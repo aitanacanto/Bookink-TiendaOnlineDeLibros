@@ -9,56 +9,89 @@ using System.Data.SqlClient;
 using System.Configuration;
 
 namespace ClassLibrary
-    
-}
-public class CADCategoria
 {
-    private string conString = ConfigurationManager.ConnectionStrings["miConexion"].ConnectionString;
-
-    public List<ENCategoria> GetAllCategories()
+    public class CADCategoria
     {
-        List<ENCategoria> categories = new List<ENCategoria>();
-        using (SqlConnection connection = new SqlConnection(conString))
+        private string conString;
+        public CADCategoria()
         {
-            SqlCommand cmd = new SqlCommand("SELECT id, nombre FROM CATEGORIA", connection);
-            connection.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            conString = ConfigurationManager.ConnectionStrings["database"].ConnectionString;
+            if (conString == null)
             {
-                categories.Add(new ENCategoria
-                {
-                    Id = Convert.ToInt32(reader["id"]),
-                    Nombre = reader["nombre"].ToString()
-                });
+                throw new InvalidOperationException("La cadena de conexión 'database' no está definida en el archivo de configuración.");
             }
         }
-        return categories;
-    }
-
-    public bool AddCategory(string nombre)
-    {
-        using (SqlConnection connection = new SqlConnection(conString))
+        public List<ENCategoria> GetAllCategories()
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO CATEGORIA (nombre) VALUES (@nombre)", connection);
-            cmd.Parameters.AddWithValue("@nombre", nombre);
-            connection.Open();
-            int result = cmd.ExecuteNonQuery();
-            return result > 0;
+            List<ENCategoria> categories = new List<ENCategoria>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT id, nombre FROM CATEGORIA", connection);
+                    connection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        categories.Add(new ENCategoria
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Nombre = reader["nombre"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener todas las categorías: " + ex.Message);
+            }
+            finally
+            {
+                
+            }
+            return categories;
+        }
+
+        public bool AddCategory(string nombre)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+                    SqlCommand cmd = new SqlCommand("INSERT INTO CATEGORIA (nombre) VALUES (@nombre)", connection);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    connection.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al añadir categoría: " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool DeleteCategory(int categoryId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+                    SqlCommand cmd = new SqlCommand("DELETE FROM CATEGORIA WHERE id = @id", connection);
+                    cmd.Parameters.AddWithValue("@id", categoryId);
+                    connection.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al eliminar categoría: " + ex.Message);
+                return false;
+            }
         }
     }
-
-    public bool DeleteCategory(int categoryId)
-    {
-        using (SqlConnection connection = new SqlConnection(conString))
-        {
-            SqlCommand cmd = new SqlCommand("DELETE FROM CATEGORIA WHERE id = @id", connection);
-            cmd.Parameters.AddWithValue("@id", categoryId);
-            connection.Open();
-            int result = cmd.ExecuteNonQuery();
-            return result > 0;
-        }
-    }
-}
 }
 
 
