@@ -25,16 +25,20 @@ namespace ClassLibrary
 
         public ENReseña()
         {
-
+            UserID = 0;
+            ProductID = 0;
+            Rating = 0;
+            Comment = string.Empty;
+            Date = DateTime.MinValue;
         }
 
         public ENReseña(int userID, int productID, int rating, string comment, DateTime date)
         {
-            _userID = userID;
-            _productID = productID;
-            _rating = rating;
-            _comment = comment;
-            _date = date;
+            UserID = userID;
+            ProductID = productID;
+            Rating = rating;
+            Comment = comment;
+            Date = date;
         }
         public bool Create()
         {

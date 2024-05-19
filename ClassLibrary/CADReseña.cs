@@ -102,7 +102,7 @@ namespace ClassLibrary
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No se ha podido modificar la reseña, ERROR: {0}", ex.Message);
+                Console.WriteLine("No se ha podido eliminar la reseña, ERROR: {0}", ex.Message);
                 return false;
             }
             finally

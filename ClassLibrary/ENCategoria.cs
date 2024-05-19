@@ -6,28 +6,34 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClassLibrary
-{ 
-public class ENCategoria
 {
-    public int Id { get; set; }
-    public string Nombre { get; set; }
-
-    public bool Add()
+    public class ENCategoria
     {
-        CADCategoria cad = new CADCategoria();
-        return cad.AddCategory(this.Nombre);
-    }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
 
-    public bool Delete()
-    {
-        CADCategoria cad = new CADCategoria();
-        return cad.DeleteCategory(this.Id);
-    }
+        public bool Add()
+        {
+            CADCategoria cad = new CADCategoria();
+            return cad.AddCategory(this.Nombre);
+        }
 
-    public List<ENCategoria> GetAllCategories()
-    {
-        CADCategoria cad = new CADCategoria();
-        return cad.GetAllCategories();
+        public bool Delete()
+        {
+            CADCategoria cad = new CADCategoria();
+            return cad.DeleteCategory(this.Id);
+        }
+
+        public bool Update()
+        {
+            CADCategoria cad = new CADCategoria();
+            return cad.UpdateCategory(this.Id, this.Nombre);
+        }
+
+        public static List<ENCategoria> GetAllCategories()
+        {
+            CADCategoria cad = new CADCategoria();
+            return cad.GetAllCategories();
+        }
     }
-}
 }
