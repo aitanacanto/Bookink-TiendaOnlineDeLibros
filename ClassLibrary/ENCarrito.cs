@@ -88,7 +88,7 @@ namespace ClassLibrary
         {
             foreach ( ENLinCarrito lincar in _listLinCar )
             {
-                if (lincar.id_producto == pro.Id)
+                if (lincar.producto.Id == pro.Id)
                 {
                     return lincar;
                 }
@@ -106,7 +106,7 @@ namespace ClassLibrary
             ENLinCarrito linca = existeProducto(pro);
             if (linca == null)
             {
-                linca = new ENLinCarrito(this.id, pro.Id, 1, pro.Price);
+                linca = new ENLinCarrito(this.id, pro, 1);
                 _listLinCar.Add(linca);
             }
             else
@@ -114,6 +114,18 @@ namespace ClassLibrary
                 linca.incrementarCantidad();
             }
         }
+        public void eliminarProductoCarrito(int id_pro)
+        {
+            ENProducto pro = new ENProducto(id_pro);
+            pro.Read();
+            ENLinCarrito linca = existeProducto(pro);
+            if (linca.decrementarCantidad())
+            {
+                _listLinCar.Remove(linca);
+            }
+        }
+
+
         public bool readCarrito()
         {
             CADCarrito carr = new CADCarrito();
@@ -172,6 +184,23 @@ namespace ClassLibrary
             CADCarrito carr = new CADCarrito();
             DataSet dat = carr.listandoCarritos();
             return dat;
+        }
+
+        public ENLinCarrito obtenerLineaProducto(int id_producto)
+        {
+            foreach (ENLinCarrito linea in _listLinCar)
+            {
+                if(linea.producto.Id == id_producto)
+                {
+                    return linea;
+                }
+            }
+            return null;
+        }
+
+        public List<ENLinCarrito> ObtenerProductosEnCarrito()
+        {
+            return _listLinCar;
         }
     }
 }

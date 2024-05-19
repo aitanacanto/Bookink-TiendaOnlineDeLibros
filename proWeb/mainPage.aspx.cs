@@ -27,14 +27,7 @@ namespace proWeb
 
                 reapeterNov.DataSource = Novedades;
                 reapeterNov.DataBind();
-                Session["Carrito"] = new ENCarrito();
             }
-        }
-        protected void Anyadir_Click(object sender, EventArgs e)
-        {
-
-            Response.Redirect("carrito.aspx");
-
         }
 
         // Método para obtener la lista de productos (puedes obtenerla de tu base de datos o de donde sea)
@@ -49,15 +42,18 @@ namespace proWeb
             listaProductos = en.ObtenerTodosLosProductos();
             return listaProductos;
 
-            return listaProductos;
         }
         protected void Add_Click(object sender, EventArgs e)
         {
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
+            if (carrito == null)
+            {
+                carrito = new ENCarrito();
+                Session["Carrito"] = carrito;
+            }
             Button button = (Button)sender;
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
-            Response.Redirect("carrito.aspx");
         }
     }
 }

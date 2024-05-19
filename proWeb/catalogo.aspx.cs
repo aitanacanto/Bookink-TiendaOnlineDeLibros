@@ -18,7 +18,7 @@ namespace proWeb
                 CargarLibros();
 
                 // Método para cargar los paquetes
-                CargarPaquetes();
+                //CargarPaquetes();
             }
         }
 
@@ -35,7 +35,7 @@ namespace proWeb
         {
             // Aquí deberías escribir el código para obtener tus datos
             // Simplemente devuelve una lista de productos como ejemplo
-            
+
             List<ENProducto> listaProductos = new List<ENProducto>();
             // Método para cargar los paquetes
             ENPaquete paquete = new ENPaquete();
@@ -45,13 +45,18 @@ namespace proWeb
             repeaterPaquetes.DataBind();
         }
 
-            protected void Anyadir_Click(object sender, EventArgs e)
-            {
+        protected void Anyadir_Click(object sender, EventArgs e)
+        {
+
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
+            if (carrito == null)
+            {
+                carrito = new ENCarrito();
+                Session["Carrito"] = carrito;
+            }
             Button button = (Button)sender;
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
-            Response.Redirect("carrito.aspx");
-            }
+        }
     }
 }

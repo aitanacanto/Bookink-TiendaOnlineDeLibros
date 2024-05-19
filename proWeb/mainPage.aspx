@@ -139,7 +139,7 @@
                                         </div>
                                             
                                         <div class="text-center mt-3">
-                                            <asp:Button ID="Anyadir" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Anyadir_Click"  />
+                                            <asp:Button ID="Id_Producto" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("id") %>' OnClick="Add_Click"  />
                                             </div>
                                     </div>
                                 </a>

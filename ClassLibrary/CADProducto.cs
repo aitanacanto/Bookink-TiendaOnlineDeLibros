@@ -145,7 +145,7 @@ namespace ClassLibrary
                 en.Name = dr["nombre"].ToString();
                 en.Price = float.Parse(dr["precio"].ToString());
                 en.Stock = int.Parse(dr["cant_stock"].ToString());
-                en.SalePrice = float.Parse(dr["precio_oferta"].ToString());
+                en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
                 en.Sinopsis = dr["sinopsis"].ToString();
                 en.Autor = dr["autor"].ToString();
                 en.ImagePath = dr["img_producto"].ToString();
@@ -191,7 +191,7 @@ namespace ClassLibrary
                             en.Name = dr["nombre"].ToString();
                             en.Price = float.Parse(dr["precio"].ToString());
                             en.Stock = int.Parse(dr["cant_stock"].ToString());
-                            en.SalePrice = float.Parse(dr["precio_oferta"].ToString());
+                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0: float.Parse(dr["precio_oferta"].ToString());
                             en.Sinopsis = dr["sinopsis"].ToString();
                             en.Autor = dr["autor"].ToString();
                             en.ImagePath = dr["img_producto"].ToString();
