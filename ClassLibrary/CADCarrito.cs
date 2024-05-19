@@ -24,20 +24,24 @@ namespace ClassLibrary
         {
             bool validar = false;
             DataSet dat = new DataSet();
-            SqlConnection cone = new SqlConnection(constring);
+            SqlConnection c = new SqlConnection(constring);
             try
             {
-                SqlDataAdapter adap = new SqlDataAdapter("select * from CARRITO", cone);
-                adap.Fill(dat, "CARRITO");
-                DataTable tabla = new DataTable();
-                tabla = dat.Tables["CARRITO"];
-                DataRow fila = tabla.NewRow();
-                fila[1] = carr.id_usuario;
-                fila[2] = carr.importe_total;
-                tabla.Rows.Add(fila);
-                SqlCommandBuilder builder = new SqlCommandBuilder(adap);
-                adap.Update(dat, "CARRITO");
-                carr.id = int.Parse(fila[0].ToString());
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "INSERT INTO CARRITO (id_usuario, pvp_total) " +
+                               "VALUES (@id_usuario, @importe_total)";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@id_usuario", carr.id_usuario);
+                com.Parameters.AddWithValue("@importe_total", carr.importe_total);
+                
+                com.ExecuteNonQuery();
+                int id_carrito = buscarIdCarrito(carr.id_usuario);
+                carr.id = id_carrito;
+
                 validar = true;
             }
             catch (SqlException er)
@@ -52,9 +56,41 @@ namespace ClassLibrary
             }
             finally
             {
-                if (cone != null) cone.Close();
+                if (c != null) c.Close();
             }
             return validar;
+        }
+        private int buscarIdCarrito(int id_usuario)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            DataSet dat = new DataSet();
+            int id_carrito = 0;
+            try
+            {
+                SqlDataAdapter adap = new SqlDataAdapter("select * from CARRITO where id_usuario='" + id_usuario + "'" , c);
+                adap.Fill(dat, "CARRITO");
+                DataTable tabla = new DataTable();
+                tabla = dat.Tables["CARRITO"];
+                if (tabla.Rows.Count > 0)
+                {
+                    id_carrito = int.Parse(tabla.Rows[0]["id"].ToString());
+                }
+            }
+            catch (SqlException e)
+            {
+
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            catch (Exception e)
+            {
+                
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            finally
+            {
+                if (c != null) c.Close();
+            }
+            return id_carrito;
         }
         public bool readCarritoUsuario(ENCarrito carr, ENUsuario user)
         {
@@ -339,5 +375,6 @@ namespace ClassLibrary
                 if (cone != null) cone.Close();
             }
         }
+
     }
 }

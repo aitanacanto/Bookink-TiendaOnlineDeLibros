@@ -80,7 +80,7 @@ namespace ClassLibrary
 
                 string inputPass;
                 // Crear una sentencia parametricada
-                string query = "SELECT email, contrasenya FROM USUARIO WHERE email = @email";
+                string query = "SELECT id, email, contrasenya FROM USUARIO WHERE email = @email";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
@@ -93,6 +93,7 @@ namespace ClassLibrary
                     inputPass = (string)reader["contrasenya"];
                     if (inputPass == en.Password)
                     {
+                        en.Id = int.Parse(reader["id"].ToString());
                         return true;
                     }
                     else

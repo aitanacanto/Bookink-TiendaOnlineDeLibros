@@ -11,6 +11,7 @@ namespace proWeb
     public partial class LogIn : System.Web.UI.Page
     {
         ENUsuario usuario;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Remove("User");
@@ -31,8 +32,19 @@ namespace proWeb
                 // Usuario logeado
                 //Response.Redirect("mainpage.aspx");
                 Session["User"] = usuario;
-                LabelOculta.Text = "ta logeao";
+                LabelOculta.Text = "Autenticación exitosa. " + usuario.Name;
                 LabelOculta.Visible = true;
+                ENCarrito cesta = Session["Carrito"] as ENCarrito;
+                if (cesta != null)
+                {
+                    cesta.id_usuario = usuario.Id;
+                }
+                else
+                {
+                    cesta = new ENCarrito(usuario.Id);
+                    Session["Carrito"] = cesta;
+                }
+                cesta.insertarCarrito();
             }
             else
             {

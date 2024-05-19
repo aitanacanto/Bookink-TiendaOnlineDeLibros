@@ -22,6 +22,7 @@ namespace ClassLibrary
             get { return _id; }
             set { _id = value; }
         }
+        
 
         public int id_usuario
         {
@@ -44,11 +45,11 @@ namespace ClassLibrary
             this._listLinCar = new List<ENLinCarrito>();
         }
 
-        public ENCarrito(int id, int id_usuario, float importe_total)
+        public ENCarrito(int id_usuario)
         {
-            this.id = id;
+            this.id = 0;
             this.id_usuario = id_usuario;
-            this.importe_total = importe_total;
+            this.importe_total = 0;
             this._listLinCar = new List<ENLinCarrito>();
         }
 
@@ -72,6 +73,11 @@ namespace ClassLibrary
             return dat;
         }
 
+        public bool insertarCarrito()
+        {
+            CADCarrito carr = new CADCarrito();
+            return carr.creacionCarrito(this);
+        }
 
         public bool actualizacionCarrito()
         {
@@ -201,6 +207,24 @@ namespace ClassLibrary
         public List<ENLinCarrito> ObtenerProductosEnCarrito()
         {
             return _listLinCar;
+        }
+        public int ContarProductosEnCarrito()
+        {
+            int total_productos = 0;
+            foreach (ENLinCarrito linea in _listLinCar)
+            {
+                total_productos += linea.cantidad;
+            }
+            return total_productos;
+        }
+        public float CalcularPvp()
+        {
+            float total_pvp = 0;
+            foreach (ENLinCarrito linea in _listLinCar)
+            {
+                total_pvp += linea.pvp;
+            }
+            return total_pvp;
         }
     }
 }
