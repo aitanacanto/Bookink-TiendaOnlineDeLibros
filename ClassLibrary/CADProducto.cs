@@ -308,5 +308,67 @@ namespace ClassLibrary
 
 
 
+        public List<ENProducto> BuscarProductosPorNombre(string nombre)
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string comandoBuscarSQL = "SELECT * FROM PRODUCTO WHERE nombre LIKE '%" + nombre + "%'";
+                SqlCommand cmdBuscar = new SqlCommand(comandoBuscarSQL, conex);
+
+                using (SqlDataReader dr = cmdBuscar.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        try
+                        {
+                            ENProducto en = new ENProducto();
+                            en.Id = int.Parse(dr["id"].ToString());
+                            en.Name = dr["nombre"].ToString();
+                            en.Price = float.Parse(dr["precio"].ToString());
+                            en.Stock = int.Parse(dr["cant_stock"].ToString());
+                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
+                            en.Sinopsis = dr["sinopsis"].ToString();
+                            en.Autor = dr["autor"].ToString();
+                            en.ImagePath = dr["img_producto"].ToString();
+                            en.Editorial = dr["editorial"].ToString();
+                            en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                            en.NumPags = int.Parse(dr["num_pag"].ToString());
+                            en.CodOfer = dr["cod_oferta"].ToString();
+
+                            productos.Add(en);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error al leer producto con ID {0}. Error: {1}", dr["id"], ex.Message);
+                        }
+                    }
+                }
+
+                return productos;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+
+
+
+
     }
 }
