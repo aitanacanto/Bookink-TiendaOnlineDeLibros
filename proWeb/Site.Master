@@ -45,7 +45,16 @@
                             </asp:Menu>
 
             <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <asp:TextBox ID="txtSearchMaster" runat="server" Class="form-control" placeholder="Search" aria-label="Search"></asp:TextBox>
+                <asp:TextBox  ID="txtBuscar"
+                                    runat="server"
+                                    CssClass="form-control"
+                                    placeholder="Buscar" aria-label="Buscar"></asp:TextBox>
+                <asp:Button
+                                    ID="btnBuscar"
+                                    runat="server"
+                                    CssClass="btn btn-outline-success ms-2"
+                                    Text="Buscar"
+                                    OnClick="btnBuscar_Click" style="display:none"/>
             </div>
 
             <a href="carrito.aspx" class="d-block link-dark text-decoration-none ms-3 me-3" id="cart">
