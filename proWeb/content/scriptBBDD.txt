@@ -136,7 +136,7 @@ create table [dbo].[TIENE_PAQUETE]
     [id_producto] INT,
     PRIMARY KEY (id_paquete, id_producto),
     FOREIGN KEY (id_paquete) REFERENCES PAQUETE(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id) ON DELETE CASCADE
 )
 GO
 create table [dbo].[LINPEDIDO_PA]

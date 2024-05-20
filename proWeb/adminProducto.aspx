@@ -177,6 +177,25 @@
                   </div>
                 </div>
 
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Producto</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <asp:Label id="idel" Text="ID" runat="server" />
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <asp:button id="btnDel" runat="server" type="button" class="btn btn-danger" OnClick="delete_click" Text="Eliminar"></asp:button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
      <asp:Repeater ID="reapeterProduct" runat="server">
                     <ItemTemplate>
                    
@@ -192,30 +211,14 @@
                                     <i class="fa-solid fa-pen-to-square"></i>
                                     Editar
                                 </asp:LinkButton>
-                                <asp:LinkButton runat="server" class="delete" OnClientClick="return false;">
+                                <asp:LinkButton runat="server" class="delete" OnClick="btnDel_Click" CommandArgument='<%# Eval("Id")%>'>
                                     <i class="fa-solid fa-trash"></i>
                                     Eliminar
                                 </asp:LinkButton>
                             </div>
 
 
-                  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Producto</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                          <p>¿Quieres eliminar este producto?</p>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
+                  
 
 
 

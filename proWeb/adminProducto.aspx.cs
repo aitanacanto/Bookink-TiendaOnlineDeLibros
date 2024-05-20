@@ -135,7 +135,53 @@ namespace proWeb
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No se ha podido añadir el producto, ERROR: {0}", ex.Message);
+                Console.WriteLine("No se ha podido editar el producto, ERROR: {0}", ex.Message);
+                return;
+
+            }
+        }
+
+        protected void btnDel_Click(object sender, EventArgs e)
+        {
+            LinkButton btnEdit = (LinkButton)sender;
+            int id = Convert.ToInt32(btnEdit.CommandArgument);
+            ENProducto prod = new ENProducto();
+            prod.Id = id;
+            Session["idvalue"] = prod.Id;
+
+            if (prod.Read())
+            {
+                idel.Text = "¿Quieres eliminar el producto con ID: " +  prod.Id.ToString() + "?\n" ;
+
+
+            }
+
+
+            string script = @"<script type='text/javascript'>
+                        $(document).ready(function () {
+                            $('#deleteModal').modal('toggle');
+                        });
+                      </script>";
+
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", script);
+        }
+
+        protected void delete_click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                int id = (int)Session["idvalue"];
+                ENProducto prod = new ENProducto();
+                prod.Id = id;
+                prod.Read();
+
+
+                prod.Delete();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido borrar el producto, ERROR: {0}", ex.Message);
                 return;
 
             }
