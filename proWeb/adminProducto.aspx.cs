@@ -61,16 +61,10 @@ namespace proWeb
         }
         private List<ENProducto> ObtenerProductos()
             {
+            ENProducto en = new ENProducto();
             List<ENProducto> productos = new List<ENProducto>();
-            for (int i = 1; i < 10; i++)
-            {
-                ENProducto prod = new ENProducto();
-                prod.Id = i;
-                prod.Read();
-                productos.Add(prod);
-            }
-            
-            return productos;
+            return en.ObtenerTodosLosProductos();
+
         }
 
         protected void btnAdd_Click1(object sender, EventArgs e)

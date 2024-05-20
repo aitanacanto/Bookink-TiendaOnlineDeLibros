@@ -34,6 +34,11 @@ body {
         font-style: italic;
         color: #666;
     }
+
+    .description {
+        font-style: italic;
+        color: #666;
+    }
     .color-estre {
         color: gold;
     }
