@@ -73,6 +73,15 @@ namespace ClassLibrary
             this.price = price;
             this.pvp = price * cantidad;
         }
+
+        public List<ENLinCarrito> cargarLineasCarrito(int id)
+        {
+            
+            CADLinCarrito linca = new CADLinCarrito();
+            return linca.cargarLineasCarrito(id);
+
+        }
+
         public void incrementarCantidad()
         {
             if (cantidad < producto.Stock) { 
@@ -93,54 +102,11 @@ namespace ClassLibrary
             }
             
         }
-        
-        
-        public bool creacionLineaCarrito()
+        public bool insertarLinea()
         {
-            CADLinCarrito linca = new CADLinCarrito();
-            ENCarrito c = new ENCarrito();
-            c.id = this.id_carrito;
-
-            if (linca.readLinCarrito(this) != true && c.readCarrito())
-            {
-                return linca.creacionLinCarrito(this);
-            }
-
-            return false;
+            CADLinCarrito linea = new CADLinCarrito();
+            return linea.insertarLinea(this);
         }
 
-        public bool readLinCarrito()
-        {
-            CADLinCarrito linca = new CADLinCarrito();
-            return linca.readLinCarrito(this);
-        }
-
-
-        public bool eliminacionLinCarrito()
-        {
-            CADLinCarrito linca = new CADLinCarrito();
-
-            if (linca.readLinCarrito(this))
-            {
-                return linca.eliminacionLinCarrito(this);
-            }
-
-            return false;
-        }
-
-        
-
-        public DataSet ensenyarLinCarritoByCarrito(ENCarrito c)
-        {
-            CADLinCarrito linca = new CADLinCarrito();
-            DataSet dat = new DataSet();
-
-            if (c.readCarrito() == true)
-            {
-                dat = linca.ensenyarLinCarritoByCarrito(c);
-            }
-
-            return dat;
-        }
     }
 }

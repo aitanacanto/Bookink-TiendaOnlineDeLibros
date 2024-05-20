@@ -57,7 +57,11 @@ namespace proWeb
         {
             Session.Remove("User");
             user = new ENUsuario();
+            ENCarrito cesta;
+            Session.Remove("Carrito");
+            cesta = new ENCarrito();
             Response.Redirect("mainPage.aspx");
+
         }
         protected void BtnDeleteUser(object sender, EventArgs e)
         {

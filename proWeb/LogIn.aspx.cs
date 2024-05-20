@@ -11,6 +11,7 @@ namespace proWeb
     public partial class LogIn : System.Web.UI.Page
     {
         ENUsuario usuario;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -32,6 +33,23 @@ namespace proWeb
                 Session["User"] = usuario;
                 LabelOculta.Text = "Autenticación exitosa. " + usuario.Name;
                 LabelOculta.Visible = true;
+                ENCarrito cesta = Session["Carrito"] as ENCarrito;
+                if (cesta != null)
+                {
+                    // carrito en memoria
+                    cesta.id_usuario = usuario.Id;
+                    cesta.insertarCarrito();
+                    cesta.readCarrito();
+
+                }
+                else
+                {
+                    // no tengo carrito en memoria y tengo carrito en base de datos
+                    cesta = new ENCarrito(usuario.Id);
+                   
+                }
+                Session["Carrito"] = cesta;
+
             }
             else
             {
