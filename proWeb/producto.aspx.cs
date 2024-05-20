@@ -11,7 +11,6 @@ namespace proWeb
 {
     public partial class producto : System.Web.UI.Page
     {
-        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,24 +39,6 @@ namespace proWeb
                 editorial.InnerText = prod.Editorial;
                 numpag.InnerText = prod.NumPags.ToString();
             }
-        }
-
-        protected void Anyadir_Click(object sender, EventArgs e)
-        {
-            ENCarrito carrito = Session["Carrito"] as ENCarrito;
-            if (carrito == null)
-            {
-                carrito = new ENCarrito();
-                Session["Carrito"] = carrito;
-            }
-            string Id = Request.QueryString["id"];
-            ENProducto prod = new ENProducto();
-            prod.Id = int.Parse(Id);
-            if (!string.IsNullOrEmpty(Id))
-            {
-                carrito.anyadirProductoCarrito(prod.Id);
-            }
-            
         }
     }
 }
