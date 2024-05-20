@@ -621,3 +621,57 @@ body {
     background-color: #dc3545;
     color: #fff;
 }
+
+
+/* Estilos adicionales para usuario.aspx */
+
+.user-info-table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+    .user-info-table .label-column {
+        text-align: left;
+        padding: 10px;
+        width: 20%;
+    }
+
+    .user-info-table .data-column {
+        text-align: left;
+        padding: 10px;
+        width: 30%;
+    }
+
+    .user-info-table .input-column {
+        text-align: left;
+        padding: 10px;
+        width: 50%;
+    }
+
+    .user-info-table input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .user-info-table hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+    }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+    .button-container button {
+        width: 30%;
+        padding: 10px;
+        border-radius: 4px;
+    }
