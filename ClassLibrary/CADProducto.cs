@@ -111,7 +111,7 @@ namespace ClassLibrary
             {
                 c.Open();
                 if (!this.Exists(c, en)){throw new ArgumentException("El producto no existe"); }
-                string query = "Delete from Products where Id = @Id";
+                string query = "Delete from PRODUCTO where Id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
                 com.Parameters.AddWithValue("@Id", en.Id);
 
