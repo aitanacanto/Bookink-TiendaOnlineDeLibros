@@ -44,7 +44,7 @@
                     <ItemTemplate>
                         <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
                             <div class="product-card card">
-                                <a href="producto.aspx" class="text-decoration-none">
+                                <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
                                     <div class="text-center">
                                         <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
                                     </div>
