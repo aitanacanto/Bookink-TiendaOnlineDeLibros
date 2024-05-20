@@ -33,7 +33,7 @@ namespace ClassLibrary
 
         }
 
-        public ENProducto(string name, int stock, float price, float salePrice, string imagePath, string sinopsis, string autor, string codOfer, string editorial,int anyoPubli, int numPags )
+        public ENProducto(string name, int stock, float price, float salePrice, string imagePath, string sinopsis, string autor, string codOfer, string editorial, int anyoPubli, int numPags)
         {
             Name = name;
             Stock = stock;
@@ -94,6 +94,12 @@ namespace ClassLibrary
         {
             CADProducto cad = new CADProducto();
             return cad.ObtenerTodasLasEditoriales();
+        }
+
+        public List<ENProducto> BuscarProductosPorNombre(string nombre)
+        {
+            CADProducto cad = new CADProducto();
+            return cad.BuscarProductosPorNombre(nombre);
         }
     }
 }

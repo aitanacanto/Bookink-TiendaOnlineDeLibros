@@ -15,23 +15,30 @@ namespace proWeb
             if (!IsPostBack)
             {
                 PoblarFiltros();
-                CargarLibros();
+                string searchQuery = Request.QueryString["search"];
+                CargarLibros(searchQuery);
                 CargarPaquetes();
             }
         }
 
-        private void CargarLibros()
+        private void CargarLibros(string searchQuery = "")
         {
             ENProducto en = new ENProducto();
             List<ENProducto> listaProductos = new List<ENProducto>();
-            listaProductos = en.ObtenerTodosLosProductos();
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                listaProductos = en.ObtenerTodosLosProductos();
+            }
+            else
+            {
+                listaProductos = en.BuscarProductosPorNombre(searchQuery);
+            }
             reapeterProduct.DataSource = listaProductos;
             reapeterProduct.DataBind();
         }
 
         private void CargarPaquetes()
         {
-
             List<ENProducto> listaProductos = new List<ENProducto>();
             ENPaquete paquete = new ENPaquete();
             List<ENPaquete> listaPaquetes = paquete.ObtenerTodosLosPaquetes();
@@ -42,7 +49,6 @@ namespace proWeb
 
         protected void Anyadir_Click(object sender, EventArgs e)
         {
-
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
             if (carrito == null)
             {
@@ -75,7 +81,6 @@ namespace proWeb
             }
         }
 
-
         private void PoblarEditoriales()
         {
             ddlEditorial.Items.Clear();
@@ -89,7 +94,6 @@ namespace proWeb
                 ddlEditorial.Items.Add(new ListItem(editorial, editorial));
             }
         }
-
 
         private void PoblarAutores()
         {
@@ -105,11 +109,10 @@ namespace proWeb
             }
         }
 
-
-
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            CargarLibros();
+            string searchQuery = Request.QueryString["search"];
+            CargarLibros(searchQuery);
             CargarPaquetes();
         }
 

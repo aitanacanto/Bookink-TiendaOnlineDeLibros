@@ -14,5 +14,11 @@ namespace proWeb
 
         }
 
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string query = txtBuscar.Text;
+            Response.Redirect($"catalogo.aspx?search={query}");
+        }
+
     }
 }
