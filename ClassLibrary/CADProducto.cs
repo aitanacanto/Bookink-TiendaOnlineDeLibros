@@ -228,6 +228,85 @@ namespace ClassLibrary
             }
         }
 
+        public List<String> ObtenerTodosLosAutores()
+        {
+            List<string> autores = new List<string>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+
+                string comandoAutoresSQL = "SELECT DISTINCT autor FROM PRODUCTO";
+                SqlCommand cmdAutores = new SqlCommand(comandoAutoresSQL, conex);
+
+                using (SqlDataReader dr = cmdAutores.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        autores.Add(dr["autor"].ToString());
+                    }
+                }
+
+                return autores;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+
+        public List<String> ObtenerTodasLasEditoriales()
+        {
+            List<string> editoriales = new List<string>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+
+                string comandoEditorialesSQL = "SELECT DISTINCT editorial FROM PRODUCTO";
+                SqlCommand cmdEditoriales = new SqlCommand(comandoEditorialesSQL, conex);
+
+                using (SqlDataReader dr = cmdEditoriales.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        editoriales.Add(dr["editorial"].ToString());
+                    }
+                }
+
+                return editoriales;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+
+
 
     }
 }

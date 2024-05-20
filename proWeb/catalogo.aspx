@@ -6,16 +6,13 @@
         <div class="row">
             <div class="col-md-3">
                 <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select mb-2">
-                    <asp:ListItem Text="Categoría" Value="" />
-                    
+                    <asp:ListItem Text="Selecciona una categoría" Value="" />
                 </asp:DropDownList>
                 <asp:DropDownList ID="ddlEditorial" runat="server" CssClass="form-select mb-2">
-                    <asp:ListItem Text="Editorial" Value="" />
-                    
+                    <asp:ListItem Text="Selecciona una editorial" Value="" />
                 </asp:DropDownList>
                 <asp:DropDownList ID="ddlAutor" runat="server" CssClass="form-select mb-2">
-                    <asp:ListItem Text="Autor" Value="" />
-                    
+                    <asp:ListItem Text="Selecciona un autor" Value="" />
                 </asp:DropDownList>
                 <asp:TextBox ID="txtPrecioMin" runat="server" CssClass="form-control mb-2" Placeholder="Precio Mín" TextMode="Number" />
                 <asp:TextBox ID="txtPrecioMax" runat="server" CssClass="form-control mb-2" Placeholder="Precio Máx" TextMode="Number" />

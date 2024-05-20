@@ -63,6 +63,9 @@ namespace proWeb
 
         private void PoblarCategorias()
         {
+            ddlCategoria.Items.Clear();
+            ddlCategoria.Items.Add(new ListItem("Selecciona una categoría", ""));
+
             ENCategoria enCat = new ENCategoria();
             List<ENCategoria> categories = enCat.GetAllCategories();
 
@@ -73,17 +76,37 @@ namespace proWeb
         }
 
 
+
         private void PoblarEditoriales()
         {
-            ddlEditorial.Items.Add(new ListItem("Editorial A", "EditorialA"));
-            ddlEditorial.Items.Add(new ListItem("Editorial B", "EditorialB"));
+            ddlEditorial.Items.Clear();
+            ddlEditorial.Items.Add(new ListItem("Selecciona una editorial", ""));
+
+            ENProducto enProd = new ENProducto();
+            List<string> editoriales = enProd.ObtenerTodasLasEditoriales();
+
+            foreach (string editorial in editoriales)
+            {
+                ddlEditorial.Items.Add(new ListItem(editorial, editorial));
+            }
         }
+
 
         private void PoblarAutores()
         {
-            ddlAutor.Items.Add(new ListItem("Autor A", "AutorA"));
-            ddlAutor.Items.Add(new ListItem("Autor B", "AutorB"));
+            ddlAutor.Items.Clear();
+            ddlAutor.Items.Add(new ListItem("Selecciona un autor", ""));
+
+            ENProducto enProd = new ENProducto();
+            List<string> autores = enProd.ObtenerTodosLosAutores();
+
+            foreach (string autor in autores)
+            {
+                ddlAutor.Items.Add(new ListItem(autor, autor));
+            }
         }
+
+
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
