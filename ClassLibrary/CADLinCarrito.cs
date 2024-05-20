@@ -100,6 +100,11 @@ namespace ClassLibrary
             return validar;
         }
 
+        public bool actualizarLinea(ENLinCarrito eNLinCarrito)
+        {
+            return false;
+        }
+
         public List<ENLinCarrito> cargarLineasCarrito(int id)
         {
             List<ENLinCarrito> lista = new List<ENLinCarrito>();

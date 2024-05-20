@@ -40,6 +40,14 @@ namespace proWeb
             }
             CargarCarrito();
         }
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+            cesta = Session["Carrito"] as ENCarrito;
+            if(cesta != null) { 
+                cesta.deleteCarrito();
+                Response.Redirect("carrito.aspx");
+            }
+        }
 
         // Método para añadir más elementos al carrito
         protected void Add_Click(object sender, EventArgs e)
