@@ -105,8 +105,6 @@ using ClassLibrary;
 
             List<ENLinCarrito> listaProductos = new List<ENLinCarrito>();
             listaProductos = cesta.ObtenerProductosEnCarrito();
-            reapeterProduct.DataSource = listaProductos;
-            reapeterProduct.DataBind();
         }
         }
     }
