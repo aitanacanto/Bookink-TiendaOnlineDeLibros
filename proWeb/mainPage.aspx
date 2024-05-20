@@ -37,7 +37,7 @@
             <div class="row">
                 <asp:Repeater ID="reapeterNov" runat="server">
                     <ItemTemplate>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
                             <div class="product-card card">
                                 <a href='<%# "producto.aspx?id=" + Eval("Id") %>' class="text-decoration-none">
                                     <div class="text-center">
