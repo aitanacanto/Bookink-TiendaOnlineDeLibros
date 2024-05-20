@@ -178,17 +178,24 @@
         </div>
 
         <div class="right-section">
-            <asp:Repeater ID="rptProducts" runat="server">
+            <asp:Repeater ID="reapeterProduct" runat="server">
                 <ItemTemplate>
-                    <div class="item">
-                        <p><%# Eval("Name") %></p>
-                        <p>Precio: <%# Eval("Price", "{0:C}") %></p>
-                    </div>
+                    <div class="row align-items-center border-bottom pb-2 mb-2">
+                        <div class="col-2">
+                            <asp:Image ID="imgProduct" runat="server" class="small-image rounded" ImageUrl='<%# Eval("producto.ImagePath") %>' AlternateText="Producto" />
+                        </div>
+                        <div class="col-7 text-center">
+                            <h3 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold;"><%# Eval("producto.name") %></h3>
+                            <p class="card-text"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
+                        </div>
+                        <div class="col-3 text-right">
+                            <div class="col-4 text-right">
+                                <asp:Label ID = "pvp" runat="server" class="card-text" Text= '<%# String.Format("{0:0.00}", Eval("pvp")) %>'></asp:Label>
+                                <span> € </span>
+                            </div>
+                        </div>
                 </ItemTemplate>
             </asp:Repeater>
-            <div class="total">
-                Total de artículos: 3
-            </div>
         </div>
     </div>
 </asp:Content>

@@ -10,6 +10,7 @@ using ClassLibrary;
     {
         public partial class pedido : Page
         {
+            ENCarrito cesta;
             protected void Page_Load(object sender, EventArgs e)
             {
                 if (!IsPostBack)
@@ -94,11 +95,18 @@ using ClassLibrary;
         }
 
         private void DisplayProducts()
+        {
+            cesta = Session["Carrito"] as  ENCarrito;
+            if (cesta == null)
             {
-                List<ENProducto> products = new List<ENProducto>
-                {
-                
-                };
+                cesta = new ENCarrito();
+                Session["Carrito"] = cesta;
             }
+
+            List<ENLinCarrito> listaProductos = new List<ENLinCarrito>();
+            listaProductos = cesta.ObtenerProductosEnCarrito();
+            reapeterProduct.DataSource = listaProductos;
+            reapeterProduct.DataBind();
+        }
         }
     }
