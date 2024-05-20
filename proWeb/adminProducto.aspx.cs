@@ -17,8 +17,6 @@ namespace proWeb
             if (!IsPostBack)
             {
                 listaProductos = ObtenerProductos();
-
-
                 BindRepeater();
             }
         }
@@ -43,7 +41,7 @@ namespace proWeb
 
                 ENProducto newProduct = new ENProducto(name, stock, price, saleprice, filePath, sinopsis, autor, codOfer, editorial, anyo, numpag);
                 newProduct.Create();
-                listaProductos.Add(newProduct);
+                listaProductos = ObtenerProductos();
                 BindRepeater();
             }
             catch (Exception ex)
@@ -61,16 +59,13 @@ namespace proWeb
         }
         private List<ENProducto> ObtenerProductos()
             {
-            List<ENProducto> productos = new List<ENProducto>();
-            for (int i = 1; i < 10; i++)
-            {
-                ENProducto prod = new ENProducto();
-                prod.Id = i;
-                prod.Read();
-                productos.Add(prod);
-            }
-            
-            return productos;
+            ENProducto en = new ENProducto();
+            List<ENProducto> listaProductos = new List<ENProducto>();
+            listaProductos = en.ObtenerTodosLosProductos();
+            reapeterProduct.DataSource = listaProductos;
+            reapeterProduct.DataBind();
+
+            return listaProductos;
         }
 
         protected void btnAdd_Click1(object sender, EventArgs e)
@@ -132,6 +127,8 @@ namespace proWeb
                 prod.AnyoPubli = int.Parse(Publi.Text);
 
                 prod.Update();
+                listaProductos = ObtenerProductos();
+                BindRepeater();
             }
             catch (Exception ex)
             {
@@ -178,6 +175,8 @@ namespace proWeb
 
 
                 prod.Delete();
+                listaProductos = ObtenerProductos();
+                BindRepeater();
             }
             catch (Exception ex)
             {
