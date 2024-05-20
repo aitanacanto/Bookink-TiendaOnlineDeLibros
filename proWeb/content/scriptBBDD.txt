@@ -22,11 +22,11 @@ create table [dbo].[USUARIO]
     [nombre] VARCHAR(255) NOT NULL,
     [apellidos] VARCHAR(255) NOT NULL,
     [contrasenya] VARCHAR(255) NOT NULL,
-    [nif] NVARCHAR(20) NOT NULL,
+    [dni] NVARCHAR(20) NOT NULL,
     [email] NVARCHAR(100) NOT NULL UNIQUE,
     [telefono] NVARCHAR(20) NOT NULL,
     [puntos] INT NOT NULL,
-    [admin] NVARCHAR(5) NOT NULL,
+    [admin] BIT NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
@@ -342,10 +342,10 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
 
 -- Nota: La función HASHBYTES() de SQL Server se usa para cifrar la contraseña en SHA256.
 
-INSERT INTO [dbo].[USUARIO] (nombre, apellidos, contrasenya, nif, email, telefono, puntos, admin) VALUES 
-('Juan', 'Pérez', 'bf59998c661e13ef3620f09462e15e521e5d3d707dab54313034526bc8474b6f', 'DNI000008', 'juan.perez@example.com', '600123456', 100, 'no'), --contraseña1234
-('Ana', 'Gómez', 'a20aff106fe011d5dd696e3b7105200ff74331eeb8e865bb80ebd82b12665a07', 'DNI000009', 'ana.gomez@example.com', '600654321', 150, 'no'), --password321
-('Luis', 'Martínez', 'd84464181f7f019f3fb10e6bbd06f543d7ac84c4f8e360ebb9402a472ab30ebc', 'DNI000010', 'luis.martinez@example.com', '600789123', 200, 'no'); --1234password
+INSERT INTO [dbo].[USUARIO] (nombre, apellidos, contrasenya, dni, email, telefono, puntos, admin) VALUES 
+('Juan', 'Pérez', 'bf59998c661e13ef3620f09462e15e521e5d3d707dab54313034526bc8474b6f', 'DNI000006', 'juan.perez@example.com', '600123456', 100, 0), --contraseña1234
+('Ana', 'Gómez', 'a20aff106fe011d5dd696e3b7105200ff74331eeb8e865bb80ebd82b12665a07', 'DNI000004', 'ana.gomez@example.com', '600654321', 150, 0), --password321
+('Luis', 'Martínez', 'd84464181f7f019f3fb10e6bbd06f543d7ac84c4f8e360ebb9402a472ab30ebc', 'DNI000003', 'luis.martinez@example.com', '600789123', 200, 1); --1234password
 
 
 --Direcciones

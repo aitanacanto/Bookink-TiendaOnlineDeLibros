@@ -35,7 +35,7 @@ namespace ClassLibrary
             constring = ConfigurationManager.ConnectionStrings["database"].ToString();
         }
 
-        public bool Register(ENUsuario en) 
+        public bool Register(ENUsuario en, bool admin) 
         {
             SqlConnection c = new SqlConnection(constring);
             try
@@ -43,18 +43,19 @@ namespace ClassLibrary
                 c.Open();
 
                 // Crear una sentencia parametricada
-                string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, nif, email, telefono, puntos, admin) " +
+                string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, dni, email, telefono, puntos, admin) " +
                                "OUTPUT INSERTED.ID " +
-                               "VALUES (@name, @surname, @contrasenya, @nif, @email, @telefono, 0, 'no')";
+                               "VALUES (@name, @surname, @contrasenya, @dni, @email, @telefono, 0, @admin)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
                 com.Parameters.AddWithValue("@name", en.Name);
                 com.Parameters.AddWithValue("@surname", en.Surname);
                 com.Parameters.AddWithValue("@contrasenya", en.Password);
-                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@dni", en.DNI);
                 com.Parameters.AddWithValue("@email", en.Email);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
+                com.Parameters.AddWithValue("@admin", admin);
 
                 en.Id = Convert.ToInt32(com.ExecuteScalar());
 
@@ -83,7 +84,7 @@ namespace ClassLibrary
 
                 string inputPass;
                 // Crear una sentencia parametricada
-                string query = "SELECT id, nombre, apellidos, contrasenya, nif, email, telefono FROM USUARIO WHERE email = @email";
+                string query = "SELECT id, nombre, apellidos, contrasenya, dni, email, telefono, admin FROM USUARIO WHERE email = @email";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
@@ -99,8 +100,9 @@ namespace ClassLibrary
                         en.Id = (int)reader["id"];
                         en.Name = (string)reader["nombre"];
                         en.Surname = (string)reader["apellidos"];
-                        en.NIF = (string)reader["nif"];
+                        en.DNI = (string)reader["dni"];
                         en.PhoneNumber = (string)reader["telefono"];
+                        en.Admin = (bool)reader["admin"];
                         return true;
                     }
                     else
@@ -133,7 +135,7 @@ namespace ClassLibrary
 
                 // Crear una sentencia parametricada
                 string query = "UPDATE USUARIO SET nombre = @name, apellidos = @surname, contrasenya = @contrasenya, " +
-                                "nif = @nif, telefono = @telefono " +
+                                "dni = @dni, telefono = @telefono " +
                                 "WHERE email = @email";
 
                 SqlCommand com = new SqlCommand(query, c);
@@ -142,7 +144,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@name", en.Name);
                 com.Parameters.AddWithValue("@surname", en.Surname);
                 com.Parameters.AddWithValue("@contrasenya", en.Password);
-                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@dni", en.DNI);
                 com.Parameters.AddWithValue("@email", en.Email);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
 
@@ -165,7 +167,6 @@ namespace ClassLibrary
             SqlConnection c = new SqlConnection(constring);
             try
             {
-                //necesito una funcion de tiene_direccion para borrar las relaciones y luego poder todas las direcciones
                 c.Open();
 
                 // Crear una sentencia parametricada
@@ -196,6 +197,37 @@ namespace ClassLibrary
         {
             user.Direcciones.Add(dir);
             return true;
+        }
+
+        public bool MakeAdmin(ENUsuario en)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "UPDATE USUARIO SET admin = 1" +
+                                "WHERE email = @email";
+
+                //TODO: posible mejora - Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@email", en.Email);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido hacer admin al usuario, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
         }
     }
 }

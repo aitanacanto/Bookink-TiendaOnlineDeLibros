@@ -12,7 +12,7 @@
        
     <div class="admin-products">
         <div class="header">
-            <h1 class="title" runat="server" id="Pruebas">Productos
+            <h1 runat="server" id="Pruebas">Productos
                 </h1>
                 <div style="margin-left: auto;">
                      <asp:button class="create" data-bs-toggle="modal" data-bs-target="#exampleModal" runat="server" text="Crear Producto" OnClientClick="return false;" />
@@ -200,11 +200,19 @@
                     <ItemTemplate>
                    
                         <div class="Producto">
-                            <div style="width: 150px; height: 150px; background-color: #FFFFE0; border-radius: 8px;"></div>
+                            <div class="d-flex justify-content-center" style="width: 150px; height: 150px; border-radius: 8px; ">
+                                <asp:Image class=" mb-2 mt-2" ImageUrl='<%# Eval("ImagePath") %>' runat="server" />
+                            </div>
                             <div>
-                                <h2 class="title"><%# Eval("Name") %></h2>
-                                <p class="price">Precio: <%# Eval("Price") %> €</p>
+                                <h2 runat="server" class="title"><%# TruncateText(Eval("Name").ToString(),35) %></h2>
+                                <div class="d-flex">            
+                                <p class="price">Precio: <%# String.Format("{0:0.00}", Eval("Price")) %> €</p>
+                                <p class="price">Precio Oferta: <%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
+                                </div>
+                                <div class="d-flex">
                                 <p class="id">ID: <%# Eval("Id") %></p>
+                                <p class="id"><%# Eval("Stock") %> unidades en stock</p>
+                                </div>
                             </div>
                             <div class="mod-buttons">
                                 <asp:LinkButton runat="server" class="edit"  OnClick="btnEdit_Click" CommandArgument='<%# Eval("Id")%>'>

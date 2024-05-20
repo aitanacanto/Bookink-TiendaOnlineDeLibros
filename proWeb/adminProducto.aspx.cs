@@ -17,8 +17,6 @@ namespace proWeb
             if (!IsPostBack)
             {
                 listaProductos = ObtenerProductos();
-
-
                 BindRepeater();
             }
         }
@@ -43,7 +41,7 @@ namespace proWeb
 
                 ENProducto newProduct = new ENProducto(name, stock, price, saleprice, filePath, sinopsis, autor, codOfer, editorial, anyo, numpag);
                 newProduct.Create();
-                listaProductos.Add(newProduct);
+                listaProductos = ObtenerProductos();
                 BindRepeater();
             }
             catch (Exception ex)
@@ -62,9 +60,12 @@ namespace proWeb
         private List<ENProducto> ObtenerProductos()
             {
             ENProducto en = new ENProducto();
-            List<ENProducto> productos = new List<ENProducto>();
-            return en.ObtenerTodosLosProductos();
+            List<ENProducto> listaProductos = new List<ENProducto>();
+            listaProductos = en.ObtenerTodosLosProductos();
+            reapeterProduct.DataSource = listaProductos;
+            reapeterProduct.DataBind();
 
+            return listaProductos;
         }
 
         protected void btnAdd_Click1(object sender, EventArgs e)
@@ -124,8 +125,18 @@ namespace proWeb
                 prod.Autor = Autor.Text;
                 prod.Editorial = Editorial.Text;
                 prod.AnyoPubli = int.Parse(Publi.Text);
+                string fileName = Path.GetFileName(Imagen.PostedFile.FileName);
+
+                if (fileName != "")
+                {
+                    string filePath = "/content/products/" + fileName;
+                    Imagen.SaveAs(Server.MapPath(filePath));
+                    prod.ImagePath = filePath;
+                }
 
                 prod.Update();
+                listaProductos = ObtenerProductos();
+                BindRepeater();
             }
             catch (Exception ex)
             {
@@ -172,12 +183,25 @@ namespace proWeb
 
 
                 prod.Delete();
+                listaProductos = ObtenerProductos();
+                BindRepeater();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("No se ha podido borrar el producto, ERROR: {0}", ex.Message);
                 return;
 
+            }
+        }
+        protected string TruncateText(string text, int length)
+        {
+            if (text.Length <= length)
+            {
+                return text;
+            }
+            else
+            {
+                return text.Substring(0, length) + "...";
             }
         }
     };
