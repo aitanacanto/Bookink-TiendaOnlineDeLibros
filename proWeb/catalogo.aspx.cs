@@ -14,30 +14,32 @@ namespace proWeb
         {
             if (!IsPostBack)
             {
-                // Método para cargar los libros
-                CargarLibros();
-
-                // Método para cargar los paquetes
-                //CargarPaquetes();
+                PoblarFiltros();
+                string searchQuery = Request.QueryString["search"];
+                CargarLibros(searchQuery);
+                CargarPaquetes();
             }
         }
 
-        private void CargarLibros()
+        private void CargarLibros(string searchQuery = "")
         {
             ENProducto en = new ENProducto();
             List<ENProducto> listaProductos = new List<ENProducto>();
-            listaProductos = en.ObtenerTodosLosProductos();
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                listaProductos = en.ObtenerTodosLosProductos();
+            }
+            else
+            {
+                listaProductos = en.BuscarProductosPorNombre(searchQuery);
+            }
             reapeterProduct.DataSource = listaProductos;
             reapeterProduct.DataBind();
         }
 
         private void CargarPaquetes()
         {
-            // Aquí deberías escribir el código para obtener tus datos
-            // Simplemente devuelve una lista de productos como ejemplo
-
             List<ENProducto> listaProductos = new List<ENProducto>();
-            // Método para cargar los paquetes
             ENPaquete paquete = new ENPaquete();
             List<ENPaquete> listaPaquetes = paquete.ObtenerTodosLosPaquetes();
 
@@ -47,7 +49,6 @@ namespace proWeb
 
         protected void Anyadir_Click(object sender, EventArgs e)
         {
-
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
             if (carrito == null)
             {
@@ -58,5 +59,62 @@ namespace proWeb
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
         }
+
+        private void PoblarFiltros()
+        {
+            PoblarCategorias();
+            PoblarEditoriales();
+            PoblarAutores();
+        }
+
+        private void PoblarCategorias()
+        {
+            ddlCategoria.Items.Clear();
+            ddlCategoria.Items.Add(new ListItem("Selecciona una categoría", ""));
+
+            ENCategoria enCat = new ENCategoria();
+            List<ENCategoria> categories = enCat.GetAllCategories();
+
+            foreach (ENCategoria categoria in categories)
+            {
+                ddlCategoria.Items.Add(new ListItem(categoria.Nombre, categoria.Id.ToString()));
+            }
+        }
+
+        private void PoblarEditoriales()
+        {
+            ddlEditorial.Items.Clear();
+            ddlEditorial.Items.Add(new ListItem("Selecciona una editorial", ""));
+
+            ENProducto enProd = new ENProducto();
+            List<string> editoriales = enProd.ObtenerTodasLasEditoriales();
+
+            foreach (string editorial in editoriales)
+            {
+                ddlEditorial.Items.Add(new ListItem(editorial, editorial));
+            }
+        }
+
+        private void PoblarAutores()
+        {
+            ddlAutor.Items.Clear();
+            ddlAutor.Items.Add(new ListItem("Selecciona un autor", ""));
+
+            ENProducto enProd = new ENProducto();
+            List<string> autores = enProd.ObtenerTodosLosAutores();
+
+            foreach (string autor in autores)
+            {
+                ddlAutor.Items.Add(new ListItem(autor, autor));
+            }
+        }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            string searchQuery = Request.QueryString["search"];
+            CargarLibros(searchQuery);
+            CargarPaquetes();
+        }
+
     }
 }

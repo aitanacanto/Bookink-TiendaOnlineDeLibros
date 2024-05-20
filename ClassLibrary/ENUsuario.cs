@@ -17,27 +17,28 @@ namespace ClassLibrary
         private string _email;
         private string _password;
         private string _phoneNumber;
-        private string _NIF;
+        private string _DNI;
         private int _id;
         private List<ENDireccion> _direcciones;
+        private bool _admin;
          
         public string Name { get { return _name; } set { _name = value; } }
         public string Surname { get { return _surname; } set { _surname = value; } }
         public string Email { get { return _email; } set { _email = value; } }
         public string Password { get { return _password; } set { _password = value; } }
         public string PhoneNumber { get { return _phoneNumber; } set { _phoneNumber = value; } }
-        public string NIF
+        public string DNI
         {
-            get { return _NIF; }
+            get { return _DNI; }
             set
             {
                 if (IsValidDNI(value))
                 {
-                    _NIF = value;
+                    _DNI = value;
                 }
                 else
                 {
-                    throw new ArgumentException("El NIF proporcionado no es válido.");
+                    throw new ArgumentException("El DNI proporcionado no es válido.");
                 }
             }
         }
@@ -56,6 +57,7 @@ namespace ClassLibrary
                 _direcciones = value;
             }
         }
+        public bool Admin { get { return _admin; } set { _admin = value; } }
 
         // Método para validar el DNI
         private bool IsValidDNI(string dni)
@@ -85,26 +87,45 @@ namespace ClassLibrary
             return correctLetter == letterPart;
         }
 
+        private static string ComputeSha256Hash(string rawData)
+        {
+            // Crear un objeto SHA256
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Computar el hash del string en bytes
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convertir los bytes a un string hexadecimal
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
         public ENUsuario() 
         {
             Id = 0;
             Name = string.Empty;
             Surname = string.Empty;
             Email = string.Empty;
-            _NIF = string.Empty;
+            _DNI = string.Empty;
             Password = string.Empty;
             PhoneNumber = string.Empty;
             Direcciones = new List<ENDireccion>();
+            _admin = false;
         }
 
-        public ENUsuario(string name, string surname, string password, string nif, string email, string phone)
+        public ENUsuario(string name, string surname, string password, string dni, string email, string phone)
         {
             Name = name;
             Surname = surname;
-            NIF = nif;
+            DNI = dni;
             Password = ComputeSha256Hash(password);
             Email = email;
             PhoneNumber = phone;
+            _admin = false;
         }
 
         public ENUsuario(string email, string password)
@@ -113,10 +134,10 @@ namespace ClassLibrary
             Password = ComputeSha256Hash(password);
         }
 
-        public bool Register()
+        public bool Register(bool admin)
         {
             CADUsuario cad = new CADUsuario();
-            return cad.Register(this);
+            return cad.Register(this, admin);
         }
 
         public bool LogIn()
@@ -142,22 +163,11 @@ namespace ClassLibrary
             CADUsuario cad = new CADUsuario();
             return cad.AddAddress(this,dir);
         }
-        private static string ComputeSha256Hash(string rawData)
-        {
-            // Crear un objeto SHA256
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // Computar el hash del string en bytes
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
 
-                // Convertir los bytes a un string hexadecimal
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
+        public bool MakeAdmin()
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.MakeAdmin(this);
         }
     }
 }

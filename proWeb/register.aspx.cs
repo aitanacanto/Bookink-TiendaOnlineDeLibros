@@ -21,7 +21,7 @@ namespace proWeb
             try
             {
                 ENUsuario user = new ENUsuario(Nombre.Text, Apellidos.Text, Contraseña.Text, NIF.Text, Email.Text, Telefono.Text);
-                bool registro = user.Register();
+                bool registro = user.Register(false);
                 if (registro)
                 {
                     ENDireccion direccion = new ENDireccion(cod_postal.Text,calle.Text,ciudad.Text,pais.Text);

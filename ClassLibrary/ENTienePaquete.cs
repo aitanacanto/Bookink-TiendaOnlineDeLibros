@@ -22,6 +22,18 @@ namespace ClassLibrary
             IdPaquete = idPaquete;
             IdProducto = idProducto;
         }
+
+        public bool AgregarProductoAlPaquete(int idPaquete, int idProducto)
+        {
+            CADTienePaquete cad = new CADTienePaquete();
+            return cad.AgregarProductoAlPaquete(idPaquete, idProducto);
+        }
+
+        public bool EliminarProductoDelPaquete(int idPaquete, int idProducto)
+        {
+            CADTienePaquete cad = new CADTienePaquete();
+            return cad.EliminarProductoDelPaquete(idPaquete, idProducto);
+        }
     }
 
 }

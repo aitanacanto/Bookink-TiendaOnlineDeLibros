@@ -32,7 +32,8 @@ namespace ClassLibrary
 
                 foreach (ENProducto producto in en.Productos)
                 {
-                    AgregarProductoAlPaquete(en, producto.Id); 
+                    ENTienePaquete tiene = new ENTienePaquete { IdPaquete = en.IdPaquete, IdProducto = producto.Id };
+                    tiene.AgregarProductoAlPaquete(tiene.IdPaquete, tiene.IdProducto);
                 }
                 return true;
             }
@@ -52,78 +53,71 @@ namespace ClassLibrary
             }
         }
 
-
-
-        public ENPaquete leerPaquete(ENPaquete en)
+        public bool leerPaquete(ENPaquete en)
         {
             if (en == null)
             {
                 throw new ArgumentNullException(nameof(en), "El parámetro en no puede ser null");
             }
 
-            SqlConnection conex = new SqlConnection(constring);
+            SqlConnection c = new SqlConnection(constring);
 
             try
             {
-                conex.Open();
-                string comandoSQL = "SELECT * FROM PAQUETE WHERE id = @id";
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
-                cmd.Parameters.AddWithValue("@id", en.IdPaquete);
+                c.Open();
+                string query = "SELECT * FROM PAQUETE WHERE Id = @Id";
+                SqlCommand com = new SqlCommand(query, c);
+                com.Parameters.AddWithValue("@Id", en.IdPaquete);
 
-                SqlDataReader reader = cmd.ExecuteReader();
-                ENPaquete paquete = null;
-
-                if (reader.Read())
+                SqlDataReader dr = com.ExecuteReader();
+                if (dr.Read())
                 {
-                    paquete = new ENPaquete
-                    {
-                        IdPaquete = (int)reader["id"],
-                        Nombre = (string)reader["nombre"],
-                        Precio = (float)reader["precio"],
-                        Img_paquete = (string)reader["img_paquete"]
-                    };
+                    en.IdPaquete = int.Parse(dr["id"].ToString());
+                    en.Nombre = dr["nombre"].ToString();
+                    en.Precio = float.Parse(dr["precio"].ToString());
+                    en.Img_paquete = dr["img_paquete"].ToString();
                 }
-                else
-                {
-                    reader.Close();
-                    return null;
-                }
+                dr.Close();
 
-                reader.Close();
-
-                paquete.Productos = new List<ENProducto>();
-                string comandoProductosSQL = "SELECT p.* FROM PRODUCTO p JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
-                SqlCommand cmdProductos = new SqlCommand(comandoProductosSQL, conex);
-                cmdProductos.Parameters.AddWithValue("@id_paquete", paquete.IdPaquete);
-                bool leido = true;
+                en.Productos = new List<ENProducto>();
+                string comandoProductosSQL = "SELECT p.id FROM PRODUCTO p JOIN TIENE_PAQUETE tp ON p.id = tp.id_producto WHERE tp.id_paquete = @id_paquete";
+                SqlCommand cmdProductos = new SqlCommand(comandoProductosSQL, c);
+                cmdProductos.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
 
                 using (SqlDataReader readerProductos = cmdProductos.ExecuteReader())
                 {
-                    while (readerProductos.Read() && leido)
+                    while (readerProductos.Read())
                     {
-                        ENProducto producto = new ENProducto();
-                        leido = producto.Read();
-                        paquete.Productos.Add(producto);
+                        ENProducto producto = new ENProducto
+                        {
+                            Id = int.Parse(readerProductos["id"].ToString())
+                        };
+                        bool leido = producto.Read();
+                        if (leido)
+                        {
+                            en.Productos.Add(producto);
+                        }
                     }
                 }
+                return true;
 
-                return paquete;
             }
             catch (SqlException e)
             {
                 Console.WriteLine("Operation has failed. SQL Error: {0}", e.Message);
-                return null;
+                return false;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Operation has failed. Error: {0}", e.Message);
-                return null;
+                return false;
             }
             finally
             {
-                conex.Close();
+                c.Close();
             }
         }
+
 
 
 
@@ -195,66 +189,6 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
-        public bool EliminarProductoDelPaquete(ENPaquete en, int idProducto)
-        {
-            SqlConnection conex = new SqlConnection(constring);
-
-            try
-            {
-                conex.Open();
-                string comandoSQL = "DELETE FROM TIENE_PAQUETE WHERE id_paquete = @id_paquete AND id_producto = @id_producto";
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
-                cmd.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
-                cmd.Parameters.AddWithValue("@id_producto", idProducto);
-                cmd.ExecuteNonQuery();
-
-                return true;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine("Delete product operation has failed. Error: {0}", e.Message);
-                return false;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Delete product operation has failed. Error: {0}", e.Message);
-                return false;
-            }
-            finally
-            {
-                conex.Close();
-            }
-        }
-        public bool AgregarProductoAlPaquete(ENPaquete en, int idProducto)
-        {
-            SqlConnection conex = new SqlConnection(constring);
-
-            try
-            {
-                conex.Open();
-                string comandoSQL = "INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES (@id_paquete, @id_producto)";
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
-                cmd.Parameters.AddWithValue("@id_paquete", en.IdPaquete);
-                cmd.Parameters.AddWithValue("@id_producto", idProducto);
-                cmd.ExecuteNonQuery();
-
-                return true;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine("Insert product operation has failed. Error: {0}", e.Message);
-                return false;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Insert product operation has failed. Error: {0}", e.Message);
-                return false;
-            }
-            finally
-            {
-                conex.Close();
-            }
-        }
 
         public List<ENPaquete> ObtenerTodosLosPaquetes()
         {
@@ -264,8 +198,7 @@ namespace ClassLibrary
             try
             {
                 conex.Open();
-
-                string comandoPaquetesSQL = "SELECT id, nombre, precio, img_paquete FROM PAQUETE";
+                string comandoPaquetesSQL = "SELECT id FROM PAQUETE";
                 SqlCommand cmdPaquetes = new SqlCommand(comandoPaquetesSQL, conex);
 
                 using (SqlDataReader readerPaquetes = cmdPaquetes.ExecuteReader())
@@ -274,15 +207,18 @@ namespace ClassLibrary
                     {
                         try
                         {
+                            // Crear una instancia de ENPaquete con solo el IdPaquete
                             ENPaquete paquete = new ENPaquete
                             {
-                                IdPaquete = (int)readerPaquetes["id"],
-                                Nombre = (string)readerPaquetes["nombre"],
-                                Precio = Convert.ToSingle(readerPaquetes["precio"]),
-                                Img_paquete = (string)readerPaquetes["img_paquete"]
-                            };
+                                IdPaquete = int.Parse(readerPaquetes["id"].ToString())
+                        };
 
-                            paquetes.Add(paquete);
+                            // Llamar a leerPaquete para llenar los detalles completos del paquete
+                            bool paqueteLeido = leerPaquete(paquete);
+                            if (paqueteLeido)
+                            {
+                                paquetes.Add(paquete);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -305,9 +241,10 @@ namespace ClassLibrary
             }
             finally
             {
-                Console.WriteLine("Cerrando la conexión.");
                 conex.Close();
             }
         }
+
+
     }
 }
