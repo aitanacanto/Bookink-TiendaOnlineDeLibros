@@ -35,7 +35,7 @@ namespace ClassLibrary
             constring = ConfigurationManager.ConnectionStrings["database"].ToString();
         }
 
-        public bool Register(ENUsuario en) 
+        public bool Register(ENUsuario en, bool admin) 
         {
             SqlConnection c = new SqlConnection(constring);
             try
@@ -45,7 +45,7 @@ namespace ClassLibrary
                 // Crear una sentencia parametricada
                 string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, dni, email, telefono, puntos, admin) " +
                                "OUTPUT INSERTED.ID " +
-                               "VALUES (@name, @surname, @contrasenya, @dni, @email, @telefono, 0, 0)";
+                               "VALUES (@name, @surname, @contrasenya, @dni, @email, @telefono, 0, @admin)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
@@ -55,6 +55,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@dni", en.DNI);
                 com.Parameters.AddWithValue("@email", en.Email);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
+                com.Parameters.AddWithValue("@admin", admin);
 
                 en.Id = Convert.ToInt32(com.ExecuteScalar());
 
@@ -166,7 +167,6 @@ namespace ClassLibrary
             SqlConnection c = new SqlConnection(constring);
             try
             {
-                //necesito una funcion de tiene_direccion para borrar las relaciones y luego poder todas las direcciones
                 c.Open();
 
                 // Crear una sentencia parametricada
@@ -197,6 +197,37 @@ namespace ClassLibrary
         {
             user.Direcciones.Add(dir);
             return true;
+        }
+
+        public bool MakeAdmin(ENUsuario en)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "UPDATE USUARIO SET admin = 1" +
+                                "WHERE email = @email";
+
+                //TODO: posible mejora - Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@email", en.Email);
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido hacer admin al usuario, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
         }
     }
 }

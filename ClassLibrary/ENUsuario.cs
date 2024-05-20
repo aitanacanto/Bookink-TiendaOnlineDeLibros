@@ -87,6 +87,23 @@ namespace ClassLibrary
             return correctLetter == letterPart;
         }
 
+        private static string ComputeSha256Hash(string rawData)
+        {
+            // Crear un objeto SHA256
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Computar el hash del string en bytes
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convertir los bytes a un string hexadecimal
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
         public ENUsuario() 
         {
             Id = 0;
@@ -117,10 +134,10 @@ namespace ClassLibrary
             Password = ComputeSha256Hash(password);
         }
 
-        public bool Register()
+        public bool Register(bool admin)
         {
             CADUsuario cad = new CADUsuario();
-            return cad.Register(this);
+            return cad.Register(this, admin);
         }
 
         public bool LogIn()
@@ -146,22 +163,11 @@ namespace ClassLibrary
             CADUsuario cad = new CADUsuario();
             return cad.AddAddress(this,dir);
         }
-        private static string ComputeSha256Hash(string rawData)
-        {
-            // Crear un objeto SHA256
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // Computar el hash del string en bytes
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
 
-                // Convertir los bytes a un string hexadecimal
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
+        public bool MakeAdmin()
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.MakeAdmin(this);
         }
     }
 }
