@@ -84,7 +84,16 @@ namespace ClassLibrary
             CADProducto cad = new CADProducto();
             return cad.ObtenerTodosLosProductos();
         }
-        
+        public List<String> ObtenerTodosLosAutores()
+        {
+            CADProducto cad = new CADProducto();
+            return cad.ObtenerTodosLosAutores();
+        }
 
+        public List<String> ObtenerTodasLasEditoriales()
+        {
+            CADProducto cad = new CADProducto();
+            return cad.ObtenerTodasLasEditoriales();
+        }
     }
 }

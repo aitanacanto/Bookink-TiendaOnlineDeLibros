@@ -57,19 +57,6 @@ namespace ClassLibrary
             return cad.EliminarPaquete(this);
         }
 
-        public bool EliminarProductoDelPaquete(int idProducto)
-        {
-            CADPaquete cad = new CADPaquete();
-            return cad.EliminarProductoDelPaquete(this, idProducto);
-        }
-
-
-        public bool AgregarProductoAlPaquete(int idProducto)
-        {
-            CADPaquete cad = new CADPaquete();
-            return cad.AgregarProductoAlPaquete(this, idProducto);
-        }
-
         public List<ENPaquete> ObtenerTodosLosPaquetes()
         {
             CADPaquete cad = new CADPaquete();

@@ -136,7 +136,7 @@ create table [dbo].[TIENE_PAQUETE]
     [id_producto] INT,
     PRIMARY KEY (id_paquete, id_producto),
     FOREIGN KEY (id_paquete) REFERENCES PAQUETE(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id) ON DELETE CASCADE
 )
 GO
 create table [dbo].[LINPEDIDO_PA]
@@ -148,20 +148,23 @@ create table [dbo].[LINPEDIDO_PA]
     FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped)   
 )
 GO
-create table [dbo].[CATEGORIA]
-(	
+
+CREATE TABLE [dbo].[CATEGORIA]
+(
     [id] INT IDENTITY (1, 1) NOT NULL,
     [nombre] NVARCHAR(100) NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
-create table [dbo].[TIENE_CATEGORIA]
-(	
+
+-- Create/modify the TIENE_CATEGORIA table
+CREATE TABLE [dbo].[TIENE_CATEGORIA]
+(
     [id_categoria] INT,
     [id_producto] INT,
     PRIMARY KEY (id_categoria, id_producto),
-    FOREIGN KEY (id_categoria) REFERENCES CATEGORIA(id),
-    FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id)
+    CONSTRAINT [fk_TIENE_CATEGORIA_CATEGORIA] FOREIGN KEY ([id_categoria]) REFERENCES CATEGORIA([id]) ON DELETE CASCADE,
+    CONSTRAINT [fk_TIENE_CATEGORIA_PRODUCTO] FOREIGN KEY ([id_producto]) REFERENCES PRODUCTO([id]) ON DELETE CASCADE
 )
 GO
 
@@ -366,6 +369,7 @@ INSERT INTO RESENA (id_usuario, id_producto, comentario, fecha, valoracion) VALU
 -- Producto 1: 2 reseñas
 (1, 1, 'Excelente libro, muy recomendable.', '2024-05-01', 4.8),
 (2, 1, 'Una historia fascinante de principio a fin.', '2024-05-02', 4.5),
+
 
 -- Producto 2: 2 reseñas
 (3, 2, 'Me encantó, no pude dejar de leerlo.', '2024-05-03', 4.9),

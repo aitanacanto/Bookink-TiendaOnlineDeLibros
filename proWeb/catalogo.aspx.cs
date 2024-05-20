@@ -14,11 +14,9 @@ namespace proWeb
         {
             if (!IsPostBack)
             {
-                // Método para cargar los libros
+                PoblarFiltros();
                 CargarLibros();
-
-                // Método para cargar los paquetes
-                //CargarPaquetes();
+                CargarPaquetes();
             }
         }
 
@@ -33,11 +31,8 @@ namespace proWeb
 
         private void CargarPaquetes()
         {
-            // Aquí deberías escribir el código para obtener tus datos
-            // Simplemente devuelve una lista de productos como ejemplo
 
             List<ENProducto> listaProductos = new List<ENProducto>();
-            // Método para cargar los paquetes
             ENPaquete paquete = new ENPaquete();
             List<ENPaquete> listaPaquetes = paquete.ObtenerTodosLosPaquetes();
 
@@ -58,5 +53,65 @@ namespace proWeb
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
         }
+
+        private void PoblarFiltros()
+        {
+            PoblarCategorias();
+            PoblarEditoriales();
+            PoblarAutores();
+        }
+
+        private void PoblarCategorias()
+        {
+            ddlCategoria.Items.Clear();
+            ddlCategoria.Items.Add(new ListItem("Selecciona una categoría", ""));
+
+            ENCategoria enCat = new ENCategoria();
+            List<ENCategoria> categories = enCat.GetAllCategories();
+
+            foreach (ENCategoria categoria in categories)
+            {
+                ddlCategoria.Items.Add(new ListItem(categoria.Nombre, categoria.Id.ToString()));
+            }
+        }
+
+
+        private void PoblarEditoriales()
+        {
+            ddlEditorial.Items.Clear();
+            ddlEditorial.Items.Add(new ListItem("Selecciona una editorial", ""));
+
+            ENProducto enProd = new ENProducto();
+            List<string> editoriales = enProd.ObtenerTodasLasEditoriales();
+
+            foreach (string editorial in editoriales)
+            {
+                ddlEditorial.Items.Add(new ListItem(editorial, editorial));
+            }
+        }
+
+
+        private void PoblarAutores()
+        {
+            ddlAutor.Items.Clear();
+            ddlAutor.Items.Add(new ListItem("Selecciona un autor", ""));
+
+            ENProducto enProd = new ENProducto();
+            List<string> autores = enProd.ObtenerTodosLosAutores();
+
+            foreach (string autor in autores)
+            {
+                ddlAutor.Items.Add(new ListItem(autor, autor));
+            }
+        }
+
+
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            CargarLibros();
+            CargarPaquetes();
+        }
+
     }
 }
