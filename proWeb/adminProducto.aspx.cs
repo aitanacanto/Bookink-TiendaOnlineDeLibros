@@ -185,6 +185,17 @@ namespace proWeb
 
             }
         }
+        protected string TruncateText(string text, int length)
+        {
+            if (text.Length <= length)
+            {
+                return text;
+            }
+            else
+            {
+                return text.Substring(0, length) + "...";
+            }
+        }
     };
 
 }

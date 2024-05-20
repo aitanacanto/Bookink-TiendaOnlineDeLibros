@@ -200,9 +200,11 @@
                     <ItemTemplate>
                    
                         <div class="Producto">
-                            <div style="width: 150px; height: 150px; background-color: #FFFFE0; border-radius: 8px;"></div>
+                            <div class="d-flex justify-content-center" style="width: 150px; height: 150px; border-radius: 8px; ">
+                                <asp:Image class=" mb-2 mt-2" ImageUrl='<%# Eval("ImagePath") %>' runat="server" />
+                            </div>
                             <div>
-                                <h2 class="title"><%# Eval("Name") %></h2>
+                                <h2 runat="server" class="title"><%# TruncateText(Eval("Name").ToString(),35) %></h2>
                                 <p class="price">Precio: <%# Eval("Price") %> €</p>
                                 <p class="id">ID: <%# Eval("Id") %></p>
                             </div>
