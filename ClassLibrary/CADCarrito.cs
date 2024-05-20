@@ -95,7 +95,43 @@ namespace ClassLibrary
             }
             
         }
+        public bool deleteCarrito(ENCarrito carr)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            
 
+            try
+            {
+                c.Open();
+                
+                // Crear una sentencia parametricada
+                string query = "DELETE FROM LINCARRITO where id_carrito =" + carr.id;
+
+                //TODO: posible mejora - Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            catch (Exception e)
+            {
+                
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            finally
+            {
+                if (c != null) c.Close();
+            }
+            
+        }
         public int buscarIdCarrito(int id_usuario)
         {
             SqlConnection c = new SqlConnection(constring);
@@ -128,6 +164,7 @@ namespace ClassLibrary
             }
             return id_carrito;
         }
+
         public bool readCarritoUsuario(ENCarrito carr, ENUsuario user)
         {
             bool validar = false;

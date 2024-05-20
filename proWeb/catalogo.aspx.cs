@@ -59,6 +59,7 @@ namespace proWeb
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
         }
+        
 
         private void PoblarFiltros()
         {
