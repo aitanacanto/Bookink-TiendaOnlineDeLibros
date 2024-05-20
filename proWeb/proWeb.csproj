@@ -78,6 +78,7 @@
     <Content Include="mainPage.aspx" />
     <Content Include="mispedidos.aspx" />
     <Content Include="paquete.aspx" />
+    <Content Include="confirmarPedido.aspx" />
     <Content Include="pedido.aspx" />
     <Content Include="producto.aspx" />
     <Content Include="register.aspx" />
@@ -155,6 +156,13 @@
     </Compile>
     <Compile Include="paquete.aspx.designer.cs">
       <DependentUpon>paquete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="confirmarPedido.aspx.cs">
+      <DependentUpon>confirmarPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="confirmarPedido.aspx.designer.cs">
+      <DependentUpon>confirmarPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="pedido.aspx.cs">
       <DependentUpon>pedido.aspx</DependentUpon>
