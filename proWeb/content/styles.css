@@ -16,8 +16,9 @@ body {
     }
 
     .logo-img {
-        width: 80px;
+        width: 150px;
         height: auto;
+        margin-right: 10px;
     }
 
     .precios {
@@ -42,6 +43,7 @@ body {
     .color-estre {
         color: gold;
     }
+
 
 .no-estre {
     color: gold;
