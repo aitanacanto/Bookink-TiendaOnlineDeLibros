@@ -76,7 +76,6 @@ namespace proWeb
         }
 
 
-
         private void PoblarEditoriales()
         {
             ddlEditorial.Items.Clear();
