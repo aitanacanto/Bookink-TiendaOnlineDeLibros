@@ -108,5 +108,11 @@ namespace ClassLibrary
             return linea.insertarLinea(this);
         }
 
+        public bool actualizarLinea()
+        {
+            CADLinCarrito linea = new CADLinCarrito();
+            return linea.actualizarLinea(this);
+        }
+
     }
 }

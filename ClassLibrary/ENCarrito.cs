@@ -133,10 +133,18 @@ namespace ClassLibrary
             {
                 linca = new ENLinCarrito(this.id, pro, 1);
                 _listLinCar.Add(linca);
+                if(this.id_usuario != 0)
+                {
+                    linca.insertarLinea();
+                }
             }
             else
             {
                 linca.incrementarCantidad();
+                if (this.id_usuario != 0)
+                {
+                    //linca.actualizarLinea();
+                }
             }
         }
         public void eliminarProductoCarrito(int id_pro)
@@ -172,18 +180,12 @@ namespace ClassLibrary
         }
 
 
-        public DataSet eliminacionCarrito(int id)
+        public bool deleteCarrito()
 
         {
             CADCarrito carr = new CADCarrito();
-            DataSet dat = carr.eliminacionCarrito(this, id);
-
-            if (carr.readCarrito(this))
-            {
-                dat = carr.eliminacionCarrito(this, id);
-            }
-
-            return dat;
+            _listLinCar.Clear();
+            return carr.deleteCarrito(this);
         }
         public bool vaciarCarrito()
         {

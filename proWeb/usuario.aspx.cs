@@ -58,6 +58,7 @@ namespace proWeb
             Session.Remove("User");
             user = new ENUsuario();
             ENCarrito cesta;
+            cesta = Session["Carrito"] as ENCarrito;
             Session.Remove("Carrito");
             cesta = new ENCarrito();
             Response.Redirect("mainPage.aspx");
