@@ -43,16 +43,16 @@ namespace ClassLibrary
                 c.Open();
 
                 // Crear una sentencia parametricada
-                string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, nif, email, telefono, puntos, admin) " +
+                string query = "INSERT INTO USUARIO (nombre, apellidos, contrasenya, dni, email, telefono, puntos, admin) " +
                                "OUTPUT INSERTED.ID " +
-                               "VALUES (@name, @surname, @contrasenya, @nif, @email, @telefono, 0, 'no')";
+                               "VALUES (@name, @surname, @contrasenya, @dni, @email, @telefono, 0, 0)";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
                 com.Parameters.AddWithValue("@name", en.Name);
                 com.Parameters.AddWithValue("@surname", en.Surname);
                 com.Parameters.AddWithValue("@contrasenya", en.Password);
-                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@dni", en.DNI);
                 com.Parameters.AddWithValue("@email", en.Email);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
 
@@ -83,7 +83,7 @@ namespace ClassLibrary
 
                 string inputPass;
                 // Crear una sentencia parametricada
-                string query = "SELECT id, nombre, apellidos, contrasenya, nif, email, telefono FROM USUARIO WHERE email = @email";
+                string query = "SELECT id, nombre, apellidos, contrasenya, dni, email, telefono, admin FROM USUARIO WHERE email = @email";
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
@@ -99,8 +99,9 @@ namespace ClassLibrary
                         en.Id = (int)reader["id"];
                         en.Name = (string)reader["nombre"];
                         en.Surname = (string)reader["apellidos"];
-                        en.NIF = (string)reader["nif"];
+                        en.DNI = (string)reader["dni"];
                         en.PhoneNumber = (string)reader["telefono"];
+                        en.Admin = (bool)reader["admin"];
                         return true;
                     }
                     else
@@ -133,7 +134,7 @@ namespace ClassLibrary
 
                 // Crear una sentencia parametricada
                 string query = "UPDATE USUARIO SET nombre = @name, apellidos = @surname, contrasenya = @contrasenya, " +
-                                "nif = @nif, telefono = @telefono " +
+                                "dni = @dni, telefono = @telefono " +
                                 "WHERE email = @email";
 
                 SqlCommand com = new SqlCommand(query, c);
@@ -142,7 +143,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@name", en.Name);
                 com.Parameters.AddWithValue("@surname", en.Surname);
                 com.Parameters.AddWithValue("@contrasenya", en.Password);
-                com.Parameters.AddWithValue("@nif", en.NIF);
+                com.Parameters.AddWithValue("@dni", en.DNI);
                 com.Parameters.AddWithValue("@email", en.Email);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
 
