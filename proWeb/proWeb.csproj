@@ -73,6 +73,7 @@
     </Content>
     <Content Include="carrito.aspx" />
     <Content Include="catalogo.aspx" />
+    <Content Include="content\logo.png" />
     <Content Include="content\scriptBBDD.txt" />
     <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
