@@ -37,7 +37,7 @@ namespace proWeb
                 // Mostrar detalles del paquete
                 imageProduct.ImageUrl = enPaquete.Img_paquete;
                 ProductName.InnerText = enPaquete.Nombre;
-                ProductDescription.InnerText = ""; // Agregar descripción si existe en ENPaquete
+                ProductDescription.InnerText = enPaquete.Descripcion; // Agregar descripción si existe en ENPaquete
                 ProductPrice.InnerText = $"Precio: {enPaquete.Precio:0.00} €";
 
                 // Cargar los libros del paquete

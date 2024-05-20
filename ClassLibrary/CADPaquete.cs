@@ -22,11 +22,12 @@ namespace ClassLibrary
             {
                 conex.Open();
 
-                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio, img_paquete) VALUES (@nombre, @precio, @img_paquete);";
+                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio, img_paquete, descripcion) VALUES (@nombre, @precio, @img_paquete);";
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
                 cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
+                cmd.Parameters.AddWithValue("@descripcion", en.Descripcion);
 
                 en.IdPaquete = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -76,6 +77,7 @@ namespace ClassLibrary
                     en.Nombre = dr["nombre"].ToString();
                     en.Precio = float.Parse(dr["precio"].ToString());
                     en.Img_paquete = dr["img_paquete"].ToString();
+                    en.Descripcion = dr["descripcion"].ToString();
                 }
                 dr.Close();
 
@@ -129,12 +131,13 @@ namespace ClassLibrary
             {
                 conex.Open();
 
-                string comandoSQL = "UPDATE PAQUETE SET nombre = @nombre, precio = @precio WHERE id = @id";
+                string comandoSQL = "UPDATE PAQUETE SET nombre = @nombre, precio = @precio, descripcion = @descripcion WHERE id = @id";
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@id", en.IdPaquete);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
                 cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
+                cmd.Parameters.AddWithValue("@descripcion", en.Descripcion);
                 cmd.ExecuteNonQuery();
 
                 return true;
