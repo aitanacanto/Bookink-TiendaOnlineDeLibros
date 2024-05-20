@@ -117,11 +117,11 @@
             <div class="row">
                 <asp:Repeater ID="reapeterProduct" runat="server">
                     <ItemTemplate>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
                             <div class="product-card card">
                                  <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none">
                                     <div class="text-center">
-                                        <asp:Image ID="imgProduct" runat="server" class="img-fluid max-width" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                        <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold;"><%# Eval("name") %></h5>
