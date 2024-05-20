@@ -49,7 +49,7 @@ namespace proWeb
                    
                 }
                 Session["Carrito"] = cesta;
-                Response.Redirect("Login.aspx");
+                Response.Redirect("mainPage.aspx");
             }
             else
             {
