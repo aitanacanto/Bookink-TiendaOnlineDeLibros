@@ -38,7 +38,7 @@ namespace ClassLibrary
             return cad.CrearPaquete(this);
         }
 
-        public ENPaquete leerPaquete()
+        public bool leerPaquete()
         {
             CADPaquete cad = new CADPaquete();
             return cad.leerPaquete(this);

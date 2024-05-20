@@ -127,6 +127,7 @@ create table [dbo].[PAQUETE]
     [nombre] NVARCHAR(100) NOT NULL,
     [precio] DECIMAL(10, 2) NOT NULL,
     [img_paquete] NVARCHAR(255) NOT NULL,
+    [descripcion] NVARCHAR(500) NOT NULL,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
@@ -296,16 +297,16 @@ INSERT INTO PRODUCTO (cod_oferta, nombre, precio, cant_stock, precio_oferta, img
 
 
 -- PAQUETE
-    INSERT INTO PAQUETE (nombre, precio, img_paquete) VALUES 
-    ('HARRY POTTER Pack',80.00, 'content/products/pack_1.jpg'),
-    ('CULPABLES Pack',32.99, 'content/products/pack_2.jpg'),
-    ('DIVERGENTE Pack',42.99, 'content/products/pack_3.jpg'),
-    ('POPPY WAR Pack',35.00, 'content/products/pack_3.jpg'),
-    ('LOS HABITANTES DEL AIRE Pack',54.99, 'content/products/pack_4.jpg'),
-    ('MISTBORN Pack',45.50, 'content/products/pack_5.jpg'),
-    ('BLACKWATER Pack',69.99, 'content/products/pack_6.jpg'),
-    ('CRÓNICAS DE LA TORRE Pack',29.99, 'content/products/pack_7.jpg'),
-    ('PERCY JACKSON Pack', 46.55, 'content/products/pack_8.jpg');
+    INSERT INTO PAQUETE (nombre, precio, img_paquete, descripcion) VALUES 
+    ('HARRY POTTER Pack', 80.00, 'content/products/pack_1.jpg', 'Un viaje mágico a través de las aventuras del joven mago Harry Potter y sus amigos en Hogwarts. Incluye todos los libros de la saga.'),
+    ('CULPABLES Pack', 32.99, 'content/products/pack_2.jpg', 'Una emocionante serie llena de misterio y romance, donde cada decisión tiene sus consecuencias. Ideal para los amantes del drama y la intriga.'),
+    ('DIVERGENTE Pack', 42.99, 'content/products/pack_3.jpg', 'Sumérgete en una sociedad dividida en facciones con esta emocionante saga distópica. Perfecto para los fans de la acción y la aventura.'),
+    ('POPPY WAR Pack', 35.00, 'content/products/pack_3.jpg', 'Explora una épica fantasía militar inspirada en la historia y la mitología asiática. Una historia intensa y cautivadora que no podrás soltar.'),
+    ('LOS HABITANTES DEL AIRE Pack', 54.99, 'content/products/pack_4.jpg', 'Descubre un mundo de fae y política donde nada es lo que parece. Una trilogía llena de traiciones, romances y batallas.'),
+    ('MISTBORN Pack', 45.50, 'content/products/pack_5.jpg', 'Una fascinante serie de fantasía donde los héroes inesperados deben enfrentarse a un imperio oscuro. Con giros sorprendentes y un sistema de magia único.'),
+    ('BLACKWATER Pack', 69.99, 'content/products/pack_6.jpg', 'Un conjunto de historias entrelazadas sobre una familia a lo largo de generaciones, con secretos oscuros y legados misteriosos.'),
+    ('CRÓNICAS DE LA TORRE Pack', 29.99, 'content/products/pack_7.jpg', 'Acompaña a los estudiantes de una misteriosa torre mágica en sus aventuras y desafíos. Una serie perfecta para jóvenes lectores de fantasía.'),
+    ('PERCY JACKSON Pack', 46.55, 'content/products/pack_8.jpg', 'Aventúrate con Percy Jackson y sus amigos en una serie de misiones épicas inspiradas en la mitología griega. Ideal para jóvenes y adultos por igual.');
 
 -- TIENE PAQUETE
     INSERT INTO TIENE_PAQUETE (id_paquete, id_producto) VALUES 
