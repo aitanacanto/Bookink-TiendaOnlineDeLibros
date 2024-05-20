@@ -125,6 +125,14 @@ namespace proWeb
                 prod.Autor = Autor.Text;
                 prod.Editorial = Editorial.Text;
                 prod.AnyoPubli = int.Parse(Publi.Text);
+                string fileName = Path.GetFileName(Imagen.PostedFile.FileName);
+
+                if (fileName != "")
+                {
+                    string filePath = "/content/products/" + fileName;
+                    Imagen.SaveAs(Server.MapPath(filePath));
+                    prod.ImagePath = filePath;
+                }
 
                 prod.Update();
                 listaProductos = ObtenerProductos();
