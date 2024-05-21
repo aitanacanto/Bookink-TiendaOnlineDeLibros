@@ -65,7 +65,7 @@
             </div>
             <div class="mb-3">
                 <label for="mb-3">Teléfono</label>
-                <asp:TextBox ID="Telefono" runat="server" TextMode="Number" CssClass="form-control" onkeyup="telefono(this)"></asp:TextBox>
+                <asp:TextBox ID="Telefono" runat="server" CssClass="form-control" onkeyup="telefono(this)"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label for="NIF">DNI</label>
