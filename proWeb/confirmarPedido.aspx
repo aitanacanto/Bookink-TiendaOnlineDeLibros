@@ -13,6 +13,11 @@
             text-align: center;
             margin-top: 5px;
         }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
     </style>
 </asp:Content>
 
@@ -22,5 +27,9 @@
     </div>
     <div class="gracias">
         ¡Muchas gracias por su compra!
+    </div>
+
+    <<div class="button-container">
+         <asp:Button ID="btnSeguir" runat="server" CssClass="btn-buy" Text="¡Quiero seguir comprando!" OnClick="btnSeguir_Click"/>
     </div>
 </asp:Content>

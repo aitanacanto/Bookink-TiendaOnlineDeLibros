@@ -13,6 +13,7 @@ namespace ClassLibrary
         public string Nombre { get; set; }
         public float Precio { get; set; }
         public string Img_paquete { get; set; }
+        public string Descripcion { get; set; }
         public List<ENProducto> Productos { get; set; } // Lista de productos en el paquete
 
 
@@ -21,14 +22,15 @@ namespace ClassLibrary
             this.Productos = new List<ENProducto>();
             this.Nombre = "";
             this.Precio = 0;
-
+            this.Descripcion = "";
         }
 
-        public ENPaquete(int idPaquete, string nombre, float precio, List<ENProducto> productos)
+        public ENPaquete(int idPaquete, string nombre, float precio, string descripcion, List<ENProducto> productos)
         {
             IdPaquete = idPaquete;
             Nombre = nombre;
             Precio = precio;
+            Descripcion = descripcion;
             Productos = new List<ENProducto>(productos);
         }
 

@@ -19,10 +19,12 @@ namespace proWeb
                 MenuItem soyadmin = UserMenu.FindItem("Soy Admin");
                 MenuItem iniciar = UserMenu.FindItem("Iniciar Sesión");
                 MenuItem registrar = UserMenu.FindItem("Registrarse");
+                MenuItem pedidos = UserMenu.FindItem("Mis Pedidos");
                 if (user == null)
                 {
 
                     UserMenu.Items.Remove(midatos);
+                    UserMenu.Items.Remove(pedidos);
                     UserMenu.Items.Remove(soyadmin);
 
                 }
@@ -34,6 +36,12 @@ namespace proWeb
                 }
             }
             
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string query = txtBuscar.Text;
+            Response.Redirect($"catalogo.aspx?search={query}");
         }
 
     }

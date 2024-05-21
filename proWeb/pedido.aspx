@@ -99,7 +99,7 @@
             </div>
 
             <div class="col-sm" style="margin-bottom: 5px;">
-                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Placeholder="Correo electrónico"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Placeholder="Correo electrónico" Required="true"></asp:TextBox>
             </div>
 
             <div class="form-check" style="margin-bottom: 20px;">
@@ -114,36 +114,36 @@
             </div>
 
             <div class="col-sm" style="margin-bottom: 5px;">
-                <asp:TextBox ID="txtCountry" runat="server" CssClass="form-control" Placeholder="País / Región"></asp:TextBox>
+                <asp:TextBox ID="txtCountry" runat="server" CssClass="form-control" Placeholder="País / Región" Required="true"></asp:TextBox>
             </div>
 
             <div class="row g-3" style="margin-bottom: 5px;">
                 <div class="col-sm">
-                    <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" Placeholder="Nombre"></asp:TextBox>
+                    <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" Placeholder="Nombre" Required="true"></asp:TextBox>
                 </div>
                 <div class="col-sm-7">
-                    <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" Placeholder="Apellidos"></asp:TextBox>
+                    <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" Placeholder="Apellidos" Required="true"></asp:TextBox>
                 </div>
             </div>
 
             <div class="col-sm" style="margin-bottom: 5px;">
-                <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" Placeholder="Dirección"></asp:TextBox>
+                <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" Placeholder="Dirección" Required="true"></asp:TextBox>
             </div>
 
             <div class="row g-3" style="margin-bottom: 5px;">
                 <div class="col-sm">
-                    <asp:TextBox ID="txtPostalCode" runat="server" CssClass="form-control" Placeholder="Código Postal" onkeyup="codigoPostal(this)"></asp:TextBox>
+                    <asp:TextBox ID="txtPostalCode" runat="server" CssClass="form-control" Placeholder="Código Postal" onkeyup="codigoPostal(this)" Required="true"></asp:TextBox>
                 </div>
                 <div class="col-sm">
-                    <asp:TextBox ID="txtCity" runat="server" CssClass="form-control" Placeholder="Ciudad"></asp:TextBox>
+                    <asp:TextBox ID="txtCity" runat="server" CssClass="form-control" Placeholder="Ciudad" Required="true"></asp:TextBox>
                 </div>
                 <div class="col-sm">
-                    <asp:TextBox ID="txtProvince" runat="server" CssClass="form-control" Placeholder="Provincia"></asp:TextBox>
+                    <asp:TextBox ID="txtProvince" runat="server" CssClass="form-control" Placeholder="Provincia" Required="true"></asp:TextBox>
                 </div>
             </div>
 
             <div class="col-sm" style="margin-bottom: 5px;">
-                <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" Placeholder="Teléfono" onkeyup="telefono(this)"></asp:TextBox>
+                <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" Placeholder="Teléfono" onkeyup="telefono(this)" Required="true"></asp:TextBox>
             </div>
 
             <div class="form-check" style="margin-bottom: 20px;">
@@ -158,18 +158,18 @@
             </div>
 
             <div class="col-sm" style="margin-bottom: 5px;">
-                <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control" Placeholder="Num.Tarjeta" onkeyup="numTarjeta(this)"></asp:TextBox>
+                <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control" Placeholder="Num.Tarjeta" onkeyup="numTarjeta(this)" Required="true"></asp:TextBox>
             </div>
             <div class="row g-3" style="margin-bottom: 5px;">
                 <div class="col-sm">
-                    <asp:TextBox ID="txtExpirationDate" runat="server" CssClass="form-control" Placeholder="Fecha de vencimiento (MM/AA)" onkeyup="fechaVencimiento(this)"></asp:TextBox>
+                    <asp:TextBox ID="txtExpirationDate" runat="server" CssClass="form-control" Placeholder="Fecha de vencimiento (MM/AA)" onkeyup="fechaVencimiento(this)" Required="true"></asp:TextBox>
                 </div>
                 <div class="col-sm">
-                    <asp:TextBox ID="txtCVV" runat="server" CssClass="form-control" Placeholder="CVV" onkeyup="CVV(this)"></asp:TextBox>
+                    <asp:TextBox ID="txtCVV" runat="server" CssClass="form-control" Placeholder="CVV" onkeyup="CVV(this)" Required="true"></asp:TextBox>
                 </div>
             </div>
             <div class="col-sm">
-                <asp:TextBox ID="txtCardholderName" runat="server" CssClass="form-control" Placeholder="Nombre del titular"></asp:TextBox>
+                <asp:TextBox ID="txtCardholderName" runat="server" CssClass="form-control" Placeholder="Nombre del titular" Required="true"></asp:TextBox>
             </div>
 
             <div class="d-grid gap-2" style="margin-top: 15px;">
@@ -178,17 +178,6 @@
         </div>
 
         <div class="right-section">
-            <asp:Repeater ID="rptProducts" runat="server">
-                <ItemTemplate>
-                    <div class="item">
-                        <p><%# Eval("Name") %></p>
-                        <p>Precio: <%# Eval("Price", "{0:C}") %></p>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-            <div class="total">
-                Total de artículos: 3
-            </div>
         </div>
     </div>
 </asp:Content>
