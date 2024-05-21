@@ -22,6 +22,8 @@
                     <asp:MenuItem Text="Usuarios" NavigateUrl="adminUsuario.aspx" />
                     <asp:MenuItem Text="Productos" NavigateUrl="adminProducto.aspx" />
                     <asp:MenuItem Text="Categorías" NavigateUrl="adminCategoria.aspx" />
+                    <asp:MenuItem Text="Ver Métricas Monetización Aplicación" NavigateUrl="metricas.aspx" />
+
                 </Items>
             </asp:Menu>
         </div>
