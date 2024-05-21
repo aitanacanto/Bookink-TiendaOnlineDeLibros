@@ -199,7 +199,7 @@ namespace ClassLibrary
             return true;
         }
 
-        public bool MakeAdmin(ENUsuario en)
+        public bool MakeAdmin(string email)
         {
             SqlConnection c = new SqlConnection(constring);
             try
@@ -214,7 +214,7 @@ namespace ClassLibrary
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
-                com.Parameters.AddWithValue("@email", en.Email);
+                com.Parameters.AddWithValue("@email", email);
 
                 com.ExecuteNonQuery();
                 return true;

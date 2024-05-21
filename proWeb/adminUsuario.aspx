@@ -35,6 +35,7 @@
                                 %>'>
                                 Mostrar Más
                             </button>
+                            <asp:Button runat="server" ID="btnMakeAdmin" OnClick="btnMakeAdmin" CssClass="make-admin" CommandArgument='<%# Eval("Email") %>' Text="Hacer Admin"/>
                         </div>
                     </div>
                 </ItemTemplate>
