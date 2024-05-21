@@ -525,6 +525,19 @@ body {
     width: 150px;
 }
 
+.make-admin {
+    background-color: #198754;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+    width: 150px;
+}
+
 .deleteUser {
     background-color: #b12d44;
     color: #fff;

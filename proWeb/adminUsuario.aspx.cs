@@ -12,7 +12,7 @@ namespace proWeb
     {
         private static List<ENUsuario> listaUsuarios = new List<ENUsuario>();
         private static List<ENUsuario> listaTrabajadores = new List<ENUsuario>();
-
+        ENUsuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -149,6 +149,25 @@ namespace proWeb
                 lblMensaje.Text = "No se ha podido añadir el trabajador, ERROR: " + ex.Message;
                 lblMensaje.Visible = true;
                 return;
+            }
+        }
+
+        protected void btnMakeAdmin(object sender, EventArgs e)
+        {
+            try
+            {
+                usuario = Session["user"] as ENUsuario;
+                // Obtén el botón que generó el evento
+                Button btn = (Button)sender;
+
+                // Obtén el valor del CommandArgument
+                string email = btn.CommandArgument;
+                usuario.MakeAdmin(email);
+                Response.Redirect("adminusuario.aspx");
+
+            } catch (Exception ex)
+            {
+
             }
         }
     }

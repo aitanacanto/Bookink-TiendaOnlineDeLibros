@@ -164,10 +164,10 @@ namespace ClassLibrary
             return cad.AddAddress(this,dir);
         }
 
-        public bool MakeAdmin()
+        public bool MakeAdmin(string email)
         {
             CADUsuario cad = new CADUsuario();
-            return cad.MakeAdmin(this);
+            return cad.MakeAdmin(email);
         }
     }
 }

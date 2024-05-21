@@ -20,6 +20,7 @@ namespace proWeb
         {
             try
             {
+                if(ConfirmarContra.Text != Contraseña.Text) throw new ArgumentException("Las contraseñas no coinciden.");
                 ENUsuario user = new ENUsuario(Nombre.Text, Apellidos.Text, Contraseña.Text, NIF.Text, Email.Text, Telefono.Text);
                 bool registro = user.Register(false);
                 if (registro)
