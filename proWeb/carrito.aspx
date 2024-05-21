@@ -7,9 +7,6 @@
             height: auto;
         }
 
-        .align-left {
-            text-align: left;
-        }
     </style>
 </asp:Content>
 
@@ -63,7 +60,7 @@
 
 
         <!-- Seccion de debajo de los productos -->
-        <div class="row align-items-center text-left">
+        <div class="row align-items-center">
             <!-- Alinea el contenido a la izquierda -->
             <div class="col-8">
                 <!-- alinea los totales -->

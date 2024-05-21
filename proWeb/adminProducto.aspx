@@ -58,12 +58,8 @@
                          <div class="row align-items-start">
                         <div class="mb-3 col">
                          <asp:label runat="server" class="form-label">Categoría</asp:label>
-                            <select class="form-select">
-                                <option value="cat1">Cat1</option>
-                                <option value="cat2">Cat2</option>
-                                <option value="cat3">Cat3</option>
-                                <option value="cat4">Cat4</option>
-                            </select>
+                            <asp:DropDownList runat="server" ID="listacat" CssClass="form-select mb-2">
+                            </asp:DropDownList>
                         </div>
                              <div class="mb-3 col">
                                  <asp:label runat="server" class="form-label">Editorial</asp:label>
