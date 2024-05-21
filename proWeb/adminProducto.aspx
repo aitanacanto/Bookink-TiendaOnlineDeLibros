@@ -27,6 +27,7 @@
                           <div class="mb-3 col">
                           <asp:label runat="server" class="form-label">Nombre</asp:label>
                           <asp:TextBox runat="server" type="text" name="name" ID="TxtName" class="form-control"/>
+
                         </div>
                           <div class="row align-items-start">
                               <div class="mb-3 col">
@@ -74,7 +75,7 @@
 
                            <div class="mb-3">
                           <asp:label runat="server" class="form-label">Año de Publicación</asp:label>
-                          <asp:TextBox runat="server" type="text" name="anyo_publi" class="form-control" ID="txt_anyo"/>
+                          <asp:TextBox runat="server" type="number" name="anyo_publi" class="form-control" ID="txt_anyo"/>
                         </div>
 
                        <div class="mb-3">
@@ -133,12 +134,8 @@
                          <div class="row align-items-start">
                         <div class="mb-3 col">
                          <asp:label runat="server" class="form-label">Categoría</asp:label>
-                            <select class="form-select">
-                                <option value="cat1">Cat1</option>
-                                <option value="cat2">Cat2</option>
-                                <option value="cat3">Cat3</option>
-                                <option value="cat4">Cat4</option>
-                            </select>
+                            <asp:DropDownList runat="server" ID="listacat2" CssClass="form-select mb-2">
+                            </asp:DropDownList>
                         </div>
                              <div class="mb-3 col">
                                  <asp:label runat="server" class="form-label">Editorial</asp:label>
@@ -153,7 +150,7 @@
                           <div class="row align-items-start">
                            <div class="mb-3 col">
                           <asp:label runat="server" class="form-label">Año de Publicación</asp:label>
-                          <asp:TextBox runat="server" type="text" name="anyo_publi" class="form-control" ID="Publi"/>
+                          <asp:TextBox runat="server" type="number" name="anyo_publi" class="form-control" ID="Publi"/>
                         </div>
                               <div class="mb-3 col">
                           <asp:label runat="server" class="form-label">Id</asp:label>

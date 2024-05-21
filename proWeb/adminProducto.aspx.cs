@@ -26,6 +26,7 @@ namespace proWeb
         {
             try
             {
+                
                 string name = TxtName.Text;
                 int stock = int.Parse(txt_stock.Text);
                 float price = float.Parse(TxtPrice.Text, CultureInfo.InvariantCulture);
@@ -37,11 +38,14 @@ namespace proWeb
                 int anyo = int.Parse(txt_anyo.Text);
                 int numpag = int.Parse(TxtNumPag.Text);
                 string fileName = Path.GetFileName(ImagenSubida.PostedFile.FileName);
-                string filePath = "/content/products/" + fileName;
-                ImagenSubida.SaveAs(Server.MapPath(filePath));
+                
+                string extension = Path.GetExtension(ImagenSubida.PostedFile.FileName);
+                string filePath = "/content/products/" + name+DateTime.Now.ToString("dd-MM-yy-HH-mmss") +extension;
+                
 
                 ENProducto newProduct = new ENProducto(name, stock, price, saleprice, filePath, sinopsis, autor, codOfer, editorial, anyo, numpag);
                 newProduct.Create();
+                ImagenSubida.SaveAs(Server.MapPath(filePath));
                 listaProductos = ObtenerProductos();
                 BindRepeater();
             }
@@ -176,13 +180,15 @@ namespace proWeb
         {
             listacat.Items.Clear();
             listacat.Items.Add(new ListItem("Selecciona una categoría", ""));
-
+            listacat2.Items.Clear();
+            listacat2.Items.Add(new ListItem("Selecciona una categoría", ""));
             ENCategoria enCat = new ENCategoria();
             List<ENCategoria> categories = enCat.GetAllCategories();
 
             foreach (ENCategoria categoria in categories)
             {
                 listacat.Items.Add(new ListItem(categoria.Nombre, categoria.Id.ToString()));
+                listacat2.Items.Add(new ListItem(categoria.Nombre, categoria.Id.ToString()));
             }
         }
 
