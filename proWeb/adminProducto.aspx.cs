@@ -16,6 +16,7 @@ namespace proWeb
         {
             if (!IsPostBack)
             {
+                listar_cat();
                 listaProductos = ObtenerProductos();
                 BindRepeater();
             }
@@ -169,6 +170,20 @@ namespace proWeb
                       </script>";
 
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", script);
+        }
+
+        protected void listar_cat()
+        {
+            listacat.Items.Clear();
+            listacat.Items.Add(new ListItem("Selecciona una categoría", ""));
+
+            ENCategoria enCat = new ENCategoria();
+            List<ENCategoria> categories = enCat.GetAllCategories();
+
+            foreach (ENCategoria categoria in categories)
+            {
+                listacat.Items.Add(new ListItem(categoria.Nombre, categoria.Id.ToString()));
+            }
         }
 
         protected void delete_click(object sender, EventArgs e)

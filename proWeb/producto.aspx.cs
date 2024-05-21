@@ -20,6 +20,15 @@ namespace proWeb
                 {
                     CargarProducto(Id);
                 }
+                List<ENProducto> listaProductos = ObtenerProductos();
+                List<ENProducto> Novedades = new List<ENProducto>();
+                for (int i = 0; i < 4; i++)
+                {
+                    Novedades.Add(listaProductos[i]);
+                }
+                // Asignamos la lista de productos al repeater
+                reapeterProduct.DataSource = Novedades;
+                reapeterProduct.DataBind();
             }
         }
 
@@ -39,6 +48,30 @@ namespace proWeb
                 editorial.InnerText = prod.Editorial;
                 numpag.InnerText = prod.NumPags.ToString();
             }
+        }
+
+        protected void Add_Click(object sender, EventArgs e)
+        {
+            ENCarrito carrito = Session["Carrito"] as ENCarrito;
+            if (carrito == null)
+            {
+                carrito = new ENCarrito();
+                Session["Carrito"] = carrito;
+            }
+            Button button = (Button)sender;
+            int id_producto = int.Parse(button.CommandArgument);
+            carrito.anyadirProductoCarrito(id_producto);
+        }
+
+        private List<ENProducto> ObtenerProductos()
+        {
+
+            List<ENProducto> listaProductos = new List<ENProducto>();
+
+            ENProducto en = new ENProducto();
+            listaProductos = en.ObtenerTodosLosProductos();
+            return listaProductos;
+
         }
     }
 }
