@@ -26,7 +26,23 @@ namespace proWeb
         {
             try
             {
-                
+                if (string.IsNullOrWhiteSpace(TxtName.Text) ||
+                string.IsNullOrWhiteSpace(txt_stock.Text) ||
+                string.IsNullOrWhiteSpace(TxtPrice.Text) ||
+                string.IsNullOrWhiteSpace(TxtSalePrice.Text) ||
+                string.IsNullOrWhiteSpace(Txt_sinopsis.Text) ||
+                string.IsNullOrWhiteSpace(txt_Autor.Text) ||
+                string.IsNullOrWhiteSpace(txt_editorial.Text) ||
+                string.IsNullOrWhiteSpace(txt_anyo.Text) ||
+                string.IsNullOrWhiteSpace(TxtNumPag.Text) ||
+                ImagenSubida.PostedFile == null ||
+                ImagenSubida.PostedFile.FileName == "")
+                {
+                    lblError.Text = "Todos los campos son obligatorios.";
+                    lblError.Visible = true;
+                    return;
+                }
+
                 string name = TxtName.Text;
                 int stock = int.Parse(txt_stock.Text);
                 float price = float.Parse(TxtPrice.Text, CultureInfo.InvariantCulture);
@@ -40,7 +56,7 @@ namespace proWeb
                 string fileName = Path.GetFileName(ImagenSubida.PostedFile.FileName);
                 
                 string extension = Path.GetExtension(ImagenSubida.PostedFile.FileName);
-                string filePath = "/content/products/" + name+DateTime.Now.ToString("dd-MM-yy-HH-mmss") +extension;
+                string filePath = "/content/products/" + name+DateTime.Now.ToString("dd-MM-yy-HH-mm-ss") +extension;
                 
 
                 ENProducto newProduct = new ENProducto(name, stock, price, saleprice, filePath, sinopsis, autor, codOfer, editorial, anyo, numpag);
@@ -117,7 +133,20 @@ namespace proWeb
         {
             try
             {
-
+                if (string.IsNullOrWhiteSpace(TxtName.Text) ||
+                string.IsNullOrWhiteSpace(txt_stock.Text) ||
+                string.IsNullOrWhiteSpace(TxtPrice.Text) ||
+                string.IsNullOrWhiteSpace(TxtSalePrice.Text) ||
+                string.IsNullOrWhiteSpace(Txt_sinopsis.Text) ||
+                string.IsNullOrWhiteSpace(txt_Autor.Text) ||
+                string.IsNullOrWhiteSpace(txt_editorial.Text) ||
+                string.IsNullOrWhiteSpace(txt_anyo.Text) ||
+                string.IsNullOrWhiteSpace(TxtNumPag.Text))
+                {
+                    lblError.Text = "Todos los campos son obligatorios.";
+                    lblError.Visible = true;
+                    return;
+                }
                 ENProducto prod = new ENProducto();
                 prod.Id = int.Parse(ids.Text);
                 prod.Read();

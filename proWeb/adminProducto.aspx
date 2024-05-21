@@ -16,6 +16,8 @@
                 </h1>
                 <div style="margin-left: auto;">
                      <asp:button class="create" data-bs-toggle="modal" data-bs-target="#exampleModal" runat="server" text="Crear Producto" OnClientClick="return false;" />
+                   
+
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -83,9 +85,10 @@
                            <asp:FileUpload runat="server" class="form-control" type="file" id="ImagenSubida"/>
                         </div>    
                       </div>
+                          <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <asp:button ID="btnAdd" runat="server" type="button" class="btn btn-primary" OnClick="btnAdd_Click" Text="Guardar Cambios"></asp:button>
+                        <asp:button ID="btnAdd" runat="server" class="btn btn-primary" OnClick="btnAdd_Click" Text="Guardar Cambios" AutoPostback ="False"></asp:button>
                       </div>
                     </div>
                   </div>
