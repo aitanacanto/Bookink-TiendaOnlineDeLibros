@@ -6,28 +6,32 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ClassLibrary;
 
-    namespace proWeb
+namespace proWeb
+{
+    public partial class pedido : Page
     {
-        public partial class pedido : Page
+        ENCarrito cesta;
+        protected void Page_Load(object sender, EventArgs e)
         {
-            ENCarrito cesta;
-            protected void Page_Load(object sender, EventArgs e)
+            if (!IsPostBack)
             {
-                if (!IsPostBack)
-                {
-                    DisplayProducts();
-                }
+                // Logic for initial page load, if needed
+                CargarCarrito();
+            }
+        }
+
+        protected void btnPagar_Click(object sender, EventArgs e)
+        {
+            /*if (ValidateForm())
+            {
+                
+            Response.Redirect("confirmarPedido.aspx");
             }
 
-            protected void btnPagar_Click(object sender, EventArgs e)
-            {
-                if (ValidateForm())
-                {
-                    Response.Redirect("confirmarPedido.aspx");
-                }
-
-                Console.WriteLine(ValidateForm());
-            }
+            Console.WriteLine(ValidateForm());
+            */
+            Response.Redirect("confirmarPedido.aspx");
+        }
 
         private bool ValidateForm()
         {
@@ -94,17 +98,22 @@ using ClassLibrary;
             return true;
         }
 
-        private void DisplayProducts()
+        private void CargarCarrito()
         {
-            cesta = Session["Carrito"] as  ENCarrito;
-            if (cesta == null)
-            {
-                cesta = new ENCarrito();
-                Session["Carrito"] = cesta;
-            }
+               /* cesta = Session["Carrito"] as ENCarrito;
+                if (cesta == null)
+                {
+                    cesta = new ENCarrito();
+                    Session["Carrito"] = cesta;
+                }
 
-            List<ENLinCarrito> listaProductos = new List<ENLinCarrito>();
-            listaProductos = cesta.ObtenerProductosEnCarrito();
-        }
+                ENProducto en = new ENProducto();
+                List<ENLinCarrito> listaProductos = new List<ENLinCarrito>();
+                listaProductos = cesta.ObtenerProductosEnCarrito();
+                reapeterProduct.DataSource = listaProductos;
+                reapeterProduct.DataBind();
+                total_lineas.Text = cesta.ContarProductosEnCarrito().ToString();
+                total_pvp.Text = String.Format("{0:0.00}", cesta.CalcularPvp()) + " €";*/
         }
     }
+}
