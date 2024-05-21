@@ -17,7 +17,7 @@ namespace proWeb
                 // Aquí llamamos a un método para obtener la lista de productos
                 List<ENProducto> listaProductos = ObtenerProductos();
                 List<ENProducto> Novedades = new List<ENProducto>();
-                for (int i = 0; i < 4; i++)
+                for (int i = listaProductos.Count()-1; i > listaProductos.Count()-5; i--)
                 {
                     Novedades.Add(listaProductos[i]);
                 }
