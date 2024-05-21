@@ -86,7 +86,7 @@ namespace ClassLibrary
 
                     foreach (ENLinCarrito linea in _listLinCar)
                     {
-                        linea.insertarLinea();
+                            linea.insertarLinea();
                     }
                     return true;
                 }
@@ -108,7 +108,7 @@ namespace ClassLibrary
 
         }
 
-        
+
         private ENLinCarrito existeProducto(ENProducto pro)
         {
             foreach (ENLinCarrito lincar in _listLinCar)
@@ -133,7 +133,7 @@ namespace ClassLibrary
             {
                 linca = new ENLinCarrito(this.id, pro, 1);
                 _listLinCar.Add(linca);
-                if(this.id_usuario != 0)
+                if (this.id_usuario != 0)
                 {
                     linca.insertarLinea();
                 }
@@ -143,7 +143,7 @@ namespace ClassLibrary
                 linca.incrementarCantidad();
                 if (this.id_usuario != 0)
                 {
-                    //linca.actualizarLinea();
+                    linca.actualizarLinea();
                 }
             }
         }
@@ -154,14 +154,22 @@ namespace ClassLibrary
             ENLinCarrito linca = existeProducto(pro);
             if (linca.decrementarCantidad())
             {
+                linca.eliminarLinea();
                 _listLinCar.Remove(linca);
+            }
+            else
+            {
+                if (this.id_usuario != 0)
+                {
+                    linca.actualizarLinea();
+                }
             }
         }
 
 
         public bool readCarrito()
         {
-            
+
             CADCarrito carr = new CADCarrito();
             if (carr.readCarrito(this))
             {
