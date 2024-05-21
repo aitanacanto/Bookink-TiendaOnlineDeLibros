@@ -114,10 +114,10 @@
     <div data-aos="fade-in">
          <h1 class="text-center">Catálogo Libros</h1>
         <div class="container">
-            <div class="row">
+            <div class="row " >
                 <asp:Repeater ID="reapeterProduct" runat="server">
                     <ItemTemplate>
-                        <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
+                        <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch" data-aos="fade-in">
                             <div class="product-card card d-flex flex-column">
                                  <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
                                     <div class="text-center">
