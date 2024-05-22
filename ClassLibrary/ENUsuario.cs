@@ -169,5 +169,18 @@ namespace ClassLibrary
             CADUsuario cad = new CADUsuario();
             return cad.MakeAdmin(email);
         }
+        
+        public static List<ENUsuario> ObtenerUsuarios()
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.ObtenerUsuarios(false);
+        }
+
+        public static List<ENUsuario> ObtenerTrabajadores()
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.ObtenerUsuarios(true);
+        }
+
     }
 }
