@@ -87,7 +87,7 @@ namespace ClassLibrary
             return correctLetter == letterPart;
         }
 
-        private static string ComputeSha256Hash(string rawData)
+        public static string ComputeSha256Hash(string rawData)
         {
             // Crear un objeto SHA256
             using (SHA256 sha256Hash = SHA256.Create())

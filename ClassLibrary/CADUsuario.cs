@@ -135,8 +135,8 @@ namespace ClassLibrary
 
                 // Crear una sentencia parametricada
                 string query = "UPDATE USUARIO SET nombre = @name, apellidos = @surname, contrasenya = @contrasenya, " +
-                                "dni = @dni, telefono = @telefono " +
-                                "WHERE email = @email";
+                                "dni = @dni, telefono = @telefono, email = @email " +
+                                "WHERE id = @id";
 
                 SqlCommand com = new SqlCommand(query, c);
 
@@ -146,6 +146,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@contrasenya", en.Password);
                 com.Parameters.AddWithValue("@dni", en.DNI);
                 com.Parameters.AddWithValue("@email", en.Email);
+                com.Parameters.AddWithValue("@id", en.Id);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
 
                 com.ExecuteNonQuery();
