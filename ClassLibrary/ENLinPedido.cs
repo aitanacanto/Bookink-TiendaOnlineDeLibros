@@ -48,22 +48,30 @@ namespace ClassLibrary
 
         public bool create()
         {
-            return false;
+            CADLinPedido c = new CADLinPedido();
+
+            return c.create(this);
         }
 
         public bool update()
         {
-            return false;
+            CADLinPedido c = new CADLinPedido();
+
+            return c.update(this);
         }
 
         public bool read()
         {
-            return false;
+            CADLinPedido c = new CADLinPedido();
+
+            return c.read(this);
         }
 
         public bool delete()
         {
-            return false;
+            CADLinPedido c = new CADLinPedido();
+
+            return c.delete(this);
         }
 
 

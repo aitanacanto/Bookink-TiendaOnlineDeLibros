@@ -21,13 +21,15 @@ namespace proWeb
                     CargarProducto(Id);
                 }
                 List<ENProducto> listaProductos = ObtenerProductos();
-                List<ENProducto> Novedades = new List<ENProducto>();
+                List<ENProducto> Relacionado = new List<ENProducto>();
+                Random rnd = new Random();
+                List<ENProducto> productosAleatorios = listaProductos.OrderBy(x => rnd.Next()).ToList();
                 for (int i = 0; i < 4; i++)
                 {
-                    Novedades.Add(listaProductos[i]);
+                    Relacionado.Add(productosAleatorios[i]);
                 }
                 // Asignamos la lista de productos al repeater
-                reapeterProduct.DataSource = Novedades;
+                reapeterProduct.DataSource = Relacionado;
                 reapeterProduct.DataBind();
             }
         }
