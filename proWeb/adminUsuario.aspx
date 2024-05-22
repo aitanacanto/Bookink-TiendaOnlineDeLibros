@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Administrar Usuarios y Trabajadores</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-xO2eOqG9E1z4Oz+fa6sbXhfuLjYuxs5vjs3G9vb9CiHRUq3RivZtr4jXb8LBO+7p" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-b4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+5KVp5mwoqb0sFZgJGz4TO7vg6G9ckxs0" crossorigin="anonymous"></script>
@@ -64,10 +63,10 @@
                             <button type="button" class="mostrar" data-bs-toggle="collapse" data-bs-target="#collapseTrabajador<%# Eval("Id") %>" aria-expanded="false" aria-controls="collapseTrabajador<%# Eval("Id") %>">
                                 Mostrar Más
                             </button>
-                            <button class="deleteUser" OnClick="btnBorrarTrabajador_Click" CommandArgument='<%# Eval("Id") %>'>
-                                <i class="fa-solid fa-trash"></i>
-                                Eliminar
-                            </button>
+                            <asp:LinkButton runat="server" class="delete" OnClick="btnDel_Click" CommandArgument='<%# Eval("Email")%>'>
+                                    <i class="fa-solid fa-trash"></i>
+                                    Eliminar
+                            </asp:LinkButton>
                         </div>
                     </div>
                     <div class="collapse" id="collapseTrabajador<%# Eval("Id") %>">
@@ -112,6 +111,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <asp:Label id="idel" Text="ID" runat="server" />
+
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <asp:button id="btnDel" runat="server" type="button" class="btn btn-danger" OnClick="delete_click" Text="Eliminar"></asp:button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#<%= lblMensaje.ClientID %>").fadeOut(1); // 1000 milisegundos = 1 segundo
+            }, 1); // 3000 milisegundos = 3 segundos
+        });
+    </script>
+
 
 
 </asp:Content>

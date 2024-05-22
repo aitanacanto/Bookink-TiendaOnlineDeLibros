@@ -230,5 +230,40 @@ namespace ClassLibrary
                 c.Close();
             }
         }
+
+        public List<ENUsuario> ObtenerUsuarios(bool admin)
+        {
+            List<ENUsuario> listaUsuarios = new List<ENUsuario>();
+            SqlConnection con = new SqlConnection(constring);
+            try
+            {
+                con.Open();
+                string query = admin ? "SELECT * FROM USUARIO WHERE admin = 1" : "SELECT * FROM USUARIO WHERE admin = 0";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ENUsuario usuario = new ENUsuario();
+                    usuario.Id = Convert.ToInt32(reader["id"]);
+                    usuario.Name = reader["nombre"].ToString();
+                    usuario.Surname = reader["apellidos"].ToString();
+                    usuario.Email = reader["email"].ToString();
+                    usuario.PhoneNumber = reader["telefono"].ToString();
+                    usuario.DNI = reader["dni"].ToString();
+                    usuario.Admin = admin;
+                    listaUsuarios.Add(usuario);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener los usuarios: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return listaUsuarios;
+        }
     }
 }
