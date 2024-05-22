@@ -69,9 +69,6 @@
     <Content Include="adminUsuario.aspx" />
     <Content Include="carrito.aspx" />
     <Content Include="catalogo.aspx" />
-    <Content Include="content\fotocliente.png" />
-    <Content Include="content\fototrabajador.jpg" />
-    <Content Include="content\logo.png" />
     <Content Include="content\scriptBBDD.txt" />
     <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
