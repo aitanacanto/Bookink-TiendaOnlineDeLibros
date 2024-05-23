@@ -31,5 +31,12 @@ namespace ClassLibrary
             CADTieneDireccion cadTieneDireccion = new CADTieneDireccion();
             return cadTieneDireccion.AgregarRelacion(this);
         }
+       
+        public bool Delete()
+        {
+            CADTieneDireccion cadTieneDireccion = new CADTieneDireccion();
+            return cadTieneDireccion.EliminarRelacion(this);
+        }
+
     }
 }

@@ -54,7 +54,6 @@ namespace ClassLibrary
                 
         }
 
-
         public bool LeerDireccion(ENDireccion direccion)
         {
             using (SqlConnection c = new SqlConnection(constring))
@@ -71,7 +70,7 @@ namespace ClassLibrary
                             if (dr.Read())
                             {
                                 direccion.CodPostal = dr["cod_postal"].ToString();
-                                direccion.Direccion = dr["direccion"].ToString();
+                                direccion.Direccion = dr["dirección"].ToString();
                                 direccion.Ciudad = dr["ciudad"].ToString();
                                 direccion.Pais = dr["pais"].ToString();
                                 return true;
@@ -119,6 +118,32 @@ namespace ClassLibrary
                 catch (Exception ex)
                 {
                     Console.WriteLine("No se ha podido modificar la dirección, ERROR: {0}", ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    c.Close();
+                }
+            }
+        }
+
+        public bool EliminarDireccion(ENDireccion direccion)
+        {
+            using (SqlConnection c = new SqlConnection(constring))
+            {
+                try
+                {
+                    c.Open();
+                    using (SqlCommand com = new SqlCommand("DELETE FROM DIRECCION WHERE id = @id", c))
+                    {
+                        com.Parameters.AddWithValue("@id", direccion.ID);
+                        com.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido eliminar la dirección, ERROR: {0}", ex.Message);
                     return false;
                 }
                 finally
