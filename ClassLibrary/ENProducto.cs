@@ -101,5 +101,11 @@ namespace ClassLibrary
             CADProducto cad = new CADProducto();
             return cad.BuscarProductosPorNombre(nombre);
         }
+
+        public bool aumentarPopularidad(int Id)
+        {
+            CADProducto cad = new CADProducto();
+            return cad.aumentarPopularidad(Id);
+        }
     }
 }
