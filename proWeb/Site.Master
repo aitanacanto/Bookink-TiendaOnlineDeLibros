@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Bookink - Tu tienda de libros en línea</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -61,6 +62,10 @@
                         <a href="carrito.aspx" class="d-block link-dark text-decoration-none ms-3 me-3" id="cart">
                             <i class="fa-solid fa-cart-shopping fa-lg"></i>
                         </a>
+                        <asp:Label 
+                            ID="LabelInicio" 
+                            runat="server" 
+                            Visible="false"></asp:Label>
 
 
                         <div class="dropdown text-end ms-3">

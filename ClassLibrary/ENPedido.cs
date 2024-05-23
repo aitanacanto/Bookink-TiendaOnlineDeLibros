@@ -8,8 +8,15 @@ using System.Data;
 
 namespace ClassLibrary
 {
-    class ENPedido
+    public class ENPedido
     {
+        private DateTime date;
+        public DateTime Date
+        {
+            get { return date; }
+            set { date = value; }
+        }
+
         private int numped;
         public int Numped
         {
@@ -62,7 +69,7 @@ namespace ClassLibrary
             this.Estado = " ";
         }
 
-        public ENPedido(int numped, int id_usuario, int cod_carrito, string direccion_envio, float precio, string estado)
+        public ENPedido(int numped, int id_usuario, int cod_carrito, string direccion_envio, float precio, string estado, DateTime date)
         {
             this.Numped = numped;
             this.Id_usuario = id_usuario;
@@ -70,6 +77,7 @@ namespace ClassLibrary
             this.Direccion_envio = direccion_envio;
             this.Precio = precio;
             this.Estado = estado;
+            this.Date = date;
         }
 
         public bool crearPedido()
@@ -84,7 +92,7 @@ namespace ClassLibrary
             return cad.cambiarEstado(this);
         }
 
-        public DataSet verPedidos()
+        public List<ENPedido> verPedidos()
         {
             CADPedido cad = new CADPedido();
             return cad.verPedidos(this);

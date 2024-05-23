@@ -14,6 +14,7 @@ namespace ClassLibrary
         private int _stock;
         private float _price;
         private float _salePrice;
+        private List<ENCategoria> _listLinCategoria = new List<ENCategoria>();
 
         public string Name { get { return _name; } set { _name = value; } }
         public int Id { get { return _id; } set { _id = value; } }
@@ -100,6 +101,22 @@ namespace ClassLibrary
         {
             CADProducto cad = new CADProducto();
             return cad.BuscarProductosPorNombre(nombre);
+        }
+
+        public bool AnyadirCategoria(ENCategoria cat)
+        {
+            if (!_listLinCategoria.Contains(cat))
+            {
+                _listLinCategoria.Add(cat);
+                return true;
+            }
+            return false;
+        }
+
+        public bool aumentarPopularidad(int Id)
+        {
+            CADProducto cad = new CADProducto();
+            return cad.aumentarPopularidad(Id);
         }
     }
 }

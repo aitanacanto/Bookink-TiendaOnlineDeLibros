@@ -36,7 +36,8 @@ namespace proWeb
                 string.IsNullOrWhiteSpace(txt_anyo.Text) ||
                 string.IsNullOrWhiteSpace(TxtNumPag.Text) ||
                 ImagenSubida.PostedFile == null ||
-                ImagenSubida.PostedFile.FileName == "")
+                ImagenSubida.PostedFile.FileName == "" ||
+                string.IsNullOrWhiteSpace(listacat.SelectedValue))
                 {
                     lblError.Text = "Todos los campos son obligatorios.";
                     lblError.Visible = true;
@@ -62,6 +63,12 @@ namespace proWeb
                 ENProducto newProduct = new ENProducto(name, stock, price, saleprice, filePath, sinopsis, autor, codOfer, editorial, anyo, numpag);
                 newProduct.Create();
                 ImagenSubida.SaveAs(Server.MapPath(filePath));
+
+                int categoriaId = int.Parse(listacat.SelectedValue);
+                ENTieneCategoria cat = new ENTieneCategoria(categoriaId, newProduct.Id);
+                cat.AddRelation();
+
+
                 listaProductos = ObtenerProductos();
                 BindRepeater();
             }
@@ -115,6 +122,16 @@ namespace proWeb
                 Publi.Text = prod.AnyoPubli.ToString();
                 Sinopsis.Text = prod.Sinopsis;
                 ids.Text = prod.Id.ToString();
+                List<ENTieneCategoria> relaciones = ENTieneCategoria.GetRelationsByProduct(prod.Id);
+                if (relaciones.Count > 0)
+                {
+                    int categoriaId = relaciones[0].IdCategoria;
+                    listacat2.SelectedValue = categoriaId.ToString();
+                }
+                else
+                {
+                    listacat2.SelectedValue = "0";
+                }
 
             }
 
@@ -133,21 +150,31 @@ namespace proWeb
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(TxtName.Text) ||
-                string.IsNullOrWhiteSpace(txt_stock.Text) ||
-                string.IsNullOrWhiteSpace(TxtPrice.Text) ||
-                string.IsNullOrWhiteSpace(TxtSalePrice.Text) ||
-                string.IsNullOrWhiteSpace(Txt_sinopsis.Text) ||
-                string.IsNullOrWhiteSpace(txt_Autor.Text) ||
-                string.IsNullOrWhiteSpace(txt_editorial.Text) ||
-                string.IsNullOrWhiteSpace(txt_anyo.Text) ||
-                string.IsNullOrWhiteSpace(TxtNumPag.Text))
+
+                if (string.IsNullOrWhiteSpace(Name.Text) ||
+                string.IsNullOrWhiteSpace(Cantidad.Text) ||
+                string.IsNullOrWhiteSpace(Precio.Text) ||
+                string.IsNullOrWhiteSpace(Oferta.Text) ||
+                string.IsNullOrWhiteSpace(Sinopsis.Text) ||
+                string.IsNullOrWhiteSpace(Autor.Text) ||
+                string.IsNullOrWhiteSpace(Editorial.Text) ||
+                string.IsNullOrWhiteSpace(Publi.Text) ||
+                string.IsNullOrWhiteSpace(NumPags.Text) || 
+                string.IsNullOrWhiteSpace(listacat2.SelectedValue))
+
                 {
                     lblError.Text = "Todos los campos son obligatorios.";
                     lblError.Visible = true;
                     return;
                 }
                 ENProducto prod = new ENProducto();
+                int categoriaId = 0;
+                List<ENTieneCategoria> relaciones = ENTieneCategoria.GetRelationsByProduct(int.Parse(ids.Text));
+                if (relaciones.Count > 0)
+                {
+                    categoriaId = relaciones[0].IdCategoria;
+                }
+                
                 prod.Id = int.Parse(ids.Text);
                 prod.Read();
                 prod.Name = Name.Text;
@@ -161,12 +188,29 @@ namespace proWeb
                 prod.AnyoPubli = int.Parse(Publi.Text);
                 string fileName = Path.GetFileName(Imagen.PostedFile.FileName);
 
+
                 if (fileName != "")
                 {
                     string filePath = "/content/products/" + fileName;
                     Imagen.SaveAs(Server.MapPath(filePath));
                     prod.ImagePath = filePath;
                 }
+                int caId = int.Parse(listacat2.SelectedValue);
+                if (categoriaId != 0)
+                {
+                    ENTieneCategoria cat = new ENTieneCategoria(categoriaId, prod.Id);
+
+
+                    
+
+                    cat.UpdateRelation(caId);
+                }
+                else
+                {
+                    ENTieneCategoria cat = new ENTieneCategoria(caId, prod.Id);
+                    cat.AddRelation();
+                }
+                
 
                 prod.Update();
                 listaProductos = ObtenerProductos();
@@ -208,9 +252,9 @@ namespace proWeb
         protected void listar_cat()
         {
             listacat.Items.Clear();
-            listacat.Items.Add(new ListItem("Selecciona una categoría", ""));
+            listacat.Items.Add(new ListItem("Selecciona una categoría", "0"));
             listacat2.Items.Clear();
-            listacat2.Items.Add(new ListItem("Selecciona una categoría", ""));
+            listacat2.Items.Add(new ListItem("Selecciona una categoría", "0"));
             ENCategoria enCat = new ENCategoria();
             List<ENCategoria> categories = enCat.GetAllCategories();
 

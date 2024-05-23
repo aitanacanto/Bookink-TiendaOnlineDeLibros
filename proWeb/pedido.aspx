@@ -172,7 +172,7 @@
             </div>
         </div>
         <div class="col-sm">
-          <asp:Repeater ID="reapeterProduct" runat="server">
+          <asp:Repeater ID="reapeterCarrito" runat="server">
             <ItemTemplate>
                 <div class="row align-items-center">
                     <div class="col-2">

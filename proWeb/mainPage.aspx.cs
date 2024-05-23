@@ -18,31 +18,25 @@ namespace proWeb
             {
                 // Aquí llamamos a un método para obtener la lista de productos
                 List<ENProducto> listaProductos = ObtenerProductos();
+                int prodCount = listaProductos.Count();
+                // Aquí hacemos la lista de novedades
                 List<ENProducto> Novedades = new List<ENProducto>();
-                for (int i = 0; i < MaxNovedades; i++)
-                {
-                    Novedades.Add(listaProductos[i]);
-                }
-                if (listaProductos.Count() > MaxListaProductos + MaxNovedades)
-                {
-                    listaProductos = listaProductos.GetRange(MaxNovedades,MaxListaProductos);
-                }
+                Novedades = listaProductos.GetRange(prodCount - MaxNovedades, MaxNovedades);
+                //Limitamos la lista de productos al minimo entre maxlistaproductos y la cantidad de productos
+                if (listaProductos.Count() > MaxListaProductos)
+                    listaProductos = listaProductos.GetRange(0, MaxListaProductos);
                 // Asignamos la lista de productos al repeater
                 reapeterProduct.DataSource = listaProductos;
                 reapeterProduct.DataBind();
-
+                // Asignamos la lista de novedades al repeater
                 reapeterNov.DataSource = Novedades;
                 reapeterNov.DataBind();
+
                 if (Session["Carrito"] == null) Session["Carrito"] = new ENCarrito();
-                if (Session["Usuario"] ==  null) Session["Usuario"] = new ENUsuario();
-                
+                if (Session["Usuario"] == null) Session["Usuario"] = new ENUsuario();
+
             }
-            /*ENUsuario user = (ENUsuario)Session["Usuario"];
-            if (user.Id != 0)
-            {
-                LabelOculta.Text = "Bienvenido " + user.Name + " con id " + user.Id;
-                LabelOculta.Visible = true;
-            }*/
+
         }
 
         // Método para obtener la lista de productos (puedes obtenerla de tu base de datos o de donde sea)

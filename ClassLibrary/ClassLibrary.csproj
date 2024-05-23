@@ -57,6 +57,8 @@
     <Compile Include="CADTieneDireccion.cs" />
     <Compile Include="CADTienePaquete.cs" />
     <Compile Include="CADUsuario.cs" />
+    <Compile Include="CADLinCarrito_pa.cs" />
+    <Compile Include="ENLinCarrito_pa.cs" />
     <Compile Include="ENCarrito.cs" />
     <Compile Include="ENDireccion.cs" />
     <Compile Include="ENLinCarrito.cs" />

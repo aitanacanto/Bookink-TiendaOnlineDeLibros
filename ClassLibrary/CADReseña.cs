@@ -110,5 +110,84 @@ namespace ClassLibrary
                 c.Close();
             }
         }
+
+        public List<ENReseña> GetReseñas(int inProductId)
+        {
+            SqlConnection c = new SqlConnection(constring);
+                List<ENReseña> listaProductos = new List<ENReseña>();
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "SELECT RESENA.*, nombre, apellidos FROM RESENA " +
+                                "JOIN USUARIO on(id_usuario = id)" + //para sacar los nombres y apellidos de los usuarios de las reseñas
+                                "WHERE id_producto = @product";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@product", inProductId);
+                SqlDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    int userId = (int)reader["id_usuario"];
+                    int productId = (int)reader["id_producto"];
+                    float rating = (float)(decimal)reader["valoracion"];
+                    string comment = (string)reader["comentario"];
+                    DateTime date = (DateTime)reader["fecha"];
+                    string userName = (string)reader["nombre"];
+                    string userSurname = (string)reader["apellidos"];
+
+                    ENReseña newRes = new ENReseña(userId, productId, rating, comment, date)
+                    {
+                        UserName = userName + " " + userSurname,
+                    };
+                    listaProductos.Add(newRes);
+                }
+
+                return listaProductos;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido modificar la reseña, ERROR: {0}", ex.Message);
+                return listaProductos;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+        public float ValoracionMedia(int inProductId)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "SELECT avg(valoracion) AS Media " +
+                                "FROM RESENA " +
+                                "WHERE id_producto = @product";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@product", inProductId);
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    return Convert.ToSingle(reader["Media"]);
+                }
+                return 2.5f; //no se han encontrado reseñas de ese producto
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido modificar la reseña, ERROR: {0}", ex.Message);
+                return 2.5f;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
     }
 }
