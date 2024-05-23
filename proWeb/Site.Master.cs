@@ -26,10 +26,12 @@ namespace proWeb
                     UserMenu.Items.Remove(midatos);
                     UserMenu.Items.Remove(pedidos);
                     UserMenu.Items.Remove(soyadmin);
-
+                    LabelInicio.Visible = false;
                 }
                 else
                 {
+                    LabelInicio.Text = "¡Bienvenido, " + user.Name + "!";
+                    LabelInicio.Visible = true;
                     UserMenu.Items.Remove(iniciar);
                     UserMenu.Items.Remove(registrar);
                     if (!user.Admin) UserMenu.Items.Remove(soyadmin);

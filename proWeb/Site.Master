@@ -61,6 +61,10 @@
                         <a href="carrito.aspx" class="d-block link-dark text-decoration-none ms-3 me-3" id="cart">
                             <i class="fa-solid fa-cart-shopping fa-lg"></i>
                         </a>
+                        <asp:Label 
+                            ID="LabelInicio" 
+                            runat="server" 
+                            Visible="false"></asp:Label>
 
 
                         <div class="dropdown text-end ms-3">
