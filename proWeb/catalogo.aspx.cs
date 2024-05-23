@@ -112,14 +112,14 @@ namespace proWeb
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string categoria = ddlCategoria.SelectedValue;
             string editorial = ddlEditorial.SelectedValue;
             string autor = ddlAutor.SelectedValue;
+            int? idCategoria = string.IsNullOrEmpty(ddlCategoria.SelectedValue) ? (int?)null : int.Parse(ddlCategoria.SelectedValue);
             float? precioMinimo = string.IsNullOrEmpty(txtPrecioMin.Text) ? (float?)null : float.Parse(txtPrecioMin.Text);
             float? precioMaximo = string.IsNullOrEmpty(txtPrecioMax.Text) ? (float?)null : float.Parse(txtPrecioMax.Text);
 
             ENProducto enProd = new ENProducto();
-            List<ENProducto> listaProductos = enProd.BuscarProductosPorFiltros(categoria, editorial, autor, precioMinimo, precioMaximo);
+            List<ENProducto> listaProductos = enProd.BuscarProductosPorFiltros(idCategoria, editorial, autor, precioMinimo, precioMaximo);
 
             // Enlaza la lista filtrada al repeater
             reapeterProduct.DataSource = listaProductos;

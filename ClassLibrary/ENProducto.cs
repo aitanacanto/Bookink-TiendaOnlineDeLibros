@@ -103,7 +103,7 @@ namespace ClassLibrary
             return cad.BuscarProductosPorNombre(nombre);
         }
 
-        public List<ENProducto> BuscarProductosPorFiltros(string categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
+        public List<ENProducto> BuscarProductosPorFiltros(int? categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
         {
             CADProducto cad = new CADProducto();
             return cad.BuscarProductosPorFiltros(categoria, editorial, autor, precioMinimo, precioMaximo);
