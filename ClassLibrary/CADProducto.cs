@@ -367,6 +367,62 @@ namespace ClassLibrary
             }
         }
 
+        public List<ENProducto> BuscarProductosPorFiltros(string categoria, string editorial, string autor)
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string query = @"
+                    SELECT p.*
+                    FROM PRODUCTO p
+                    JOIN TIENE_CATEGORIA tc ON p.id = tc.id_producto
+                    JOIN CATEGORIA c ON c.id = tc.id_categoria
+                    WHERE (@Categoria IS NULL OR c.nombre = @Categoria)
+                    AND (@Editorial IS NULL OR p.editorial = @Editorial)
+                    AND (@Autor IS NULL OR p.autor = @Autor)";
+
+                SqlCommand cmd = new SqlCommand(query, conex);
+                cmd.Parameters.AddWithValue("@Categoria", string.IsNullOrEmpty(categoria) ? (object)DBNull.Value : categoria);
+                cmd.Parameters.AddWithValue("@Editorial", string.IsNullOrEmpty(editorial) ? (object)DBNull.Value : editorial);
+                cmd.Parameters.AddWithValue("@Autor", string.IsNullOrEmpty(autor) ? (object)DBNull.Value : autor);
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        ENProducto en = new ENProducto();
+                        en.Id = int.Parse(dr["id"].ToString());
+                        en.Name = dr["nombre"].ToString();
+                        en.Stock = int.Parse(dr["cant_stock"].ToString());
+                        en.Price = float.Parse(dr["precio"].ToString());
+                        en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
+                        en.ImagePath = dr["img_producto"].ToString();
+                        en.Sinopsis = dr["sinopsis"].ToString();
+                        en.Autor = dr["autor"].ToString();
+                        en.CodOfer = dr["cod_oferta"].ToString();
+                        en.Editorial = dr["editorial"].ToString();
+                        en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                        en.NumPags = int.Parse(dr["num_pag"].ToString());
+
+                        productos.Add(en);
+                    }
+                }
+                return productos;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", ex.Message);
+                return null;
+            }
+            finally
+            {
+                conex.Close();
+            }
+        }
+
 
 
 
