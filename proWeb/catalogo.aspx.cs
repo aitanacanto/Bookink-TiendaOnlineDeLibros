@@ -119,6 +119,7 @@ namespace proWeb
 
         protected void Add_Click(object sender, EventArgs e)
         {
+            /*
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
             if (carrito == null)
             {
@@ -128,6 +129,8 @@ namespace proWeb
             Button button = (Button)sender;
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
+            */
+            Response.Redirect("mainPage.aspx");
         }
 
     }
