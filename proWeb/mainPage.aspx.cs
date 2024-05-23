@@ -87,8 +87,17 @@ namespace proWeb
 
         }
 
-        
+        protected void btnVerMas_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string categoria = btn.CommandArgument;
 
- 
+            // Redirigir a una página que muestre los productos filtrados por la categoría seleccionada.
+            Response.Redirect($"catalogo.aspx?categoria={categoria}");
+        }
+
+
+
+
     }
 }
