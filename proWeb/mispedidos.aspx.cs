@@ -11,6 +11,7 @@ namespace proWeb
     public partial class mispedidos : Page
     {
         ENPedido ped = new ENPedido();
+        ENCarrito cesta = new ENCarrito();
         protected void Page_Load(object sender, EventArgs e)
         {
             ensenyarPedidos();
@@ -19,6 +20,8 @@ namespace proWeb
         protected void ensenyarPedidos()
         {
             List<ENPedido> listaPedidos = new List<ENPedido>();
+            cesta = Session["Carrito"] as ENCarrito;
+            ped.Id_usuario = cesta.id_usuario;
             listaPedidos = ped.verPedidos();
             if (repeaterPedidos != null)
             {

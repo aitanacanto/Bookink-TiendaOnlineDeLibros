@@ -22,7 +22,14 @@ namespace proWeb
 
         protected void btnPagar_Click(object sender, EventArgs e)
         {
+            cesta = Session["Carrito"] as ENCarrito;
+            ped.Id_usuario = cesta.id_usuario;
+            ped.Cod_carrito = cesta.id;
+            ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
+            ped.Precio = cesta.CalcularPvp();
+            ped.Estado = "En Proceso";
             ped.crearPedido();
+            cesta.deleteCarrito();
             Response.Redirect("confirmarPedido.aspx");
         }
 
