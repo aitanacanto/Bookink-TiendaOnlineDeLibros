@@ -10,10 +10,13 @@ namespace proWeb
 {
     public partial class mainPage : System.Web.UI.Page
     {
+        private int MaxListaProductos = 20; //Número máximo de elementos a mostrar en la lista principal
+        private int MaxNovedades = 4; //Número máximo de elementos a mostrar en las novedades
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                // Aquí llamamos a un método para obtener la lista de productos
                 List<ENProducto> listaProductos = ObtenerProductos();
                 int prodCount = listaProductos.Count();
                 // Aquí hacemos la lista de novedades
@@ -21,16 +24,7 @@ namespace proWeb
                 Novedades = listaProductos.GetRange(prodCount - MaxNovedades, MaxNovedades);
                 //Limitamos la lista de productos al minimo entre maxlistaproductos y la cantidad de productos
                 if (listaProductos.Count() > MaxListaProductos)
-                    listaProductos = listaProductos.GetRange(0,MaxListaProductos);
-                {
-                    listaProductos = listaProductos.GetRange(MaxNovedades,MaxListaProductos);
-                }
-                {
-                    listaProductos = listaProductos.GetRange(MaxNovedades,MaxListaProductos);
-                }
-                {
-                    listaProductos = listaProductos.GetRange(MaxNovedades,MaxListaProductos);
-                }
+                    listaProductos = listaProductos.GetRange(0, MaxListaProductos);
                 // Asignamos la lista de productos al repeater
                 reapeterProduct.DataSource = listaProductos;
                 reapeterProduct.DataBind();
@@ -39,8 +33,8 @@ namespace proWeb
                 reapeterNov.DataBind();
 
                 if (Session["Carrito"] == null) Session["Carrito"] = new ENCarrito();
-                if (Session["Usuario"] ==  null) Session["Usuario"] = new ENUsuario();
-                
+                if (Session["Usuario"] == null) Session["Usuario"] = new ENUsuario();
+
             }
 
         }
