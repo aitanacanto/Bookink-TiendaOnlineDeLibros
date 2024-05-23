@@ -140,13 +140,13 @@ create table [dbo].[TIENE_PAQUETE]
     FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id) ON DELETE CASCADE
 )
 GO
-create table [dbo].[LINPEDIDO_PA]
+create table [dbo].[LINCARRITO_PA]
 (	
     [id_paquete] INT,
     [id_pedido] INT,
     PRIMARY KEY (id_paquete, id_pedido),
     FOREIGN KEY (id_paquete) REFERENCES PAQUETE(id),
-    FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped)   
+    FOREIGN KEY (id_pedido) REFERENCES CARRITO(id)  
 )
 GO
 
