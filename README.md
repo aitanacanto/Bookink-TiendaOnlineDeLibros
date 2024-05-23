@@ -14,7 +14,6 @@
 | Manuel José   | Tornero Fuster    | DNI000006 | ENUsuario, ENReseña          |
 | Jorge         | Paredes Soler     | DNI000007 | ENDireccion, ENTieneDireccion|
 
-
 ### Descripción
 La aplicación web que implementaremos es una **tienda online de libros**. En nuestra tienda online habrá **tres tipos de usuarios**, de esta categoría dependrán los permisos que este usuario tenga en la web.
 
@@ -72,6 +71,59 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 ### Base de Datos
 ![Base de Datos](BaseDeDatos.png)
 *También, está disponible en pdf en el archivo ![bbdd.pdf](bbdd.pdf).*
+
+### Implementaciones de cada integrante:
+
+### - Aitana Cantó Rico:
+- **EN/CAD Implementados:** ENPaquete, CADPaquete, ENTienePaquete, CADTienePaquete
+- **Páginas aspx implementadas:** paquete.aspx, adminPaquete.aspx, SiteMaster
+- **Otras tareas:** Creación script bbdd.
+- **Mejora Obligatoria Implementada:** Filtrado de libros por nombre, categoría, etc...
+- **Colaboraciones:** mainPage.aspx, catalogo.aspx
+
+### - Rafael Carballo Lorenzo:
+- **EN/CAD Implementados:**
+- **Páginas aspx implementadas:**
+- **Otras tareas:** 
+- **Mejora Obligatoria Implementada:**
+- **Colaboraciones:**
+
+### - Bruno Vilella Martínez:
+
+- **EN/CAD Implementados:**
+- **Páginas aspx implementadas:**
+- **Otras tareas:** 
+- **Mejora Obligatoria Implementada:**
+- **Colaboraciones:**
+
+### - Darío Pastor Fuentes:
+
+- **EN/CAD Implementados:**
+- **Páginas aspx implementadas:**
+- **Otras tareas:** 
+- **Mejora Obligatoria Implementada:**
+- **Colaboraciones:**
+
+### - Alberto Boronat López: 
+- **EN/CAD Implementados:**
+- **Páginas aspx implementadas:**
+- **Otras tareas:** 
+- **Mejora Obligatoria Implementada:**
+- **Colaboraciones:**
+
+### - Manuel José Tornero Fuster: 
+- **EN/CAD Implementados:**
+- **Páginas aspx implementadas:**
+- **Otras tareas:** 
+- **Mejora Obligatoria Implementada:**
+- **Colaboraciones:**
+
+### - Jorge Paredes Soler: 
+- **EN/CAD Implementados:**
+- **Páginas aspx implementadas:**
+- **Otras tareas:** 
+- **Mejora Obligatoria Implementada:**
+- **Colaboraciones:**
 
 # Entrega 01 Propuesta - Comentarios
 

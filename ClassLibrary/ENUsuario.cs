@@ -87,7 +87,7 @@ namespace ClassLibrary
             return correctLetter == letterPart;
         }
 
-        private static string ComputeSha256Hash(string rawData)
+        public static string ComputeSha256Hash(string rawData)
         {
             // Crear un objeto SHA256
             using (SHA256 sha256Hash = SHA256.Create())
@@ -169,5 +169,18 @@ namespace ClassLibrary
             CADUsuario cad = new CADUsuario();
             return cad.MakeAdmin(email);
         }
+        
+        public static List<ENUsuario> ObtenerUsuarios()
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.ObtenerUsuarios(false);
+        }
+
+        public static List<ENUsuario> ObtenerTrabajadores()
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.ObtenerUsuarios(true);
+        }
+
     }
 }

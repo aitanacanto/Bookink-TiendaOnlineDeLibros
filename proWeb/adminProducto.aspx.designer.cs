@@ -123,6 +123,15 @@ namespace proWeb
         protected global::System.Web.UI.WebControls.FileUpload ImagenSubida;
 
         /// <summary>
+        /// Control lblError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+
+        /// <summary>
         /// Control btnAdd.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,15 @@ namespace proWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Oferta;
+
+        /// <summary>
+        /// Control listacat2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList listacat2;
 
         /// <summary>
         /// Control Editorial.

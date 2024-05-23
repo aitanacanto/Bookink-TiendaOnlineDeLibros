@@ -16,7 +16,7 @@ namespace proWeb
             {
                 ENUsuario user = Session["user"] as ENUsuario;
                 MenuItem midatos = UserMenu.FindItem("Mis Datos");
-                MenuItem soyadmin = UserMenu.FindItem("Soy Admin");
+                MenuItem soyadmin = UserMenu.FindItem("Administración");
                 MenuItem iniciar = UserMenu.FindItem("Iniciar Sesión");
                 MenuItem registrar = UserMenu.FindItem("Registrarse");
                 MenuItem pedidos = UserMenu.FindItem("Mis Pedidos");
@@ -30,9 +30,9 @@ namespace proWeb
                 }
                 else
                 {
-
                     UserMenu.Items.Remove(iniciar);
                     UserMenu.Items.Remove(registrar);
+                    if (!user.Admin) UserMenu.Items.Remove(soyadmin);
                 }
             }
             

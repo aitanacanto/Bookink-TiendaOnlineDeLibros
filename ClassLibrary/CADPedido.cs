@@ -16,7 +16,7 @@ namespace ClassLibrary
 
         public CADPedido()
         {
-            constring = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ToString();
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString(); ;
         }
 
         public bool crearPedido(ENPedido pedido)
@@ -25,30 +25,20 @@ namespace ClassLibrary
 
             try
             {
-                ENCarrito c = new ENCarrito(); 
-                c.id = pedido.Cod_carrito;
-
-                if (c.readCarrito())
-                {
                     conex.Open();
 
-                    string comandoSQL = $"INSERT INTO PEDIDO (numped, id_usuario, cod_carrito, dirección_envío, precio, estado) VALUES (@numped, @id_usuario, @cod_carrito, @dirección_envío, @precio, @estado)";
+                    string comandoSQL = $"INSERT INTO PEDIDO (id_usuario, cod_carrito, dirección_envío, precio, estado) VALUES (@id_usuario, @cod_carrito, @dirección_envío, @precio, @estado)";
 
                     SqlCommand cmd = new SqlCommand(comandoSQL, conex);
-                    cmd.Parameters.AddWithValue("@id_usuario", c.id_usuario);
+                    cmd.Parameters.AddWithValue("@id_usuario", pedido.Id_usuario);
                     cmd.Parameters.AddWithValue("@cod_carrito", pedido.Cod_carrito);
                     cmd.Parameters.AddWithValue("@dirección_envío", pedido.Direccion_envio);
-                    cmd.Parameters.AddWithValue("@precio", c.importe_total);
+                    cmd.Parameters.AddWithValue("@precio", pedido.Precio);
                     cmd.Parameters.AddWithValue("@estado", pedido.Estado);
 
                     cmd.ExecuteNonQuery();
 
                     return true;
-                }
-                else
-                {
-                    return false;
-                }
             }
             catch (SqlException e)
             {
@@ -101,37 +91,35 @@ namespace ClassLibrary
             }
         }
 
-        public DataSet verPedidos(ENPedido pedido)
+        public List<ENPedido> verPedidos(ENPedido pedido)
         {
-            DataSet dat = new DataSet();
-            SqlConnection conex = new SqlConnection(constring);
+            List<ENPedido> lista = new List<ENPedido>();
+            SqlConnection conex = new SqlConnection(constring); ;
 
             try
             {
                 conex.Open();
-                string comandoSQL = $"SELECT numped, id_usuario, cod_carrito, dirección_envío, precio, estado FROM pedido WHERE id_usuario =" + pedido.Id_usuario;
-                SqlDataAdapter adap = new SqlDataAdapter(comandoSQL, conex);
-
-                adap.Fill(dat, "PEDIDOS");
-                return dat;
+                SqlCommand cmd = new SqlCommand("Select * from PEDIDO where id_usuario=" + pedido.Id_usuario, conex);
+                SqlDataReader leer = cmd.ExecuteReader();
+                while (leer.Read())
+                {
+                    ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString());
+                    lista.Add(newped);
+                }
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Product operation has failed.Error: {0}", e.Message);
-                return dat;
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Product operation has failed.Error: {0}", e.Message);
-                return dat;
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
             }
             finally
             {
-                if (conex != null)
-                {
-                    conex.Close();
-                }
+                if (conex != null) conex.Close();
             }
+            return lista;
         }
     }
 }
