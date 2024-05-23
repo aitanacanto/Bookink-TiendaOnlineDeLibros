@@ -28,6 +28,7 @@ namespace proWeb
             ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
             ped.Precio = cesta.CalcularPvp();
             ped.Estado = "En Proceso";
+            ped.Date = DateTime.Today;
             ped.crearPedido();
             cesta.deleteCarrito();
             Response.Redirect("confirmarPedido.aspx");
