@@ -135,8 +135,8 @@ namespace ClassLibrary
 
                 // Crear una sentencia parametricada
                 string query = "UPDATE USUARIO SET nombre = @name, apellidos = @surname, contrasenya = @contrasenya, " +
-                                "dni = @dni, telefono = @telefono " +
-                                "WHERE email = @email";
+                                "dni = @dni, telefono = @telefono, email = @email " +
+                                "WHERE id = @id";
 
                 SqlCommand com = new SqlCommand(query, c);
 
@@ -146,6 +146,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@contrasenya", en.Password);
                 com.Parameters.AddWithValue("@dni", en.DNI);
                 com.Parameters.AddWithValue("@email", en.Email);
+                com.Parameters.AddWithValue("@id", en.Id);
                 com.Parameters.AddWithValue("@telefono", en.PhoneNumber);
 
                 com.ExecuteNonQuery();
@@ -199,7 +200,7 @@ namespace ClassLibrary
             return true;
         }
 
-        public bool MakeAdmin(ENUsuario en)
+        public bool MakeAdmin(string email)
         {
             SqlConnection c = new SqlConnection(constring);
             try
@@ -214,7 +215,7 @@ namespace ClassLibrary
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
-                com.Parameters.AddWithValue("@email", en.Email);
+                com.Parameters.AddWithValue("@email", email);
 
                 com.ExecuteNonQuery();
                 return true;
@@ -228,6 +229,41 @@ namespace ClassLibrary
             {
                 c.Close();
             }
+        }
+
+        public List<ENUsuario> ObtenerUsuarios(bool admin)
+        {
+            List<ENUsuario> listaUsuarios = new List<ENUsuario>();
+            SqlConnection con = new SqlConnection(constring);
+            try
+            {
+                con.Open();
+                string query = admin ? "SELECT * FROM USUARIO WHERE admin = 1" : "SELECT * FROM USUARIO WHERE admin = 0";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ENUsuario usuario = new ENUsuario();
+                    usuario.Id = Convert.ToInt32(reader["id"]);
+                    usuario.Name = reader["nombre"].ToString();
+                    usuario.Surname = reader["apellidos"].ToString();
+                    usuario.Email = reader["email"].ToString();
+                    usuario.PhoneNumber = reader["telefono"].ToString();
+                    usuario.DNI = reader["dni"].ToString();
+                    usuario.Admin = admin;
+                    listaUsuarios.Add(usuario);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener los usuarios: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return listaUsuarios;
         }
     }
 }

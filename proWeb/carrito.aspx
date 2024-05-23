@@ -14,7 +14,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container mt-3">
+    <div class="container">
         <!-- Titulo -->
         <div class="row">
             <div class="col-12">
@@ -24,7 +24,7 @@
         </div>
         <asp:Repeater ID="reapeterProduct" runat="server">
             <ItemTemplate>
-                <div class="row align-items-center">
+                <div class="row align-items-center text-center">
                     <div class="col-2">
                         <asp:Image ID="imgProduct" runat="server" class="small-image rounded" ImageUrl='<%# Eval("producto.ImagePath") %>' AlternateText="Producto" />
                     </div>
@@ -63,9 +63,9 @@
 
 
         <!-- Seccion de debajo de los productos -->
-        <div class="row align-items-center text-left">
+        <div class="row align-items-center mt-3">
             <!-- Alinea el contenido a la izquierda -->
-            <div class="col-8">
+            <div class="col-md-4">
                 <!-- alinea los totales -->
                 <h3>Total Productos:
                 <asp:Label ID="total_lineas" runat="server" class="mx-2"></asp:Label>
@@ -76,13 +76,13 @@
                 </h3>
                 <!-- Total precio -->
             </div>
-            <div class="col-4 text-right">
+            <div class="col-md-4 text-right align-content-end">
                 <!-- Alinea el boton de "Comprar" a la derecha -->
                 <asp:Button
                     ID="btnComprar"
                     runat="server"
                     Text="Comprar"
-                    CssClass="btn btn-primary btn-lg"
+                    CssClass="btn btn-primary btn-lg align-content-end"
                     OnClick="Buy_Click" />
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="Delete_Click">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

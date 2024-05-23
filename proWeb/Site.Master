@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Bookink - Tu tienda de libros en línea</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -18,70 +19,72 @@
     <form id="form1" runat="server">
         <div class="container-fluid">
 
-                        <header class="p-3 mb-3 border-bottom bg-white">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-between">
-            <div class="logo me-2">
-                <a href="mainPage.aspx">
-                    <img src="content/logo.png" alt="Logo de bookink" class="logo-img" />
-                </a>
-            </div>
+            <header class="p-3 mb-3 border-bottom bg-white">
+                <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="logo me-2">
+                            <a href="mainPage.aspx">
+                                <img src="content/logo.png" alt="Logo de bookink" class="logo-img" />
+                            </a>
+                        </div>
 
-            <asp:Menu 
-                                ID="Menu1" 
-                                runat="server" 
-                                CssClass="navbar-nav me-auto mb-2 mb-lg-0 text-dark" 
-                                Orientation="Horizontal"
-                            >
+                        <asp:Menu
+                            ID="Menu1"
+                            runat="server"
+                            CssClass="navbar-nav me-auto mb-2 mb-lg-0 text-dark"
+                            Orientation="Horizontal">
+                            <StaticMenuItemStyle CssClass="nav-item me-3 text-dark" />
+                            <DynamicMenuItemStyle CssClass="nav-link text-dark" />
+                            <DynamicHoverStyle CssClass="nav-link active text-dark" />
+                            <DynamicMenuStyle CssClass="dropdown-menu text-dark" />
+                            <Items>
+                                <asp:MenuItem Text="Inicio" NavigateUrl="mainPage.aspx" />
+                                <asp:MenuItem Text="Catálogo" NavigateUrl="catalogo.aspx" />
+                            </Items>
+                        </asp:Menu>
+
+                        <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                            <asp:Panel runat="server" DefaultButton="btnBuscar">
+                                <asp:TextBox
+                                    ID="txtBuscar"
+                                    runat="server"
+                                    CssClass="form-control"
+                                    placeholder="Buscar" aria-label="Buscar"></asp:TextBox>
+                                <asp:Button
+                                    ID="btnBuscar"
+                                    runat="server"
+                                    CssClass="btn btn-outline-success ms-2"
+                                    Text="Buscar"
+                                    OnClick="btnBuscar_Click" Style="display: none" />
+                            </asp:Panel>
+                        </div>
+
+                        <a href="carrito.aspx" class="d-block link-dark text-decoration-none ms-3 me-3" id="cart">
+                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                        </a>
+
+
+                        <div class="dropdown text-end ms-3">
+                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-user fa-lg" width="32" height="32"></i>
+                            </a>
+                            <asp:Menu ID="UserMenu" runat="server" Orientation="Horizontal" CssClass="dropdown-menu text-dark" StaticDisplayLevels="2">
                                 <StaticMenuItemStyle CssClass="nav-item me-3 text-dark" />
                                 <DynamicMenuItemStyle CssClass="nav-link text-dark" />
                                 <DynamicHoverStyle CssClass="nav-link active text-dark" />
                                 <DynamicMenuStyle CssClass="dropdown-menu text-dark" />
                                 <Items>
-                                    <asp:MenuItem Text="Inicio" NavigateUrl="mainPage.aspx" />
-                                    <asp:MenuItem Text="Catálogo" NavigateUrl="catalogo.aspx" />   
+                                    <asp:MenuItem Text="Iniciar Sesión" NavigateUrl="LogIn.aspx" />
+                                    <asp:MenuItem Text="Registrarse" NavigateUrl="register.aspx" />
+                                    <asp:MenuItem Text="Mis Datos" NavigateUrl="usuario.aspx" />
+                                    <asp:MenuItem Text="Mis Pedidos" NavigateUrl="mispedidos.aspx" />
+                                    <asp:MenuItem Text="Administración" NavigateUrl="admin.aspx" />
                                 </Items>
                             </asp:Menu>
-
-            <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <asp:TextBox  ID="txtBuscar"
-                                    runat="server"
-                                    CssClass="form-control"
-                                    placeholder="Buscar" aria-label="Buscar"></asp:TextBox>
-                <asp:Button
-                                    ID="btnBuscar"
-                                    runat="server"
-                                    CssClass="btn btn-outline-success ms-2"
-                                    Text="Buscar"
-                                    OnClick="btnBuscar_Click" style="display:none"/>
-            </div>
-
-            <a href="carrito.aspx" class="d-block link-dark text-decoration-none ms-3 me-3" id="cart">
-                    <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                </a>
-
-
-            <div class="dropdown text-end ms-3">
-                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-user fa-lg" width="32" height="32"></i>
-                </a>
-                <asp:Menu ID="UserMenu" runat="server" Orientation="Horizontal" CssClass="dropdown-menu text-dark" StaticDisplayLevels="2">
-                    <StaticMenuItemStyle CssClass="nav-item me-3 text-dark" />
-                                <DynamicMenuItemStyle CssClass="nav-link text-dark" />
-                                <DynamicHoverStyle CssClass="nav-link active text-dark" />
-                                <DynamicMenuStyle CssClass="dropdown-menu text-dark" />
-                                <Items>
-                                        <asp:MenuItem Text="Iniciar Sesión" NavigateUrl="LogIn.aspx" />
-                                        <asp:MenuItem Text="Registrarse" NavigateUrl="register.aspx" />
-                                        <asp:MenuItem Text="Mis Datos" NavigateUrl="usuario.aspx" />
-                                        <asp:MenuItem Text="Mis Pedidos" NavigateUrl="mispedidos.aspx" />
-                                        <asp:MenuItem Text="Soy Admin" NavigateUrl="admin.aspx" />
-                                </Items>
-                            </asp:Menu>
-            </div>
-        </div>
-    </div>
-</header>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
             <div class="main-content" style="padding-top: 0px; min-height: 750px;">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
@@ -94,13 +97,16 @@
                     </a>
                 </div>
                 <div class="social-media">
-                    <h5>Our Social Media</h5>
-                    <a href="https://www.instagram.com/">
-                        <img height="20" src="content/instagram.png" /></a>
-                    <a href="https://x.com/">
-                        <img height="28" src="content/twitter_x.png" /></a>\
-                    <a href="https://www.facebook.com/">
-                        <img height="28" src="content/facebook.png" /></a>
+                    <h5>¡Siguenos en nuestras redes sociales!</h5>
+                    <div class="align-self-center">
+
+                        <a href="https://www.instagram.com/bookingcom/">
+                            <img height="20" src="content/instagram.png" /></a>
+                        <a href="https://x.com/bookingcom">
+                            <img height="28" src="content/twitter_x.png" /></a>
+                        <a href="https://www.facebook.com/bookingcom/">
+                            <img height="28" src="content/facebook.png" /></a>
+                    </div>
 
                 </div>
                 <p>&copy; 2024 BookInk. Todos los derechos reservados.</p>

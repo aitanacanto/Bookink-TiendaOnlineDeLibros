@@ -12,7 +12,7 @@ namespace proWeb
     {
         private static List<ENUsuario> listaUsuarios = new List<ENUsuario>();
         private static List<ENUsuario> listaTrabajadores = new List<ENUsuario>();
-
+        ENUsuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -33,87 +33,60 @@ namespace proWeb
 
         private List<ENUsuario> ObtenerUsuarios()
         {
-            List<ENUsuario> listaUsuarios = new List<ENUsuario>();
-            CADUsuario cadUsuario = new CADUsuario();
-            try
-            {
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["database"].ToString());
-                {
-                    con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO WHERE admin = 0", con))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            ENUsuario usuario = new ENUsuario();
-                            usuario.Id = Convert.ToInt32(reader["id"]);
-                            usuario.Name = reader["nombre"].ToString();
-                            usuario.Surname = reader["apellidos"].ToString();
-                            usuario.Email = reader["email"].ToString();
-                            usuario.PhoneNumber = reader["telefono"].ToString();
-                            usuario.DNI = reader["dni"].ToString();
-                            listaUsuarios.Add(usuario);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al obtener los usuarios: " + ex.Message);
-            }
-            return listaUsuarios;
+            return ENUsuario.ObtenerUsuarios();
         }
 
         private List<ENUsuario> ObtenerTrabajadores()
         {
-            List<ENUsuario> listaTrabajadores = new List<ENUsuario>();
-            CADUsuario cadUsuario = new CADUsuario();
+            return ENUsuario.ObtenerTrabajadores();
+        }
+
+        protected void btnDel_Click(object sender, EventArgs e)
+        {
+            LinkButton btnDelete = (LinkButton)sender;
+            string email = btnDelete.CommandArgument; // Recuperar el email del argumento del comando
+            Session["emailvalue"] = email; // Guardar el email en la sesión
+
+            idel.Text = "¿Seguro que quieres dar de baja al trabajador con email " + email + "?\n";
+
+            string script = @"<script type='text/javascript'>
+                    $(document).ready(function () {
+                        $('#deleteModal').modal('toggle');
+                    });
+                  </script>";
+
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", script);
+        }
+
+        protected void delete_click(object sender, EventArgs e)
+        {
             try
             {
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["database"].ToString());
+                string email = Session["emailvalue"].ToString();
+                ENUsuario trabajador = new ENUsuario { Email = email };
+
+                if (trabajador.DeleteUser())
                 {
-                    con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO WHERE admin = 1", con))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            ENUsuario trabajador = new ENUsuario();
-                            trabajador.Id = Convert.ToInt32(reader["id"]);
-                            trabajador.Name = reader["nombre"].ToString();
-                            trabajador.Surname = reader["apellidos"].ToString();
-                            trabajador.Email = reader["email"].ToString();
-                            trabajador.PhoneNumber = reader["telefono"].ToString();
-                            trabajador.DNI = reader["dni"].ToString();
-                            listaTrabajadores.Add(trabajador);
-                        }
-                    }
+                    lblMensaje.Text = "Trabajador eliminado correctamente.";
+                    lblMensaje.Visible = true;
+                    listaTrabajadores = ObtenerTrabajadores();
+                    BindRepeater();
                 }
+                else
+                {
+                    lblMensaje.Text = "Error al eliminar el trabajador.";
+                    lblMensaje.Visible = true;
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                lblMensaje.Text = "No se ha podido eliminar el usuario, ERROR SQL: " + sqlEx.Message;
+                lblMensaje.Visible = true;
+                Console.WriteLine("SQL ERROR: " + sqlEx.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al obtener los trabajadores: " + ex.Message);
-            }
-            return listaTrabajadores;
-        }
-
-        protected void btnBorrarTrabajador_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            int idTrabajador = Convert.ToInt32(btn.CommandArgument);
-            ENUsuario trabajador = new ENUsuario();
-            trabajador.Id = idTrabajador;
-
-            if (trabajador.DeleteUser())
-            {
-                lblMensaje.Text = "Trabajador eliminado correctamente.";
-                lblMensaje.Visible = true;
-                listaTrabajadores = ObtenerTrabajadores();
-                BindRepeater();
-            }
-            else
-            {
-                lblMensaje.Text = "Error al eliminar el trabajador.";
+                lblMensaje.Text = "No se ha podido eliminar el trabajador, ERROR: " + ex.Message;
                 lblMensaje.Visible = true;
             }
         }
@@ -149,6 +122,25 @@ namespace proWeb
                 lblMensaje.Text = "No se ha podido añadir el trabajador, ERROR: " + ex.Message;
                 lblMensaje.Visible = true;
                 return;
+            }
+        }
+
+        protected void btnMakeAdmin(object sender, EventArgs e)
+        {
+            try
+            {
+                usuario = Session["user"] as ENUsuario;
+                // Obtén el botón que generó el evento
+                Button btn = (Button)sender;
+
+                // Obtén el valor del CommandArgument
+                string email = btn.CommandArgument;
+                usuario.MakeAdmin(email);
+                Response.Redirect("adminusuario.aspx");
+
+            } catch (Exception ex)
+            {
+
             }
         }
     }

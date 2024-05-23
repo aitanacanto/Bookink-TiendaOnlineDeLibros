@@ -28,11 +28,18 @@
         <div class="product-details">
             <h1 id="ProductName" runat="server" style="text-align:left">Titulo Libro</h1>
             <p  ID="ProductAutor" runat="server" class="author">Autor</p>
+            <div class="mb-2">
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-regular fa-star no-estre"></i>
+                                        </div>
              <div class="d-flex">
             <p ID="ProductPrice" runat="server" class="card-text text-danger" style="text-decoration:line-through">Precio Oferta</p>
             <p ID="ProductOfer" runat="server" style="margin-left: 10px" class="price">Precio: 19.99 €</p>
                  </div>
-            <button class="add-to-cart">Agregar al carrito</button>
+            <asp:Button ID="Id_Producto" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Anyadir_Click"  />
         </div>
        </div>
         <div style="clear: both;"></div> <!-- Limpiar el float -->
@@ -90,21 +97,42 @@
         </div>
         <!-- Sección de Productos Relacionados -->
         <div class="related-products">
-            <div class="product">
-                <h3>Producto Relacionado 1</h3>
-                <p>Autor: Autor del Libro</p>
-                <p>Precio: 14.99 €</p>
-            </div>
-            <div class="product">
-                <h3>Producto Relacionado 2</h3>
-                <p>Autor: Autor del Libro</p>
-                <p>Precio: 17.99 €</p>
-            </div>
-            <div class="product">
-                <h3>Producto Relacionado 3</h3>
-                <p>Autor: Autor del Libro</p>
-                <p>Precio: 21.99 €</p>
-            </div>
+            <div class="container">
+            <div class="row " >
+            <asp:Repeater ID="reapeterProduct" runat="server">
+                    <ItemTemplate>
+                        <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch" data-aos="fade-in">
+                            <div class="product-card card d-flex flex-column">
+                                 <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
+                                    <div class="text-center">
+                                        <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                    </div>
+                                    <div class="card-body d-flex flex-column flex-grow-1">
+                                        <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold;text-align:left;"><%# Eval("name") %></h5>
+                                        <p class="autor mb-1"><%# Eval("Autor") %></p>
+                                        <div class="mb-2">
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-regular fa-star no-estre"></i>
+                                        </div>
+                                        <div class="d-flex">
+                                            <p class="card-text text-danger" style="text-decoration:line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
+                                            <p class="card-text text-dark" style="margin-left:10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
+                                        </div>
+                                            
+                                        <div class="text-center mt-auto">
+                                            <asp:Button ID="Id_Producto" runat="server" Class = "btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("id") %>' OnClick="Add_Click"  />
+                                            </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+                </div>
+                </div>
         </div>
     </div>
 </asp:Content>

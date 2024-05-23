@@ -58,7 +58,8 @@ namespace proWeb
             }
             if (!string.IsNullOrEmpty(txtContraseñaNueva.Text))
             {
-                user.Password = txtContraseñaNueva.Text;
+                //Importante cifrar la contraseña
+                user.Password = ENUsuario.ComputeSha256Hash(txtContraseñaNueva.Text);
             }
             if (!string.IsNullOrEmpty(txtTelefonoNuevo.Text))
             {
@@ -75,7 +76,7 @@ namespace proWeb
             }
 
             // Actualizar dirección
-            ENDireccion direccion = new ENDireccion
+            /*ENDireccion direccion = new ENDireccion
             {
                 ID = Int32.Parse(txtDireccionNueva.Text), // Asegúrate de que el ID es un número entero
                 CodPostal = txtCodPostalNuevo.Text,
@@ -91,7 +92,7 @@ namespace proWeb
             else
             {
                 lblMensaje.Text += " Hubo un error al actualizar la dirección.";
-            }
+            }*/
         }
 
         protected void BtnLogOut(object sender, EventArgs e)

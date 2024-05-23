@@ -32,7 +32,7 @@ namespace proWeb
             int row = int.Parse(valores[1]);
             cesta.eliminarProductoCarrito(id_producto);
             ENLinCarrito linea = cesta.obtenerLineaProducto(id_producto);
-            if(linea != null) { 
+            if(linea != null) {
                 Label lblPvp = (Label)reapeterProduct.Items[row].FindControl("pvp");
                 lblPvp.Text = String.Format("{0:0.00}", linea.pvp);
                 Label lblcantidad = (Label)reapeterProduct.Items[row].FindControl("cantidad");
@@ -48,7 +48,7 @@ namespace proWeb
                 Response.Redirect("carrito.aspx");
             }
         }
-
+        
         // Método para añadir más elementos al carrito
         protected void Add_Click(object sender, EventArgs e)
         {
@@ -70,18 +70,24 @@ namespace proWeb
         // Método para comprar productos y redirigir a otra página
         protected void Buy_Click(object sender, EventArgs e)
         {
+            cesta = Session["Carrito"] as ENCarrito;
             usuario = Session["user"] as ENUsuario;
-            if (usuario != null)
-            {
-                Response.Redirect("pedido.aspx");
+            if (cesta.CalcularPvp() != 0) {
+                if (usuario != null)
+                {
+                    Response.Redirect("pedido.aspx");
+                }
+                else {
+                    Response.Redirect("LogIn.aspx");
+                }
             }
-            else { 
-                Response.Redirect("LogIn.aspx");
+            else
+            {
+                Response.Redirect("mainPage.aspx");
             }
         }
         private void CargarCarrito()
         {
-            
             cesta = Session["Carrito"] as ENCarrito;
             if (cesta == null)
             {

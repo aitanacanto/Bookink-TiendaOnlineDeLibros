@@ -20,6 +20,17 @@ namespace proWeb
                 {
                     CargarProducto(Id);
                 }
+                List<ENProducto> listaProductos = ObtenerProductos();
+                List<ENProducto> Relacionado = new List<ENProducto>();
+                Random rnd = new Random();
+                List<ENProducto> productosAleatorios = listaProductos.OrderBy(x => rnd.Next()).ToList();
+                for (int i = 0; i < 4; i++)
+                {
+                    Relacionado.Add(productosAleatorios[i]);
+                }
+                // Asignamos la lista de productos al repeater
+                reapeterProduct.DataSource = Relacionado;
+                reapeterProduct.DataBind();
             }
         }
 
@@ -39,6 +50,47 @@ namespace proWeb
                 editorial.InnerText = prod.Editorial;
                 numpag.InnerText = prod.NumPags.ToString();
             }
+        }
+        protected void Anyadir_Click(object sender, EventArgs e)
+        {
+            ENCarrito carrito = Session["Carrito"] as ENCarrito;
+            if (carrito == null)
+            {
+                carrito = new ENCarrito();
+                Session["Carrito"] = carrito;
+            }
+            string Id = Request.QueryString["id"];
+            ENProducto prod = new ENProducto();
+            prod.Id = int.Parse(Id);
+            if (!string.IsNullOrEmpty(Id))
+            {
+                carrito.anyadirProductoCarrito(prod.Id);
+            }
+
+        }
+
+        protected void Add_Click(object sender, EventArgs e)
+        {
+            ENCarrito carrito = Session["Carrito"] as ENCarrito;
+            if (carrito == null)
+            {
+                carrito = new ENCarrito();
+                Session["Carrito"] = carrito;
+            }
+            Button button = (Button)sender;
+            int id_producto = int.Parse(button.CommandArgument);
+            carrito.anyadirProductoCarrito(id_producto);
+        }
+
+        private List<ENProducto> ObtenerProductos()
+        {
+
+            List<ENProducto> listaProductos = new List<ENProducto>();
+
+            ENProducto en = new ENProducto();
+            listaProductos = en.ObtenerTodosLosProductos();
+            return listaProductos;
+
         }
     }
 }

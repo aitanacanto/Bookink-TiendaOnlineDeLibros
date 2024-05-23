@@ -525,8 +525,8 @@ body {
     width: 150px;
 }
 
-.deleteUser {
-    background-color: #b12d44;
+.make-admin {
+    background-color: #198754;
     color: #fff;
     border: none;
     padding: 8px 12px;
@@ -536,6 +536,23 @@ body {
     transition: background-color 0.3s;
     margin: 10px;
     width: 150px;
+}
+
+
+.deleteUser{
+    background-color: #B12D44;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+    width: 150px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
 }
 
 .dropdown-toggle.btn-primary {
@@ -663,4 +680,32 @@ body {
         width: 30%;
         padding: 10px;
         border-radius: 4px;
+    }
+
+.btn-catalogo {
+    width: 20%;
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px auto;
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+    font-size-adjust:inherit;
+    color: white;
+    background-color: #007bff; /* Color de fondo */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+    .btn-catalogo:hover {
+        background-color: #0056b3; /* Color de fondo al pasar el mouse */
+        text-decoration: none; /* Asegura que no se subraye el texto */
+    }
+
+    .btn-catalogo:focus {
+        outline: none; /* Elimina el borde de enfoque por defecto */
+        box-shadow: 0 0 5px rgba(0,123,255,0.5); /* Añade una sombra */
     }

@@ -60,6 +60,15 @@ namespace proWeb
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProductOfer;
 
         /// <summary>
+        /// Control Id_Producto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Id_Producto;
+
+        /// <summary>
         /// Control ProductSinopsis.
         /// </summary>
         /// <remarks>
@@ -94,5 +103,14 @@ namespace proWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableCell editorial;
+
+        /// <summary>
+        /// Control reapeterProduct.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater reapeterProduct;
     }
 }
