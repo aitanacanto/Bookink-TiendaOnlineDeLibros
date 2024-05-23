@@ -69,10 +69,10 @@
     <Content Include="adminUsuario.aspx" />
     <Content Include="carrito.aspx" />
     <Content Include="catalogo.aspx" />
-    <Content Include="content\logo.png" />
     <Content Include="content\scriptBBDD.txt" />
     <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
+    <Content Include="metricas.aspx" />
     <Content Include="mispedidos.aspx" />
     <Content Include="paquete.aspx" />
     <Content Include="confirmarPedido.aspx" />
@@ -139,6 +139,13 @@
     </Compile>
     <Compile Include="mainPage.aspx.designer.cs">
       <DependentUpon>mainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="metricas.aspx.cs">
+      <DependentUpon>metricas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="metricas.aspx.designer.cs">
+      <DependentUpon>metricas.aspx</DependentUpon>
     </Compile>
     <Compile Include="mispedidos.aspx.cs">
       <DependentUpon>mispedidos.aspx</DependentUpon>

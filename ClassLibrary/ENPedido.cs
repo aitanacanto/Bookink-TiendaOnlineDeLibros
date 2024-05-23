@@ -8,7 +8,7 @@ using System.Data;
 
 namespace ClassLibrary
 {
-    class ENPedido
+    public class ENPedido
     {
         private int numped;
         public int Numped
@@ -84,7 +84,7 @@ namespace ClassLibrary
             return cad.cambiarEstado(this);
         }
 
-        public DataSet verPedidos()
+        public List<ENPedido> verPedidos()
         {
             CADPedido cad = new CADPedido();
             return cad.verPedidos(this);

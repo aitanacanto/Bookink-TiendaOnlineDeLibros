@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="proWeb.register" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="styles.css" />
-        <script>
+    <script>
         function telefono(input) {
             input.value = input.value.replace(/\D/g, '').substring(0, 9);
             input.value = input.value.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3').trim();
@@ -36,12 +37,14 @@
                 return true;
             }
         }
-        </script>
+    </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="container login-form">
+        <asp:Panel runat="server" DefaultButton="btnRegister">
+
             <h1>REGISTRO</h1>
             <div class="mb-3">
                 <label for="Nombre">Nombre</label>
@@ -90,18 +93,17 @@
                 </div>
             </div>
             <div>
-                <asp:Label ID="LabelOculta" runat="server" Visible="false">fdsafjdasklfjdas</asp:Label>          
+                <asp:Label ID="LabelOculta" runat="server" Visible="false">fdsafjdasklfjdas</asp:Label>
             </div>
-            <div class="button-container" style="text-align: center; margin-top: 20px;"> 
-              <!-- Botón para Registrarse -->
-              <asp:Button 
-                  ID="btnRegister" 
-                  runat="server" 
-                  Text="Registrarse" 
-                  CssClass="button" 
-                  OnClick="Register_Click" 
-              />
+            <div class="button-container" style="text-align: center; margin-top: 20px;">
+                <!-- Botón para Registrarse -->
+                <asp:Button
+                    ID="btnRegister"
+                    runat="server"
+                    Text="Registrarse"
+                    CssClass="button"
+                    OnClick="Register_Click" />
             </div>
-
-      </div>
+        </asp:Panel>
+    </div>
 </asp:Content>

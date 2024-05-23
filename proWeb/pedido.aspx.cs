@@ -11,96 +11,29 @@ namespace proWeb
     public partial class pedido : Page
     {
         ENCarrito cesta;
+        ENPedido ped;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Logic for initial page load, if needed
+                ped.Id_usuario = cesta.id_usuario;
+                ped.Cod_carrito = cesta.id;
+                ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
+                ped.Precio = cesta.CalcularPvp();
+                ped.Estado = "En Proceso";
+                ped.crearPedido();
                 CargarCarrito();
             }
         }
 
         protected void btnPagar_Click(object sender, EventArgs e)
         {
-            /*if (ValidateForm())
-            {
-                
             Response.Redirect("confirmarPedido.aspx");
-            }
-
-            Console.WriteLine(ValidateForm());
-            */
-            Response.Redirect("confirmarPedido.aspx");
-        }
-
-        private bool ValidateForm()
-        {
-            if (string.IsNullOrWhiteSpace(txtEmail.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtFirstName.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtLastName.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtAddress.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtPostalCode.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtCity.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtProvince.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtPhone.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtCardNumber.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtExpirationDate.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtCVV.Text))
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtCardholderName.Text))
-            {
-                return false;
-            }
-
-            return true;
         }
 
         private void CargarCarrito()
         {
-               /* cesta = Session["Carrito"] as ENCarrito;
+               cesta = Session["Carrito"] as ENCarrito;
                 if (cesta == null)
                 {
                     cesta = new ENCarrito();
@@ -108,12 +41,15 @@ namespace proWeb
                 }
 
                 ENProducto en = new ENProducto();
-                List<ENLinCarrito> listaProductos = new List<ENLinCarrito>();
-                listaProductos = cesta.ObtenerProductosEnCarrito();
-                reapeterProduct.DataSource = listaProductos;
-                reapeterProduct.DataBind();
-                total_lineas.Text = cesta.ContarProductosEnCarrito().ToString();
-                total_pvp.Text = String.Format("{0:0.00}", cesta.CalcularPvp()) + " €";*/
+                List<ENLinCarrito> listaCarrito = new List<ENLinCarrito>();
+                listaCarrito = cesta.ObtenerProductosEnCarrito();
+                if (reapeterCarrito != null)
+                {
+                    reapeterCarrito.DataSource = listaCarrito;
+                    reapeterCarrito.DataBind();
+                    total_lineas.Text = cesta.ContarProductosEnCarrito().ToString();
+                    total_pvp.Text = String.Format("{0:0.00}", cesta.CalcularPvp()) + " €";
+                }
         }
     }
 }

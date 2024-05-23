@@ -19,90 +19,157 @@ namespace ClassLibrary
             this.constring = ConfigurationManager.ConnectionStrings["database"].ToString();
         }
 
-        public bool creacionLinCarrito(ENLinCarrito enli)
+
+
+
+        public bool existeEnCarrito(ENLinCarrito linea)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+                string querryAux = "Select * from LINCARRITO where id_carrito = @id_carrito and id_producto = @id_producto";
+                SqlCommand comAux = new SqlCommand(querryAux, c);
+                comAux.Parameters.AddWithValue("@id_carrito", linea.id_carrito);
+                comAux.Parameters.AddWithValue("@id_producto", linea.producto.Id);
+                SqlDataReader dr = comAux.ExecuteReader();
+                bool existe = dr.Read();
+                dr.Close();
+
+                return existe;
+            }
+            catch (SqlException e)
+            {
+
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            finally
+            {
+                if (c != null) c.Close();
+            }
+        }
+        public bool eliminarLinea(ENLinCarrito linea)
+        {
+            SqlConnection c = new SqlConnection(constring);
+
+
+            try
+            {
+                c.Open();
+
+
+                string query = "DELETE FROM LINCARRITO where id_carrito =" + linea.id_carrito + "and id_producto =" + linea.producto.Id;
+
+
+                SqlCommand com = new SqlCommand(query, c);
+
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                return false;
+            }
+            finally
+            {
+                if (c != null) c.Close();
+            }
+        }
+
+        public bool actualizarLinea(ENLinCarrito linea)
         {
             bool validar = false;
             DataSet dat = new DataSet();
-            SqlConnection cone = new SqlConnection(constring);
-
+            SqlConnection c = new SqlConnection(constring);
             try
             {
-                SqlDataAdapter adap = new SqlDataAdapter("Select * From LINCARRITO", cone);
-                adap.Fill(dat, "LINCARRITO");
-                DataTable tabla = new DataTable();
-                tabla = dat.Tables["LINCARRITO"];
-                DataRow fila = tabla.NewRow();
-                fila[0] = enli.id_carrito;
-                fila[2] = enli.producto.Id;
-                fila[3] = enli.cantidad;
-                fila[4] = enli.pvp;
-                tabla.Rows.Add(fila);
+                c.Open();
 
-                SqlCommandBuilder builder = new SqlCommandBuilder(adap);
-                adap.Update(dat, "LINCARRITO");
+                // Crear una sentencia parametricada
+                string query = "UPDATE LINCARRITO SET cantidad = @cantidad, pvp = @pvp where id_carrito = @id_carrito and id_producto = @id_producto";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@cantidad", linea.cantidad);
+                com.Parameters.AddWithValue("@pvp", linea.pvp);
+                com.Parameters.AddWithValue("@id_carrito", linea.id_carrito);
+                com.Parameters.AddWithValue("@id_producto", linea.producto.Id);
+
+                com.ExecuteNonQuery();
+
                 validar = true;
             }
-            catch (SqlException e)
+            catch (SqlException er)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                validar = false;
+                Console.WriteLine("User operation has failed. Error: {0}", er.Message);
             }
-            catch (Exception e)
+            catch (Exception er)
             {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                validar = false;
+                Console.WriteLine("User operation has failed. Error: {0}", er.Message);
             }
             finally
             {
-                if (cone != null) cone.Close();
+                if (c != null) c.Close();
             }
-
             return validar;
         }
 
-        public bool readLinCarrito(ENLinCarrito enli)
+        public bool actualizarCantidadLinea(ENLinCarrito linea)
         {
             bool validar = false;
-            SqlConnection cone = null;
-
+            DataSet dat = new DataSet();
+            SqlConnection c = new SqlConnection(constring);
             try
             {
-                cone = new SqlConnection(constring);
-                cone.Open();
-                SqlCommand coma = new SqlCommand("Select * from LINCARRITO", cone);
-                SqlDataReader lee = coma.ExecuteReader();
-                while (lee.Read())
-                {
-                    if (lee["id_carrito"].ToString() == enli.id_carrito.ToString())
-                    {
-                        validar = true;
-                        ENProducto producto = new ENProducto(int.Parse(lee["id_producto"].ToString()));
-                        producto.Read();
-                        enli.producto = producto;
-                        enli.cantidad = int.Parse(lee["cantidad"].ToString());
-                        enli.pvp = float.Parse(lee["pvp"].ToString());
-                    }
-                }
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "UPDATE LINCARRITO SET cantidad = @cantidad + cantidad, pvp = @pvp where id_carrito = @id_carrito and id_producto = @id_producto";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@cantidad", linea.cantidad);
+                com.Parameters.AddWithValue("@pvp", linea.pvp);
+                com.Parameters.AddWithValue("@id_carrito", linea.id_carrito);
+                com.Parameters.AddWithValue("@id_producto", linea.producto.Id);
+
+                com.ExecuteNonQuery();
+
+                validar = true;
             }
-            catch (SqlException e)
+            catch (SqlException er)
             {
                 validar = false;
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                Console.WriteLine("User operation has failed. Error: {0}", er.Message);
             }
-            catch (Exception e)
+            catch (Exception er)
             {
                 validar = false;
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+                Console.WriteLine("User operation has failed. Error: {0}", er.Message);
             }
             finally
             {
-                if (cone != null) cone.Close();
+                if (c != null) c.Close();
             }
-
             return validar;
-        }
-
-        public bool actualizarLinea(ENLinCarrito eNLinCarrito)
-        {
-            return false;
         }
 
         public List<ENLinCarrito> cargarLineasCarrito(int id)
@@ -179,100 +246,6 @@ namespace ClassLibrary
                 if (c != null) c.Close();
             }
             return validar;
-        }
-
-        public DataSet actualizacionLinCarrito(ENLinCarrito enli, int mi)
-        {
-            DataSet dat = new DataSet();
-            SqlConnection cone = new SqlConnection(constring);
-
-            try
-            {
-                String linea = "Select * From LINCARRITO";
-                SqlDataAdapter adap = new SqlDataAdapter(linea, cone);
-                adap.Fill(dat, "LINCARRITO");
-                DataTable tabla = new DataTable();
-                tabla = dat.Tables["LINCARRITO"];
-                tabla.Rows[mi]["id_producto"] = enli.producto.Id;
-                tabla.Rows[mi]["cantidad"] = enli.cantidad;
-                tabla.Rows[mi]["pvp"] = enli.pvp;
-                SqlCommandBuilder builder = new SqlCommandBuilder(adap);
-                adap.Update(dat, "LINCARRITO");
-                return dat;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                return dat;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                return dat;
-            }
-            finally
-            {
-                if (cone != null) cone.Close();
-            }
-        }
-        public bool eliminacionLinCarrito(ENLinCarrito enli)
-        {
-            bool validar = false;
-            SqlConnection cone = null;
-            String linea = "Delete From LINCARRITO where id_carrito=" + enli.id_carrito + " and id_producto" + enli.producto.Id;
-
-            try
-            {
-                cone = new SqlConnection(constring);
-                cone.Open();
-                SqlCommand coma = new SqlCommand(linea, cone);
-                coma.ExecuteNonQuery();
-                validar = true;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                validar = false;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                validar = false;
-            }
-            finally
-            {
-                if (cone != null) cone.Close();
-            }
-
-            return validar;
-        }
-
-        public DataSet ensenyarLinCarritoByCarrito(ENCarrito car)
-        {
-            DataSet dat = new DataSet();
-            SqlConnection cone = new SqlConnection(constring);
-
-            try
-            {
-                String linea = "Select * from LINCARRITO where id_carrito=" + car.id;
-                SqlDataAdapter adap = new SqlDataAdapter(linea, cone);
-                adap.Fill(dat, "LINCARRITO");
-                return dat;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                return dat;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
-                return dat;
-            }
-            finally
-            {
-                if (cone != null) cone.Close();
-            }
         }
     }
 }
