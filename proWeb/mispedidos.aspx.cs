@@ -11,7 +11,7 @@ namespace proWeb
     public partial class mispedidos : Page
     {
         ENPedido ped = new ENPedido();
-        ENCarrito cesta = new ENCarrito();
+        ENCarrito cesta;
         protected void Page_Load(object sender, EventArgs e)
         {
             ensenyarPedidos();

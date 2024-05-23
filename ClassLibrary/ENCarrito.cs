@@ -23,7 +23,6 @@ namespace ClassLibrary
             set { actualizarIdCarritoLineas(value); }
         }
 
-
         public int id_usuario
         {
             get { return _id_usuario; }
@@ -206,21 +205,6 @@ namespace ClassLibrary
 
             return false;
         }
-        /*
-        public DataSet ensenyarCarritoUsuario(ENUsuario user)
-        {
-            
-            DataSet dat = new DataSet();
-
-            if (user.readUsuario() == true)
-            {
-                CADCarrito carr = new CADCarrito();
-                dat = carr.ensenyarCarritoUsuario(user);
-            }
-            return dat;
-            
-        }
-        */
 
         public DataSet listarCarritos()
         {

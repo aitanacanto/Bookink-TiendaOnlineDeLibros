@@ -11,18 +11,18 @@
             <ItemTemplate>
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target='<%# "#collapse" + Eval("ped.Numped") %>' aria-expanded="false" aria-controls='<%# "collapse" + Eval("ped.Numped") %>'>
-                            Pedido <%# Eval("ped.Numped") %>
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target='<%# "#collapse" + Eval("Numped") %>' aria-expanded="false" aria-controls='<%# "collapse" + Eval("Numped") %>'>
+                            Pedido <%# Eval("Numped") %>
                         </button>
                     </h2>
-                    <div id='<%# "collapse" + Eval("ped.Numped") %>' class="accordion-collapse collapse">
+                    <div id='<%# "collapse" + Eval("Numped") %>' class="accordion-collapse collapse">
                         <div class="accordion-body">
                             <div>
                                 <span><strong>Num.Pedido:</strong></span>
-                                <span style="font-size: 15px;"><%# Eval("ped.Numped") %></span>
+                                <span style="font-size: 15px;"><%# Eval("Numped") %></span>
                             </div>
                             <ul>
-                                <asp:Repeater ID="repeaterProductos" runat="server" DataSource='<%# Eval("Productos") %>'>
+                                <asp:Repeater ID="repeaterPedidos" runat="server">
                                     <ItemTemplate>
                                         <li style="margin-right: 100px;">
                                             <img src='<%# Eval("ImagenUrl") %>' alt='<%# Eval("Nombre") %>' style="max-width: 100px; height: auto;" />
@@ -41,10 +41,6 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </ul>
-                            <div>
-                                <span><strong>Precio Total:</strong></span>
-                                <span style="font-size: 15px;"><%# String.Format("{0:0.00}€", Eval("PrecioTotal")) %></span>
-                            </div>
                         </div>
                     </div>
                 </div>
