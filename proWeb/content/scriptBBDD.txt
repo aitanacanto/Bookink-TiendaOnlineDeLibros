@@ -44,6 +44,7 @@ create table [dbo].[PRODUCTO]
     [precio_oferta] DECIMAL(10, 2),
     [anyo_publicacion] INT,
     [num_pag] INT,
+    [popularidad] INT,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
@@ -141,13 +142,13 @@ create table [dbo].[TIENE_PAQUETE]
     FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id) ON DELETE CASCADE
 )
 GO
-create table [dbo].[LINCARRITO_PA]
+create table [dbo].[LINPEDIDO_PA]
 (	
     [id_paquete] INT,
     [id_pedido] INT,
     PRIMARY KEY (id_paquete, id_pedido),
     FOREIGN KEY (id_paquete) REFERENCES PAQUETE(id),
-    FOREIGN KEY (id_pedido) REFERENCES CARRITO(id)  
+    FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped)  
 )
 GO
 
