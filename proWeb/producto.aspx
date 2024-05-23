@@ -32,8 +32,8 @@
                     <span> <%# ValoracionMedia() %></span> <%# GenerarEstrellas(ValoracionMedia()) %>
                 </div>
                 <div class="d-flex">
-                    <p id="ProductPrice" runat="server" class="card-text text-danger" style="text-decoration: line-through">Precio Oferta</p>
-                    <p id="ProductOfer" runat="server" style="margin-left: 10px" class="price">Precio: 19.99 €</p>
+                    <p id="ProductPrice" runat="server" class="card-text text-danger" style="text-decoration: line-through; margin-right: 10px">Precio Oferta</p>
+                    <p id="ProductOfer" runat="server" style="" class="price">Precio: 19.99 €</p>
                 </div>
                 <asp:Button ID="Id_Producto" runat="server" CssClass="btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Anyadir_Click" />
             </div>
