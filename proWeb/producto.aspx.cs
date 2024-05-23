@@ -55,13 +55,22 @@ namespace proWeb
             {
                 ProductName.InnerText = prod.Name;
                 ProductAutor.InnerText = prod.Autor;
-                ProductPrice.InnerText = String.Format("{0:0.00} €", prod.Price);
-                ProductOfer.InnerText = String.Format("{0:0.00} €", prod.SalePrice);
                 imageProduct.ImageUrl = prod.ImagePath;
                 ProductSinopsis.InnerText = prod.Sinopsis;
                 anyo.InnerText = prod.AnyoPubli.ToString();
                 editorial.InnerText = prod.Editorial;
                 numpag.InnerText = prod.NumPags.ToString();
+
+                if (prod.CodOfer == "OF001")
+                {
+                    ProductPrice.InnerText = String.Format("{0:0.00} €", prod.Price);
+                    ProductOfer.InnerText = String.Format("{0:0.00} €", prod.SalePrice);
+                }
+                else if (prod.CodOfer == "OF000")
+                {
+                    ProductOfer.InnerText = String.Format("{0:0.00} €", prod.Price);
+                    ProductPrice.Visible = false;
+                }
             }
         }
         protected void Anyadir_Click(object sender, EventArgs e)

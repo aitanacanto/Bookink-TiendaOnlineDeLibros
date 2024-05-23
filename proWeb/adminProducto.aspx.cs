@@ -50,7 +50,7 @@ namespace proWeb
                 float saleprice = float.Parse(TxtSalePrice.Text, CultureInfo.InvariantCulture);
                 string sinopsis = Txt_sinopsis.Text;
                 string autor = txt_Autor.Text;
-                string codOfer = "OF001";
+                string codOfer = "OF000";
                 string editorial = txt_editorial.Text;
                 int anyo = int.Parse(txt_anyo.Text);
                 int numpag = int.Parse(TxtNumPag.Text);
@@ -58,7 +58,10 @@ namespace proWeb
                 
                 string extension = Path.GetExtension(ImagenSubida.PostedFile.FileName);
                 string filePath = "/content/products/" + name+DateTime.Now.ToString("dd-MM-yy-HH-mm-ss") +extension;
-                
+                if (oferac.Checked)
+                {
+                    codOfer = "OF001";
+                }
 
                 ENProducto newProduct = new ENProducto(name, stock, price, saleprice, filePath, sinopsis, autor, codOfer, editorial, anyo, numpag);
                 newProduct.Create();
@@ -132,6 +135,14 @@ namespace proWeb
                 {
                     listacat2.SelectedValue = "0";
                 }
+                if (prod.CodOfer == "OF001")
+                {
+                    CheckBox2.Checked = true;
+                }
+                else
+                {
+                    CheckBox2.Checked = false;
+                }
 
             }
 
@@ -187,7 +198,14 @@ namespace proWeb
                 prod.Editorial = Editorial.Text;
                 prod.AnyoPubli = int.Parse(Publi.Text);
                 string fileName = Path.GetFileName(Imagen.PostedFile.FileName);
-
+                if (CheckBox2.Checked)
+                {
+                    prod.CodOfer = "OF001";
+                }
+                else
+                {
+                    prod.CodOfer = "OF000";
+                }
 
                 if (fileName != "")
                 {

@@ -56,7 +56,8 @@
                           <div class="mb-3 col">
                          <asp:label runat="server" class="form-label">Precio Oferta</asp:label>
                           <asp:TextBox runat="server" type="number" ID="TxtSalePrice"  step="0.01" name="price-offer" class="form-control"/> 
-                        </div>
+                              <asp:CheckBox Text="Activar Oferta" runat="server" ID="oferac" />
+                          </div>
                               </div>
                          <div class="row align-items-start">
                         <div class="mb-3 col">
@@ -132,7 +133,8 @@
                           <div class="mb-3 col">
                          <asp:label runat="server" class="form-label">Precio Oferta</asp:label>
                           <asp:TextBox runat="server" type="number" ID="Oferta"  step="0.01" name="price-offer" class="form-control"/> 
-                        </div>
+                          <asp:CheckBox Text="Activar Oferta" runat="server" ID="CheckBox2" />
+                          </div>
                               </div>
                          <div class="row align-items-start">
                         <div class="mb-3 col">
