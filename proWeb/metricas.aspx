@@ -1,9 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="metricas.aspx.cs" Inherits="proWeb.metricas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2>Pedidos por Mes/Año</h2>
-    <canvas id="pedidosChart" width="400" height="200"></canvas>
+    <h2 style="text-align: center;">Evolución de Ventas</h2>
+    <div class="chart-container">
+        <canvas id="pedidosChart" width="400" height="200"></canvas>
+    </div>
     <asp:Literal ID="litScript" runat="server"></asp:Literal>
 </asp:Content>
+
