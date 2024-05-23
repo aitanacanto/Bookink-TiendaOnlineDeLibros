@@ -107,7 +107,7 @@ namespace ClassLibrary
                 // Crear una sentencia parametricada
                 string query = "DELETE FROM LINCARRITO where id_carrito =" + carr.id;
 
-                //TODO: posible mejora - Hacer una funcion que compruebe si el usuario y la contraseña son iguales para eliminar e implementarla en login
+                
                 SqlCommand com = new SqlCommand(query, c);
 
                 // Añadir los parametros a la sentencia
