@@ -105,6 +105,24 @@ namespace proWeb
         protected global::System.Web.UI.HtmlControls.HtmlTableCell editorial;
 
         /// <summary>
+        /// Control LabelResenya.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelResenya;
+
+        /// <summary>
+        /// Control ReviewRepeater.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater ReviewRepeater;
+
+        /// <summary>
         /// Control reapeterProduct.
         /// </summary>
         /// <remarks>
