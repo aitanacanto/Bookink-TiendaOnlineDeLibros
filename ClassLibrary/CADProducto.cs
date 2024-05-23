@@ -39,7 +39,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
+                string query = "INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) OUTPUT INSERTED.ID  VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags) ";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -54,7 +54,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@AnyoPubli", en.AnyoPubli);
                 com.Parameters.AddWithValue("@NumPags", en.NumPags);
 
-                com.ExecuteNonQuery();
+                en.Id = Convert.ToInt32(com.ExecuteScalar());
                 return true;
             }
             catch (Exception ex)
