@@ -10,23 +10,17 @@ namespace proWeb
 {
     public partial class mainPage : System.Web.UI.Page
     {
-        private int MaxListaProductos = 20; //Número máximo de elementos a mostrar en la lista principal
-        private int MaxNovedades = 4; //Número máximo de elementos a mostrar en las novedades
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Aquí llamamos a un método para obtener la lista de productos
                 List<ENProducto> listaProductos = ObtenerProductos();
                 List<ENProducto> Novedades = new List<ENProducto>();
-                for (int i = 0; i < MaxNovedades; i++)
+                for (int i = listaProductos.Count()-1; i > listaProductos.Count()-5; i--)
                 {
                     Novedades.Add(listaProductos[i]);
                 }
-                if (listaProductos.Count() > MaxListaProductos + MaxNovedades)
-                {
-                    listaProductos = listaProductos.GetRange(MaxNovedades,MaxListaProductos);
-                }
+
                 // Asignamos la lista de productos al repeater
                 reapeterProduct.DataSource = listaProductos;
                 reapeterProduct.DataBind();
