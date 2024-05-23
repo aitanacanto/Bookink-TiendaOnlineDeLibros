@@ -129,6 +129,28 @@ namespace proWeb
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
         }
+        protected void reapeterNov_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                ENProducto producto = (ENProducto)e.Item.DataItem;
+                producto.Read();
 
+                var lblPrice = (Label)e.Item.FindControl("lblPrice");
+                var lblSalePrice = (Label)e.Item.FindControl("lblSalePrice");
+
+                if (producto.CodOfer == "OF001")
+                {
+                    lblPrice.Text = String.Format("{0:0.00} €", producto.Price);
+                    lblSalePrice.Text = String.Format("{0:0.00} €", producto.SalePrice);
+                }
+                else if (producto.CodOfer == "OF000")
+                {
+                    lblSalePrice.Text = String.Format("{0:0.00} €", producto.Price);
+                    lblPrice.Visible = false;
+                }
+            }
+
+        }
     }
 }

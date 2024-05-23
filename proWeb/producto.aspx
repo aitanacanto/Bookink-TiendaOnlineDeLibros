@@ -36,8 +36,8 @@
                                             <i class="fa-regular fa-star no-estre"></i>
                                         </div>
              <div class="d-flex">
-            <p ID="ProductPrice" runat="server" class="card-text text-danger" style="text-decoration:line-through">Precio Oferta</p>
-            <p ID="ProductOfer" runat="server" style="margin-left: 10px" class="price">Precio: 19.99 €</p>
+            <p ID="ProductPrice" runat="server" class="card-text text-danger" style="text-decoration:line-through; margin-right: 10px">Precio Oferta</p>
+            <p ID="ProductOfer" runat="server"  class="price">Precio: 19.99 €</p>
                  </div>
             <asp:Button ID="Id_Producto" runat="server" CssClass = "btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Anyadir_Click"  />
         </div>

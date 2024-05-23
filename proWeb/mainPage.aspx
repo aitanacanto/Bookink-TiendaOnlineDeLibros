@@ -34,7 +34,7 @@
             <h1 class="text-center">Últimas Novedades</h1>
             <div class="container">
                 <div class="row">
-                    <asp:Repeater ID="reapeterNov" runat="server">
+                    <asp:Repeater ID="reapeterNov" runat="server" OnItemDataBound="reapeterNov_ItemDataBound">
                         <ItemTemplate>
                             <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
                                 <div class="product-card card d-flex flex-column flex-grow-1">
@@ -53,8 +53,8 @@
                                                 <i class="fa-regular fa-star no-estre"></i>
                                             </div>
                                             <div class="d-flex">
-                                                <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
-                                                <p class="card-text text-dark" style="margin-left: 10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
+                                                <asp:Label ID="lblPrice" runat="server" CssClass="card-text text-danger accordion mb-3" style="text-decoration: line-through;margin-right: 10px;"></asp:Label>
+                                                <asp:Label ID="lblSalePrice" runat="server" CssClass="card-text text-dark mb-3" style=""></asp:Label>
                                             </div>
 
                                             <div class="text-center mt-auto">
@@ -114,7 +114,7 @@
         <h1 class="text-center">Catálogo Libros</h1>
         <div class="container">
             <div class="row ">
-                <asp:Repeater ID="reapeterProduct" runat="server">
+                <asp:Repeater ID="reapeterProduct" runat="server" OnItemDataBound="reapeterNov_ItemDataBound">
                     <ItemTemplate>
                         <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch" data-aos="fade-in">
                             <div class="product-card card d-flex flex-column">
@@ -133,8 +133,8 @@
                                             <i class="fa-regular fa-star no-estre"></i>
                                         </div>
                                         <div class="d-flex">
-                                            <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
-                                            <p class="card-text text-dark" style="margin-left: 10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
+                                            <asp:Label ID="lblPrice" runat="server" CssClass="card-text text-danger accordion mb-3" style="text-decoration: line-through;margin-right: 10px;"></asp:Label>
+                                                <asp:Label ID="lblSalePrice" runat="server" CssClass="card-text text-dark mb-3" style=""></asp:Label>
                                         </div>
 
                                         <div class="text-center mt-auto">
