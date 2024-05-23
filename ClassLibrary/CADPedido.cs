@@ -16,7 +16,7 @@ namespace ClassLibrary
 
         public CADPedido()
         {
-            constring = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ToString();
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString(); ;
         }
 
         public bool crearPedido(ENPedido pedido)
@@ -94,14 +94,13 @@ namespace ClassLibrary
         public List<ENPedido> verPedidos(ENPedido pedido)
         {
             List<ENPedido> lista = new List<ENPedido>();
-            SqlConnection cone = null;
+            SqlConnection conex = new SqlConnection(constring); ;
 
             try
             {
-                cone = new SqlConnection(constring);
-                cone.Open();
-                SqlCommand coma = new SqlCommand("Select * from PEDIDO where id_usuario=" + pedido.Id_usuario, cone);
-                SqlDataReader leer = coma.ExecuteReader();
+                conex.Open();
+                SqlCommand cmd = new SqlCommand("Select * from PEDIDO where id_usuario=" + pedido.Id_usuario, conex);
+                SqlDataReader leer = cmd.ExecuteReader();
                 while (leer.Read())
                 {
                     ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString());
@@ -118,7 +117,7 @@ namespace ClassLibrary
             }
             finally
             {
-                if (cone != null) cone.Close();
+                if (conex != null) conex.Close();
             }
             return lista;
         }

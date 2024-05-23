@@ -10,7 +10,7 @@ namespace proWeb
 {
     public partial class mispedidos : Page
     {
-        ENPedido ped;
+        ENPedido ped = new ENPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
             ensenyarPedidos();

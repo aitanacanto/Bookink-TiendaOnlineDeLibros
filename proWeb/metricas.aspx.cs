@@ -12,7 +12,7 @@ namespace proWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            constring = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ToString();
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString();
             graficaVentas();
         }
 

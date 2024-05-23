@@ -11,23 +11,23 @@ namespace proWeb
     public partial class pedido : Page
     {
         ENCarrito cesta;
-        ENPedido ped;
+        ENPedido ped = new ENPedido();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                ped.Id_usuario = cesta.id_usuario;
-                ped.Cod_carrito = cesta.id;
-                ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
-                ped.Precio = cesta.CalcularPvp();
-                ped.Estado = "En Proceso";
-                ped.crearPedido();
                 CargarCarrito();
             }
         }
 
         protected void btnPagar_Click(object sender, EventArgs e)
         {
+            ped.Id_usuario = cesta.id_usuario;
+            ped.Cod_carrito = cesta.id;
+            ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
+            ped.Precio = cesta.CalcularPvp();
+            ped.Estado = "En Proceso";
+            ped.crearPedido();
             Response.Redirect("confirmarPedido.aspx");
         }
 
