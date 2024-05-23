@@ -14,39 +14,92 @@ namespace proWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            user = Session["user"] as ENUsuario;
-            if (user == null) // Si el usuario no está logeado, se redirige a la página de login
+            if (!IsPostBack)
             {
-                Response.Redirect("LogIn.aspx");
-            }
-            else
-            {
-                lblNombreActual.Text = user.Name;
-                lblCorreoActual.Text = user.Email;
-                lblTelefonoActual.Text = user.PhoneNumber;
-                lblDireccionActual.Text = ObtenerDireccion(user.Id); // Obtiene y muestra la dirección del usuario
+                user = Session["user"] as ENUsuario;
+                if (user == null)
+                {
+                    Response.Redirect("LogIn.aspx");
+                }
+                else
+                {
+                    lblNombreActual.Text = user.Name;
+                    lblCorreoActual.Text = user.Email;
+                    lblTelefonoActual.Text = user.PhoneNumber;
+
+                    // Cargar y mostrar la primera dirección del usuario
+                    user.Direcciones = user.ObtenerDirecciones();
+                    if (user.Direcciones.Count > 0)
+                    {
+                        ActualizarCamposDireccion(user.Direcciones[0]);
+                    }
+
+                    // Cargar las direcciones adicionales en el Repeater
+                    repeaterDirecciones.DataSource = user.Direcciones.Skip(1); // Omitir la primera dirección
+                    repeaterDirecciones.DataBind();
+                }
             }
         }
 
-        protected string ObtenerDireccion(int userId)
+        private void ActualizarCamposDireccion(ENDireccion direccion)
         {
-            /*CADTieneDireccion cadTieneDireccion = new CADTieneDireccion();
-            ENTieneDireccion tieneDireccion = new ENTieneDireccion(userId);
+            lblDireccionActual.Text = direccion.Direccion;
+            lblCodPostalActual.Text = direccion.CodPostal;
+            lblCiudadActual.Text = direccion.Ciudad;
+            lblPaisActual.Text = direccion.Pais;
+        }
 
-            if (tieneDireccion != null)
+        protected void BtnAgregarDireccion_Click(object sender, EventArgs e)
+        {
+            ENDireccion nuevaDireccion = new ENDireccion
             {
-                ENDireccion direccion = new ENDireccion();
-                direccion.ID = tieneDireccion.IdDireccion;
-                if (direccion.Read())
-                {
-                    return $"{direccion.Direccion}, {direccion.CodPostal}, {direccion.Ciudad}, {direccion.Pais}";
-                }
+                Direccion = txtDireccionNueva.Text,
+                CodPostal = txtCodPostalNuevo.Text,
+                Ciudad = txtCiudadNueva.Text,
+                Pais = txtPaisNuevo.Text
+            };
+
+            if (nuevaDireccion.Create())
+            {
+                user.AddAddress(nuevaDireccion);
+                lblMensaje.Text = "Dirección agregada correctamente.";
             }
-            return "Dirección no disponible.";*/
+            else
+            {
+                lblMensaje.Text = "Hubo un error al agregar la nueva dirección.";
+            }
 
-            return "Dirección no disponible.";
+            // Recargar direcciones
+            user.Direcciones = user.ObtenerDirecciones();
+            repeaterDirecciones.DataSource = user.Direcciones.Skip(1); // Omitir la primera dirección
+            repeaterDirecciones.DataBind();
+        }
 
+        protected void BtnEliminarDireccion_Click(object sender, EventArgs e)
+        {
+            Button btnEliminar = (Button)sender;
+            int direccionId = int.Parse(btnEliminar.CommandArgument);
+            ENDireccion direccionAEliminar = user.Direcciones.Find(d => d.ID == direccionId);
 
+            if (direccionAEliminar != null && direccionAEliminar.Delete())
+            {
+                user.Direcciones.Remove(direccionAEliminar);
+                lblMensaje.Text = "Dirección eliminada correctamente.";
+            }
+            else
+            {
+                lblMensaje.Text = "Hubo un error al eliminar la dirección.";
+            }
+
+            // Recargar direcciones
+            user.Direcciones = user.ObtenerDirecciones();
+            repeaterDirecciones.DataSource = user.Direcciones.Skip(1); // Omitir la primera dirección
+            repeaterDirecciones.DataBind();
+        }
+
+        protected void BtnEditarDireccion_Click(object sender, EventArgs e)
+        {
+            // Implementar lógica de edición de direcciones
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
@@ -72,25 +125,6 @@ namespace proWeb
             else
             {
                 lblMensaje.Text = "Hubo un error al actualizar la información del usuario.";
-            }
-
-            // Actualizar dirección
-            ENDireccion direccion = new ENDireccion
-            {
-                ID = Int32.Parse(txtDireccionNueva.Text), // Asegúrate de que el ID es un número entero
-                CodPostal = txtCodPostalNuevo.Text,
-                Direccion = txtDireccionNueva.Text,
-                Ciudad = txtCiudadNueva.Text,
-                Pais = txtPaisNuevo.Text
-            };
-
-            if (direccion.Update())
-            {
-                lblMensaje.Text += " Dirección actualizada correctamente.";
-            }
-            else
-            {
-                lblMensaje.Text += " Hubo un error al actualizar la dirección.";
             }
         }
 

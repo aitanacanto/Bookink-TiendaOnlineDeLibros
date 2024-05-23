@@ -43,6 +43,7 @@ namespace ClassLibrary
             }
         }
         public int Id { get { return _id; } set { _id = value; } }
+        
         public List<ENDireccion> Direcciones
         {
             get
@@ -57,6 +58,7 @@ namespace ClassLibrary
                 _direcciones = value;
             }
         }
+        
         public bool Admin { get { return _admin; } set { _admin = value; } }
 
         // Método para validar el DNI
@@ -104,6 +106,7 @@ namespace ClassLibrary
                 return builder.ToString();
             }
         }
+        
         public ENUsuario() 
         {
             Id = 0;
@@ -180,6 +183,38 @@ namespace ClassLibrary
         {
             CADUsuario cad = new CADUsuario();
             return cad.ObtenerUsuarios(true);
+        }
+
+        /*public ENDireccion ObtenerDireccion()
+        {
+            CADTieneDireccion cadTieneDireccion = new CADTieneDireccion();
+            int idDireccion = cadTieneDireccion.ObtenerDireccionId(this.Id);
+            if (idDireccion > 0)
+            {
+                ENDireccion direccion = new ENDireccion { ID = idDireccion };
+                if (direccion.Read())
+                {
+                    return direccion;
+                }
+            }
+            return null;
+        }*/
+
+        public List<ENDireccion> ObtenerDirecciones()
+        {
+            CADTieneDireccion cadTieneDireccion = new CADTieneDireccion();
+            List<int> idDirecciones = cadTieneDireccion.ObtenerDireccionesIds(this.Id);
+            List<ENDireccion> direcciones = new List<ENDireccion>();
+
+            foreach (int id in idDirecciones)
+            {
+                ENDireccion direccion = new ENDireccion { ID = id };
+                if (direccion.Read())
+                {
+                    direcciones.Add(direccion);
+                }
+            }
+            return direcciones;
         }
 
     }

@@ -62,6 +62,12 @@ namespace ClassLibrary
             return cadDireccion.ModificarDireccion(this);
         }
 
+        public bool Delete()
+        {
+            CADDireccion cadDireccion = new CADDireccion();
+            return cadDireccion.EliminarDireccion(this);
+        }
+
         public List<ENCategoria> GetAllCategories()
         {
             CADCategoria cad = new CADCategoria();
