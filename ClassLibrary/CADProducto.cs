@@ -367,7 +367,7 @@ namespace ClassLibrary
             }
         }
 
-        public List<ENProducto> BuscarProductosPorFiltros(string categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
+        public List<ENProducto> BuscarProductosPorFiltros(int? categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
         {
             List<ENProducto> productos = new List<ENProducto>();
             SqlConnection conex = new SqlConnection(constring);
@@ -375,23 +375,33 @@ namespace ClassLibrary
             try
             {
                 conex.Open();
+
+                List<string> conditions = new List<string>();
+                if (categoria.HasValue) {  conditions.Add("c.id = @Categoria");    }
+                if (!string.IsNullOrEmpty(editorial)){  conditions.Add("p.editorial = @Editorial"); }
+                if (!string.IsNullOrEmpty(autor)){      conditions.Add("p.autor = @Autor");         }
+                if (precioMinimo.HasValue){             conditions.Add("p.precio >= @PrecioMinimo");}
+                if (precioMaximo.HasValue){             conditions.Add("p.precio <= @PrecioMaximo");}
+
                 string query = @"
                                 SELECT p.*
                                 FROM PRODUCTO p
                                 JOIN TIENE_CATEGORIA tc ON p.id = tc.id_producto
-                                JOIN CATEGORIA c ON c.id = tc.id_categoria
-                                WHERE (@Categoria IS NULL OR c.nombre = @Categoria)
-                                AND (@Editorial IS NULL OR p.editorial = @Editorial)
-                                AND (@Autor IS NULL OR p.autor = @Autor)
-                                AND (@PrecioMinimo IS NULL OR p.precio >= @PrecioMinimo)
-                                AND (@PrecioMaximo IS NULL OR p.precio <= @PrecioMaximo)";
+                                JOIN CATEGORIA c ON c.id = tc.id_categoria";
+
+                if (conditions.Count > 0)
+                {
+                    query += " WHERE " + string.Join(" AND ", conditions);
+                }
 
                 SqlCommand cmd = new SqlCommand(query, conex);
-                cmd.Parameters.AddWithValue("@Categoria", string.IsNullOrEmpty(categoria) ? (object)DBNull.Value : categoria);
-                cmd.Parameters.AddWithValue("@Editorial", string.IsNullOrEmpty(editorial) ? (object)DBNull.Value : editorial);
-                cmd.Parameters.AddWithValue("@Autor", string.IsNullOrEmpty(autor) ? (object)DBNull.Value : autor);
-                cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.HasValue ? (object)precioMinimo.Value : DBNull.Value);
-                cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.HasValue ? (object)precioMaximo.Value : DBNull.Value);
+
+                if (categoria.HasValue) {  cmd.Parameters.AddWithValue("@Categoria", categoria);   }
+                if (!string.IsNullOrEmpty(editorial)){  cmd.Parameters.AddWithValue("@Editorial", editorial);   }
+                if (!string.IsNullOrEmpty(autor)){      cmd.Parameters.AddWithValue("@Autor", autor);           }
+                if (precioMinimo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.Value); }
+                if (precioMaximo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.Value); }
+
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
@@ -427,5 +437,7 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
+
+
     }
 }
