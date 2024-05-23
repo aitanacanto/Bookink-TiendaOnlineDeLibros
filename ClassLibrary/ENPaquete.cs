@@ -34,6 +34,14 @@ namespace ClassLibrary
             Productos = new List<ENProducto>(productos);
         }
 
+        public ENPaquete(string nombre, float precio, string descripcion, List<ENProducto> productos)
+        {
+            Nombre = nombre;
+            Precio = precio;
+            Descripcion = descripcion;
+            Productos = new List<ENProducto>(productos);
+        }
+
         public bool CrearPaquete()
         {
             CADPaquete cad = new CADPaquete();

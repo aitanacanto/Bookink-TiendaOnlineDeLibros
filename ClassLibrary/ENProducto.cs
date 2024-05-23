@@ -103,20 +103,10 @@ namespace ClassLibrary
             return cad.BuscarProductosPorNombre(nombre);
         }
 
-        public bool AnyadirCategoria(ENCategoria cat)
-        {
-            if (!_listLinCategoria.Contains(cat))
-            {
-                _listLinCategoria.Add(cat);
-                return true;
-            }
-            return false;
-        }
-
-        public bool aumentarPopularidad(int Id)
+        public List<ENProducto> BuscarProductosPorFiltros(string categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
         {
             CADProducto cad = new CADProducto();
-            return cad.aumentarPopularidad(Id);
+            return cad.BuscarProductosPorFiltros(categoria, editorial, autor, precioMinimo, precioMaximo);
         }
     }
 }

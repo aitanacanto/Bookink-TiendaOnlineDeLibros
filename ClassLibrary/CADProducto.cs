@@ -366,33 +366,64 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
-        public bool aumentarPopularidad(int Id)
+
+        public List<ENProducto> BuscarProductosPorFiltros(string categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
         {
+            List<ENProducto> productos = new List<ENProducto>();
             SqlConnection conex = new SqlConnection(constring);
 
             try
             {
                 conex.Open();
-                string comandoSQL = "UPDATE PRODUCTO SET popularidad = popularidad + 1 WHERE id ='" + Id ;
-                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
+                string query = @"
+                                SELECT p.*
+                                FROM PRODUCTO p
+                                JOIN TIENE_CATEGORIA tc ON p.id = tc.id_producto
+                                JOIN CATEGORIA c ON c.id = tc.id_categoria
+                                WHERE (@Categoria IS NULL OR c.nombre = @Categoria)
+                                AND (@Editorial IS NULL OR p.editorial = @Editorial)
+                                AND (@Autor IS NULL OR p.autor = @Autor)
+                                AND (@PrecioMinimo IS NULL OR p.precio >= @PrecioMinimo)
+                                AND (@PrecioMaximo IS NULL OR p.precio <= @PrecioMaximo)";
 
-                cmd.ExecuteNonQuery();
+                SqlCommand cmd = new SqlCommand(query, conex);
+                cmd.Parameters.AddWithValue("@Categoria", string.IsNullOrEmpty(categoria) ? (object)DBNull.Value : categoria);
+                cmd.Parameters.AddWithValue("@Editorial", string.IsNullOrEmpty(editorial) ? (object)DBNull.Value : editorial);
+                cmd.Parameters.AddWithValue("@Autor", string.IsNullOrEmpty(autor) ? (object)DBNull.Value : autor);
+                cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.HasValue ? (object)precioMinimo.Value : DBNull.Value);
+                cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.HasValue ? (object)precioMaximo.Value : DBNull.Value);
 
-                return true;
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        ENProducto en = new ENProducto();
+                        en.Id = int.Parse(dr["id"].ToString());
+                        en.Name = dr["nombre"].ToString();
+                        en.Stock = int.Parse(dr["cant_stock"].ToString());
+                        en.Price = float.Parse(dr["precio"].ToString());
+                        en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
+                        en.ImagePath = dr["img_producto"].ToString();
+                        en.Sinopsis = dr["sinopsis"].ToString();
+                        en.Autor = dr["autor"].ToString();
+                        en.CodOfer = dr["cod_oferta"].ToString();
+                        en.Editorial = dr["editorial"].ToString();
+                        en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                        en.NumPags = int.Parse(dr["num_pag"].ToString());
+
+                        productos.Add(en);
+                    }
+                }
+
+                return productos;
             }
-            catch (SqlException e)
+            catch (Exception ex)
             {
-                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
-                return false;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
-                return false;
+                Console.WriteLine("Operación fallida. Error: {0}", ex.Message);
+                return null;
             }
             finally
             {
-                Console.WriteLine("Cerrando la conexión.");
                 conex.Close();
             }
         }
