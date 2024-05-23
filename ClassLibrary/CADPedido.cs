@@ -27,7 +27,7 @@ namespace ClassLibrary
             {
                     conex.Open();
 
-                    string comandoSQL = $"INSERT INTO PEDIDO (id_usuario, cod_carrito, dirección_envío, precio, estado) VALUES (@id_usuario, @cod_carrito, @dirección_envío, @precio, @estado)";
+                    string comandoSQL = $"INSERT INTO PEDIDO (id_usuario, cod_carrito, dirección_envío, precio, estado, fecha) VALUES (@id_usuario, @cod_carrito, @dirección_envío, @precio, @estado, @fecha)";
 
                     SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                     cmd.Parameters.AddWithValue("@id_usuario", pedido.Id_usuario);
@@ -35,6 +35,7 @@ namespace ClassLibrary
                     cmd.Parameters.AddWithValue("@dirección_envío", pedido.Direccion_envio);
                     cmd.Parameters.AddWithValue("@precio", pedido.Precio);
                     cmd.Parameters.AddWithValue("@estado", pedido.Estado);
+                    cmd.Parameters.AddWithValue("@fecha", pedido.Date);
 
                     cmd.ExecuteNonQuery();
 
@@ -103,7 +104,7 @@ namespace ClassLibrary
                 SqlDataReader leer = cmd.ExecuteReader();
                 while (leer.Read())
                 {
-                    ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString());
+                    ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString(), DateTime.Parse(leer["fecha"].ToString()));
                     lista.Add(newped);
                 }
             }

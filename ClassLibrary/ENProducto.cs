@@ -112,5 +112,11 @@ namespace ClassLibrary
             }
             return false;
         }
+
+        public bool aumentarPopularidad(int Id)
+        {
+            CADProducto cad = new CADProducto();
+            return cad.aumentarPopularidad(Id);
+        }
     }
 }

@@ -366,9 +366,35 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
+        public bool aumentarPopularidad(int Id)
+        {
+            SqlConnection conex = new SqlConnection(constring);
 
+            try
+            {
+                conex.Open();
+                string comandoSQL = "UPDATE PRODUCTO SET popularidad = popularidad + 1 WHERE id ='" + Id ;
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
 
+                cmd.ExecuteNonQuery();
 
-
+                return true;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return false;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
     }
 }
