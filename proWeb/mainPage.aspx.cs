@@ -14,13 +14,13 @@ namespace proWeb
         {
             if (!IsPostBack)
             {
-                // Aquí llamamos a un método para obtener la lista de productos
                 List<ENProducto> listaProductos = ObtenerProductos();
                 List<ENProducto> Novedades = new List<ENProducto>();
                 for (int i = listaProductos.Count()-1; i > listaProductos.Count()-5; i--)
                 {
                     Novedades.Add(listaProductos[i]);
                 }
+
                 // Asignamos la lista de productos al repeater
                 reapeterProduct.DataSource = listaProductos;
                 reapeterProduct.DataBind();
