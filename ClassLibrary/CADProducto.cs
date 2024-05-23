@@ -367,7 +367,7 @@ namespace ClassLibrary
             }
         }
 
-        public List<ENProducto> BuscarProductosPorFiltros(string categoria, string editorial, string autor)
+        public List<ENProducto> BuscarProductosPorFiltros(string categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
         {
             List<ENProducto> productos = new List<ENProducto>();
             SqlConnection conex = new SqlConnection(constring);
@@ -376,18 +376,22 @@ namespace ClassLibrary
             {
                 conex.Open();
                 string query = @"
-                    SELECT p.*
-                    FROM PRODUCTO p
-                    JOIN TIENE_CATEGORIA tc ON p.id = tc.id_producto
-                    JOIN CATEGORIA c ON c.id = tc.id_categoria
-                    WHERE (@Categoria IS NULL OR c.nombre = @Categoria)
-                    AND (@Editorial IS NULL OR p.editorial = @Editorial)
-                    AND (@Autor IS NULL OR p.autor = @Autor)";
+                                SELECT p.*
+                                FROM PRODUCTO p
+                                JOIN TIENE_CATEGORIA tc ON p.id = tc.id_producto
+                                JOIN CATEGORIA c ON c.id = tc.id_categoria
+                                WHERE (@Categoria IS NULL OR c.nombre = @Categoria)
+                                AND (@Editorial IS NULL OR p.editorial = @Editorial)
+                                AND (@Autor IS NULL OR p.autor = @Autor)
+                                AND (@PrecioMinimo IS NULL OR p.precio >= @PrecioMinimo)
+                                AND (@PrecioMaximo IS NULL OR p.precio <= @PrecioMaximo)";
 
                 SqlCommand cmd = new SqlCommand(query, conex);
                 cmd.Parameters.AddWithValue("@Categoria", string.IsNullOrEmpty(categoria) ? (object)DBNull.Value : categoria);
                 cmd.Parameters.AddWithValue("@Editorial", string.IsNullOrEmpty(editorial) ? (object)DBNull.Value : editorial);
                 cmd.Parameters.AddWithValue("@Autor", string.IsNullOrEmpty(autor) ? (object)DBNull.Value : autor);
+                cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.HasValue ? (object)precioMinimo.Value : DBNull.Value);
+                cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.HasValue ? (object)precioMaximo.Value : DBNull.Value);
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
@@ -410,6 +414,7 @@ namespace ClassLibrary
                         productos.Add(en);
                     }
                 }
+
                 return productos;
             }
             catch (Exception ex)
@@ -422,6 +427,5 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
-
     }
 }

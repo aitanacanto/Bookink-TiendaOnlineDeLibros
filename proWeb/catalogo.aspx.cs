@@ -10,6 +10,7 @@ namespace proWeb
 {
     public partial class catalogo : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,7 +40,6 @@ namespace proWeb
 
         private void CargarPaquetes()
         {
-            List<ENProducto> listaProductos = new List<ENProducto>();
             ENPaquete paquete = new ENPaquete();
             List<ENPaquete> listaPaquetes = paquete.ObtenerTodosLosPaquetes();
 
@@ -112,9 +112,18 @@ namespace proWeb
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string searchQuery = Request.QueryString["search"];
-            CargarLibros(searchQuery);
-            CargarPaquetes();
+            string categoria = ddlCategoria.SelectedValue;
+            string editorial = ddlEditorial.SelectedValue;
+            string autor = ddlAutor.SelectedValue;
+            float? precioMinimo = string.IsNullOrEmpty(txtPrecioMin.Text) ? (float?)null : float.Parse(txtPrecioMin.Text);
+            float? precioMaximo = string.IsNullOrEmpty(txtPrecioMax.Text) ? (float?)null : float.Parse(txtPrecioMax.Text);
+
+            ENProducto enProd = new ENProducto();
+            List<ENProducto> listaProductos = enProd.BuscarProductosPorFiltros(categoria, editorial, autor, precioMinimo, precioMaximo);
+
+            // Enlaza la lista filtrada al repeater
+            reapeterProduct.DataSource = listaProductos;
+            reapeterProduct.DataBind();
         }
 
         protected void Add_Click(object sender, EventArgs e)
