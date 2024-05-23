@@ -76,6 +76,7 @@ create table [dbo].[PEDIDO]
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
     PRIMARY KEY CLUSTERED (numped),
+    [fecha] DATE NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
     FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id)
 )
