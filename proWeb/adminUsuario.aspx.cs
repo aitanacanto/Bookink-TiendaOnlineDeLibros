@@ -1,62 +1,155 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using ClassLibrary;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace proWeb
 {
     public partial class adminUsuario : System.Web.UI.Page
     {
+        private static List<ENUsuario> listaUsuarios = new List<ENUsuario>();
+        private static List<ENUsuario> listaTrabajadores = new List<ENUsuario>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Aquí llamamos a un método para obtener la lista de productos
-            List<ENUsuario> listaUsuarios = ObtenerUsuarios();
-            List<ENUsuario> listaTrabajadores = ObtenerUsuarios();
+            if (!IsPostBack)
+            {
+                listaUsuarios = ObtenerUsuarios();
+                listaTrabajadores = ObtenerTrabajadores();
+                BindRepeater();
+            }
+        }
 
-            // Asignamos la lista de productos al repeater
+        private void BindRepeater()
+        {
             rptUsuarios.DataSource = listaUsuarios;
             rptUsuarios.DataBind();
-
             rptTrabajadores.DataSource = listaTrabajadores;
             rptTrabajadores.DataBind();
         }
 
-        // Método de ejemplo para obtener la lista de productos
         private List<ENUsuario> ObtenerUsuarios()
         {
-            // Aquí puedes obtener la lista de productos desde la base de datos, archivo XML, etc.
-            // Por ahora, usaremos una lista estática para ejemplificar
-
             List<ENUsuario> listaUsuarios = new List<ENUsuario>();
-            // Añade algunos productos de ejemplo (debes obtenerlos de tu fuente de datos real)
-            //listaUsuarios.Add(new ENUsuario(2, "Manuel", "Lopez Cobos", "494949", "manu@cobos.com"));
-            //listaUsuarios.Add(new ENUsuario(3, "Laura", "Rodriguez Sala", "494949", "laura@sala.com"));
-            //listaUsuarios.Add(new ENUsuario(5, "María", "Del Oro Marín", "494949", "maria@deloro.com"));
-
+            CADUsuario cadUsuario = new CADUsuario();
+            try
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["database"].ToString());
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO WHERE admin = 0", con))
+                    {
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            ENUsuario usuario = new ENUsuario();
+                            usuario.Id = Convert.ToInt32(reader["id"]);
+                            usuario.Name = reader["nombre"].ToString();
+                            usuario.Surname = reader["apellidos"].ToString();
+                            usuario.Email = reader["email"].ToString();
+                            usuario.PhoneNumber = reader["telefono"].ToString();
+                            usuario.DNI = reader["dni"].ToString();
+                            listaUsuarios.Add(usuario);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener los usuarios: " + ex.Message);
+            }
             return listaUsuarios;
+        }
+
+        private List<ENUsuario> ObtenerTrabajadores()
+        {
+            List<ENUsuario> listaTrabajadores = new List<ENUsuario>();
+            CADUsuario cadUsuario = new CADUsuario();
+            try
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["database"].ToString());
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO WHERE admin = 1", con))
+                    {
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            ENUsuario trabajador = new ENUsuario();
+                            trabajador.Id = Convert.ToInt32(reader["id"]);
+                            trabajador.Name = reader["nombre"].ToString();
+                            trabajador.Surname = reader["apellidos"].ToString();
+                            trabajador.Email = reader["email"].ToString();
+                            trabajador.PhoneNumber = reader["telefono"].ToString();
+                            trabajador.DNI = reader["dni"].ToString();
+                            listaTrabajadores.Add(trabajador);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener los trabajadores: " + ex.Message);
+            }
+            return listaTrabajadores;
         }
 
         protected void btnBorrarTrabajador_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            int idTrabajador = Convert.ToInt32(btn.CommandArgument);
+            ENUsuario trabajador = new ENUsuario();
+            trabajador.Id = idTrabajador;
 
+            if (trabajador.DeleteUser())
+            {
+                lblMensaje.Text = "Trabajador eliminado correctamente.";
+                lblMensaje.Visible = true;
+                listaTrabajadores = ObtenerTrabajadores();
+                BindRepeater();
+            }
+            else
+            {
+                lblMensaje.Text = "Error al eliminar el trabajador.";
+                lblMensaje.Visible = true;
+            }
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string nombre = txtNombreTrabajador.Text;
+                string apellidos = txtApellidosTrabajador.Text;
+                string email = txtEmailTrabajador.Text;
+                string telefono = txtTelefonoTrabajador.Text;
+                string nif = txtNIFTrabajador.Text;
+                string password = "password"; // Deberías solicitar la contraseña también
 
-        }
+                ENUsuario nuevoTrabajador = new ENUsuario(nombre, apellidos, password, nif, email, telefono);
 
-        protected void btnEditarTrabajador_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void rptTrabajadores_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-
+                if (nuevoTrabajador.Register(true))
+                {
+                    lblMensaje.Text = "Trabajador agregado correctamente.";
+                    lblMensaje.Visible = true;
+                    listaTrabajadores = ObtenerTrabajadores();
+                    BindRepeater();
+                }
+                else
+                {
+                    lblMensaje.Text = "Error al agregar el trabajador.";
+                    lblMensaje.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.Text = "No se ha podido añadir el trabajador, ERROR: " + ex.Message;
+                lblMensaje.Visible = true;
+                return;
+            }
         }
     }
 }

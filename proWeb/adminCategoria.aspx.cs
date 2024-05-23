@@ -107,8 +107,8 @@ namespace proWeb
 
         private List<ENCategoria> ObtenerCategorias()
         {
-            // Este método debe retornar la lista de categorías desde la base de datos.
-            return ENCategoria.GetAllCategories();
+            ENCategoria enCat = new ENCategoria();
+            return enCat.GetAllCategories();
         }
     }
 }

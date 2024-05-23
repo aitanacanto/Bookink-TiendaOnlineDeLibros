@@ -28,7 +28,7 @@
                 <asp:TextBox ID="Telefono" runat="server" TextMode="SingleLine" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label for="NIF">NIF/DNI</label>
+                <label for="NIF">DNI</label>
                 <asp:TextBox ID="NIF" runat="server" TextMode="SingleLine" CssClass="form-control" Required="true"></asp:TextBox>
             </div>
             <div class="mb-3 related-products">

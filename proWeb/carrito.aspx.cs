@@ -40,6 +40,14 @@ namespace proWeb
             }
             CargarCarrito();
         }
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+            cesta = Session["Carrito"] as ENCarrito;
+            if(cesta != null) { 
+                cesta.deleteCarrito();
+                Response.Redirect("carrito.aspx");
+            }
+        }
 
         // Método para añadir más elementos al carrito
         protected void Add_Click(object sender, EventArgs e)
@@ -56,6 +64,7 @@ namespace proWeb
             lblPvp.Text = String.Format("{0:0.00}", linea.pvp);
             Label lblcantidad = (Label)reapeterProduct.Items[row].FindControl("cantidad");
             lblcantidad.Text = linea.cantidad.ToString();
+            CargarCarrito();
         }
 
         // Método para comprar productos y redirigir a otra página
@@ -67,7 +76,7 @@ namespace proWeb
                 Response.Redirect("pedido.aspx");
             }
             else { 
-                Response.Redirect("LogIn.aspx"); // Redirigir a la página de pedido
+                Response.Redirect("LogIn.aspx");
             }
         }
         private void CargarCarrito()
@@ -85,6 +94,9 @@ namespace proWeb
             listaProductos = cesta.ObtenerProductosEnCarrito();
             reapeterProduct.DataSource = listaProductos;
             reapeterProduct.DataBind();
+            total_lineas.Text = cesta.ContarProductosEnCarrito().ToString();
+            total_pvp.Text = String.Format("{0:0.00}", cesta.CalcularPvp()) + " €";
+
         }
 
     }

@@ -74,7 +74,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = @"INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
+                string query = @"UPDATE PRODUCTO set nombre = @Name, cant_stock = @Stock, precio = @Price, precio_oferta = @SalePrice, img_producto = @ImagePath, sinopsis = @Sinopsis, autor = @Autor, cod_oferta = @CodOfer, editorial = @Editorial, anyo_publicacion = @AnyoPubli, num_pag = @NumPags WHERE id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -88,9 +88,10 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@Editorial", en.Editorial);
                 com.Parameters.AddWithValue("@AnyoPubli", en.AnyoPubli);
                 com.Parameters.AddWithValue("@NumPags", en.NumPags);
+                com.Parameters.AddWithValue("@Id", en.Id);
 
                 com.ExecuteNonQuery();
-                return false;
+                return true;
             }
             catch (Exception ex)
             {
@@ -110,7 +111,7 @@ namespace ClassLibrary
             {
                 c.Open();
                 if (!this.Exists(c, en)){throw new ArgumentException("El producto no existe"); }
-                string query = "Delete from Products where Id = @Id";
+                string query = "Delete from PRODUCTO where Id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
                 com.Parameters.AddWithValue("@Id", en.Id);
 
@@ -152,7 +153,7 @@ namespace ClassLibrary
                 en.Editorial = dr["editorial"].ToString();
                 en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
                 en.NumPags = int.Parse(dr["num_pag"].ToString());
-
+                en.CodOfer = dr["cod_oferta"].ToString();
 
                 dr.Close();
                 return true;
@@ -226,6 +227,147 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
+
+        public List<String> ObtenerTodosLosAutores()
+        {
+            List<string> autores = new List<string>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+
+                string comandoAutoresSQL = "SELECT DISTINCT autor FROM PRODUCTO";
+                SqlCommand cmdAutores = new SqlCommand(comandoAutoresSQL, conex);
+
+                using (SqlDataReader dr = cmdAutores.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        autores.Add(dr["autor"].ToString());
+                    }
+                }
+
+                return autores;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+
+        public List<String> ObtenerTodasLasEditoriales()
+        {
+            List<string> editoriales = new List<string>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+
+                string comandoEditorialesSQL = "SELECT DISTINCT editorial FROM PRODUCTO";
+                SqlCommand cmdEditoriales = new SqlCommand(comandoEditorialesSQL, conex);
+
+                using (SqlDataReader dr = cmdEditoriales.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        editoriales.Add(dr["editorial"].ToString());
+                    }
+                }
+
+                return editoriales;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+
+
+
+        public List<ENProducto> BuscarProductosPorNombre(string nombre)
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string comandoBuscarSQL = "SELECT * FROM PRODUCTO WHERE nombre LIKE '%" + nombre + "%'";
+                SqlCommand cmdBuscar = new SqlCommand(comandoBuscarSQL, conex);
+
+                using (SqlDataReader dr = cmdBuscar.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        try
+                        {
+                            ENProducto en = new ENProducto();
+                            en.Id = int.Parse(dr["id"].ToString());
+                            en.Name = dr["nombre"].ToString();
+                            en.Price = float.Parse(dr["precio"].ToString());
+                            en.Stock = int.Parse(dr["cant_stock"].ToString());
+                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
+                            en.Sinopsis = dr["sinopsis"].ToString();
+                            en.Autor = dr["autor"].ToString();
+                            en.ImagePath = dr["img_producto"].ToString();
+                            en.Editorial = dr["editorial"].ToString();
+                            en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                            en.NumPags = int.Parse(dr["num_pag"].ToString());
+                            en.CodOfer = dr["cod_oferta"].ToString();
+
+                            productos.Add(en);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error al leer producto con ID {0}. Error: {1}", dr["id"], ex.Message);
+                        }
+                    }
+                }
+
+                return productos;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+
+
 
 
     }
