@@ -100,7 +100,7 @@ namespace proWeb
 
         private void CargarCarrito()
         {
-               /* cesta = Session["Carrito"] as ENCarrito;
+               cesta = Session["Carrito"] as ENCarrito;
                 if (cesta == null)
                 {
                     cesta = new ENCarrito();
@@ -108,12 +108,12 @@ namespace proWeb
                 }
 
                 ENProducto en = new ENProducto();
-                List<ENLinCarrito> listaProductos = new List<ENLinCarrito>();
-                listaProductos = cesta.ObtenerProductosEnCarrito();
-                reapeterProduct.DataSource = listaProductos;
-                reapeterProduct.DataBind();
+                List<ENLinCarrito> listaCarrito = new List<ENLinCarrito>();
+                listaCarrito = cesta.ObtenerProductosEnCarrito();
+                reapeterCarrito.DataSource = listaCarrito;
+                reapeterCarrito.DataBind();
                 total_lineas.Text = cesta.ContarProductosEnCarrito().ToString();
-                total_pvp.Text = String.Format("{0:0.00}", cesta.CalcularPvp()) + " €";*/
+                total_pvp.Text = String.Format("{0:0.00}", cesta.CalcularPvp()) + " €";
         }
     }
 }
