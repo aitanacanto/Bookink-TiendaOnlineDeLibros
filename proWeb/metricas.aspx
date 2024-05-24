@@ -10,6 +10,9 @@
             max-width: 100%;
             height: auto;
         }
+        .table-container {
+            margin-top: 20px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -18,5 +21,31 @@
         <canvas id="pedidosChart" width="400" height="200"></canvas>
     </div>
     <asp:Literal ID="litScript" runat="server"></asp:Literal>
-</asp:Content>
 
+    <h2 style="text-align: center;">Top 10 Productos Más Vendidos</h2>
+    <div class="container table-container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Nombre</th>
+                    <th>Precio (€)</th>
+                    <th>Cantidad Vendida</th>
+                    <th>Importe Total (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <asp:Repeater ID="repeaterTopProducts" runat="server">
+                    <ItemTemplate>
+                        <tr>
+                            <td><%# Eval("Id") %></td>
+                            <td><%# Eval("Name") %></td>
+                            <td><%# Eval("Price") %></td>
+                            
+                        </tr>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </tbody>
+        </table>
+    </div>
+</asp:Content>
