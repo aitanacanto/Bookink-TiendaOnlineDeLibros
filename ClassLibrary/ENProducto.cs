@@ -113,6 +113,11 @@ namespace ClassLibrary
             CADProducto cad = new CADProducto();
             return cad.ObtenerTopProductosVendidosMetricas();
         }
+        public List<ENProducto> ObtenerTopProductosVendidos()
+        {
+            CADProducto cad = new CADProducto();
+            return cad.ObtenerTopProductosVendidos();
+        }
 
     }
 }

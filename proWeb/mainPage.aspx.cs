@@ -99,7 +99,7 @@ namespace proWeb
         }
         private void BindTopProductosMasVendidos()
         {
-            List<ENProducto> topProductos = new ENProducto().ObtenerTopProductosVendidosMetricas();
+            List<ENProducto> topProductos = new ENProducto().ObtenerTopProductosVendidos();
             repeaterTopProductos.DataSource = topProductos;
             repeaterTopProductos.DataBind();
         }
