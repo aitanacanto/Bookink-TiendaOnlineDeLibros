@@ -108,11 +108,6 @@ namespace ClassLibrary
             CADProducto cad = new CADProducto();
             return cad.BuscarProductosPorFiltros(categoria, editorial, autor, precioMinimo, precioMaximo);
         }
-        public  List<ENProducto> ObtenerTopProductosVendidos()
-        {
-            CADProducto cad = new CADProducto();
-            return cad.ObtenerTopProductosVendidos();
-        }
         public List<ENProducto> ObtenerTopProductosVendidosMetricas()
         {
             CADProducto cad = new CADProducto();
