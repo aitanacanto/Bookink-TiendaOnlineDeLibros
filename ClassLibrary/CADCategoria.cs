@@ -49,7 +49,7 @@ namespace ClassLibrary
             return categories;
         }
 
-        public List<ENProducto> topVentasPorCategoria(ENCategoria cat)
+        public List<ENProducto> topVentasPorCategoria(int? id_cat)
         {
             List<ENProducto> productos = new List<ENProducto>();
             SqlConnection connection = null;
@@ -57,7 +57,7 @@ namespace ClassLibrary
             {
                     connection = new SqlConnection(conString);
                 
-                    SqlCommand cmd = new SqlCommand("SELECT top 10 prod.id FROM LINPEDIDO Lin inner join PRODUCTO prod on Lin.id_producto = prod.Id inner join TIENE_CATEGORIA tc on tc.id_producto = prod.id where tc.id_categoria =" + cat.Id + " Group by prod.id order by Sum(lin.cantidad) Order by Desc", connection);
+                    SqlCommand cmd = new SqlCommand("SELECT top 8 prod.id FROM LINPEDIDO Lin inner join PRODUCTO prod on Lin.id_producto = prod.Id inner join TIENE_CATEGORIA tc on tc.id_producto = prod.id where tc.id_categoria =" + id_cat + " Group by prod.id order by Sum(lin.cantidad) Desc", connection);
                     connection.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
