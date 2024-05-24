@@ -49,6 +49,42 @@ namespace ClassLibrary
             return categories;
         }
 
+        public List<ENProducto> topVentasPorCategoria(ENCategoria cat)
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            SqlConnection connection = null;
+            try
+            {
+                    connection = new SqlConnection(conString);
+                
+                    SqlCommand cmd = new SqlCommand("SELECT top 10 prod.id FROM LINPEDIDO Lin inner join PRODUCTO prod on Lin.id_producto = prod.Id inner join TIENE_CATEGORIA tc on tc.id_producto = prod.id where tc.id_categoria =" + cat.Id + " Group by prod.id order by Sum(lin.cantidad) Order by Desc", connection);
+                    connection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ENProducto producto = new ENProducto(int.Parse(reader["Id"].ToString()));
+                        producto.Read();
+                        productos.Add(producto);
+                    }
+                
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
+
+
+            return productos;
+        }
+
         public bool AddCategory(string nombre)
         {
             try

@@ -9,6 +9,7 @@ namespace ClassLibrary
 {
         public class ENTieneCategoria
         {
+            
             public int IdCategoria { get; set; }
             public int IdProducto { get; set; }
 

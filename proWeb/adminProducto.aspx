@@ -9,14 +9,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
 
-       
+               
+
     <div class="admin-products">
         <div class="header">
             <h1 runat="server" id="Pruebas">Productos
                 </h1>
                 <div style="margin-left: auto;">
                      <asp:button class="create" data-bs-toggle="modal" data-bs-target="#exampleModal" runat="server" text="Crear Producto" OnClientClick="return false;" />
-                   
+                   <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
@@ -56,7 +57,8 @@
                           <div class="mb-3 col">
                          <asp:label runat="server" class="form-label">Precio Oferta</asp:label>
                           <asp:TextBox runat="server" type="number" ID="TxtSalePrice"  step="0.01" name="price-offer" class="form-control"/> 
-                        </div>
+                              <asp:CheckBox Text="Activar Oferta" runat="server" ID="oferac" />
+                          </div>
                               </div>
                          <div class="row align-items-start">
                         <div class="mb-3 col">
@@ -79,16 +81,17 @@
                           <asp:label runat="server" class="form-label">Año de Publicación</asp:label>
                           <asp:TextBox runat="server" type="number" name="anyo_publi" class="form-control" ID="txt_anyo"/>
                         </div>
-
+                                
                        <div class="mb-3">
                           <label class="form-label">Imagen</label>
                            <asp:FileUpload runat="server" class="form-control" type="file" id="ImagenSubida"/>
                         </div>    
                       </div>
                           <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <asp:button ID="btnAdd" runat="server" class="btn btn-primary" OnClick="btnAdd_Click" Text="Guardar Cambios" AutoPostback ="False"></asp:button>
+                        <asp:button ID="btnAdd" runat="server" class="btn btn-primary" OnClick="btnAdd_Click" Text="Guardar Cambios" AutoPostback ="True"></asp:button>
                       </div>
                     </div>
                   </div>
@@ -132,7 +135,8 @@
                           <div class="mb-3 col">
                          <asp:label runat="server" class="form-label">Precio Oferta</asp:label>
                           <asp:TextBox runat="server" type="number" ID="Oferta"  step="0.01" name="price-offer" class="form-control"/> 
-                        </div>
+                          <asp:CheckBox Text="Activar Oferta" runat="server" ID="CheckBox2" />
+                          </div>
                               </div>
                          <div class="row align-items-start">
                         <div class="mb-3 col">

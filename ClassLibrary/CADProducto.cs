@@ -39,7 +39,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                string query = "INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags)";
+                string query = "INSERT INTO PRODUCTO (nombre, cant_stock, precio, precio_oferta, img_producto, sinopsis, autor, cod_oferta, editorial, anyo_publicacion, num_pag) OUTPUT INSERTED.ID  VALUES (@Name, @Stock, @Price, @SalePrice, @ImagePath, @Sinopsis, @Autor, @CodOfer, @Editorial, @AnyoPubli, @NumPags) ";
                 SqlCommand com = new SqlCommand(query, c);
 
                 com.Parameters.AddWithValue("@Name", en.Name);
@@ -54,7 +54,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@AnyoPubli", en.AnyoPubli);
                 com.Parameters.AddWithValue("@NumPags", en.NumPags);
 
-                com.ExecuteNonQuery();
+                en.Id = Convert.ToInt32(com.ExecuteScalar());
                 return true;
             }
             catch (Exception ex)
@@ -367,7 +367,76 @@ namespace ClassLibrary
             }
         }
 
+        public List<ENProducto> BuscarProductosPorFiltros(int? categoria, string editorial, string autor, float? precioMinimo, float? precioMaximo)
+        {
+            List<ENProducto> productos = new List<ENProducto>();
+            SqlConnection conex = new SqlConnection(constring);
 
+            try
+            {
+                conex.Open();
+
+                List<string> conditions = new List<string>();
+                if (categoria.HasValue) {  conditions.Add("c.id = @Categoria");    }
+                if (!string.IsNullOrEmpty(editorial)){  conditions.Add("p.editorial = @Editorial"); }
+                if (!string.IsNullOrEmpty(autor)){      conditions.Add("p.autor = @Autor");         }
+                if (precioMinimo.HasValue){             conditions.Add("p.precio >= @PrecioMinimo");}
+                if (precioMaximo.HasValue){             conditions.Add("p.precio <= @PrecioMaximo");}
+
+                string query = @"
+                                SELECT p.*
+                                FROM PRODUCTO p
+                                JOIN TIENE_CATEGORIA tc ON p.id = tc.id_producto
+                                JOIN CATEGORIA c ON c.id = tc.id_categoria";
+
+                if (conditions.Count > 0)
+                {
+                    query += " WHERE " + string.Join(" AND ", conditions);
+                }
+
+                SqlCommand cmd = new SqlCommand(query, conex);
+
+                if (categoria.HasValue) {  cmd.Parameters.AddWithValue("@Categoria", categoria);   }
+                if (!string.IsNullOrEmpty(editorial)){  cmd.Parameters.AddWithValue("@Editorial", editorial);   }
+                if (!string.IsNullOrEmpty(autor)){      cmd.Parameters.AddWithValue("@Autor", autor);           }
+                if (precioMinimo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.Value); }
+                if (precioMaximo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.Value); }
+
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        ENProducto en = new ENProducto();
+                        en.Id = int.Parse(dr["id"].ToString());
+                        en.Name = dr["nombre"].ToString();
+                        en.Stock = int.Parse(dr["cant_stock"].ToString());
+                        en.Price = float.Parse(dr["precio"].ToString());
+                        en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
+                        en.ImagePath = dr["img_producto"].ToString();
+                        en.Sinopsis = dr["sinopsis"].ToString();
+                        en.Autor = dr["autor"].ToString();
+                        en.CodOfer = dr["cod_oferta"].ToString();
+                        en.Editorial = dr["editorial"].ToString();
+                        en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                        en.NumPags = int.Parse(dr["num_pag"].ToString());
+
+                        productos.Add(en);
+                    }
+                }
+
+                return productos;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", ex.Message);
+                return null;
+            }
+            finally
+            {
+                conex.Close();
+            }
+        }
 
 
     }

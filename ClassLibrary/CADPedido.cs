@@ -16,7 +16,7 @@ namespace ClassLibrary
 
         public CADPedido()
         {
-            constring = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ToString();
+            constring = ConfigurationManager.ConnectionStrings["database"].ToString(); ;
         }
 
         public bool crearPedido(ENPedido pedido)
@@ -27,7 +27,7 @@ namespace ClassLibrary
             {
                     conex.Open();
 
-                    string comandoSQL = $"INSERT INTO PEDIDO (id_usuario, cod_carrito, dirección_envío, precio, estado) VALUES (@id_usuario, @cod_carrito, @dirección_envío, @precio, @estado)";
+                    string comandoSQL = $"INSERT INTO PEDIDO (id_usuario, cod_carrito, dirección_envío, precio, estado, fecha) VALUES (@id_usuario, @cod_carrito, @dirección_envío, @precio, @estado, @fecha)";
 
                     SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                     cmd.Parameters.AddWithValue("@id_usuario", pedido.Id_usuario);
@@ -35,6 +35,7 @@ namespace ClassLibrary
                     cmd.Parameters.AddWithValue("@dirección_envío", pedido.Direccion_envio);
                     cmd.Parameters.AddWithValue("@precio", pedido.Precio);
                     cmd.Parameters.AddWithValue("@estado", pedido.Estado);
+                    cmd.Parameters.AddWithValue("@fecha", pedido.Date);
 
                     cmd.ExecuteNonQuery();
 
@@ -94,17 +95,16 @@ namespace ClassLibrary
         public List<ENPedido> verPedidos(ENPedido pedido)
         {
             List<ENPedido> lista = new List<ENPedido>();
-            SqlConnection cone = null;
+            SqlConnection conex = new SqlConnection(constring); ;
 
             try
             {
-                cone = new SqlConnection(constring);
-                cone.Open();
-                SqlCommand coma = new SqlCommand("Select * from PEDIDO where id_usuario=" + pedido.Id_usuario, cone);
-                SqlDataReader leer = coma.ExecuteReader();
+                conex.Open();
+                SqlCommand cmd = new SqlCommand("Select * from PEDIDO where id_usuario=" + pedido.Id_usuario, conex);
+                SqlDataReader leer = cmd.ExecuteReader();
                 while (leer.Read())
                 {
-                    ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString());
+                    ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString(), DateTime.Parse(leer["fecha"].ToString()));
                     lista.Add(newped);
                 }
             }
@@ -118,7 +118,7 @@ namespace ClassLibrary
             }
             finally
             {
-                if (cone != null) cone.Close();
+                if (conex != null) conex.Close();
             }
             return lista;
         }

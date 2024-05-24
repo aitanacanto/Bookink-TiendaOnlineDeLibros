@@ -10,6 +10,7 @@ namespace proWeb
 {
     public partial class catalogo : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,7 +40,6 @@ namespace proWeb
 
         private void CargarPaquetes()
         {
-            List<ENProducto> listaProductos = new List<ENProducto>();
             ENPaquete paquete = new ENPaquete();
             List<ENPaquete> listaPaquetes = paquete.ObtenerTodosLosPaquetes();
 
@@ -112,13 +112,23 @@ namespace proWeb
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string searchQuery = Request.QueryString["search"];
-            CargarLibros(searchQuery);
-            CargarPaquetes();
+            string editorial = ddlEditorial.SelectedValue;
+            string autor = ddlAutor.SelectedValue;
+            int? idCategoria = string.IsNullOrEmpty(ddlCategoria.SelectedValue) ? (int?)null : int.Parse(ddlCategoria.SelectedValue);
+            float? precioMinimo = string.IsNullOrEmpty(txtPrecioMin.Text) ? (float?)null : float.Parse(txtPrecioMin.Text);
+            float? precioMaximo = string.IsNullOrEmpty(txtPrecioMax.Text) ? (float?)null : float.Parse(txtPrecioMax.Text);
+
+            ENProducto enProd = new ENProducto();
+            List<ENProducto> listaProductos = enProd.BuscarProductosPorFiltros(idCategoria, editorial, autor, precioMinimo, precioMaximo);
+
+            // Enlaza la lista filtrada al repeater
+            reapeterProduct.DataSource = listaProductos;
+            reapeterProduct.DataBind();
         }
 
         protected void Add_Click(object sender, EventArgs e)
         {
+            /*
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
             if (carrito == null)
             {
@@ -128,7 +138,31 @@ namespace proWeb
             Button button = (Button)sender;
             int id_producto = int.Parse(button.CommandArgument);
             carrito.anyadirProductoCarrito(id_producto);
+            */
+            Response.Redirect("mainPage.aspx");
         }
+        protected void reapeterNov_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                ENProducto producto = (ENProducto)e.Item.DataItem;
+                producto.Read();
 
+                var lblPrice = (Label)e.Item.FindControl("lblPrice");
+                var lblSalePrice = (Label)e.Item.FindControl("lblSalePrice");
+
+                if (producto.CodOfer == "OF001")
+                {
+                    lblPrice.Text = String.Format("{0:0.00} €", producto.Price);
+                    lblSalePrice.Text = String.Format("{0:0.00} €", producto.SalePrice);
+                }
+                else if (producto.CodOfer == "OF000")
+                {
+                    lblSalePrice.Text = String.Format("{0:0.00} €", producto.Price);
+                    lblPrice.Visible = false;
+                }
+            }
+
+        }
     }
 }

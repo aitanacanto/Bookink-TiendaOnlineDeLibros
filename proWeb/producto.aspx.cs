@@ -11,6 +11,7 @@ namespace proWeb
 {
     public partial class producto : System.Web.UI.Page
     {
+        int productId = -1;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -18,7 +19,8 @@ namespace proWeb
                 string Id = Request.QueryString["id"];
                 if (!string.IsNullOrEmpty(Id))
                 {
-                    CargarProducto(Id);
+                    productId = int.Parse(Id);
+                    CargarProducto(productId);
                 }
                 List<ENProducto> listaProductos = ObtenerProductos();
                 List<ENProducto> Relacionado = new List<ENProducto>();
@@ -28,27 +30,47 @@ namespace proWeb
                 {
                     Relacionado.Add(productosAleatorios[i]);
                 }
+                List<ENReseña> listaReseñas = ENReseña.GetReseñas(productId);
                 // Asignamos la lista de productos al repeater
                 reapeterProduct.DataSource = Relacionado;
                 reapeterProduct.DataBind();
+                // Asignamos la lista de reseñas al repeater
+                ReviewRepeater.DataSource = listaReseñas;
+                ReviewRepeater.DataBind();
+                if (listaReseñas.Count() == 0)
+                    LabelResenya.Visible = true;
+                else
+                    LabelResenya.Visible = false;
+                this.DataBind(); // para el primer generar estrellas
             }
         }
 
-        private void CargarProducto(string Id)
+        private void CargarProducto(int productId)
         {
-            ENProducto prod = new ENProducto();
-            prod.Id = int.Parse(Id);
+            ENProducto prod = new ENProducto
+            {
+                Id = productId
+            };
             if (prod.Read())
             {
                 ProductName.InnerText = prod.Name;
                 ProductAutor.InnerText = prod.Autor;
-                ProductPrice.InnerText = String.Format("{0:0.00} €", prod.Price);
-                ProductOfer.InnerText = String.Format("{0:0.00} €", prod.SalePrice);
                 imageProduct.ImageUrl = prod.ImagePath;
                 ProductSinopsis.InnerText = prod.Sinopsis;
                 anyo.InnerText = prod.AnyoPubli.ToString();
                 editorial.InnerText = prod.Editorial;
                 numpag.InnerText = prod.NumPags.ToString();
+
+                if (prod.CodOfer == "OF001")
+                {
+                    ProductPrice.InnerText = String.Format("{0:0.00} €", prod.Price);
+                    ProductOfer.InnerText = String.Format("{0:0.00} €", prod.SalePrice);
+                }
+                else if (prod.CodOfer == "OF000")
+                {
+                    ProductOfer.InnerText = String.Format("{0:0.00} €", prod.Price);
+                    ProductPrice.Visible = false;
+                }
             }
         }
         protected void Anyadir_Click(object sender, EventArgs e)
@@ -59,10 +81,12 @@ namespace proWeb
                 carrito = new ENCarrito();
                 Session["Carrito"] = carrito;
             }
-            string Id = Request.QueryString["id"];
-            ENProducto prod = new ENProducto();
-            prod.Id = int.Parse(Id);
-            if (!string.IsNullOrEmpty(Id))
+            //string Id = Request.QueryString["id"];
+            ENProducto prod = new ENProducto
+            {
+                Id = productId
+            };
+            if (productId != -1) //es un producto concreto
             {
                 carrito.anyadirProductoCarrito(prod.Id);
             }
@@ -78,8 +102,7 @@ namespace proWeb
                 Session["Carrito"] = carrito;
             }
             Button button = (Button)sender;
-            int id_producto = int.Parse(button.CommandArgument);
-            carrito.anyadirProductoCarrito(id_producto);
+            carrito.anyadirProductoCarrito(productId);
         }
 
         private List<ENProducto> ObtenerProductos()
@@ -91,6 +114,36 @@ namespace proWeb
             listaProductos = en.ObtenerTodosLosProductos();
             return listaProductos;
 
+        }
+        public string GenerarEstrellas(float valoracion)
+        {
+            int estrellasLlenas = (int)valoracion;
+            bool mediaEstrella = (valoracion - estrellasLlenas) >= 0.5;
+            int estrellasVacias = 5 - estrellasLlenas - (mediaEstrella ? 1 : 0);
+
+            string estrellasHtml = "";
+
+            for (int i = 0; i < estrellasLlenas; i++)
+            {
+                estrellasHtml += "<span class=\"star on\"></span>";
+            }
+
+            if (mediaEstrella)
+            {
+                estrellasHtml += "<span class=\"star half\"></span>";
+            }
+
+            for (int i = 0; i < estrellasVacias; i++)
+            {
+                estrellasHtml += "<span class=\"star\"></span>";
+            }
+
+            return estrellasHtml;
+        }
+
+        public float ValoracionMedia()
+        {
+            return ENReseña.ValoracionMedia(productId); 
         }
     }
 }

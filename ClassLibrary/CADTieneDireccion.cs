@@ -45,8 +45,10 @@ namespace ClassLibrary
             }
         }
 
-        public int ObtenerDireccionId(ENTieneDireccion tiene)
+        public List<int> ObtenerDireccionesIds(int idUsuario)
         {
+            List<int> idDirecciones = new List<int>();
+
             using (SqlConnection c = new SqlConnection(constring))
             {
                 try
@@ -54,20 +56,46 @@ namespace ClassLibrary
                     c.Open();
                     using (SqlCommand com = new SqlCommand("SELECT id_direccion FROM TIENE_DIRECCION WHERE id_usuario = @id_usuario", c))
                     {
-                        com.Parameters.AddWithValue("@id_usuario", tiene.IdUsuario);
-
+                        com.Parameters.AddWithValue("@id_usuario", idUsuario);
                         SqlDataReader reader = com.ExecuteReader();
-                        if (reader.Read())
+                        while (reader.Read())
                         {
-                            return reader.GetInt32(0);
+                            idDirecciones.Add((int)reader["id_direccion"]);
                         }
-                        return -1; // No se encontró la dirección
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("No se ha podido obtener el ID de la dirección, ERROR: {0}", ex.Message);
-                    return -1;
+                    Console.WriteLine("No se ha podido obtener los IDs de las direcciones, ERROR: {0}", ex.Message);
+                }
+                finally
+                {
+                    c.Close();
+                }
+            }
+
+            return idDirecciones;
+        }
+
+        public bool EliminarRelacion(ENTieneDireccion tiene)
+        {
+            using (SqlConnection c = new SqlConnection(constring))
+            {
+                try
+                {
+                    c.Open();
+                    using (SqlCommand com = new SqlCommand("DELETE FROM TIENE_DIRECCION WHERE id_usuario = @id_usuario AND id_direccion = @id_direccion", c))
+                    {
+                        com.Parameters.AddWithValue("@id_usuario", tiene.IdUsuario);
+                        com.Parameters.AddWithValue("@id_direccion", tiene.IdDireccion);
+                        com.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("No se ha podido eliminar la relación, ERROR: {0}", ex.Message);
+                    return false;
                 }
                 finally
                 {
@@ -75,5 +103,6 @@ namespace ClassLibrary
                 }
             }
         }
+
     }
 }

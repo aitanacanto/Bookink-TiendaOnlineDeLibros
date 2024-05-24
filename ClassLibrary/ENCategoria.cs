@@ -35,5 +35,10 @@ namespace ClassLibrary
             return cad.GetAllCategories();
         }
 
+        public List<ENProducto> topVentasPorCategoria()
+        {
+            CADCategoria cad = new CADCategoria();
+            return cad.topVentasPorCategoria(this);
+        }
     }
 }
