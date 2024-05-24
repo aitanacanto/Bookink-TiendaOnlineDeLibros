@@ -137,12 +137,14 @@ ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y 
 - **Mejora Obligatoria Implementada:** 
 - **Colaboraciones:** ayuda en top 10 de metricas.aspx, sitemaster.aspx, catalogo.aspx
 
+
 ### - Alberto Boronat López: 
-- **EN/CAD Implementados:** CADCategoria, ENCategoria, CADTieneCategoria, ENTieneCategoria
-- **Páginas aspx implementadas:** adminCategoria.aspx, metricas.aspx
-- **Otras tareas:** script productos
-- **Mejora Obligatoria Implementada:** Top 10 Productos Vendidos
-- **Colaboraciones:** mainPage.aspx
+- **EN/CAD Implementados:** CADDcategoria, CADTieneCategoria, ENTieneCategoria, Encategoría 
+- **Páginas aspx implementadas:** Categoria.aspx,AdminTieneCategoria.aspx
+- **Otras tareas:** métricas.aspx, css de mis páginas 
+- **Mejora Obligatoria Implementada:** top 10 productos mas vendidos 
+- **Colaboraciones:** Todas las fotos de los libros (content)
+
 
 ### - Manuel José Tornero Fuster: 
 - **EN/CAD Implementados:** ENUsuario, ENReseña, CADUsuario, CADReseña
