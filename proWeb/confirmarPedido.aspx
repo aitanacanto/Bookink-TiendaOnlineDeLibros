@@ -29,7 +29,7 @@
         ¡Muchas gracias por su compra!
     </div>
 
-    <<div class="button-container">
+    <div class="button-container">
          <asp:Button ID="btnSeguir" runat="server" CssClass="btn-buy" Text="¡Quiero seguir comprando!" OnClick="btnSeguir_Click"/>
     </div>
 </asp:Content>

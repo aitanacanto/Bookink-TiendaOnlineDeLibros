@@ -139,19 +139,18 @@ namespace proWeb
 
             for (int i = 0; i < estrellasLlenas; i++)
             {
-                estrellasHtml += "<span class=\"star on\"></span>";
+                estrellasHtml += "<i class=\"fa-solid fa-star color-estre\"></i>";
             }
 
             if (mediaEstrella)
             {
-                estrellasHtml += "<span class=\"star half\"></span>";
+                estrellasHtml += "<i class=\"fa-solid fa-star-half-stroke color-estre\"></i>";
             }
 
             for (int i = 0; i < estrellasVacias; i++)
             {
-                estrellasHtml += "<span class=\"star\"></span>";
+                estrellasHtml += "<i class=\"fa-regular fa-star no-estre\"></i>";
             }
-
             return estrellasHtml;
         }
 
