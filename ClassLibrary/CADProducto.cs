@@ -534,9 +534,6 @@ namespace ClassLibrary
                         en.Id = int.Parse(dr["id"].ToString());
                         en.Name = dr["nombre"].ToString();
                         en.Price = float.Parse(dr["precio"].ToString());
-                       
-                        
-
                         productos.Add(en);
                      
                     }

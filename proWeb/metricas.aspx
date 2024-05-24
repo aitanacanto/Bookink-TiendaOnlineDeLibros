@@ -28,10 +28,9 @@
             <thead>
                 <tr>
                     <th>ID Producto</th>
-                    <th>Nombre</th>
+                    <th>Titulo</th>
                     <th>Precio (€)</th>
-                    <th>Cantidad Vendida</th>
-                    <th>Importe Total (€)</th>
+                    
                 </tr>
             </thead>
             <tbody>
