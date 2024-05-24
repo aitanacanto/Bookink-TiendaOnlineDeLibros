@@ -59,7 +59,7 @@ namespace proWeb
                 string extension = Path.GetExtension(FileUpload1.PostedFile.FileName);
                 string filePath = "/content/products/" + name + DateTime.Now.ToString("dd-MM-yy-HH-mm-ss") + extension;
 
-                ENPaquete newPa = new ENPaquete(name, price, descripcion, null);
+                ENPaquete newPa = new ENPaquete(name, price, descripcion, filePath, null);
                 newPa.CrearPaquete();
                 FileUpload1.SaveAs(Server.MapPath(filePath));
                 listaPaquetes = CargarPaquetes();

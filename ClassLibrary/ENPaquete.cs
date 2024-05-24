@@ -35,11 +35,12 @@ namespace ClassLibrary
             Productos = new List<ENProducto>(productos);
         }
 
-        public ENPaquete(string nombre, float precio, string descripcion, List<ENProducto> productos)
+        public ENPaquete(string nombre, float precio, string descripcion, string img_paquete, List<ENProducto> productos)
         {
             Nombre = nombre;
             Precio = precio;
             Descripcion = descripcion;
+            Img_paquete = img_paquete;
             if (productos == null)
             {
                 Productos = new List<ENProducto>();

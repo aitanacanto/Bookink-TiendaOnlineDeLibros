@@ -22,15 +22,17 @@ namespace ClassLibrary
             {
                 conex.Open();
 
-                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio, img_paquete, descripcion) VALUES (@nombre, @precio, @img_paquete);";
+                string comandoSQL = "INSERT INTO PAQUETE (nombre, precio, img_paquete, descripcion) OUTPUT INSERTED.ID VALUES (@nombre, @precio, @img_paquete, @descripcion);";
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                 cmd.Parameters.AddWithValue("@nombre", en.Nombre);
                 cmd.Parameters.AddWithValue("@precio", en.Precio);
                 cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
                 cmd.Parameters.AddWithValue("@descripcion", en.Descripcion);
 
+                en.IdPaquete = Convert.ToInt32(cmd.ExecuteScalar());
 
-                if (en.Productos != null)
+
+                if (en.Productos.Count > 0)
                 {
                     foreach (ENProducto producto in en.Productos)
                     {
@@ -43,12 +45,12 @@ namespace ClassLibrary
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Product operation has failed. Error: {0}", e.Message);
+                Console.WriteLine("Package operation has failed. Error: {0}", e.Message);
                 return false;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Product operation has failed. Error: {0}", e.Message);
+                Console.WriteLine("Package operation has failed. Error: {0}", e.Message);
                 return false;
             }
             finally
