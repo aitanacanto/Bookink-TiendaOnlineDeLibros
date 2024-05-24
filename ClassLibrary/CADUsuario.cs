@@ -265,5 +265,42 @@ namespace ClassLibrary
             }
             return listaUsuarios;
         }
+        /// <summary>
+        /// Método que verifica si un usuario a pedido un determinado producto.
+        /// Se usa para verificar si puede añadir reseñas al producto.
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns></returns>
+        public bool HaPedido(ENUsuario user, int idProduct)
+        {
+            SqlConnection con = new SqlConnection(constring);
+            try
+            {
+                con.Open();
+                string query = "SELECT * FROM LINPEDIDO " +
+                    "JOIN PEDIDO ON (id_pedido = numped)" +
+                    "WHERE id_producto = @producto " +
+                    "AND id_usuario = @usuario";
+                SqlCommand com = new SqlCommand(query, con);
+
+                com.Parameters.AddWithValue("@producto", idProduct);
+                com.Parameters.AddWithValue("@usuario", user.Id);
+
+                SqlDataReader reader = com.ExecuteReader();
+                bool existe = reader.Read();
+                reader.Close();
+                return existe;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener los usuarios: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
     }
 }
