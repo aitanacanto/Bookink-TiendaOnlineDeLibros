@@ -470,7 +470,7 @@ namespace ClassLibrary
                         en.Price = float.Parse(dr["precio"].ToString());
                         en.Stock = int.Parse(dr["TotalVendido"].ToString());
                         productos.Add(en);
-                     
+
                     }
                 }
 
