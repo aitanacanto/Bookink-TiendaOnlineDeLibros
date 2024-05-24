@@ -150,6 +150,8 @@ namespace proWeb
 
                 // Recargar direcciones
                 CargarDirecciones();
+                Response.Redirect("usuario.aspx");
+
             }
         }
 

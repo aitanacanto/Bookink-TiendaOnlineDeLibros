@@ -168,6 +168,15 @@ namespace proWeb
         protected global::System.Web.UI.UpdatePanel UpdatePanelDirecciones;
 
         /// <summary>
+        /// Control hfCollapseState.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfCollapseState;
+
+        /// <summary>
         /// Control repeaterDirecciones.
         /// </summary>
         /// <remarks>
