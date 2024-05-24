@@ -50,7 +50,7 @@ namespace proWeb
                 catch (Exception ex)
                 {
                     // Manejo de errores: registra el error o manejarlo como desees
-                    // Ejemplo: Log.Error(ex.Message);
+                    Console.WriteLine(ex);
                     labels.Add("Error");
                     data.Add(0);
                 }
