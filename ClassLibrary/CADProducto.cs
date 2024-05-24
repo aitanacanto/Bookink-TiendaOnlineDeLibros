@@ -31,7 +31,7 @@ namespace ClassLibrary
             return existe;
         }
 
-        
+
 
         public bool Create(ENProducto en)
         {
@@ -110,7 +110,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                if (!this.Exists(c, en)){throw new ArgumentException("El producto no existe"); }
+                if (!this.Exists(c, en)) { throw new ArgumentException("El producto no existe"); }
                 string query = "Delete from PRODUCTO where Id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
                 com.Parameters.AddWithValue("@Id", en.Id);
@@ -192,7 +192,7 @@ namespace ClassLibrary
                             en.Name = dr["nombre"].ToString();
                             en.Price = float.Parse(dr["precio"].ToString());
                             en.Stock = int.Parse(dr["cant_stock"].ToString());
-                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0: float.Parse(dr["precio_oferta"].ToString());
+                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
                             en.Sinopsis = dr["sinopsis"].ToString();
                             en.Autor = dr["autor"].ToString();
                             en.ImagePath = dr["img_producto"].ToString();
@@ -377,11 +377,11 @@ namespace ClassLibrary
                 conex.Open();
 
                 List<string> conditions = new List<string>();
-                if (categoria.HasValue) {  conditions.Add("c.id = @Categoria");    }
-                if (!string.IsNullOrEmpty(editorial)){  conditions.Add("p.editorial = @Editorial"); }
-                if (!string.IsNullOrEmpty(autor)){      conditions.Add("p.autor = @Autor");         }
-                if (precioMinimo.HasValue){             conditions.Add("p.precio >= @PrecioMinimo");}
-                if (precioMaximo.HasValue){             conditions.Add("p.precio <= @PrecioMaximo");}
+                if (categoria.HasValue) { conditions.Add("c.id = @Categoria"); }
+                if (!string.IsNullOrEmpty(editorial)) { conditions.Add("p.editorial = @Editorial"); }
+                if (!string.IsNullOrEmpty(autor)) { conditions.Add("p.autor = @Autor"); }
+                if (precioMinimo.HasValue) { conditions.Add("p.precio >= @PrecioMinimo"); }
+                if (precioMaximo.HasValue) { conditions.Add("p.precio <= @PrecioMaximo"); }
 
                 string query = @"
                                 SELECT p.*
@@ -396,11 +396,11 @@ namespace ClassLibrary
 
                 SqlCommand cmd = new SqlCommand(query, conex);
 
-                if (categoria.HasValue) {  cmd.Parameters.AddWithValue("@Categoria", categoria);   }
-                if (!string.IsNullOrEmpty(editorial)){  cmd.Parameters.AddWithValue("@Editorial", editorial);   }
-                if (!string.IsNullOrEmpty(autor)){      cmd.Parameters.AddWithValue("@Autor", autor);           }
-                if (precioMinimo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.Value); }
-                if (precioMaximo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.Value); }
+                if (categoria.HasValue) { cmd.Parameters.AddWithValue("@Categoria", categoria); }
+                if (!string.IsNullOrEmpty(editorial)) { cmd.Parameters.AddWithValue("@Editorial", editorial); }
+                if (!string.IsNullOrEmpty(autor)) { cmd.Parameters.AddWithValue("@Autor", autor); }
+                if (precioMinimo.HasValue) { cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.Value); }
+                if (precioMaximo.HasValue) { cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.Value); }
 
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -474,6 +474,22 @@ namespace ClassLibrary
                     }
                 }
 
-
-    }
-}
+                return productos;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+    } }
