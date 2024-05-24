@@ -95,6 +95,11 @@ namespace proWeb
             // Redirigir a una página que muestre los productos filtrados por la categoría seleccionada.
             Response.Redirect($"catalogo.aspx?categoria={categoria}");
         }
+        private List<ENProducto> ObtenerTopProductos()
+        {
+            ENProducto en = new ENProducto();
+            return en.ObtenerTopProductosVendidos();
+        }
 
 
 

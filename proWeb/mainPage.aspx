@@ -34,7 +34,7 @@
             <h1 class="text-center">Últimas Novedades</h1>
             <div class="container">
                 <div class="row">
-                    <asp:Repeater ID="reapeterNov" runat="server" OnItemDataBound="reapeterNov_ItemDataBound">
+                    <asp:Repeater ID="reapeterNov" runat="server">
                         <ItemTemplate>
                             <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
                                 <div class="product-card card d-flex flex-column flex-grow-1">
@@ -53,8 +53,8 @@
                                                 <i class="fa-regular fa-star no-estre"></i>
                                             </div>
                                             <div class="d-flex">
-                                                <asp:Label ID="lblPrice" runat="server" CssClass="card-text text-danger accordion mb-3" Style="text-decoration: line-through; margin-right: 10px;"></asp:Label>
-                                                <asp:Label ID="lblSalePrice" runat="server" CssClass="card-text text-dark mb-3" Style=""></asp:Label>
+                                                <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
+                                                <p class="card-text text-dark" style="margin-left: 10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
                                             </div>
 
                                             <div class="text-center mt-auto">
@@ -79,9 +79,9 @@
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/Q5glcWU.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Fantasía</h5>
+                                <h5 class="card-title">Ficción</h5>
                                 <p class="card-text">Explora mundos imaginarios y emociones humanas.</p>
-                                <asp:Button ID="btnVerMas1" runat="server" CssClass="btn btn-primary" Text="Ver Más" OnClick="btnVerMas_Click" CommandArgument="Fantasía" />
+                                <a href="#" class="btn btn-primary">Ver Más</a>
                             </div>
                         </div>
                     </div>
@@ -89,9 +89,9 @@
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/zU8cXVz.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Infantil</h5>
-                                <p class="card-text">Aventuras y lecciones para lectores más pequeños.</p>
-                                <asp:Button ID="btnVerMas2" runat="server" CssClass="btn btn-primary" Text="Ver Más" OnClick="btnVerMas_Click" CommandArgument="Infantil" />
+                                <h5 class="card-title">Juvenil</h5>
+                                <p class="card-text">Aventuras y lecciones para jóvenes lectores.</p>
+                                <a href="#" class="btn btn-primary">Ver Más</a>
                             </div>
                         </div>
                     </div>
@@ -99,67 +99,105 @@
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/awqdnuz.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Terror</h5>
-                                <p class="card-text">Descubre las historias más tenebrosas que jamás imaginarás.</p>
-                                <asp:Button ID="btnVerMas3" runat="server" CssClass="btn btn-primary" Text="Ver Más" OnClick="btnVerMas_Click" CommandArgument="Terror" />
+                                <h5 class="card-title">No Ficción</h5>
+                                <p class="card-text">Descubre conocimiento del mundo real y fascinante.</p>
+                                <a href="#" class="btn btn-primary">Ver Más</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <div data-aos="fade-in">
-            <h1 class="text-center">Catálogo Libros</h1>
-            <div class="container">
-                <div class="row ">
-                    <asp:Repeater ID="reapeterProduct" runat="server" OnItemDataBound="reapeterNov_ItemDataBound">
-                        <ItemTemplate>
-                            <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch" data-aos="fade-in">
-                                <div class="product-card card d-flex flex-column">
-                                    <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
-                                        <div class="text-center">
-                                            <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+    </div>
+    
+    <div class="mb-5 mt-5" data-aos="fade-in">
+        <h1>Productos Más Vendidos</h1>
+        <div class="container">
+            <div class="row">
+                <asp:Repeater ID="repeaterTopProducts" runat="server">
+                    <ItemTemplate>
+                        <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
+                            <div class="product-card card d-flex flex-column flex-grow-1">
+                                <a href='<%# "producto.aspx?id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
+                                    <div class="text-center">
+                                        <asp:Image ID="imgTopProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                    </div>
+                                    <div class="card-body d-flex flex-column flex-grow-1">
+                                        <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("Nombre") %></h5>
+                                        <p class="autor mb-1"><%# Eval("Autor") %></p>
+                                        <div class="mb-2">
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-regular fa-star no-estre"></i>
                                         </div>
-                                        <div class="card-body d-flex flex-column flex-grow-1">
-                                            <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("name") %></h5>
-                                            <p class="autor mb-1"><%# Eval("Autor") %></p>
-                                            <div class="mb-2">
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-regular fa-star no-estre"></i>
-                                            </div>
-                                            <div class="d-flex">
-                                                <asp:Label ID="lblPrice" runat="server" CssClass="card-text text-danger accordion mb-3" Style="text-decoration: line-through; margin-right: 10px;"></asp:Label>
-                                                <asp:Label ID="lblSalePrice" runat="server" CssClass="card-text text-dark mb-3" Style=""></asp:Label>
-                                            </div>
-
-                                            <div class="text-center mt-auto">
-                                                <asp:Button ID="Id_Producto" runat="server" Class="btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("id") %>' OnClick="Add_Click" />
-                                            </div>
+                                        <div class="d-flex">
+                                            <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("Precio")) %> €</p>
+                                            <p class="card-text text-dark" style="margin-left: 10px;"><%# String.Format("{0:0.00}", Eval("PrecioOferta")) %> €</p>
                                         </div>
-                                    </a>
-                                </div>
+                                        <div class="text-center mt-auto">
+                                            <asp:Button ID="Id_TopProducto" runat="server" CssClass="btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("Id") %>' OnClick="Add_Click" />
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-                <div class="row justify-content-center">
-                    <asp:Button
-                        ID="btnVerCatalogo"
-                        runat="server"
-                        CssClass="btn-catalogo"
-                        Text="Ver Catálogo Completo"
-                        PostBackUrl="~/catalogo.aspx" />
-                </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
         </div>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init({ once: true });
-        </script>
-</asp:Content>
+    </div>
 
+    <div data-aos="fade-in">
+        <h1 class="text-center">Catálogo Libros</h1>
+        <div class="container">
+            <div class="row ">
+                <asp:Repeater ID="reapeterProduct" runat="server">
+                    <ItemTemplate>
+                        <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch" data-aos="fade-in">
+                            <div class="product-card card d-flex flex-column">
+                                <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
+                                    <div class="text-center">
+                                        <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                    </div>
+                                    <div class="card-body d-flex flex-column flex-grow-1">
+                                        <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("name") %></h5>
+                                        <p class="autor mb-1"><%# Eval("Autor") %></p>
+                                        <div class="mb-2">
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-solid fa-star color-estre"></i>
+                                            <i class="fa-regular fa-star no-estre"></i>
+                                        </div>
+                                        <div class="d-flex">
+                                            <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
+                                            <p class="card-text text-dark" style="margin-left: 10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
+                                        </div>
+
+                                        <div class="text-center mt-auto">
+                                            <asp:Button ID="Id_Producto" runat="server" Class="btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("id") %>' OnClick="Add_Click" />
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+        <div class="row justify-content-center">
+            <asp:Button
+                ID="btnVerCatalogo"
+                runat="server"
+                CssClass="btn-catalogo"
+                Text="Ver Catálogo Completo"
+                PostBackUrl="~/catalogo.aspx" />
+        </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true });
+    </script>
+</asp:Content>

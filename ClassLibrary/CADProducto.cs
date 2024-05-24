@@ -438,6 +438,70 @@ namespace ClassLibrary
             }
         }
 
+        public List<ENProducto> ObtenerTopProductosVendidos()
+{
+            List<ENProducto> productos = new List<ENProducto>();
+            SqlConnection conex = new SqlConnection(constring);
+
+            try
+            {
+                conex.Open();
+                string comandoSQL = @"
+            SELECT TOP 10 p.*, SUM(lp.cantidad) AS TotalVendido
+            FROM PRODUCTO p
+            JOIN LINPEDIDO lp ON p.id = lp.id_producto
+            GROUP BY p.id, p.nombre, p.cant_stock, p.precio, p.precio_oferta, p.img_producto, p.sinopsis, p.autor, p.cod_oferta, p.editorial, p.anyo_publicacion, p.num_pag
+            ORDER BY TotalVendido DESC";
+
+                SqlCommand cmd = new SqlCommand(comandoSQL, conex);
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        try
+                        {
+                            ENProducto en = new ENProducto();
+                            en.Id = int.Parse(dr["id"].ToString());
+                            en.Name = dr["nombre"].ToString();
+                            en.Price = float.Parse(dr["precio"].ToString());
+                            en.Stock = int.Parse(dr["cant_stock"].ToString());
+                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
+                            en.Sinopsis = dr["sinopsis"].ToString();
+                            en.Autor = dr["autor"].ToString();
+                            en.ImagePath = dr["img_producto"].ToString();
+                            en.Editorial = dr["editorial"].ToString();
+                            en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
+                            en.NumPags = int.Parse(dr["num_pag"].ToString());
+
+                            productos.Add(en);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error al leer producto con ID {0}. Error: {1}", dr["id"], ex.Message);
+                        }
+                    }
+                }
+
+                return productos;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Operación fallida. Error de SQL: {0}", e.Message);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Operación fallida. Error: {0}", e.Message);
+                return null;
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando la conexión.");
+                conex.Close();
+            }
+        }
+
 
     }
 }
