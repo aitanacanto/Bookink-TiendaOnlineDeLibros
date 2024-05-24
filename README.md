@@ -84,9 +84,9 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 ### - Rafael Carballo Lorenzo:
 - **EN/CAD Implementados:** ENPedido, CADPedido, ENLinPedido_pa, CADLinPedido_pa
 - **Páginas aspx implementadas:** pedido.aspx, confirmarPedido.aspx, mispedidos.aspx
-- **Otras tareas:** Base de datos
+- **Otras tareas:** Base de datos, css de mis paginas y un poquito de carrito
 - **Mejora Obligatoria Implementada:** Métrica de Evolución de ventas
-- **Colaboraciones:** Métricas.aspx(gráfica de), CADProducto
+- **Colaboraciones:** Métricas.aspx(gráfica de evolución de ventas), CADProducto y ENProducto(método readALL()), otras páginas que tengan que ver con pedido
 
 ### - Bruno Vilella Martínez:
 
@@ -120,11 +120,11 @@ ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y 
 - **Colaboraciones:** usuario.aspx, implementación de reseñas en producto.aspx, adminusuario.aspx
 
 ### - Jorge Paredes Soler: 
-- **EN/CAD Implementados:**
-- **Páginas aspx implementadas:**
-- **Otras tareas:** 
+- **EN/CAD Implementados:** ENDireccion, ENTieneDireccion, CADDireccion, CADTieneDireccion
+- **Páginas aspx implementadas:** adminUsuario.aspx, usuario.aspx
+- **Otras tareas:** Estilos de mis páginas
 - **Mejora Obligatoria Implementada:**
-- **Colaboraciones:**
+- **Colaboraciones:** Un método de ENUsuario
 
 # Entrega 01 Propuesta - Comentarios
 
