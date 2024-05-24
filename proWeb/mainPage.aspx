@@ -106,7 +106,29 @@
                 </div>
             </div>
         </div>
-
+                <div class="mb-5 mt-5" data-aos="fade-in">
+            <h1 class="text-center">Top 10 Productos Más Vendidos</h1>
+            <div class="container">
+                <div class="row">
+                    <asp:Repeater ID="repeaterTopProductos" runat="server">
+                        <ItemTemplate>
+                            <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
+                                <div class="product-card card d-flex flex-column flex-grow-1">
+                                    <a href='<%# "producto.aspx?id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
+                                        <div class="card-body d-flex flex-column flex-grow-1">
+                                            <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("name") %></h5>
+                                        </div>
+                                        <div class="text-center">
+                                            <asp:Image ID="imgTopProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+            </div>
+        </div>
         <div data-aos="fade-in">
             <h1 class="text-center">Catálogo Libros</h1>
             <div class="container">
@@ -154,31 +176,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="mb-5 mt-5" data-aos="fade-in">
-            <h1 class="text-center">Top 10 Productos Más Vendidos</h1>
-            <div class="container">
-                <div class="row">
-                    <asp:Repeater ID="repeaterTopProductos" runat="server">
-                        <ItemTemplate>
-                            <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
-                                <div class="product-card card d-flex flex-column flex-grow-1">
-                                    <a href='<%# "producto.aspx?id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
-                                        <div class="card-body d-flex flex-column flex-grow-1">
-                                            <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("name") %></h5>
-                                        </div>
-                                        <div class="text-center">
-                                            <asp:Image ID="imgTopProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

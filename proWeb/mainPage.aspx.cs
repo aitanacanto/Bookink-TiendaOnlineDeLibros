@@ -10,7 +10,7 @@ namespace proWeb
 {
     public partial class mainPage : System.Web.UI.Page
     {
-        private int MaxListaProductos = 20; //Número máximo de elementos a mostrar en la lista principal
+        private int MaxListaProductos = 12; //Número máximo de elementos a mostrar en la lista principal
         private int MaxNovedades = 4; //Número máximo de elementos a mostrar en las novedades
         protected void Page_Load(object sender, EventArgs e)
         {
