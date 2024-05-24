@@ -44,6 +44,7 @@ create table [dbo].[PRODUCTO]
     [precio_oferta] DECIMAL(10, 2),
     [anyo_publicacion] INT,
     [num_pag] INT,
+    [popularidad] INT,
     PRIMARY KEY CLUSTERED ([id] ASC)
 )
 GO
@@ -76,6 +77,7 @@ create table [dbo].[PEDIDO]
     [precio] DECIMAL(10, 2) NOT NULL,
     [estado] NVARCHAR(50) NOT NULL,
     PRIMARY KEY CLUSTERED (numped),
+    [fecha] DATE NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES USUARIO(id),
     FOREIGN KEY (cod_carrito) REFERENCES CARRITO(id)
 )
@@ -146,7 +148,7 @@ create table [dbo].[LINPEDIDO_PA]
     [id_pedido] INT,
     PRIMARY KEY (id_paquete, id_pedido),
     FOREIGN KEY (id_paquete) REFERENCES PAQUETE(id),
-    FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped)   
+    FOREIGN KEY (id_pedido) REFERENCES PEDIDO(numped)  
 )
 GO
 
