@@ -95,7 +95,7 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 - **Otras tareas:** Base de Datos
 - **Mejora Obligatoria Implementada:** Top 8 Ventas por Categoria
 - **Colaboraciones:** catalogo.aspx implementación de top8VentasCategoria,  
-ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y CadProducto lo referente a carrito que creo que fue un constructor.
+ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y CadProducto lo referente a carrito que creo que fue un constructor, producto.aspx lo referente a carrito, mainpage.aspx lo referente a carrito
 
 ### - Darío Pastor Fuentes:
 
