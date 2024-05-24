@@ -99,11 +99,11 @@ ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y 
 
 ### - Darío Pastor Fuentes:
 
-- **EN/CAD Implementados:**
-- **Páginas aspx implementadas:**
-- **Otras tareas:** 
-- **Mejora Obligatoria Implementada:**
-- **Colaboraciones:**
+- **EN/CAD Implementados:** EnProducto, CadProducto, EnLinPedido, CadLinpedido
+- **Páginas aspx implementadas:** MainPage.aspx, Producto.aspx, AdminProducto.aspx 
+- **Otras tareas:** subida de bbdd a servidor, publicación de la web online, vincular dominio, securizar la conexión con https, css varios de la web
+- **Mejora Obligatoria Implementada:** 
+- **Colaboraciones:** ayuda en top 10 de metricas.aspx, sitemaster.aspx, catalogo.aspx
 
 ### - Alberto Boronat López: 
 - **EN/CAD Implementados:**
