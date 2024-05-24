@@ -82,11 +82,11 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 - **Colaboraciones:** mainPage.aspx, catalogo.aspx
 
 ### - Rafael Carballo Lorenzo:
-- **EN/CAD Implementados:**
-- **Páginas aspx implementadas:**
-- **Otras tareas:** 
-- **Mejora Obligatoria Implementada:**
-- **Colaboraciones:**
+- **EN/CAD Implementados:** ENPedido, CADPedido, ENLinPedido_pa, CADLinPedido_pa
+- **Páginas aspx implementadas:** pedido.aspx, confirmarPedido.aspx, mispedidos.aspx
+- **Otras tareas:** Base de datos
+- **Mejora Obligatoria Implementada:** Métrica de Evolución de ventas
+- **Colaboraciones:** Métricas.aspx(gráfica de), CADProducto
 
 ### - Bruno Vilella Martínez:
 
