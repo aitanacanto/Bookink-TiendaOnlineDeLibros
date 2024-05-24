@@ -104,7 +104,7 @@ namespace ClassLibrary
                 SqlDataReader leer = cmd.ExecuteReader();
                 while (leer.Read())
                 {
-                    ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString(), DateTime.Parse(leer["fecha"].ToString()));
+                    ENPedido newped = new ENPedido(int.Parse(leer["numped"].ToString()), int.Parse(leer["id_usuario"].ToString()), int.Parse(leer["cod_carrito"].ToString()), leer["dirección_envío"].ToString(), float.Parse(leer["precio"].ToString()), leer["estado"].ToString()/*, DateTime.Parse(leer["fecha"].ToString())*/);
                     lista.Add(newped);
                 }
             }

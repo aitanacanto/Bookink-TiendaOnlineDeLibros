@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class ENLinPedido
+    public class ENLinPedido
     {
         private int id_pedido;
         public int Id_Pedido
@@ -23,7 +23,8 @@ namespace ClassLibrary
             set { id_producto = value; }
         }
 
-        public int cantidad
+        private int cantidad;
+        public int Cantidad
         {
             get { return cantidad; }
             set { cantidad = value; }
@@ -65,6 +66,13 @@ namespace ClassLibrary
             CADLinPedido c = new CADLinPedido();
 
             return c.read(this);
+        }
+
+        public List<ENLinPedido> readALL()
+        {
+            CADLinPedido c = new CADLinPedido();
+
+            return c.readALL(this);
         }
 
         public bool delete()

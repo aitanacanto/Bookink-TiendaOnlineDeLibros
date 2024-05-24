@@ -32,6 +32,8 @@ namespace proWeb
                 reapeterNov.DataSource = Novedades;
                 reapeterNov.DataBind();
 
+                BindTopProductosMasVendidos();
+
                 if (Session["Carrito"] == null) Session["Carrito"] = new ENCarrito();
                 if (Session["Usuario"] == null) Session["Usuario"] = new ENUsuario();
 
@@ -95,9 +97,12 @@ namespace proWeb
             // Redirigir a una página que muestre los productos filtrados por la categoría seleccionada.
             Response.Redirect($"catalogo.aspx?categoria={categoria}");
         }
-
-
-
+        private void BindTopProductosMasVendidos()
+        {
+            List<ENProducto> topProductos = new ENProducto().ObtenerTopProductosVendidos();
+            repeaterTopProductos.DataSource = topProductos;
+            repeaterTopProductos.DataBind();
+        }
 
     }
-}
+}   

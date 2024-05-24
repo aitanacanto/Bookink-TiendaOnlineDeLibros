@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Text;
 using System.Web.UI;
+using ClassLibrary;
 
 namespace proWeb
 {
@@ -17,6 +18,7 @@ namespace proWeb
             if (!IsPostBack)
             {
                 graficaVentas();
+                CargarTopProductosVendidos();
             }
         }
 
@@ -75,7 +77,7 @@ namespace proWeb
             script.Append("y: {");
             script.Append("beginAtZero: true,");
             script.Append("max: 50");
-            script.Append("}");
+            script.Append("}");     
             script.Append("}");
             script.Append("}");
             script.Append("});");
@@ -83,6 +85,17 @@ namespace proWeb
             script.Append("</script>");
 
             litScript.Text = script.ToString();
+        }
+        private void CargarTopProductosVendidos()
+        {
+            ENProducto producto = new ENProducto();
+            List<ENProducto> productosVendidos = producto.ObtenerTopProductosVendidosMetricas();
+
+            if (productosVendidos != null && productosVendidos.Count > 0)
+            {
+                repeaterTopProducts.DataSource = productosVendidos;
+                repeaterTopProducts.DataBind();
+            }
         }
     }
 }

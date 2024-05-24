@@ -7,23 +7,18 @@
     <div class="container">
         <h1>Mis Pedidos </h1>
 
-        <asp:Repeater ID="repeaterPedidos" runat="server">
+        <asp:Repeater ID="repeaterPedidos" runat="server" OnItemDataBound="ItemBound">
             <ItemTemplate>
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target='<%# "#collapse" + Eval("Numped") %>' aria-expanded="false" aria-controls='<%# "collapse" + Eval("Numped") %>'>
-                                Pedido <%# Eval("Numped") %>
+                                Pedido - Num.pedido: <%# Eval("Numped") %>
                             </button>
                         </h2>
                         <div id='<%# "collapse" + Eval("Numped") %>' class="accordion-collapse collapse">
                             <div class="accordion-body">
-                                <div>
-                                    <span><strong>Num.Pedido:</strong></span>
-                                    <span style="font-size: 15px;"><%# Eval("Numped") %></span>
-                                </div>
-                                <ul>
-                                    <asp:Repeater ID="repeaterPedidos" runat="server">
+                                    <asp:Repeater ID="repeaterLinped" runat="server">
                                         <ItemTemplate>
                                             <li style="margin-right: 100px;">
                                                 <img src='<%# Eval("ImagenUrl") %>' alt='<%# Eval("Nombre") %>' style="max-width: 100px; height: auto;" />
@@ -40,9 +35,15 @@
                                                 </div>
                                             </li>
                                         </ItemTemplate>
-
                                     </asp:Repeater>
-                                </ul>
+                                    <div>
+                                    <span> <%# Eval("Direccion_envio") %> </span>
+                                    </div>
+                                    <div>
+                                        <span>Total:  <%# Eval("Precio") %> </span>
+                                    </div>
+                                    <div>
+                                </div>
                             </div>
                         </div>
                     </div>

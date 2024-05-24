@@ -102,7 +102,7 @@ namespace ClassLibrary
                 {
 
                     c.Open();
-                    using (SqlCommand com = new SqlCommand("UPDATE DIRECCION SET cod_postal = @cod_postal, direccion = @direccion, ciudad = @ciudad, pais = @pais WHERE id = @id", c))
+                    using (SqlCommand com = new SqlCommand("UPDATE DIRECCION SET cod_postal = @cod_postal, dirección = @direccion, ciudad = @ciudad, pais = @pais WHERE id = @id", c))
                     {
                         com.Parameters.AddWithValue("@id", direccion.ID);
                         com.Parameters.AddWithValue("@cod_postal", direccion.CodPostal);
@@ -143,6 +143,7 @@ namespace ClassLibrary
                 }
                 catch (Exception ex)
                 {
+
                     Console.WriteLine("No se ha podido eliminar la dirección, ERROR: {0}", ex.Message);
                     return false;
                 }
