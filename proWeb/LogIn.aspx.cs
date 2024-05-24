@@ -24,7 +24,7 @@ namespace proWeb
         protected void Login_Click(object sender, EventArgs e)
         {
             // Código para manejar el inicio de sesión
-            usuario = new ENUsuario(loginForm.UserName, loginForm.Password);
+            usuario = new ENUsuario(UserName.Text, Password.Text);
             bool logged = usuario.LogIn();
             if (logged)
             {

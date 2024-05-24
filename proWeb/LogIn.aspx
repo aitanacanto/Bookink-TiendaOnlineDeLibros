@@ -6,8 +6,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="login-form container">
-        <asp:Login ID="loginForm" runat="server">
-            <LayoutTemplate>
                 <asp:Panel runat="server" DefaultButton="btnLogin">
                     <h1>INICIO DE SESIÓN</h1>
                     <div class="mb-3">
@@ -36,8 +34,6 @@
                             OnClick="Register_Click" />
                     </div>
                 </asp:Panel>
-            </LayoutTemplate>
-        </asp:Login>
         <asp:Label ID="LabelOculta" runat="server" Visible="false">fdsafjdasklfjdas</asp:Label>
     </div>
 </asp:Content>

@@ -14,14 +14,34 @@ namespace proWeb
         List<ENLinCarrito> listaCarrito = new List<ENLinCarrito>();
         ENCarrito cesta;
         ENPedido ped = new ENPedido();
+        ENUsuario user;
+        bool loaded = false;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarCarrito();
+                user = Session["user"] as ENUsuario;
+                if (user == null)
+                {
+                    //Response.Redirect("LogIn.aspx");
+                }
+                else
+                {
+                    //if (!loaded)  CargarDatosUsuario();
+                    CargarCarrito();
+                }
             }
         }
 
+        private void CargarDatosUsuario()
+        {
+            txtFirstName.Text = user.Name;
+            txtLastName.Text = user.Surname;
+            txtEmail.Text = user.Email;
+            txtPhone.Text = user.PhoneNumber;
+            loaded = true;
+        }
         protected void btnPagar_Click(object sender, EventArgs e)
         {
             cesta = Session["Carrito"] as ENCarrito;
@@ -45,7 +65,11 @@ namespace proWeb
 
             foreach (ENLinPedido item in linped)
             {
-                item.create();
+                ENProducto producto = new ENProducto();
+                producto.Id = item.Id_Producto;
+                producto.Read();
+                producto.Stock -= 1;
+                producto.Update();
             }
 
             Response.Redirect("confirmarPedido.aspx");
@@ -74,7 +98,7 @@ namespace proWeb
                     ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
                     ped.Precio = cesta.CalcularPvp();
                     ped.Estado = "En Proceso";
-            }
+                }
         }
     }
 }
