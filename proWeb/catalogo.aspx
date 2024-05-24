@@ -129,7 +129,7 @@
                                                             <h5 class="card-title font-weight-bold text-dark mb-0"><%# Eval("Nombre") %></h5>
                                                             <p class="card-text text-dark">Precio: <%# String.Format("{0:0.00}", Eval("Precio")) %> €</p>
                                                             <div class="text-center mt-auto">
-                                                                <asp:Button ID="btnAddToCart" runat="server" Class="btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Add_Click" />
+                                                                <asp:Button ID="btnAddToCart" runat="server" Class="btn btn-primary btn-lg" Text="Añadir al Carrito" OnClick="Add_Click1" />
                                                             </div>
                                                         </div>
                                                     </a>

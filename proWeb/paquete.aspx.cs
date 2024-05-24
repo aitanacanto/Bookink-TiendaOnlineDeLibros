@@ -50,5 +50,10 @@ namespace proWeb
                 Response.Redirect("catalogo.aspx");
             }
         }
+
+        protected void Add_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("mainPage.aspx");
+        }
     }
 }
