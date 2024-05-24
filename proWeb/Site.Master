@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
+    <link rel="icon" type="image/x-icon" href="/content/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Bookink - Tu tienda de libros en línea</title>
@@ -24,7 +25,7 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <div class="logo me-2">
                             <a href="mainPage.aspx">
-                                <img src="content/logo.png" alt="Logo de bookink" class="logo-img" />
+                                <img src="content/logo.png" alt="Logo de bookink" class="logo-img mb-3" />
                             </a>
                         </div>
 
