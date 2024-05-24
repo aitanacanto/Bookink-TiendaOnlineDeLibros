@@ -115,9 +115,9 @@ ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y 
 ### - Manuel José Tornero Fuster: 
 - **EN/CAD Implementados:** ENUsuario, ENReseña, CADUsuario, CADReseña
 - **Páginas aspx implementadas:** login.aspx, register.aspx, 
-- **Otras tareas:** Ayuda en la bbdd
+- **Otras tareas:** Ayuda en la bbdd, estilos de mis páginas
 - **Mejora Obligatoria Implementada:**
-- **Colaboraciones:** usuario.aspx, implementación de reseñas en producto.aspx, adminusuario.aspx
+- **Colaboraciones:** usuario.aspx, implementación de reseñas en producto.aspx, adminusuario.aspx, ayuda en gráfica de ventas, mainpage.aspx
 
 ### - Jorge Paredes Soler: 
 - **EN/CAD Implementados:** ENDireccion, ENTieneDireccion, CADDireccion, CADTieneDireccion
