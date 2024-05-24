@@ -90,11 +90,12 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 
 ### - Bruno Vilella Martínez:
 
-- **EN/CAD Implementados:**
-- **Páginas aspx implementadas:**
-- **Otras tareas:** 
-- **Mejora Obligatoria Implementada:**
-- **Colaboraciones:**
+- **EN/CAD Implementados:** ENCarrito, CadCarrito
+- **Páginas aspx implementadas:** carrito.aspx
+- **Otras tareas:** Base de Datos
+- **Mejora Obligatoria Implementada:** Top 8 Ventas por Categoria
+- **Colaboraciones:** catalogo.aspx implementación de top8VentasCategoria,  
+ENCategoria y CADCategoria implementación de top8VentasCategoria.
 
 ### - Darío Pastor Fuentes:
 
