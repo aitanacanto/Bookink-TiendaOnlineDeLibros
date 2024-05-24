@@ -11,23 +11,64 @@ namespace proWeb
     public partial class mispedidos : Page
     {
         ENPedido ped = new ENPedido();
+        List<List<ENProducto>> listap = new List<List<ENProducto>>();
+        List<ENPedido> listaPedidos = new List<ENPedido>();
+        int i = 0;
         ENCarrito cesta;
         protected void Page_Load(object sender, EventArgs e)
         {
             ensenyarPedidos();
         }
 
+        private List<ENProducto> llamarLista()
+        {
+            return listap[i];
+            i++;
+        }
+
+        protected void ItemBound(object sender, RepeaterItemEventArgs args)
+        {
+            if (args.Item.ItemType == ListItemType.Item || args.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Repeater repeaterLinped = (Repeater)args.Item.FindControl("repeaterLinped");
+                List<ENProducto> productos = llamarLista();
+
+                if (repeaterLinped != null)
+                {
+                    // Enlaza los productos al Repeater hijo
+                    repeaterLinped.DataSource = productos;
+                    repeaterLinped.DataBind();
+                }
+            }
+        }
+
         protected void ensenyarPedidos()
         {
-            List<ENPedido> listaPedidos = new List<ENPedido>();
             cesta = Session["Carrito"] as ENCarrito;
             ped.Id_usuario = cesta.id_usuario;
             listaPedidos = ped.verPedidos();
-            if (repeaterPedidos != null)
+
+            foreach (ENPedido pedido in listaPedidos)
             {
-                repeaterPedidos.DataSource = listaPedidos;
-                repeaterPedidos.DataBind();
+                List<ENLinPedido> lp = new List<ENLinPedido>();
+                List<ENProducto> lpro = new List<ENProducto>();
+                ENLinPedido linped = new ENLinPedido();
+                linped.Id_Pedido = pedido.Cod_carrito;
+                lp = linped.readALL();
+
+                foreach (ENLinPedido ped in lp)
+                {
+                    ENProducto producto = new ENProducto();
+                    producto.Id = ped.Id_Producto;
+                    producto.Read();
+                    lpro.Add(producto);
+                }
+
+                listap.Add(lpro);
             }
+
+            repeaterPedidos.DataSource = listaPedidos;
+            repeaterPedidos.DataBind();
         }
     }
 }

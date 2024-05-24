@@ -43,7 +43,7 @@ namespace ClassLibrary
 
                 com.Parameters.AddWithValue("@Pedido", en.Id_Pedido);
                 com.Parameters.AddWithValue("@Producto", en.Id_Producto);
-                com.Parameters.AddWithValue("@Cantidad", en.cantidad);
+                com.Parameters.AddWithValue("@Cantidad", en.Cantidad);
                 com.ExecuteNonQuery();
                 return true;
             }
@@ -69,7 +69,7 @@ namespace ClassLibrary
 
                 com.Parameters.AddWithValue("@Pedido", en.Id_Pedido);
                 com.Parameters.AddWithValue("@Producto", en.Id_Producto);
-                com.Parameters.AddWithValue("@Cantidad", en.cantidad);
+                com.Parameters.AddWithValue("@Cantidad", en.Cantidad);
                 com.ExecuteNonQuery();
                 return true;
             }
@@ -96,10 +96,10 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@id_producto", en.Id_Producto);
 
                 SqlDataReader dr = com.ExecuteReader();
-                dr.Read();
+                while(dr.Read());
                 en.Id_Pedido = int.Parse(dr["id_pedido"].ToString());
                 en.Id_Producto = int.Parse(dr["id_producto"].ToString());
-                en.cantidad = int.Parse(dr["cantidad"].ToString());
+                en.Cantidad = int.Parse(dr["cantidad"].ToString());
 
                 dr.Close();
                 return true;
@@ -108,6 +108,42 @@ namespace ClassLibrary
             {
                 Console.WriteLine("No se ha podido leer la relación, ERROR: {0}", ex.Message);
                 return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
+
+        public List<ENLinPedido> readALL(ENLinPedido en)
+        {
+            List<ENLinPedido> lista = new List<ENLinPedido>();
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+                string query = "Select * from LINPEDIDO where  id_pedido = @idpedido";
+                SqlCommand com = new SqlCommand(query, c);
+                com.Parameters.AddWithValue("@idpedido", en.Id_Pedido);
+
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    ENLinPedido newLp = new ENLinPedido();
+                    newLp.Id_Pedido = int.Parse(dr["id_pedido"].ToString());
+                    newLp.Id_Producto = int.Parse(dr["id_producto"].ToString());
+                    newLp.Cantidad = int.Parse(dr["cantidad"].ToString());
+
+                    lista.Add(en);
+                }
+
+                dr.Close();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido leer la relación, ERROR: {0}", ex.Message);
+                return lista;
             }
             finally
             {
