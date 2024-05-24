@@ -17,9 +17,18 @@ namespace proWeb
             {
                 PoblarFiltros();
                 string searchQuery = Request.QueryString["search"];
+                string catQuery = Request.QueryString["categoria"];
                 CargarLibros(searchQuery);
                 CargarPaquetes();
                 LabelVentas.Visible = false;
+
+                if (catQuery != null)
+                {
+                    ENProducto en = new ENProducto();
+                    int.TryParse(catQuery,out int catego);
+                    reapeterProduct.DataSource =  en.BuscarProductosPorFiltros(catego,null,null,null,null);
+                    reapeterProduct.DataBind();
+                }
             }
         }
 
