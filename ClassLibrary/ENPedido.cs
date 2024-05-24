@@ -97,5 +97,11 @@ namespace ClassLibrary
             CADPedido cad = new CADPedido();
             return cad.verPedidos(this);
         }
+
+        public StringBuilder graficaMetrica()
+        {
+            CADPedido cad = new CADPedido();
+            return cad.graficaMetrica(this);
+        }
     }
 }

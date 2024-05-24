@@ -437,7 +437,6 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
-
         public List<ENProducto> ObtenerTopProductosVendidos()
         {
             List<ENProducto> productos = new List<ENProducto>();
@@ -503,6 +502,7 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
+
         public List<ENProducto> ObtenerTopProductosVendidosMetricas()
         {
             List<ENProducto> productos = new List<ENProducto>();
@@ -512,16 +512,16 @@ namespace ClassLibrary
             {
                 conex.Open();
                 string comandoSQL = @"
-            SELECT TOP 10 
-                p.id, 
-                p.nombre, 
-                p.precio, 
-                SUM(lp.cantidad) AS TotalVendido,
-                SUM(lp.cantidad * p.precio) AS ImporteTotal
-            FROM PRODUCTO p
-            JOIN LINPEDIDO lp ON p.id = lp.id_producto
-            GROUP BY p.id, p.nombre, p.precio
-            ORDER BY TotalVendido DESC";
+                                    SELECT TOP 10 
+                                    p.id, 
+                                    p.nombre, 
+                                    p.precio, 
+                                    SUM(lp.cantidad) AS TotalVendido,
+                                    SUM(lp.cantidad * p.precio) AS ImporteTotal
+                                    FROM PRODUCTO p
+                                    JOIN LINPEDIDO lp ON p.id = lp.id_producto
+                                    GROUP BY p.id, p.nombre, p.precio
+                                    ORDER BY TotalVendido DESC";
 
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
 
@@ -534,8 +534,9 @@ namespace ClassLibrary
                         en.Id = int.Parse(dr["id"].ToString());
                         en.Name = dr["nombre"].ToString();
                         en.Price = float.Parse(dr["precio"].ToString());
+                        en.Stock = int.Parse(dr["TotalVendido"].ToString());
                         productos.Add(en);
-                     
+
                     }
                 }
 
@@ -557,7 +558,4 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
-
-    }
-}
-   
+    } }

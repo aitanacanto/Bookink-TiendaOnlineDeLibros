@@ -158,6 +158,21 @@ namespace proWeb
 
         protected void Add_Click(object sender, EventArgs e)
         {
+           
+            ENCarrito carrito = Session["Carrito"] as ENCarrito;
+            if (carrito == null)
+            {
+                carrito = new ENCarrito();
+                Session["Carrito"] = carrito;
+            }
+            Button button = (Button)sender;
+            int id_producto = int.Parse(button.CommandArgument);
+            carrito.anyadirProductoCarrito(id_producto);
+           
+        }
+
+        protected void Add_Click1(object sender, EventArgs e)
+        {
             /*
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
             if (carrito == null)

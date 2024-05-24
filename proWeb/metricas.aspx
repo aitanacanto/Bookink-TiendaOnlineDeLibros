@@ -30,6 +30,7 @@
                     <th>ID Producto</th>
                     <th>Titulo</th>
                     <th>Precio (€)</th>
+                    <th>Número de Ventas</th>
                     
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
                             <td><%# Eval("Id") %></td>
                             <td><%# Eval("Name") %></td>
                             <td><%# Eval("Price") %></td>
+                            <td><%# Eval("Stock") %></td>
                             
                         </tr>
                     </ItemTemplate>

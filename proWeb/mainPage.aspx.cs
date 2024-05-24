@@ -10,7 +10,7 @@ namespace proWeb
 {
     public partial class mainPage : System.Web.UI.Page
     {
-        private int MaxListaProductos = 20; //Número máximo de elementos a mostrar en la lista principal
+        private int MaxListaProductos = 12; //Número máximo de elementos a mostrar en la lista principal
         private int MaxNovedades = 4; //Número máximo de elementos a mostrar en las novedades
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -100,6 +100,7 @@ namespace proWeb
         private void BindTopProductosMasVendidos()
         {
             List<ENProducto> topProductos = new ENProducto().ObtenerTopProductosVendidos();
+            topProductos = topProductos.GetRange(0, 8);
             repeaterTopProductos.DataSource = topProductos;
             repeaterTopProductos.DataBind();
         }
