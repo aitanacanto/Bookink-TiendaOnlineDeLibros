@@ -128,7 +128,36 @@ namespace proWeb
                 ddlAutor.Items.Add(new ListItem(autor, autor));
             }
         }
+        public string GenerarEstrellas(float valoracion)
+        {
+            int estrellasLlenas = (int)valoracion;
+            bool mediaEstrella = (valoracion - estrellasLlenas) >= 0.5;
+            int estrellasVacias = 5 - estrellasLlenas - (mediaEstrella ? 1 : 0);
 
+            string estrellasHtml = "";
+
+            for (int i = 0; i < estrellasLlenas; i++)
+            {
+                estrellasHtml += "<i class=\"fa-solid fa-star color-estre\"></i>";
+            }
+
+            if (mediaEstrella)
+            {
+                estrellasHtml += "<i class=\"fa-solid fa-star-half-stroke color-estre\"></i>";
+            }
+
+            for (int i = 0; i < estrellasVacias; i++)
+            {
+                estrellasHtml += "<i class=\"fa-regular fa-star no-estre\"></i>";
+            }
+            return estrellasHtml;
+        }
+
+        public float ValoracionMedia(int productId)
+        {
+
+            return ENReseña.ValoracionMedia(productId);
+        }
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
             string editorial = ddlEditorial.SelectedValue;
@@ -209,5 +238,6 @@ namespace proWeb
             }
 
         }
+
     }
 }
