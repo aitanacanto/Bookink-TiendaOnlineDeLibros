@@ -200,21 +200,6 @@ namespace proWeb
            
         }
 
-        protected void Add_Click1(object sender, EventArgs e)
-        {
-            /*
-            ENCarrito carrito = Session["Carrito"] as ENCarrito;
-            if (carrito == null)
-            {
-                carrito = new ENCarrito();
-                Session["Carrito"] = carrito;
-            }
-            Button button = (Button)sender;
-            int id_producto = int.Parse(button.CommandArgument);
-            carrito.anyadirProductoCarrito(id_producto);
-            */
-            Response.Redirect("mainPage.aspx");
-        }
         protected void reapeterNov_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -237,6 +222,11 @@ namespace proWeb
                 }
             }
 
+        }
+
+        protected void Add_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("mainPage.aspx");
         }
 
     }

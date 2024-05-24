@@ -75,7 +75,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Ficción</h5>
                                 <p class="card-text">Explora mundos imaginarios y emociones humanas.</p>
-                                <a href="/catalogo.aspx?categoria=Fantasía" class="btn btn-primary">Ver Más</a>
+                                <asp:Button ID="btnVerMas" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
                             </div>
                         </div>
                     </div>
@@ -83,9 +83,9 @@
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/zU8cXVz.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Juvenil</h5>
+                                <h5 class="card-title">Infatil</h5>
                                 <p class="card-text">Aventuras y lecciones para jóvenes lectores.</p>
-                                <a href="#" class="btn btn-primary">Ver Más</a>
+                                <asp:Button ID="Button1" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
                             </div>
                         </div>
                     </div>
@@ -93,17 +93,17 @@
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/awqdnuz.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">No Ficción</h5>
-                                <p class="card-text">Descubre conocimiento del mundo real y fascinante.</p>
-                                <a href="#" class="btn btn-primary">Ver Más</a>
+                                <h5 class="card-title">Ciencia Ficción</h5>
+                                <p class="card-text">Descubre conocimiento de un mundo ficticio fascinante.</p>
+                                <asp:Button ID="Button2" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-                <div class="mb-5 mt-5" data-aos="fade-in">
-            <h1 class="text-center">Top 10 Productos Más Vendidos</h1>
+        <div class="mb-5 mt-5" data-aos="fade-in">
+            <h1 class="text-center">Top Productos Más Vendidos</h1>
             <div class="container">
                 <div class="row">
                     <asp:Repeater ID="repeaterTopProductos" runat="server">
