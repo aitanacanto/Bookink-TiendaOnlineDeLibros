@@ -10,6 +10,8 @@ namespace proWeb
 {
     public partial class pedido : Page
     {
+        List<ENLinPedido> linped = new List<ENLinPedido>();
+        List<ENLinCarrito> listaCarrito = new List<ENLinCarrito>();
         ENCarrito cesta;
         ENPedido ped = new ENPedido();
         protected void Page_Load(object sender, EventArgs e)
@@ -25,12 +27,18 @@ namespace proWeb
             cesta = Session["Carrito"] as ENCarrito;
             ped.Id_usuario = cesta.id_usuario;
             ped.Cod_carrito = cesta.id;
-            ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
+            ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + ", " + txtCity.Text + ", " + txtCountry.Text;
             ped.Precio = cesta.CalcularPvp();
             ped.Estado = "En Proceso";
             ped.Date = DateTime.Today;
             ped.crearPedido();
             cesta.deleteCarrito();
+
+            foreach (ENLinPedido item in linped)
+            {
+                item.create();
+            }
+
             Response.Redirect("confirmarPedido.aspx");
         }
 
@@ -44,7 +52,6 @@ namespace proWeb
                 }
 
                 ENProducto en = new ENProducto();
-                List<ENLinCarrito> listaCarrito = new List<ENLinCarrito>();
                 listaCarrito = cesta.ObtenerProductosEnCarrito();
                 if (reapeterCarrito != null)
                 {
@@ -58,6 +65,12 @@ namespace proWeb
                     ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
                     ped.Precio = cesta.CalcularPvp();
                     ped.Estado = "En Proceso";
+
+                foreach (ENLinCarrito item in listaCarrito)
+                {
+                    ENLinPedido nuevoItem = new ENLinPedido(ped.Cod_carrito, item.producto.Id, item.cantidad);
+                    linped.Add(nuevoItem);
+                }
             }
         }
     }
