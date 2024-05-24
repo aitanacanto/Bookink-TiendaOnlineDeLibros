@@ -75,7 +75,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Ficción</h5>
                                 <p class="card-text">Explora mundos imaginarios y emociones humanas.</p>
-                                <asp:Button ID="btnVerMas" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
+                                <asp:Button ID="btnVerMas" runat="server" Text="Ver Más" CssClass="btn btn-primary" CommandArgument="30" OnClick="btnVerMas_Click" />
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Infatil</h5>
                                 <p class="card-text">Aventuras y lecciones para jóvenes lectores.</p>
-                                <asp:Button ID="Button1" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
+                                <asp:Button ID="Button1" CommandArgument="26" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Ciencia Ficción</h5>
                                 <p class="card-text">Descubre conocimiento de un mundo ficticio fascinante.</p>
-                                <asp:Button ID="Button2" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
+                                <asp:Button ID="Button2" CommandArgument="27" runat="server" Text="Ver Más" CssClass="btn btn-primary" OnClick="btnVerMas_Click" />
                             </div>
                         </div>
                     </div>
