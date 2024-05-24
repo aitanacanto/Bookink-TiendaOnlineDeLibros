@@ -52,6 +52,12 @@ namespace proWeb
             return listaProductos;
 
         }
+
+        public float ValoracionMedia(int productId)
+        {
+            
+            return ENReseña.ValoracionMedia(productId);
+        }
         protected void Add_Click(object sender, EventArgs e)
         {
             ENCarrito carrito = Session["Carrito"] as ENCarrito;
@@ -88,7 +94,30 @@ namespace proWeb
             }
 
         }
+        public string GenerarEstrellas(float valoracion)
+        {
+            int estrellasLlenas = (int)valoracion;
+            bool mediaEstrella = (valoracion - estrellasLlenas) >= 0.5;
+            int estrellasVacias = 5 - estrellasLlenas - (mediaEstrella ? 1 : 0);
 
+            string estrellasHtml = "";
+
+            for (int i = 0; i < estrellasLlenas; i++)
+            {
+                estrellasHtml += "<i class=\"fa-solid fa-star color-estre\"></i>";
+            }
+
+            if (mediaEstrella)
+            {
+                estrellasHtml += "<i class=\"fa-solid fa-star-half-stroke color-estre\"></i>";
+            }
+
+            for (int i = 0; i < estrellasVacias; i++)
+            {
+                estrellasHtml += "<i class=\"fa-regular fa-star no-estre\"></i>";
+            }
+            return estrellasHtml;
+        }
         protected void btnVerMas_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;

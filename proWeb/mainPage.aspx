@@ -45,11 +45,7 @@
                                             <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("name") %></h5>
                                             <p class="autor mb-1"><%# Eval("Autor") %></p>
                                             <div class="mb-2">
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-regular fa-star no-estre"></i>
+                                                <%# GenerarEstrellas(ValoracionMedia((int)Eval("Id")))%>
                                             </div>
                                             <div class="d-flex">
                                                 <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
@@ -122,11 +118,7 @@
                                             <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("name") %></h5>
                                             <p class="autor mb-1"><%# Eval("Autor") %></p>
                                             <div class="mb-2">
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-solid fa-star color-estre"></i>
-                                                <i class="fa-regular fa-star no-estre"></i>
+                                                <%# GenerarEstrellas(ValoracionMedia((int)Eval("Id")))%>
                                             </div>
                                             <div class="d-flex">
                                                 <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
