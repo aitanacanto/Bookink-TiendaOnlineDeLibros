@@ -23,25 +23,22 @@ namespace proWeb
                 }
                 else
                 {
-                    lblNombreActual.Text = user.Name;
-                    lblCorreoActual.Text = user.Email;
-                    lblTelefonoActual.Text = user.PhoneNumber;
-
+                    CargarDatosUsuario();
                     CargarDirecciones();
                 }
             }
         }
 
-        /*private void ActualizarCamposDireccion(ENDireccion direccion)
+        private void CargarDatosUsuario()
         {
-            lblDireccionActual.Text = direccion.Direccion;
-            lblCodPostalActual.Text = direccion.CodPostal;
-            lblCiudadActual.Text = direccion.Ciudad;
-            lblPaisActual.Text = direccion.Pais;
-        }*/
+            lblNombreActual.Text = user.Name;
+            lblCorreoActual.Text = user.Email;
+            lblTelefonoActual.Text = user.PhoneNumber;
+        }
 
         private void CargarDirecciones()
         {
+            user = Session["user"] as ENUsuario;
             user.Direcciones = user.ObtenerDirecciones();
             if (user.Direcciones.Count > 0)
             {
@@ -88,11 +85,10 @@ namespace proWeb
         {
             Button btnEliminar = (Button)sender;
             int direccionId = int.Parse(btnEliminar.CommandArgument);
-            ENDireccion direccionAEliminar = user.Direcciones.Find(d => d.ID == direccionId);
+            ENDireccion direcc = new ENDireccion { ID = direccionId };
 
-            if (direccionAEliminar != null && direccionAEliminar.Delete())
+            if (direcc.Delete())
             {
-                user.Direcciones.Remove(direccionAEliminar);
                 lblMensaje.Text = "Dirección eliminada correctamente.";
             }
             else
@@ -100,20 +96,60 @@ namespace proWeb
                 lblMensaje.Text = "Hubo un error al eliminar la dirección.";
             }
 
-            // Recargar direcciones
-            user.Direcciones = user.ObtenerDirecciones();
-            repeaterDirecciones.DataSource = user.Direcciones.Skip(1); // Omitir la primera dirección
-            repeaterDirecciones.DataBind();
+            CargarDirecciones();
         }
 
-            protected void BtnEditarDireccion_Click(object sender, EventArgs e)
+        protected void BtnEditarDireccion_Click(object sender, EventArgs e)
         {
-            // Implementar lógica de edición de direcciones
+            Button btnEditar = (Button)sender;
+            int direccionId = int.Parse(btnEditar.CommandArgument);
+            RepeaterItem item = (RepeaterItem)btnEditar.NamingContainer;
+
+            TextBox txtDireccion = (TextBox)item.FindControl("txtDireccion");
+            TextBox txtCodPostal = (TextBox)item.FindControl("txtCodPostal");
+            TextBox txtCiudad = (TextBox)item.FindControl("txtCiudad");
+            TextBox txtPais = (TextBox)item.FindControl("txtPais");
+
+            txtDireccion.Visible = true;
+            txtCodPostal.Visible = true;
+            txtCiudad.Visible = true;
+            txtPais.Visible = true;
+
+            item.FindControl("btnEditarDireccion").Visible = false;
+            item.FindControl("btnConfirmarEdicion").Visible = true;
         }
 
         protected void BtnConfirmarEdicion_Click(object sender, EventArgs e)
         {
+            Button btnConfirmar = (Button)sender;
+            int direccionId = int.Parse(btnConfirmar.CommandArgument);
+            RepeaterItem item = (RepeaterItem)btnConfirmar.NamingContainer;
 
+            TextBox txtDireccion = (TextBox)item.FindControl("txtDireccion");
+            TextBox txtCodPostal = (TextBox)item.FindControl("txtCodPostal");
+            TextBox txtCiudad = (TextBox)item.FindControl("txtCiudad");
+            TextBox txtPais = (TextBox)item.FindControl("txtPais");
+
+            ENDireccion direccionAEditar = new ENDireccion { ID = direccionId };
+            if (direccionAEditar != null)
+            {
+                direccionAEditar.Direccion = txtDireccion.Text;
+                direccionAEditar.CodPostal = txtCodPostal.Text;
+                direccionAEditar.Ciudad = txtCiudad.Text;
+                direccionAEditar.Pais = txtPais.Text;
+
+                if (direccionAEditar.Update())
+                {
+                    lblMensaje.Text = "Dirección actualizada correctamente.";
+                }
+                else
+                {
+                    lblMensaje.Text = "Hubo un error al actualizar la dirección.";
+                }
+
+                // Recargar direcciones
+                CargarDirecciones();
+            }
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
