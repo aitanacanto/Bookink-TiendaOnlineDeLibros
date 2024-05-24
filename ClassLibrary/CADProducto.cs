@@ -512,16 +512,16 @@ namespace ClassLibrary
             {
                 conex.Open();
                 string comandoSQL = @"
-            SELECT TOP 10 
-                p.id, 
-                p.nombre, 
-                p.precio, 
-                SUM(lp.cantidad) AS TotalVendido,
-                SUM(lp.cantidad * p.precio) AS ImporteTotal
-            FROM PRODUCTO p
-            JOIN LINPEDIDO lp ON p.id = lp.id_producto
-            GROUP BY p.id, p.nombre, p.precio
-            ORDER BY TotalVendido DESC";
+                                    SELECT TOP 10 
+                                    p.id, 
+                                    p.nombre, 
+                                    p.precio, 
+                                    SUM(lp.cantidad) AS TotalVendido,
+                                    SUM(lp.cantidad * p.precio) AS ImporteTotal
+                                    FROM PRODUCTO p
+                                    JOIN LINPEDIDO lp ON p.id = lp.id_producto
+                                    GROUP BY p.id, p.nombre, p.precio
+                                    ORDER BY TotalVendido DESC";
 
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
 
