@@ -29,13 +29,16 @@ namespace ClassLibrary
                 cmd.Parameters.AddWithValue("@img_paquete", en.Img_paquete);
                 cmd.Parameters.AddWithValue("@descripcion", en.Descripcion);
 
-                en.IdPaquete = Convert.ToInt32(cmd.ExecuteScalar());
 
-                foreach (ENProducto producto in en.Productos)
+                if (en.Productos != null)
                 {
-                    ENTienePaquete tiene = new ENTienePaquete { IdPaquete = en.IdPaquete, IdProducto = producto.Id };
-                    tiene.AgregarProductoAlPaquete(tiene.IdPaquete, tiene.IdProducto);
+                    foreach (ENProducto producto in en.Productos)
+                    {
+                        ENTienePaquete tiene = new ENTienePaquete { IdPaquete = en.IdPaquete, IdProducto = producto.Id };
+                        tiene.AgregarProductoAlPaquete(tiene.IdPaquete, tiene.IdProducto);
+                    }
                 }
+
                 return true;
             }
             catch (SqlException e)
