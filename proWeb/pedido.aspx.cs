@@ -32,6 +32,15 @@ namespace proWeb
             ped.Estado = "En Proceso";
             ped.Date = DateTime.Today;
             ped.crearPedido();
+
+            listaCarrito = cesta.ObtenerProductosEnCarrito();
+
+            foreach (ENLinCarrito item in listaCarrito)
+            {
+                ENLinPedido nuevoItem = new ENLinPedido(ped.Numped, item.producto.Id, item.cantidad);
+                linped.Add(nuevoItem);
+            }
+
             cesta.deleteCarrito();
 
             foreach (ENLinPedido item in linped)
@@ -65,12 +74,6 @@ namespace proWeb
                     ped.Direccion_envio = txtAddress.Text + " " + txtPostalCode.Text + " " + txtCity + ", " + txtCountry;
                     ped.Precio = cesta.CalcularPvp();
                     ped.Estado = "En Proceso";
-
-                foreach (ENLinCarrito item in listaCarrito)
-                {
-                    ENLinPedido nuevoItem = new ENLinPedido(ped.Cod_carrito, item.producto.Id, item.cantidad);
-                    linped.Add(nuevoItem);
-                }
             }
         }
     }

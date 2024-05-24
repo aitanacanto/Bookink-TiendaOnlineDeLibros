@@ -21,16 +21,16 @@
                                     <asp:Repeater ID="repeaterLinped" runat="server">
                                         <ItemTemplate>
                                             <li style="margin-right: 100px;">
-                                                <img src='<%# Eval("ImagenUrl") %>' alt='<%# Eval("Nombre") %>' style="max-width: 100px; height: auto;" />
+                                                <img src='<%# Eval("ImagePath") %>' alt='<%# Eval("Name") %>' style="max-width: 100px; height: auto;" />
                                                 <div style="display: inline-block;">
                                                     <div>
-                                                        <span><%# Eval("Nombre") %></span>
+                                                        <span><%# Eval("Name") %></span>
                                                     </div>
                                                     <div>
                                                         <span><%# Eval("Autor") %></span>
                                                     </div>
                                                     <div>
-                                                        <span><%# String.Format("{0:0.00}€", Eval("Precio")) %></span>
+                                                        <span><%# String.Format("{0:0.00}€", Eval("Price")) %></span>
                                                     </div>
                                                 </div>
                                             </li>

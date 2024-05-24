@@ -134,7 +134,7 @@ namespace ClassLibrary
                     newLp.Id_Producto = int.Parse(dr["id_producto"].ToString());
                     newLp.Cantidad = int.Parse(dr["cantidad"].ToString());
 
-                    lista.Add(en);
+                    lista.Add(newLp);
                 }
 
                 dr.Close();
