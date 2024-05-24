@@ -69,6 +69,33 @@ namespace proWeb
         protected global::System.Web.UI.WebControls.Button btnFiltrar;
 
         /// <summary>
+        /// Control LabelVentas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelVentas;
+
+        /// <summary>
+        /// Control reapeterTopVentas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater reapeterTopVentas;
+
+        /// <summary>
+        /// Control CatalogoLibros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CatalogoLibros;
+
+        /// <summary>
         /// Control reapeterProduct.
         /// </summary>
         /// <remarks>

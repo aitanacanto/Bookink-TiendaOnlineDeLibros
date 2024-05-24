@@ -19,6 +19,7 @@ namespace proWeb
                 string searchQuery = Request.QueryString["search"];
                 CargarLibros(searchQuery);
                 CargarPaquetes();
+                LabelVentas.Visible = false;
             }
         }
 
@@ -26,6 +27,7 @@ namespace proWeb
         {
             ENProducto en = new ENProducto();
             List<ENProducto> listaProductos = new List<ENProducto>();
+            CatalogoLibros.Visible = true;
             if (string.IsNullOrEmpty(searchQuery))
             {
                 listaProductos = en.ObtenerTodosLosProductos();
@@ -35,7 +37,24 @@ namespace proWeb
                 listaProductos = en.BuscarProductosPorNombre(searchQuery);
             }
             reapeterProduct.DataSource = listaProductos;
+            
             reapeterProduct.DataBind();
+        }
+        private void CargarTopVentas()
+        {
+            ENCategoria categoria = new ENCategoria();
+            ENProducto en = new ENProducto();
+            List<ENProducto> listaProductos = new List<ENProducto>();
+            int? idCategoria = string.IsNullOrEmpty(ddlCategoria.SelectedValue) ? (int?)null : int.Parse(ddlCategoria.SelectedValue);
+            listaProductos = categoria.topVentasPorCategoria(idCategoria);
+            if(listaProductos.Count() == 0)
+            {
+                LabelVentas.Visible = false;
+            }
+            reapeterTopVentas.DataSource = listaProductos;
+            reapeterTopVentas.DataBind();
+            
+
         }
 
         private void CargarPaquetes()
@@ -124,6 +143,17 @@ namespace proWeb
             // Enlaza la lista filtrada al repeater
             reapeterProduct.DataSource = listaProductos;
             reapeterProduct.DataBind();
+            if (idCategoria != null && editorial == "" && autor == "" && precioMinimo == null && precioMaximo == null) {
+                LabelVentas.Visible = true;
+                CargarTopVentas();
+            }
+            if (listaProductos.Count() == 0)
+            {
+                CatalogoLibros.Visible = false;
+            } else
+            {
+                CatalogoLibros.Visible = true;
+            }
         }
 
         protected void Add_Click(object sender, EventArgs e)
