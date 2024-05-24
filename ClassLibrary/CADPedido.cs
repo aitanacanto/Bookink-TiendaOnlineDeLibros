@@ -27,7 +27,7 @@ namespace ClassLibrary
             {
                     conex.Open();
 
-                    string comandoSQL = $"INSERT INTO PEDIDO (id_usuario, cod_carrito, dirección_envío, precio, estado, fecha) VALUES (@id_usuario, @cod_carrito, @dirección_envío, @precio, @estado, @fecha)";
+                    string comandoSQL = $"INSERT INTO PEDIDO (id_usuario, cod_carrito, dirección_envío, precio, estado, fecha) OUTPUT INSERTED.numped VALUES (@id_usuario, @cod_carrito, @dirección_envío, @precio, @estado, @fecha)";
 
                     SqlCommand cmd = new SqlCommand(comandoSQL, conex);
                     cmd.Parameters.AddWithValue("@id_usuario", pedido.Id_usuario);
@@ -36,8 +36,7 @@ namespace ClassLibrary
                     cmd.Parameters.AddWithValue("@precio", pedido.Precio);
                     cmd.Parameters.AddWithValue("@estado", pedido.Estado);
                     cmd.Parameters.AddWithValue("@fecha", pedido.Date);
-
-                    cmd.ExecuteNonQuery();
+                    pedido.Numped = Convert.ToInt32(cmd.ExecuteScalar());
 
                     return true;
             }
