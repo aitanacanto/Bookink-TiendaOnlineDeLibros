@@ -27,42 +27,53 @@ namespace proWeb
                     lblCorreoActual.Text = user.Email;
                     lblTelefonoActual.Text = user.PhoneNumber;
 
-                    // Cargar y mostrar la primera dirección del usuario
-                    user.Direcciones = user.ObtenerDirecciones();
-                    if (user.Direcciones.Count > 0)
-                    {
-                        ActualizarCamposDireccion(user.Direcciones[0]);
-                    }
-
-                    // Cargar las direcciones adicionales en el Repeater
-                    repeaterDirecciones.DataSource = user.Direcciones.Skip(1); // Omitir la primera dirección
-                    repeaterDirecciones.DataBind();
+                    CargarDirecciones();
                 }
             }
         }
 
-        private void ActualizarCamposDireccion(ENDireccion direccion)
+        /*private void ActualizarCamposDireccion(ENDireccion direccion)
         {
             lblDireccionActual.Text = direccion.Direccion;
             lblCodPostalActual.Text = direccion.CodPostal;
             lblCiudadActual.Text = direccion.Ciudad;
             lblPaisActual.Text = direccion.Pais;
+        }*/
+
+        private void CargarDirecciones()
+        {
+            user.Direcciones = user.ObtenerDirecciones();
+            if (user.Direcciones.Count > 0)
+            {
+                repeaterDirecciones.DataSource = user.Direcciones;
+                repeaterDirecciones.DataBind();
+            }
         }
 
         protected void BtnAgregarDireccion_Click(object sender, EventArgs e)
         {
+
+            user = Session["user"] as ENUsuario;
+
             ENDireccion nuevaDireccion = new ENDireccion
             {
-                Direccion = txtDireccionNueva.Text,
-                CodPostal = txtCodPostalNuevo.Text,
-                Ciudad = txtCiudadNueva.Text,
-                Pais = txtPaisNuevo.Text
+                Direccion = txtNuevaDireccion.Text,
+                CodPostal = txtNuevoCodPostal.Text,
+                Ciudad = txtNuevaCiudad.Text,
+                Pais = txtNuevoPais.Text
             };
 
             if (nuevaDireccion.Create())
             {
-                user.AddAddress(nuevaDireccion);
-                lblMensaje.Text = "Dirección agregada correctamente.";
+                ENTieneDireccion tieneDir = new ENTieneDireccion(user.Id, nuevaDireccion.ID);
+                if (tieneDir.Create())
+                {
+                    lblMensaje.Text = "Dirección agregada correctamente.";
+                }
+                else
+                {
+                    lblMensaje.Text = "Hubo un error al vincular la nueva dirección.";
+                }
             }
             else
             {
@@ -70,9 +81,7 @@ namespace proWeb
             }
 
             // Recargar direcciones
-            user.Direcciones = user.ObtenerDirecciones();
-            repeaterDirecciones.DataSource = user.Direcciones.Skip(1); // Omitir la primera dirección
-            repeaterDirecciones.DataBind();
+            CargarDirecciones();
         }
 
         protected void BtnEliminarDireccion_Click(object sender, EventArgs e)
@@ -97,9 +106,14 @@ namespace proWeb
             repeaterDirecciones.DataBind();
         }
 
-        protected void BtnEditarDireccion_Click(object sender, EventArgs e)
+            protected void BtnEditarDireccion_Click(object sender, EventArgs e)
         {
             // Implementar lógica de edición de direcciones
+        }
+
+        protected void BtnConfirmarEdicion_Click(object sender, EventArgs e)
+        {
+
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)

@@ -112,11 +112,11 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 - **Colaboraciones:**
 
 ### - Manuel José Tornero Fuster: 
-- **EN/CAD Implementados:**
-- **Páginas aspx implementadas:**
-- **Otras tareas:** 
+- **EN/CAD Implementados:** ENUsuario, ENReseña, CADUsuario, CADReseña
+- **Páginas aspx implementadas:** login.aspx, register.aspx, 
+- **Otras tareas:** Ayuda en la bbdd
 - **Mejora Obligatoria Implementada:**
-- **Colaboraciones:**
+- **Colaboraciones:** usuario.aspx, implementación de reseñas en producto.aspx, adminusuario.aspx
 
 ### - Jorge Paredes Soler: 
 - **EN/CAD Implementados:**
