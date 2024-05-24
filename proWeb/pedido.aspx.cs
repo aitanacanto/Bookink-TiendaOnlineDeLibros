@@ -68,8 +68,9 @@ namespace proWeb
                 ENProducto producto = new ENProducto();
                 producto.Id = item.Id_Producto;
                 producto.Read();
-                producto.Stock -= 1;
+                producto.Stock -= item.Cantidad;
                 producto.Update();
+                item.create();
             }
 
             Response.Redirect("confirmarPedido.aspx");
