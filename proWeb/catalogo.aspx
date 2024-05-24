@@ -27,7 +27,7 @@
                             <asp:Label
                                 ID="LabelVentas"
                                 runat="server"
-                                Text="Top 8 Ventas"
+                                Text="Top Ventas de la Categoría"
                                 Visible="false"></asp:Label>
                         </h1>
                         <div class="container">
