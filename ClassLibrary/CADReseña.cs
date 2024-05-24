@@ -33,7 +33,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@product", en.ProductID);
                 com.Parameters.AddWithValue("@comment", en.Comment);
                 com.Parameters.AddWithValue("@date", en.Date);
-                com.Parameters.AddWithValue("@rating", en.Rating);
+                com.Parameters.AddWithValue("@rating", (Decimal)en.Rating);
 
                 com.ExecuteNonQuery();
                 return true;
@@ -66,7 +66,7 @@ namespace ClassLibrary
                 com.Parameters.AddWithValue("@product", en.ProductID);
                 com.Parameters.AddWithValue("@comment", en.Comment);
                 com.Parameters.AddWithValue("@date", en.Date);
-                com.Parameters.AddWithValue("@rating", en.Rating);
+                com.Parameters.AddWithValue("@rating", (Decimal)en.Rating);
 
                 com.ExecuteNonQuery();
                 return true;
@@ -111,6 +111,35 @@ namespace ClassLibrary
             }
         }
 
+        public bool Exists(ENReseña en)
+        {
+            SqlConnection c = new SqlConnection(constring);
+            try
+            {
+                c.Open();
+
+                // Crear una sentencia parametricada
+                string query = "SELECT * FROM RESENA WHERE id_usuario = @user AND id_producto = @product";
+                SqlCommand com = new SqlCommand(query, c);
+
+                // Añadir los parametros a la sentencia
+                com.Parameters.AddWithValue("@user", en.UserID);
+                com.Parameters.AddWithValue("@product", en.ProductID);
+
+                SqlDataReader reader = com.ExecuteReader();
+
+                return reader.Read();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se ha podido eliminar la reseña, ERROR: {0}", ex.Message);
+                return false;
+            }
+            finally
+            {
+                c.Close();
+            }
+        }
         public List<ENReseña> GetReseñas(int inProductId)
         {
             SqlConnection c = new SqlConnection(constring);

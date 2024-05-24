@@ -29,7 +29,7 @@
                 <h1 id="ProductName" runat="server" style="text-align: left">Titulo Libro</h1>
                 <p id="ProductAutor" runat="server" class="author">Autor</p>
                 <div class="mb-2">
-                    <span> <%# ValoracionMedia() %></span> <%# GenerarEstrellas(ValoracionMedia()) %>
+                    <span><%# ValoracionMedia() %></span> <%# GenerarEstrellas(ValoracionMedia()) %>
                 </div>
                 <div class="d-flex">
                     <p id="ProductPrice" runat="server" class="card-text text-danger" style="text-decoration: line-through; margin-right: 10px">Precio Oferta</p>
@@ -68,10 +68,10 @@
         <!-- Sección de Reseñas -->
         <div class="reviews">
             <h2>Reseñas</h2>
-            <asp:Label 
-                    ID="LabelResenya" 
-                    runat="server" 
-                    Visible="false">Aún no hay reseñas de este producto.</asp:Label>
+            <asp:Label
+                ID="LabelResenya"
+                runat="server"
+                Visible="false">Aún no hay reseñas de este producto.</asp:Label>
             <asp:Repeater ID="ReviewRepeater" runat="server">
                 <ItemTemplate>
                     <div class="review">
@@ -85,7 +85,18 @@
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-            <!-- Agrega más reseñas según sea necesario -->
+            <!-- Sección para agregar / modificar reseñas -->
+            <div>
+                <div class="mb-3">
+                    <asp:Label ID="LblRating" runat="server" AssociatedControlID="InputRating" Text="Valoración: (0-5)"></asp:Label>
+                    <asp:TextBox ID="InputRating" runat="server" CssClass="form-range" TextMode="Range" Enabled="true"></asp:TextBox>
+                </div>
+                <div class="mb-3">
+                    <asp:Label ID="LblComment" runat="server" AssociatedControlID="InputComment" CssClass="form-label" Text="Comentario"></asp:Label>
+                    <asp:TextBox ID="InputComment" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                </div>
+                <asp:Button ID="AddResenyaButton" runat="server" CssClass="btn btn-primary" Text="Agregar / Modificar Reseña" OnClick="AddResenyaButton_Click" />
+            </div>
         </div>
         <!-- Sección de Productos Relacionados -->
         <div class="related-products">
