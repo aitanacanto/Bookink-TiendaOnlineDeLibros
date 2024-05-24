@@ -72,21 +72,53 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 ![Base de Datos](BaseDeDatos.png)
 *También, está disponible en pdf en el archivo ![bbdd.pdf](bbdd.pdf).*
 
+### Instrucciones de Uso:
+- **Usuario para registrarse con permisos de administrador:**
+    - Usuario: javiers@bookink.store
+    - Contraseña: queremosun10
+- **Credenciales para conectarse a la bbdd:**
+    - IP: serverpf.com
+    - DataBase: Bookink
+    - Usuario: Empleado
+    - Contraseña: InkBook
+
+### Mejoras Implementadas:
+- Compra de un dominio: bookink.store
+- Uso de un servidor de bases de batos on promise, Microsoft SQL Server.
+- Cifrado de contraseñas.
+- Certificado ssl.
+- Comprobaciones DNI, datos tarjeta de crédito, etc...
+- Enlace Redes Sociales.
+
+
+### Mejoras Implementadas Obligatorias:
+- Informe de métricas:
+    - Top 10 ventas
+    - Top 10 ventas por categoría
+    - Gráfica de ventas por mes
+
+- Filtrado de productos:
+    - Por Categorías
+    - Por Editorial
+    - Por Precio Mínimo
+    - Por Precio Máximo
+    - Por Nombre
+
 ### Implementaciones de cada integrante:
 
 ### - Aitana Cantó Rico:
 - **EN/CAD Implementados:** ENPaquete, CADPaquete, ENTienePaquete, CADTienePaquete
 - **Páginas aspx implementadas:** paquete.aspx, adminPaquete.aspx, SiteMaster
-- **Otras tareas:** Creación script bbdd.
+- **Otras tareas:** Creación script bbdd: inserción de productos, paquetes, categorias, etc.
 - **Mejora Obligatoria Implementada:** Filtrado de libros por nombre, categoría, etc...
-- **Colaboraciones:** mainPage.aspx, catalogo.aspx
+- **Colaboraciones:** mainPage.aspx, catalogo.aspx, algunos métodos de CADProducto, relacionados con el filtrado y cdargar los productos en MainPage.aspx y catalogo.aspx.
 
 ### - Rafael Carballo Lorenzo:
 - **EN/CAD Implementados:** ENPedido, CADPedido, ENLinPedido_pa, CADLinPedido_pa
 - **Páginas aspx implementadas:** pedido.aspx, confirmarPedido.aspx, mispedidos.aspx
 - **Otras tareas:** Base de datos, css de mis paginas y un poquito de carrito
 - **Mejora Obligatoria Implementada:** Métrica de Evolución de ventas
-- **Colaboraciones:** Métricas.aspx(gráfica de evolución de ventas), CADProducto y ENProducto(método readALL()), otras páginas que tengan que ver con pedido
+- **Colaboraciones:** Métricas.aspx(gráfica de evolución de ventas), CADProducto y ENProducto(método readALL()), otras páginas que tengan que ver con pedido.
 
 ### - Bruno Vilella Martínez:
 
@@ -106,11 +138,11 @@ ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y 
 - **Colaboraciones:** ayuda en top 10 de metricas.aspx, sitemaster.aspx, catalogo.aspx
 
 ### - Alberto Boronat López: 
-- **EN/CAD Implementados:**
-- **Páginas aspx implementadas:**
-- **Otras tareas:** 
-- **Mejora Obligatoria Implementada:**
-- **Colaboraciones:**
+- **EN/CAD Implementados:** CADCategoria, ENCategoria, CADTieneCategoria, ENTieneCategoria
+- **Páginas aspx implementadas:** adminCategoria.aspx, metricas.aspx
+- **Otras tareas:** script productos
+- **Mejora Obligatoria Implementada:** Top 10 Productos Vendidos
+- **Colaboraciones:** mainPage.aspx
 
 ### - Manuel José Tornero Fuster: 
 - **EN/CAD Implementados:** ENUsuario, ENReseña, CADUsuario, CADReseña
