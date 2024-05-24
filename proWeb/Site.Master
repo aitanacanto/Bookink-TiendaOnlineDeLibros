@@ -25,7 +25,7 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <div class="logo me-2">
                             <a href="mainPage.aspx">
-                                <img src="content/logo.png" alt="Logo de bookink" class="logo-img mb-3" />
+                                <img src="content/logo.png" alt="Logo de bookink" class="logo-img mb-3 mb-md-0" />
                             </a>
                         </div>
 
