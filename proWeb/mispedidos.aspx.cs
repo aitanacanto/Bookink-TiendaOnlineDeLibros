@@ -20,18 +20,13 @@ namespace proWeb
             ensenyarPedidos();
         }
 
-        private List<ENProducto> llamarLista()
-        {
-            return listap[i];
-            i++;
-        }
-
         protected void ItemBound(object sender, RepeaterItemEventArgs args)
         {
             if (args.Item.ItemType == ListItemType.Item || args.Item.ItemType == ListItemType.AlternatingItem)
             {
                 Repeater repeaterLinped = (Repeater)args.Item.FindControl("repeaterLinped");
-                List<ENProducto> productos = llamarLista();
+                List<ENProducto> productos = listap[i];
+                i++;
 
                 if (repeaterLinped != null)
                 {
@@ -53,7 +48,7 @@ namespace proWeb
                 List<ENLinPedido> lp = new List<ENLinPedido>();
                 List<ENProducto> lpro = new List<ENProducto>();
                 ENLinPedido linped = new ENLinPedido();
-                linped.Id_Pedido = pedido.Cod_carrito;
+                linped.Id_Pedido = pedido.Numped;
                 lp = linped.readALL();
 
                 foreach (ENLinPedido ped in lp)

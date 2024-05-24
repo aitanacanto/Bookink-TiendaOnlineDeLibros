@@ -6,6 +6,33 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
+            // Inicializar colapso basado en el estado almacenado
+            if (localStorage.getItem('collapseState') === 'true') {
+                $('#collapseDirecciones').collapse('show');
+            } else {
+                $('#collapseDirecciones').collapse('hide');
+            }
+
+            // Almacenar el estado del colapso
+            $('#collapseDirecciones').on('shown.bs.collapse hidden.bs.collapse', function () {
+                localStorage.setItem('collapseState', $(this).hasClass('show'));
+            });
+
+            // Almacenar el estado del colapso antes de la actualización parcial
+            Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(function () {
+                localStorage.setItem('collapseState', $('#collapseDirecciones').hasClass('show'));
+            });
+
+            // Restaurar el estado del colapso después de la actualización parcial
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                if (localStorage.getItem('collapseState') === 'true') {
+                    $('#collapseDirecciones').collapse('show');
+                } else {
+                    $('#collapseDirecciones').collapse('hide');
+                }
+            });
+
+            // Inicializar los eventos de los botones
             $("#btnVerMasDirecciones").click(function () {
                 $("#collapseDirecciones").toggle();
             });
@@ -82,6 +109,7 @@
 
         <asp:UpdatePanel ID="UpdatePanelDirecciones" runat="server">
             <ContentTemplate>
+                <asp:HiddenField ID="hfCollapseState" runat="server" />
                 <div class="collapse" id="collapseDirecciones">
                     <h2>Direcciones Asociadas</h2>
                     <asp:Repeater ID="repeaterDirecciones" runat="server">
