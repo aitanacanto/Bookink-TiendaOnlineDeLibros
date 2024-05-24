@@ -122,7 +122,7 @@ En primer lugar, los **usuarios no registrados** que podrán visualizar los prod
 
 ### - Bruno Vilella Martínez:
 
-- **EN/CAD Implementados:** ENCarrito, CadCarrito
+- **EN/CAD Implementados:** ENCarrito, CadCarrito, EnLinCarrito, CadLinCarrito
 - **Páginas aspx implementadas:** carrito.aspx
 - **Otras tareas:** Base de Datos
 - **Mejora Obligatoria Implementada:** Top 8 Ventas por Categoria
