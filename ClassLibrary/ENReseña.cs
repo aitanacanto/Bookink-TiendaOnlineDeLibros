@@ -62,7 +62,14 @@ namespace ClassLibrary
 
             return cad.Delete(this);
         }
-        
+
+        public bool Exists()
+        {
+            CADReseña cad = new CADReseña();
+
+            return cad.Exists(this);
+        }
+
         public static List<ENReseña> GetReseñas(int id)
         {
             CADReseña cad = new CADReseña();

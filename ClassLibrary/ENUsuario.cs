@@ -182,5 +182,11 @@ namespace ClassLibrary
             return cad.ObtenerUsuarios(true);
         }
 
+        public bool HaPedido(int idProduct)
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.HaPedido(this,idProduct);
+
+        }
     }
 }

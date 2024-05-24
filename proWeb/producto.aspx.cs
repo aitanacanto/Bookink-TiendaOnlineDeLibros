@@ -12,25 +12,25 @@ namespace proWeb
     public partial class producto : System.Web.UI.Page
     {
         int productId = -1;
+        const int MaxRelacionados = 4;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string Id = Request.QueryString["id"];
+            if (!string.IsNullOrEmpty(Id))
+            {
+                productId = int.Parse(Id);
+            }
             if (!IsPostBack)
             {
-                string Id = Request.QueryString["id"];
-                if (!string.IsNullOrEmpty(Id))
-                {
-                    productId = int.Parse(Id);
-                    CargarProducto(productId);
-                }
+                if (productId != -1) CargarProducto(productId);
                 List<ENProducto> listaProductos = ObtenerProductos();
+
                 List<ENProducto> Relacionado = new List<ENProducto>();
                 Random rnd = new Random();
                 List<ENProducto> productosAleatorios = listaProductos.OrderBy(x => rnd.Next()).ToList();
-                for (int i = 0; i < 4; i++)
-                {
-                    Relacionado.Add(productosAleatorios[i]);
-                }
-                List<ENReseña> listaReseñas = ENReseña.GetReseñas(productId);
+                Relacionado = productosAleatorios.GetRange(0,MaxRelacionados);
+
+                List<ENReseña> listaReseñas = ENReseña.GetReseñas(productId); //TODO: que solo muestre 5 reseñas
                 // Asignamos la lista de productos al repeater
                 reapeterProduct.DataSource = Relacionado;
                 reapeterProduct.DataBind();
@@ -42,6 +42,20 @@ namespace proWeb
                 else
                     LabelResenya.Visible = false;
                 this.DataBind(); // para el primer generar estrellas
+
+                ENUsuario user = Session["user"] as ENUsuario;
+                if (user == null || !user.HaPedido(productId))
+                {
+                    InputRating.Enabled = false;
+                    InputComment.Enabled = false;
+                    AddResenyaButton.Enabled = false;
+                }
+                else
+                {
+                    InputRating.Enabled = true;
+                    InputComment.Enabled = true;
+                    AddResenyaButton.Enabled = true;
+                }
             }
         }
 
@@ -135,6 +149,18 @@ namespace proWeb
         public float ValoracionMedia()
         {
             return ENReseña.ValoracionMedia(productId); 
+        }
+
+        protected void AddResenyaButton_Click(object sender, EventArgs e)
+        {
+            ENUsuario user = Session["user"] as ENUsuario;
+            float valoracion = float.Parse(InputRating.Text) / 100 * 5; // para tener un número entre 0 y 5
+            ENReseña nuevaRes = new ENReseña(user.Id,productId, valoracion, InputComment.Text, DateTime.Now);
+
+            if (nuevaRes.Exists()) nuevaRes.Update();
+            else nuevaRes.Create();
+            
+            Response.Redirect("mainPage.aspx");
         }
     }
 }
