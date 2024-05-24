@@ -121,5 +121,72 @@ namespace ClassLibrary
             }
             return lista;
         }
+
+        public StringBuilder graficaMetrica(ENPedido pedido)
+        {
+            var labels = new List<string>();
+            var data = new List<int>();
+            SqlConnection conex = new SqlConnection(constring); ;
+
+            try
+            {
+                conex.Open();
+
+                string query = "SELECT FORMAT(Fecha, 'MM/yy') AS Mes, COUNT(*) AS Cantidad " +
+                               "FROM PEDIDO " +
+                               "GROUP BY FORMAT(Fecha, 'MM/yy') " +
+                               "ORDER BY MIN(Fecha)";
+                SqlCommand cmd = new SqlCommand(query, conex);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    labels.Add(reader["Mes"].ToString());
+                    data.Add(Convert.ToInt32(reader["Cantidad"]));
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("User operation has failed. Error: {0}", e.Message);
+            }
+            finally
+            {
+                if (conex != null) conex.Close();
+            }
+
+            StringBuilder script = new StringBuilder();
+            script.Append("<script>");
+            script.Append("window.onload = function() {");
+            script.Append("var ctx = document.getElementById('pedidosChart').getContext('2d');");
+            script.Append("var pedidosChart = new Chart(ctx, {");
+            script.Append("type: 'bar',");
+            script.Append("data: {");
+            script.Append("labels: [" + string.Join(",", labels.ConvertAll(l => "'" + l + "'")) + "],");
+            script.Append("datasets: [{");
+            script.Append("label: 'Cantidad de Pedidos',");
+            script.Append("data: [" + string.Join(",", data) + "],");
+            script.Append("backgroundColor: 'rgba(54, 162, 235, 0.2)',");
+            script.Append("borderColor: 'rgba(54, 162, 235, 1)',");
+            script.Append("borderWidth: 1");
+            script.Append("}]");
+            script.Append("},");
+            script.Append("options: {");
+            script.Append("scales: {");
+            script.Append("y: {");
+            script.Append("beginAtZero: true,");
+            script.Append("max: " + (data.Max() + 10));
+            script.Append("}");
+            script.Append("}");
+            script.Append("}");
+            script.Append("});");
+            script.Append("}");
+            script.Append("</script>");
+
+            return script;
+        }
     }
 }
