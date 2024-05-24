@@ -3,7 +3,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .chart-container {
-            width: 100%;
+            width: 60vw;
             margin: 0 auto;
         }
         canvas {
