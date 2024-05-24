@@ -31,7 +31,7 @@ namespace ClassLibrary
             return existe;
         }
 
-        
+
 
         public bool Create(ENProducto en)
         {
@@ -110,7 +110,7 @@ namespace ClassLibrary
             try
             {
                 c.Open();
-                if (!this.Exists(c, en)){throw new ArgumentException("El producto no existe"); }
+                if (!this.Exists(c, en)) { throw new ArgumentException("El producto no existe"); }
                 string query = "Delete from PRODUCTO where Id = @Id";
                 SqlCommand com = new SqlCommand(query, c);
                 com.Parameters.AddWithValue("@Id", en.Id);
@@ -192,7 +192,7 @@ namespace ClassLibrary
                             en.Name = dr["nombre"].ToString();
                             en.Price = float.Parse(dr["precio"].ToString());
                             en.Stock = int.Parse(dr["cant_stock"].ToString());
-                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0: float.Parse(dr["precio_oferta"].ToString());
+                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
                             en.Sinopsis = dr["sinopsis"].ToString();
                             en.Autor = dr["autor"].ToString();
                             en.ImagePath = dr["img_producto"].ToString();
@@ -377,11 +377,11 @@ namespace ClassLibrary
                 conex.Open();
 
                 List<string> conditions = new List<string>();
-                if (categoria.HasValue) {  conditions.Add("c.id = @Categoria");    }
-                if (!string.IsNullOrEmpty(editorial)){  conditions.Add("p.editorial = @Editorial"); }
-                if (!string.IsNullOrEmpty(autor)){      conditions.Add("p.autor = @Autor");         }
-                if (precioMinimo.HasValue){             conditions.Add("p.precio >= @PrecioMinimo");}
-                if (precioMaximo.HasValue){             conditions.Add("p.precio <= @PrecioMaximo");}
+                if (categoria.HasValue) { conditions.Add("c.id = @Categoria"); }
+                if (!string.IsNullOrEmpty(editorial)) { conditions.Add("p.editorial = @Editorial"); }
+                if (!string.IsNullOrEmpty(autor)) { conditions.Add("p.autor = @Autor"); }
+                if (precioMinimo.HasValue) { conditions.Add("p.precio >= @PrecioMinimo"); }
+                if (precioMaximo.HasValue) { conditions.Add("p.precio <= @PrecioMaximo"); }
 
                 string query = @"
                                 SELECT p.*
@@ -396,11 +396,11 @@ namespace ClassLibrary
 
                 SqlCommand cmd = new SqlCommand(query, conex);
 
-                if (categoria.HasValue) {  cmd.Parameters.AddWithValue("@Categoria", categoria);   }
-                if (!string.IsNullOrEmpty(editorial)){  cmd.Parameters.AddWithValue("@Editorial", editorial);   }
-                if (!string.IsNullOrEmpty(autor)){      cmd.Parameters.AddWithValue("@Autor", autor);           }
-                if (precioMinimo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.Value); }
-                if (precioMaximo.HasValue){             cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.Value); }
+                if (categoria.HasValue) { cmd.Parameters.AddWithValue("@Categoria", categoria); }
+                if (!string.IsNullOrEmpty(editorial)) { cmd.Parameters.AddWithValue("@Editorial", editorial); }
+                if (!string.IsNullOrEmpty(autor)) { cmd.Parameters.AddWithValue("@Autor", autor); }
+                if (precioMinimo.HasValue) { cmd.Parameters.AddWithValue("@PrecioMinimo", precioMinimo.Value); }
+                if (precioMaximo.HasValue) { cmd.Parameters.AddWithValue("@PrecioMaximo", precioMaximo.Value); }
 
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -439,7 +439,7 @@ namespace ClassLibrary
         }
 
         public List<ENProducto> ObtenerTopProductosVendidos()
-{
+        {
             List<ENProducto> productos = new List<ENProducto>();
             SqlConnection conex = new SqlConnection(constring);
 
@@ -447,11 +447,11 @@ namespace ClassLibrary
             {
                 conex.Open();
                 string comandoSQL = @"
-            SELECT TOP 10 p.*, SUM(lp.cantidad) AS TotalVendido
-            FROM PRODUCTO p
-            JOIN LINPEDIDO lp ON p.id = lp.id_producto
-            GROUP BY p.id, p.nombre, p.cant_stock, p.precio, p.precio_oferta, p.img_producto, p.sinopsis, p.autor, p.cod_oferta, p.editorial, p.anyo_publicacion, p.num_pag
-            ORDER BY TotalVendido DESC";
+                SELECT TOP 10 p.*, SUM(lp.cantidad) AS TotalVendido
+                FROM PRODUCTO p
+                JOIN LINPEDIDO lp ON p.id = lp.id_producto
+                GROUP BY p.id, p.nombre, p.cant_stock, p.precio, p.precio_oferta, p.img_producto, p.sinopsis, p.autor, p.cod_oferta, p.editorial, p.anyo_publicacion, p.num_pag
+                ORDER BY TotalVendido DESC";
 
                 SqlCommand cmd = new SqlCommand(comandoSQL, conex);
 
@@ -461,18 +461,20 @@ namespace ClassLibrary
                     {
                         try
                         {
-                            ENProducto en = new ENProducto();
-                            en.Id = int.Parse(dr["id"].ToString());
-                            en.Name = dr["nombre"].ToString();
-                            en.Price = float.Parse(dr["precio"].ToString());
-                            en.Stock = int.Parse(dr["cant_stock"].ToString());
-                            en.SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString());
-                            en.Sinopsis = dr["sinopsis"].ToString();
-                            en.Autor = dr["autor"].ToString();
-                            en.ImagePath = dr["img_producto"].ToString();
-                            en.Editorial = dr["editorial"].ToString();
-                            en.AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString());
-                            en.NumPags = int.Parse(dr["num_pag"].ToString());
+                            ENProducto en = new ENProducto
+                            {
+                                Id = int.Parse(dr["id"].ToString()),
+                                Name = dr["nombre"].ToString(),
+                                Price = float.Parse(dr["precio"].ToString()),
+                                Stock = int.Parse(dr["cant_stock"].ToString()),
+                                SalePrice = dr["precio_oferta"].ToString() == "" ? 0 : float.Parse(dr["precio_oferta"].ToString()),
+                                Sinopsis = dr["sinopsis"].ToString(),
+                                Autor = dr["autor"].ToString(),
+                                ImagePath = dr["img_producto"].ToString(),
+                                Editorial = dr["editorial"].ToString(),
+                                AnyoPubli = int.Parse(dr["anyo_publicacion"].ToString()),
+                                NumPags = int.Parse(dr["num_pag"].ToString())
+                            };
 
                             productos.Add(en);
                         }
@@ -501,7 +503,6 @@ namespace ClassLibrary
                 conex.Close();
             }
         }
-
-
     }
 }
+   
