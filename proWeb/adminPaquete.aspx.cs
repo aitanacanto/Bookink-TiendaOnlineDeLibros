@@ -41,9 +41,9 @@ namespace proWeb
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(TextBox3.Text) ||
-                    string.IsNullOrWhiteSpace(TextBox4.Text) ||
-                    string.IsNullOrWhiteSpace(TextBox5.Text) ||
+                if (string.IsNullOrWhiteSpace(TxtName.Text) ||
+                    string.IsNullOrWhiteSpace(TextBox1.Text) ||
+                    string.IsNullOrWhiteSpace(TextBox2.Text) ||
                     FileUpload1.PostedFile == null ||
                     FileUpload1.PostedFile.FileName == "")
                 {
@@ -52,14 +52,14 @@ namespace proWeb
                     return;
                 }
 
-                string name = TextBox3.Text;
-                float price = float.Parse(TextBox4.Text, CultureInfo.InvariantCulture);
-                string descripcion = TextBox5.Text;
+                string name = TxtName.Text;
+                float price = float.Parse(TextBox1.Text, CultureInfo.InvariantCulture);
+                string descripcion = TextBox2.Text;
                 string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
                 string extension = Path.GetExtension(FileUpload1.PostedFile.FileName);
                 string filePath = "/content/products/" + name + DateTime.Now.ToString("dd-MM-yy-HH-mm-ss") + extension;
 
-                ENPaquete newPa = new ENPaquete(name, price, descripcion, null);
+                ENPaquete newPa = new ENPaquete(name, price, descripcion, filePath, null);
                 newPa.CrearPaquete();
                 FileUpload1.SaveAs(Server.MapPath(filePath));
                 listaPaquetes = CargarPaquetes();
@@ -91,8 +91,6 @@ namespace proWeb
                 TextBox3.Text = pa.Nombre;
                 TextBox4.Text = pa.Precio.ToString("0.00", CultureInfo.InvariantCulture);
                 TextBox5.Text = pa.Descripcion;
-
-
             }
 
 

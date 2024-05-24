@@ -32,6 +32,7 @@ namespace proWeb
         private void CargarDatosUsuario()
         {
             lblNombreActual.Text = user.Name;
+            lblApellidosActual.Text = user.Surname;
             lblCorreoActual.Text = user.Email;
             lblTelefonoActual.Text = user.PhoneNumber;
         }
@@ -154,7 +155,18 @@ namespace proWeb
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
+
+            user = Session["user"] as ENUsuario;
+
             // Actualizar información de usuario
+            if (!string.IsNullOrEmpty(txtNombreNuevo.Text))
+            {
+                user.Name = txtNombreNuevo.Text;
+            }
+            if (!string.IsNullOrEmpty(txtApellidosNuevos.Text))
+            {
+                user.Surname = txtApellidosNuevos.Text;
+            }
             if (!string.IsNullOrEmpty(txtCorreoNuevo.Text))
             {
                 user.Email = txtCorreoNuevo.Text;

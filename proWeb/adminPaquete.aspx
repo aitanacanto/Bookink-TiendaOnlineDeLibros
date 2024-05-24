@@ -46,17 +46,6 @@
                                 <asp:TextBox TextMode="MultiLine" runat="server" type="text" name="sinopsis" class="form-control" ID="TextBox2"></asp:TextBox>
                             </div>
                         </div>
-                        <div class="row align-items-start">
-                            <div class="mb-3 col">
-                                <asp:Label runat="server" class="form-label">Categoría</asp:Label>
-                                <select class="form-select">
-                                    <option value="cat1">Cat1</option>
-                                    <option value="cat2">Cat2</option>
-                                    <option value="cat3">Cat3</option>
-                                    <option value="cat4">Cat4</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                     <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                     <div class="modal-footer">
@@ -97,15 +86,6 @@
                             </div>
                         </div>
                         <div class="row align-items-start">
-                            <div class="mb-3 col">
-                                <asp:Label runat="server" class="form-label">Categoría</asp:Label>
-                                <select class="form-select">
-                                    <option value="cat1">Cat1</option>
-                                    <option value="cat2">Cat2</option>
-                                    <option value="cat3">Cat3</option>
-                                    <option value="cat4">Cat4</option>
-                                </select>
-                            </div>
                             <div class="mb-3 col">
                                 <asp:Label runat="server" class="form-label">Id</asp:Label>
                                 <asp:TextBox runat="server" type="number" name="id" disabled="true" class="form-control" ID="ids" ReadOnly="true" />

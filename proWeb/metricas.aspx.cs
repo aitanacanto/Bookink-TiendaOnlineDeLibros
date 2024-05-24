@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Text;
 using System.Web.UI;
 using ClassLibrary;
+using System.Linq;
 
 namespace proWeb
 {
@@ -34,7 +35,7 @@ namespace proWeb
                     conex.Open();
 
                     string query = "SELECT FORMAT(Fecha, 'MM/yy') AS Mes, COUNT(*) AS Cantidad " +
-                                   "FROM Pedidos " +
+                                   "FROM PEDIDO " +
                                    "GROUP BY FORMAT(Fecha, 'MM/yy') " +
                                    "ORDER BY MIN(Fecha)";
                     SqlCommand cmd = new SqlCommand(query, conex);
@@ -76,7 +77,7 @@ namespace proWeb
             script.Append("scales: {");
             script.Append("y: {");
             script.Append("beginAtZero: true,");
-            script.Append("max: 50");
+            script.Append("max: " + (data.Max() + 10));
             script.Append("}");     
             script.Append("}");
             script.Append("}");

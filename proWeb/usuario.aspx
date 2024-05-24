@@ -38,6 +38,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div class="container content-box">
         <h1 class="admin-title">Mi cuenta</h1>
         
@@ -45,7 +46,12 @@
             <tr>
                 <td class="label-column"><asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label></td>
                 <td class="data-column"><asp:Label ID="lblNombreActual" runat="server" Text=""></asp:Label></td>
-                <td class="input-column"></td>
+                <td class="input-column"><asp:TextBox ID="txtNombreNuevo" runat="server" placeholder="Ingrese su nuevo nombre"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td class="label-column"><asp:Label ID="lblApellidos" runat="server" Text="Apellidos:"></asp:Label></td>
+                <td class="data-column"><asp:Label ID="lblApellidosActual" runat="server" Text=""></asp:Label></td>
+                <td class="input-column"><asp:TextBox ID="txtApellidosNuevos" runat="server" placeholder="Ingrese sus nuevos apellidos"></asp:TextBox></td>
             </tr>
             <tr>
                 <td class="label-column"><asp:Label ID="lblCorreo" runat="server" Text="Correo electrónico:"></asp:Label></td>
@@ -60,7 +66,7 @@
             <tr>
                 <td class="label-column"><asp:Label ID="lblTelefono" runat="server" Text="Teléfono:"></asp:Label></td>
                 <td class="data-column"><asp:Label ID="lblTelefonoActual" runat="server" Text=""></asp:Label></td>
-                <td class="input-column"><asp:TextBox ID="txtTelefonoNuevo" runat="server"></asp:TextBox></td>
+                <td class="input-column"><asp:TextBox ID="txtTelefonoNuevo" runat="server" placeholder="Ingrese su nuevo número de teléfono"></asp:TextBox></td>
             </tr>
             <tr>
                 <td colspan="3"><hr /></td>
@@ -74,85 +80,89 @@
             </tr>
         </table>
 
-        <div class="collapse" id="collapseDirecciones">
-            <h2>Direcciones Asociadas</h2>
-            <asp:Repeater ID="repeaterDirecciones" runat="server">
-                <HeaderTemplate>
-                    <table class="table">
-                </HeaderTemplate>
-                <ItemTemplate>
-                    <tr>
-                        <td colspan="2"><h3>Dirección <%# Container.ItemIndex + 1 %></h3></td>
-                    </tr>
-                    <tr>
-                        <td class="label-column">Dirección:</td>
-                        <td class="data-column">
-                            <span class="data-label"><%# Eval("Direccion") %></span>
-                            <asp:TextBox ID="txtDireccion" runat="server" Text='<%# Eval("Direccion") %>' CssClass="data-input" Visible="false"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-column">Código Postal:</td>
-                        <td class="data-column">
-                            <span class="data-label"><%# Eval("CodPostal") %></span>
-                            <asp:TextBox ID="txtCodPostal" runat="server" Text='<%# Eval("CodPostal") %>' CssClass="data-input" Visible="false"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-column">Ciudad:</td>
-                        <td class="data-column">
-                            <span class="data-label"><%# Eval("Ciudad") %></span>
-                            <asp:TextBox ID="txtCiudad" runat="server" Text='<%# Eval("Ciudad") %>' CssClass="data-input" Visible="false"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label-column">País:</td>
-                        <td class="data-column">
-                            <span class="data-label"><%# Eval("Pais") %></span>
-                            <asp:TextBox ID="txtPais" runat="server" Text='<%# Eval("Pais") %>' CssClass="data-input" Visible="false"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:Button ID="btnEditarDireccion" runat="server" Text="Editar" CommandArgument='<%# Eval("ID") %>' OnClick="BtnEditarDireccion_Click" CssClass="btnEditarDireccion" />
-                            <asp:Button ID="btnConfirmarEdicion" runat="server" Text="Confirmar" CommandArgument='<%# Eval("ID") %>' OnClick="BtnConfirmarEdicion_Click" CssClass="btnConfirmarEdicion" Visible="false" />
-                            <asp:Button ID="btnEliminarDireccion" runat="server" Text="Eliminar" CommandArgument='<%# Eval("ID") %>' OnClick="BtnEliminarDireccion_Click" OnClientClick="return confirmarEliminacion();" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><hr /></td>
-                    </tr>
-                </ItemTemplate>
-                <FooterTemplate>
-                    </table>
-                </FooterTemplate>
-            </asp:Repeater>
-            <button type="button" class="btn btn-primary" id="btnMostrarFormularioAgregar">Agregar Dirección</button>
-            
-            <div id="formularioAgregarDireccion" style="display:none;">
-                <table class="user-info-table">
-                    <tr>
-                        <td class="label-column"><asp:Label ID="lblNuevaDireccion" runat="server" Text="Dirección:"></asp:Label></td>
-                        <td class="input-column"><asp:TextBox ID="txtNuevaDireccion" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td class="label-column"><asp:Label ID="lblNuevoCodPostal" runat="server" Text="Código Postal:"></asp:Label></td>
-                        <td class="input-column"><asp:TextBox ID="txtNuevoCodPostal" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td class="label-column"><asp:Label ID="lblNuevaCiudad" runat="server" Text="Ciudad:"></asp:Label></td>
-                        <td class="input-column"><asp:TextBox ID="txtNuevaCiudad" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td class="label-column"><asp:Label ID="lblNuevoPais" runat="server" Text="País:"></asp:Label></td>
-                        <td class="input-column"><asp:TextBox ID="txtNuevoPais" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><asp:Button ID="btnAgregarDireccion" runat="server" Text="Agregar" OnClick="BtnAgregarDireccion_Click" /></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <asp:UpdatePanel ID="UpdatePanelDirecciones" runat="server">
+            <ContentTemplate>
+                <div class="collapse" id="collapseDirecciones">
+                    <h2>Direcciones Asociadas</h2>
+                    <asp:Repeater ID="repeaterDirecciones" runat="server">
+                        <HeaderTemplate>
+                            <table class="table">
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td colspan="2"><h3>Dirección <%# Container.ItemIndex + 1 %></h3></td>
+                            </tr>
+                            <tr>
+                                <td class="label-column">Dirección:</td>
+                                <td class="data-column">
+                                    <span class="data-label"><%# Eval("Direccion") %></span>
+                                    <asp:TextBox ID="txtDireccion" runat="server" Text='<%# Eval("Direccion") %>' CssClass="data-input" Visible="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-column">Código Postal:</td>
+                                <td class="data-column">
+                                    <span class="data-label"><%# Eval("CodPostal") %></span>
+                                    <asp:TextBox ID="txtCodPostal" runat="server" Text='<%# Eval("CodPostal") %>' CssClass="data-input" Visible="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-column">Ciudad:</td>
+                                <td class="data-column">
+                                    <span class="data-label"><%# Eval("Ciudad") %></span>
+                                    <asp:TextBox ID="txtCiudad" runat="server" Text='<%# Eval("Ciudad") %>' CssClass="data-input" Visible="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-column">País:</td>
+                                <td class="data-column">
+                                    <span class="data-label"><%# Eval("Pais") %></span>
+                                    <asp:TextBox ID="txtPais" runat="server" Text='<%# Eval("Pais") %>' CssClass="data-input" Visible="false"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <asp:Button ID="btnEditarDireccion" runat="server" Text="Editar" CommandArgument='<%# Eval("ID") %>' OnClick="BtnEditarDireccion_Click" CssClass="btnEditarDireccion" />
+                                    <asp:Button ID="btnConfirmarEdicion" runat="server" Text="Confirmar" CommandArgument='<%# Eval("ID") %>' OnClick="BtnConfirmarEdicion_Click" CssClass="btnConfirmarEdicion" Visible="false" />
+                                    <asp:Button ID="btnEliminarDireccion" runat="server" Text="Eliminar" CommandArgument='<%# Eval("ID") %>' OnClick="BtnEliminarDireccion_Click" OnClientClick="return confirmarEliminacion();" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><hr /></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                    <button type="button" class="btn btn-primary" id="btnMostrarFormularioAgregar">Agregar Dirección</button>
+                    
+                    <div id="formularioAgregarDireccion" style="display:none;">
+                        <table class="user-info-table">
+                            <tr>
+                                <td class="label-column"><asp:Label ID="lblNuevaDireccion" runat="server" Text="Dirección:"></asp:Label></td>
+                                <td class="input-column"><asp:TextBox ID="txtNuevaDireccion" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td class="label-column"><asp:Label ID="lblNuevoCodPostal" runat="server" Text="Código Postal:"></asp:Label></td>
+                                <td class="input-column"><asp:TextBox ID="txtNuevoCodPostal" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td class="label-column"><asp:Label ID="lblNuevaCiudad" runat="server" Text="Ciudad:"></asp:Label></td>
+                                <td class="input-column"><asp:TextBox ID="txtNuevaCiudad" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td class="label-column"><asp:Label ID="lblNuevoPais" runat="server" Text="País:"></asp:Label></td>
+                                <td class="input-column"><asp:TextBox ID="txtNuevoPais" runat="server"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><asp:Button ID="btnAgregarDireccion" runat="server" Text="Agregar" OnClick="BtnAgregarDireccion_Click" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
         <!-- Botón para actualizar información -->
         <div class="button-container">

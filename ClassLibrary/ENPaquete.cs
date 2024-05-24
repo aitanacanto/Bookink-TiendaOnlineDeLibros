@@ -23,6 +23,7 @@ namespace ClassLibrary
             this.Nombre = "";
             this.Precio = 0;
             this.Descripcion = "";
+            Productos = new List<ENProducto>();
         }
 
         public ENPaquete(int idPaquete, string nombre, float precio, string descripcion, List<ENProducto> productos)
@@ -34,12 +35,21 @@ namespace ClassLibrary
             Productos = new List<ENProducto>(productos);
         }
 
-        public ENPaquete(string nombre, float precio, string descripcion, List<ENProducto> productos)
+        public ENPaquete(string nombre, float precio, string descripcion, string img_paquete, List<ENProducto> productos)
         {
             Nombre = nombre;
             Precio = precio;
             Descripcion = descripcion;
-            Productos = new List<ENProducto>(productos);
+            Img_paquete = img_paquete;
+            if (productos == null)
+            {
+                Productos = new List<ENProducto>();
+            }
+            else
+            {
+                Productos = new List<ENProducto>(productos);
+            }
+            
         }
 
         public bool CrearPaquete()
