@@ -112,14 +112,30 @@
                 <div class="row">
                     <asp:Repeater ID="repeaterTopProductos" runat="server">
                         <ItemTemplate>
-                            <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch">
-                                <div class="product-card card d-flex flex-column flex-grow-1">
-                                    <a href='<%# "producto.aspx?id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
+                            <div class="col-md-3 mb-4 col-lg-3 d-flex mb-4 align-items-stretch" data-aos="fade-in">
+                                <div class="product-card card d-flex flex-column">
+                                    <a href='<%# "producto.aspx?Id=" + Eval("Id") %>' class="text-decoration-none d-flex flex-column flex-grow-1">
+                                        <div class="text-center">
+                                            <asp:Image ID="imgProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                        </div>
                                         <div class="card-body d-flex flex-column flex-grow-1">
                                             <h5 class="card-title font-weight-bold text-dark mb-0" style="font-weight: bold; text-align: left;"><%# Eval("name") %></h5>
-                                        </div>
-                                        <div class="text-center">
-                                            <asp:Image ID="imgTopProduct" runat="server" class="card-img-top img-fluid max-width mb-3 mt-3" ImageUrl='<%# Eval("ImagePath") %>' AlternateText="Producto" />
+                                            <p class="autor mb-1"><%# Eval("Autor") %></p>
+                                            <div class="mb-2">
+                                                <i class="fa-solid fa-star color-estre"></i>
+                                                <i class="fa-solid fa-star color-estre"></i>
+                                                <i class="fa-solid fa-star color-estre"></i>
+                                                <i class="fa-solid fa-star color-estre"></i>
+                                                <i class="fa-regular fa-star no-estre"></i>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="card-text text-danger" style="text-decoration: line-through"><%# String.Format("{0:0.00}", Eval("price")) %> €</p>
+                                                <p class="card-text text-dark" style="margin-left: 10px;"><%# String.Format("{0:0.00}", Eval("salePrice")) %> €</p>
+                                            </div>
+
+                                            <div class="text-center mt-auto">
+                                                <asp:Button ID="Id_Producto" runat="server" Class="btn btn-primary btn-lg" Text="Añadir al Carrito" CommandArgument='<%# Eval("id") %>' OnClick="Add_Click" />
+                                            </div>
                                         </div>
                                     </a>
                                 </div>
