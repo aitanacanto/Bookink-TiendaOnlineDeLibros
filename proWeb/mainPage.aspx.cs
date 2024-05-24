@@ -100,6 +100,7 @@ namespace proWeb
         private void BindTopProductosMasVendidos()
         {
             List<ENProducto> topProductos = new ENProducto().ObtenerTopProductosVendidos();
+            topProductos = topProductos.GetRange(0, 8);
             repeaterTopProductos.DataSource = topProductos;
             repeaterTopProductos.DataBind();
         }
