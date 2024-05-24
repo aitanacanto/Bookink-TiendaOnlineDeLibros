@@ -75,7 +75,7 @@
             <h1>Categorías Destacadas</h1>
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-sm">
+                    <div class="col-sm mb-3">
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/Q5glcWU.png" alt="Card image cap">
                             <div class="card-body">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm mb-3">
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/zU8cXVz.png" alt="Card image cap">
                             <div class="card-body">
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm mb-3">
                         <div class="card mx-auto product-card" style="width: 18rem;">
                             <img class="card-img-top" src="https://i.imgur.com/awqdnuz.png" alt="Card image cap">
                             <div class="card-body">
