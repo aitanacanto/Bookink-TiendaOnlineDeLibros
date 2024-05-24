@@ -18,6 +18,7 @@ namespace proWeb
             if (!IsPostBack)
             {
                 graficaVentas();
+                CargarTopProductosVendidos();
             }
         }
 
@@ -85,12 +86,16 @@ namespace proWeb
 
             litScript.Text = script.ToString();
         }
-        private void LoadTopProductos()
+        private void CargarTopProductosVendidos()
         {
-            ENProducto enProducto = new ENProducto();
-            List<ENProducto> topProductos = enProducto.ObtenerTopProductosVendidos();
-            repeaterTopProducts.DataSource = topProductos;
-            repeaterTopProducts.DataBind();
+            ENProducto producto = new ENProducto();
+            List<ENProducto> productosVendidos = producto.ObtenerTopProductosVendidosMetricas();
+
+            if (productosVendidos != null && productosVendidos.Count > 0)
+            {
+                repeaterTopProducts.DataSource = productosVendidos;
+                repeaterTopProducts.DataBind();
+            }
         }
     }
 }
