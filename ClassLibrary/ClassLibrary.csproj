@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -43,36 +43,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CADCarrito.cs" />
-    <Compile Include="CADDireccion.cs" />
-    <Compile Include="CADLinCarrito.cs" />
-    <Compile Include="CADLinPedido.cs" />
-    <Compile Include="CADLinPedido_pa.cs" />
-    <Compile Include="CADPaquete.cs" />
-    <Compile Include="CADPedido.cs" />
-    <Compile Include="CADProducto.cs" />
-    <Compile Include="CADCategoria.cs" />
-    <Compile Include="CADReseña.cs" />
-    <Compile Include="CADTieneCategoria.cs" />
-    <Compile Include="CADTieneDireccion.cs" />
-    <Compile Include="CADTienePaquete.cs" />
-    <Compile Include="CADUsuario.cs" />
-    <Compile Include="CADLinCarrito_pa.cs" />
-    <Compile Include="ENLinCarrito_pa.cs" />
-    <Compile Include="ENCarrito.cs" />
-    <Compile Include="ENDireccion.cs" />
-    <Compile Include="ENLinCarrito.cs" />
-    <Compile Include="ENLinPedido.cs" />
-    <Compile Include="ENLinPedido_pa.cs" />
-    <Compile Include="ENPaquete.cs" />
-    <Compile Include="ENPedido.cs" />
-    <Compile Include="ENReseña.cs" />
-    <Compile Include="ENTieneCategoria.cs" />
-    <Compile Include="ENTieneDireccion.cs" />
-    <Compile Include="ENTienePaquete.cs" />
-    <Compile Include="ENUsuario.cs" />
-    <Compile Include="ENCategoria.cs" />
-    <Compile Include="ENProducto.cs" />
+    <Compile Include="DataAccess\CADCarrito.cs" />
+    <Compile Include="DataAccess\CADDireccion.cs" />
+    <Compile Include="DataAccess\CADLinCarrito.cs" />
+    <Compile Include="DataAccess\CADLinPedido.cs" />
+    <Compile Include="DataAccess\CADLinPedido_pa.cs" />
+    <Compile Include="DataAccess\CADPaquete.cs" />
+    <Compile Include="DataAccess\CADPedido.cs" />
+    <Compile Include="DataAccess\CADProducto.cs" />
+    <Compile Include="DataAccess\CADCategoria.cs" />
+    <Compile Include="DataAccess\CADReseña.cs" />
+    <Compile Include="DataAccess\CADTieneCategoria.cs" />
+    <Compile Include="DataAccess\CADTieneDireccion.cs" />
+    <Compile Include="DataAccess\CADTienePaquete.cs" />
+    <Compile Include="DataAccess\CADUsuario.cs" />
+    <Compile Include="DataAccess\CADLinCarrito_pa.cs" />
+    <Compile Include="Entities\ENLinCarrito_pa.cs" />
+    <Compile Include="Entities\ENCarrito.cs" />
+    <Compile Include="Entities\ENDireccion.cs" />
+    <Compile Include="Entities\ENLinCarrito.cs" />
+    <Compile Include="Entities\ENLinPedido.cs" />
+    <Compile Include="Entities\ENLinPedido_pa.cs" />
+    <Compile Include="Entities\ENPaquete.cs" />
+    <Compile Include="Entities\ENPedido.cs" />
+    <Compile Include="Entities\ENReseña.cs" />
+    <Compile Include="Entities\ENTieneCategoria.cs" />
+    <Compile Include="Entities\ENTieneDireccion.cs" />
+    <Compile Include="Entities\ENTienePaquete.cs" />
+    <Compile Include="Entities\ENUsuario.cs" />
+    <Compile Include="Entities\ENCategoria.cs" />
+    <Compile Include="Entities\ENProducto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

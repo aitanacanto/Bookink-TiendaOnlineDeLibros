@@ -1,169 +1,145 @@
-# LibroExpress - Tienda de Libros Online
-> HADA- Práctica Grupal
+<div align="center">
 
-## Datos Grupo
-### Integrantes del grupo
+# LibroExpress · Bookink
 
-| Nombre        | Apellidos         | DNI       | Entidades asociadas          |
-|---------------|-------------------|-----------|------------------------------|
-| Aitana        | Cantó Rico        | DNI000001 | ENTienePaquete, ENPaquete    |
-| Rafael        | Carballo Lorenzo  | DNI000002 | ENPedido, ENLinPedido_pa     |
-| Bruno         | Vilella Martínez  | DNI000003 | ENCarrito, ENLinCarrito      |
-| Darío         | Pastor Fuentes    | DNI000004 | EnProducto, EnLinPedido      |
-| Alberto       | Boronat López     | DNI000005 | ENCategoria, EnTieneCategoria|
-| Manuel José   | Tornero Fuster    | DNI000006 | ENUsuario, ENReseña          |
-| Jorge         | Paredes Soler     | DNI000007 | ENDireccion, ENTieneDireccion|
+### Una librería online desarrollada en C# y ASP.NET Web Forms
 
-### Descripción
-La aplicación web que implementaremos es una **tienda online de libros**. En nuestra tienda online habrá **tres tipos de usuarios**, de esta categoría dependrán los permisos que este usuario tenga en la web.
+Catálogo de libros · Paquetes de lectura · Carrito y pedidos · Administración
 
-En primer lugar, los **usuarios no registrados** que podrán visualizar los productos y añadirlos al carrito. Después, los **usuarios registrados** que podrán hacer lo mismo que los anteriores y además realizar pedidos y acceder al estado de su pedido, entre otras cosas. Por último, los **administradores de la web** que podrán controlar el stock, añadir productos y eliminarlos si es necesario.
+**C# · .NET Framework 4.7.2 · ASP.NET Web Forms · SQL Server · ADO.NET · Bootstrap**
 
-### Parte Pública
-> Funcionalidad de la parte pública de la web (sin estar registrado).
-- Ver el listado de productos.
+[Arquitectura](#arquitectura) · [Ejecución local](docs/EJECUCION.md) · [Equipo](#equipo-y-contribuciones)
 
-- Conocer las especificaciones y ficha técnica de cada producto.
-- Buscar o filtrar en el listado de productos.
-- Añadir productos al carrito.
-- Posibilidad de registrarse en la web.
+<img src="docs/images/bookink-banner.png" alt="Identidad visual original de Bookink: descubre y compra libros" width="960" />
 
-### Listado EN Pública
-- **ENProducto**: Representa los libros disponibles para la venta en la tienda.
-- **ENCategoría**: Categorías a las que pertenecen los libros para facilitar la búsqueda.
-- **ENTieneCategoria**: Relación que indica qué productos están asociados a una categoría.
-- **ENUsuario**: Usuarios no registrados que visitan la tienda y pueden añadir productos al carrito.
-- **ENCarrito**: Carrito de compras que contiene los productos seleccionados por el usuario.
-- **ENLinCarrito**: Relación entre el carrito de compras y los productos seleccionados.
-- **ENPaquete**: Paquetes de libros disponibles.
-- **ENTienePaquete**: Relación que indica qué productos están incluidos en un paquete.
+</div>
 
+## El proyecto
 
-### Parte Privada
-> Funcionalidad de la parte privada de la web (una vez registrado)
-- Hacer pedidos.
+LibroExpress, presentado en la interfaz como **Bookink**, es un proyecto académico en equipo del curso 2023/2024 de la asignatura **Herramientas Avanzadas para el Desarrollo de Aplicaciones (HADA)** de la Universidad de Alicante.
 
-- Ver el estado de los pedidos realizados.
-- Suscribirse a diferentes paquetes en los que recibirán libros de forma mensual o anual.
-- Programa de fidelización donde los usuarios puedan acumular puntos por cada compra realizada y luego canjear esos puntos por descuentos o productos gratuitos.
-- Si eres administrador, añadir o eliminar productos y controlar el stock.
+La aplicación organiza una tienda de libros en tres áreas: navegación pública, operaciones de clientes registrados y gestión administrativa. La lógica de negocio y el acceso a SQL Server se separan de las páginas Web Forms mediante entidades EN y clases de acceso a datos CAD.
 
-### Listado EN Privada
-- **ENPedido**: Pedidos realizados por los usuarios registrados.
-- **ENLinPedido**: Relación entre el pedido y los productos seleccionados.
-- **ENLinPedido_pa**: Relación entre el pedido y los paquetes de productos.
-- **ENReseña**: Reseñas y valoraciones de los productos realizadas por los usuarios.
-- **ENDireccion**: Información de dirección asociada a un usuario.
-- **ENTieneDireccion**: Relación que indica qué usuarios están asociados a una dirección.
+La imagen de portada es un recurso gráfico original de la aplicación.
 
+## Vistas de la aplicación
 
-### Posibles mejoras
-- Añadir una sección biblioteca en la que también se puedan alquilar libros por determinado tiempo, el precio de alquiler dependerá de este tiempo.
+<table>
+  <tr>
+    <td align="center"><a href="docs/screenshots/portada.png"><img src="docs/screenshots/portada.png" width="450" alt="Portada de Bookink con catálogo de ejemplo" /></a></td>
+    <td align="center"><a href="docs/screenshots/catalogo.png"><img src="docs/screenshots/catalogo.png" width="450" alt="Catálogo de libros de Bookink" /></a></td>
+  </tr>
+  <tr><td align="center">Portada y novedades</td><td align="center">Catálogo de libros</td></tr>
+  <tr>
+    <td align="center"><a href="docs/screenshots/libro.png"><img src="docs/screenshots/libro.png" width="450" alt="Ficha de un libro" /></a></td>
+    <td align="center"><a href="docs/screenshots/paquete.png"><img src="docs/screenshots/paquete.png" width="450" alt="Ficha de un paquete y sus libros" /></a></td>
+  </tr>
+  <tr><td align="center">Ficha de libro</td><td align="center">Paquete de lectura</td></tr>
+</table>
 
-- Implementar un chat de atención al cliente con inteligencia artificial para una mejor experiencia de usuario.
+Interfaz original ejecutada localmente con IIS Express en una demostración de solo lectura, con datos del catálogo de ejemplo. Las selecciones de productos no representan ventas reales; las capturas no validan el proceso de compra ni la conexión histórica a SQL Server. Pulsa sobre una imagen para ampliarla.
 
-- Mostrar en tiempo real la ubicación de los pedidos mediante una integración con Google Maps.
+Otras pantallas: [inicio de sesión](docs/screenshots/acceso.png) · [registro](docs/screenshots/registro.png).
 
-- Recomendaciones personalizadas: Utilizar algoritmos de recomendación basados en el historial de compras de los usuarios para ofrecer recomendaciones personalizadas de libros que podrían interesarles.
+### Administración
 
-- Integración con redes sociales: Permitir a los usuarios compartir sus compras, reseñas y listas de deseos en redes sociales como Facebook, Twitter o Instagram, lo que puede ayudar a aumentar la visibilidad de la tienda y atraer a nuevos clientes.
+<table>
+  <tr>
+    <td align="center"><a href="docs/screenshots/admin-panel.png"><img src="docs/screenshots/admin-panel.png" width="450" alt="Panel de administración de Bookink" /></a></td>
+    <td align="center"><a href="docs/screenshots/admin-productos.png"><img src="docs/screenshots/admin-productos.png" width="450" alt="Listado de productos en la administración de Bookink" /></a></td>
+  </tr>
+  <tr><td align="center">Panel de administración</td><td align="center">Gestión de productos</td></tr>
+  <tr>
+    <td align="center"><a href="docs/screenshots/admin-paquetes.png"><img src="docs/screenshots/admin-paquetes.png" width="450" alt="Listado de paquetes de lectura en administración" /></a></td>
+    <td align="center"><a href="docs/screenshots/admin-crear-paquete.png"><img src="docs/screenshots/admin-crear-paquete.png" width="450" alt="Formulario original para crear un paquete de lectura" /></a></td>
+  </tr>
+  <tr><td align="center">Gestión de paquetes</td><td align="center">Formulario de creación de paquetes</td></tr>
+</table>
 
-### Base de Datos
-![Base de Datos](BaseDeDatos.png)
-*También, está disponible en pdf en el archivo ![bbdd.pdf](bbdd.pdf).*
+Las vistas administrativas se muestran con una cuenta y datos de ejemplo en una copia local de solo lectura. Los formularios se pueden visualizar, pero las operaciones de creación, edición y borrado están bloqueadas en esa demostración. Estas capturas no validan el acceso administrativo ni la persistencia sobre la base de datos original.
 
-### Instrucciones de Uso:
-- **Usuario para registrarse con permisos de administrador:**
-    - Usuario: javiers@bookink.store
-    - Contraseña: queremosun10
-- **Credenciales para conectarse a la bbdd:**
-    - IP: serverpf.com
-    - DataBase: Bookink
-    - Usuario: Empleado
-    - Contraseña: InkBook
+Más vistas: [categorías](docs/screenshots/admin-categorias.png) · [usuarios de ejemplo](docs/screenshots/admin-usuarios.png).
 
-### Mejoras Implementadas:
-- Compra de un dominio: bookink.store
-- Uso de un servidor de bases de batos on promise, Microsoft SQL Server.
-- Cifrado de contraseñas.
-- Certificado ssl.
-- Comprobaciones DNI, datos tarjeta de crédito, etc...
-- Enlace Redes Sociales.
+## Funcionalidades
 
+| Área | Funcionalidades incluidas |
+| --- | --- |
+| Catálogo | Libros, fichas de producto, búsqueda y filtros por nombre, categoría, autor, editorial y precio. |
+| Paquetes | Agrupaciones de libros, consulta de sus productos y administración de paquetes. |
+| Clientes | Registro, acceso, perfil y direcciones. |
+| Compra | Carrito, líneas de pedido y consulta del historial de pedidos. |
+| Administración | Gestión de productos, categorías, paquetes y usuarios. |
+| Métricas | Consultas de ventas y visualización de su evolución. |
 
-### Mejoras Implementadas Obligatorias:
-- Informe de métricas:
-    - Top 10 ventas
-    - Top 10 ventas por categoría
-    - Gráfica de ventas por mes
+Es un prototipo académico; el flujo de pedido no constituye una integración con una pasarela bancaria real.
 
-- Filtrado de productos:
-    - Por Categorías
-    - Por Editorial
-    - Por Precio Mínimo
-    - Por Precio Máximo
-    - Por Nombre
+## Arquitectura
 
-### Implementaciones de cada integrante:
+```mermaid
+flowchart LR
+    Navegador["Navegador · HTML / CSS / Bootstrap"] <-->|"HTTP"| Web["proWeb · ASP.NET Web Forms"]
+    Web --> EN["Entities · Entidades EN"]
+    EN --> CAD["DataAccess · Clases CAD / ADO.NET"]
+    CAD <-->|"Consultas SQL"| SQL["SQL Server"]
+```
 
-### - Aitana Cantó Rico:
-- **EN/CAD Implementados:** ENPaquete, CADPaquete, ENTienePaquete, CADTienePaquete
-- **Páginas aspx implementadas:** paquete.aspx, adminPaquete.aspx, SiteMaster
-- **Otras tareas:** Creación script bbdd: inserción de productos, paquetes, categorias, etc.
-- **Mejora Obligatoria Implementada:** Filtrado de libros por nombre, categoría, etc...
-- **Colaboraciones:** mainPage.aspx, catalogo.aspx, algunos métodos de CADProducto, relacionados con el filtrado y cdargar los productos en MainPage.aspx y catalogo.aspx.
+| Capa | Responsabilidad |
+| --- | --- |
+| `proWeb/` | Páginas ASPX, formularios, navegación compartida y presentación. |
+| `ClassLibrary/Entities/` | Entidades de negocio: productos, paquetes, usuarios, carrito y pedidos. |
+| `ClassLibrary/DataAccess/` | Acceso a los datos y operaciones de persistencia. |
+| `database/` | Esquema relacional y catálogo de ejemplo sin cuentas personales. |
 
-### - Rafael Carballo Lorenzo:
-- **EN/CAD Implementados:** ENPedido, CADPedido, ENLinPedido_pa, CADLinPedido_pa
-- **Páginas aspx implementadas:** pedido.aspx, confirmarPedido.aspx, mispedidos.aspx
-- **Otras tareas:** Base de datos, css de mis paginas y un poquito de carrito
-- **Mejora Obligatoria Implementada:** Métrica de Evolución de ventas
-- **Colaboraciones:** Métricas.aspx(gráfica de evolución de ventas), CADProducto y ENProducto(método readALL()), otras páginas que tengan que ver con pedido.
+## Equipo y contribuciones
 
-### - Bruno Vilella Martínez:
+Proyecto académico desarrollado en grupo para HADA, Universidad de Alicante. El reparto siguiente recoge las responsabilidades documentadas en la entrega original.
 
-- **EN/CAD Implementados:** ENCarrito, CadCarrito, EnLinCarrito, CadLinCarrito
-- **Páginas aspx implementadas:** carrito.aspx
-- **Otras tareas:** Base de Datos
-- **Mejora Obligatoria Implementada:** Top 8 Ventas por Categoria
-- **Colaboraciones:** catalogo.aspx implementación de top8VentasCategoria,  
-ENCategoria y CADCategoria implementación de top8VentasCategoria, ENProducto y CadProducto lo referente a carrito que creo que fue un constructor, producto.aspx lo referente a carrito, mainpage.aspx lo referente a carrito
+**Aitana Cantó Rico** coordinó el equipo y gestionó las integraciones en GitHub, el seguimiento del flujo de trabajo y la resolución de conflictos.
 
-### - Darío Pastor Fuentes:
+| Integrante | Entidades y acceso a datos | Páginas y contribuciones |
+| --- | --- | --- |
+| **Aitana Cantó Rico** | Paquetes y relaciones entre paquetes y productos. | Paquetes, administración de paquetes, Site.Master, datos iniciales, filtrado y colaboraciones en portada y catálogo. |
+| **Rafael Carballo Lorenzo** | Pedidos y líneas de pedido de paquetes. | Pedido, confirmación, historial, base de datos y evolución de ventas. |
+| **Bruno Vilella Martínez** | Carrito y líneas de carrito. | Carrito, base de datos, ventas por categoría y colaboraciones en productos y catálogo. |
+| **Darío Pastor Fuentes** | Productos y líneas de pedido. | Portada, producto, administración de productos y despliegue de la entrega académica. |
+| **Alberto Boronat López** | Categorías y relaciones con productos. | Administración de categorías, métricas y recursos gráficos de libros. |
+| **Manuel José Tornero Fuster** | Usuarios y reseñas. | Acceso, registro y colaboraciones en perfil, reseñas, administración y métricas. |
+| **Jorge Paredes Soler** | Direcciones y relaciones con usuarios. | Perfil, administración de usuarios y estilos de sus páginas. |
 
-- **EN/CAD Implementados:** EnProducto, CadProducto, EnLinPedido, CadLinpedido
-- **Páginas aspx implementadas:** MainPage.aspx, Producto.aspx, AdminProducto.aspx 
-- **Otras tareas:** subida de bbdd a servidor, publicación de la web online, vincular dominio, securizar la conexión con https, css varios de la web
-- **Mejora Obligatoria Implementada:** 
-- **Colaboraciones:** ayuda en top 10 de metricas.aspx, sitemaster.aspx, catalogo.aspx
+Las colaboraciones se presentan como trabajo conjunto; el reparto no implica autoría exclusiva de cada archivo.
 
+## Modelo de datos
 
-### - Alberto Boronat López: 
-- **EN/CAD Implementados:** CADDcategoria, CADTieneCategoria, ENTieneCategoria, Encategoría 
-- **Páginas aspx implementadas:** Categoria.aspx,AdminTieneCategoria.aspx
-- **Otras tareas:** métricas.aspx, css de mis páginas 
-- **Mejora Obligatoria Implementada:** top 10 productos mas vendidos 
-- **Colaboraciones:** Todas las fotos de los libros (content)
+<img src="docs/database/modelo-relacional.png" alt="Modelo relacional de LibroExpress: usuarios, productos, categorías, paquetes, carritos y pedidos" width="960" />
 
+[Abrir el diagrama en PDF](docs/database/modelo-relacional.pdf) · [Esquema SQL](database/01-schema.sql) · [Catálogo de ejemplo](database/02-catalogo.sql)
 
-### - Manuel José Tornero Fuster: 
-- **EN/CAD Implementados:** ENUsuario, ENReseña, CADUsuario, CADReseña
-- **Páginas aspx implementadas:** login.aspx, register.aspx, 
-- **Otras tareas:** Ayuda en la bbdd, estilos de mis páginas
-- **Mejora Obligatoria Implementada:**
-- **Colaboraciones:** usuario.aspx, implementación de reseñas en producto.aspx, adminusuario.aspx, ayuda en gráfica de ventas, mainpage.aspx
+## Estructura del repositorio
 
-### - Jorge Paredes Soler: 
-- **EN/CAD Implementados:** ENDireccion, ENTieneDireccion, CADDireccion, CADTieneDireccion
-- **Páginas aspx implementadas:** adminUsuario.aspx, usuario.aspx
-- **Otras tareas:** Estilos de mis páginas
-- **Mejora Obligatoria Implementada:**
-- **Colaboraciones:** Un método de ENUsuario
+```text
+libroExpress.sln         Solución de Visual Studio
+ClassLibrary/
+  Entities/             Entidades de negocio
+  DataAccess/           Acceso a datos
+  Properties/           Metadatos del proyecto
+proWeb/
+  content/              Estilos, imágenes y portadas de libros
+  Properties/           Metadatos del proyecto web
+  *.aspx                Páginas de la tienda
+  Site.Master           Diseño y navegación compartidos
+  Web.config            Configuración web sin credenciales
+database/
+  01-schema.sql         Tablas y relaciones
+  02-catalogo.sql        Productos, categorías y paquetes de ejemplo
+docs/
+  database/             Diagramas originales
+  images/               Recursos visuales del proyecto
+  screenshots/          Vistas de la tienda y administración
+  EJECUCION.md          Preparación del entorno local
+```
 
-# Entrega 01 Propuesta - Comentarios
+## Ejecutar en local
 
-La web que proponeis es correcta y cumple con todos los requisitos. La descripción tiene todo lo que se pide. El git también está perfecto. 
+Abre `libroExpress.sln` con Visual Studio y configura `proWeb` como proyecto de inicio. La solución utiliza **.NET Framework 4.7.2 y SQL Server**; no es una aplicación ASP.NET Core.
 
-Os pediria que para entender mejor que va a hacer cada uno, añadais a la tabla inicial que EN y/o funcionalidades va a hacer cada uno.
-
-Gracias y buen trabajo, seguro que sale algo genial.
+La [guía de ejecución](docs/EJECUCION.md) explica los requisitos, la preparación de una base de datos propia y la configuración local. No se necesitan las credenciales del servidor usado durante la asignatura.

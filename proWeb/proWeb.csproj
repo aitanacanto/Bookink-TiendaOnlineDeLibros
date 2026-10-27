@@ -1,4 +1,4 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -69,7 +69,7 @@
     <Content Include="adminUsuario.aspx" />
     <Content Include="carrito.aspx" />
     <Content Include="catalogo.aspx" />
-    <Content Include="content\scriptBBDD.txt" />
+
     <Content Include="content\styles.css" />
     <Content Include="mainPage.aspx" />
     <Content Include="metricas.aspx" />
@@ -80,6 +80,7 @@
     <Content Include="producto.aspx" />
     <Content Include="register.aspx" />
     <Content Include="usuario.aspx" />
+    <Content Include="ConnectionStrings.example.config" />
     <Content Include="Web.config" />
     <Content Include="LogIn.aspx" />
   </ItemGroup>
@@ -214,8 +215,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

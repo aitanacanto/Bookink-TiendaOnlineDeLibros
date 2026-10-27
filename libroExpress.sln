@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.34407.143
@@ -6,6 +6,19 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{146F280F-956D-4675-A229-2256ED3425D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proWeb", "proWeb\proWeb.csproj", "{D9A0D242-9A22-428E-B691-B62190E6707F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{A32FB1F0-50B5-570A-9236-2EDA5FD8CA43}"
+	ProjectSection(SolutionItems) = preProject
+		database\01-schema.sql = database\01-schema.sql
+		database\02-catalogo.sql = database\02-catalogo.sql
+		database\README.md = database\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{147D4BF6-12D4-575B-86B9-6F21BB77F4B3}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		docs\EJECUCION.md = docs\EJECUCION.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
